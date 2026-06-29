@@ -1,20 +1,22 @@
-public class Telefone {
+public class Contato {
 
     //Atributos
 
     //PK da tabela
     private long id;
 
-    private String telefone;
+    private String email;
+    private String nome;
 
-    //FK originada da tabela usuario ou empresa_tecnica
+    //FK originada da tabela usuario
     private long idUsuario;
 
     //Construtor
-    public Telefone(long id, String telefone, long idUsuario) {
+    public Contato(long id, String email, String nome, long idUsuario) {
 
         this.id = id;
-        this.telefone = telefone;
+        this.email = email;
+        this.nome = nome;
         this.idUsuario = idUsuario;
 
     }
@@ -28,15 +30,27 @@ public class Telefone {
 
     }
 
-    public String getTelefone() {
+    public String getEmail() {
 
-        return telefone;
+        return email;
 
     }
 
-    public void setTelefone(String telefone) {
+    public void setEmail(String email) {
 
-        this.telefone = telefone;
+        this.email = email;
+
+    }
+
+    public String getNome() {
+
+        return nome;
+
+    }
+
+    public void setNome(String nome) {
+
+        this.nome = nome;
 
     }
 
@@ -53,8 +67,9 @@ public class Telefone {
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
-                "Telefone: "+ this.telefone + "\n" +
-                "ID do usuário: "+ this.idUsuario + "\n" +
+                "Email: "+ this.email + "\n" +
+                "Nome: "+ this.nome + "\n" +
+                "Id do usuário: "+ this.idUsuario + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

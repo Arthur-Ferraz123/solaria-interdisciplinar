@@ -3,10 +3,10 @@ public class Perfil {
     //Atributos
 
     //PK da tabela
-    private int id;
+    private long id;
 
-    //FK originada da tabela usuario
-    private int idUsuario;
+    //FK originada da tabela usuario ou empresa_tecnica
+    private long idUsuario;
 
     private String descricao;
 
@@ -14,49 +14,61 @@ public class Perfil {
     private String tipoUsuario;
 
     //Construtor
-    public Perfil(int id, int idUsuario, String descricao, String tipoUsuario) {
+    public Perfil(long id, long idUsuario, String descricao, String tipoUsuario) {
+
         this.id = id;
         this.idUsuario = idUsuario;
         this.descricao = descricao;
         this.tipoUsuario = tipoUsuario;
+
     }
 
     //Getters e Setters
 
     //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
+
         return id;
+
     }
 
-    //OBS: O atributo idUsuario não tem setter, pois ele é a fk da tabela e nesse caso ela acaba sendo inválida
-    public int getIdUsuario() {
+    //OBS: O atributo idUsuario é uma FK e é imutável, então não possui setter
+    public long getIdUsuario() {
+
         return idUsuario;
+
     }
 
     public String getDescricao() {
+
         return descricao;
+
     }
 
     public void setDescricao(String descricao) {
+
         this.descricao = descricao;
+
     }
 
+    //OBS: O atributo tipoUsuario é imutável, então não possui setter
     public String getTipoUsuario() {
-        return tipoUsuario;
-    }
 
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+        return tipoUsuario;
+
     }
 
     //Método toString
     @Override
     public String toString(){
+
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
                 "Descrição: "+ this.descricao + "\n" +
                 "Tipo do usuário: "+ this.tipoUsuario + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
+
     }
+
 }

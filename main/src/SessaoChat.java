@@ -6,62 +6,76 @@ public class SessaoChat {
     //Atributos
 
     //PK da tabela
-    private int id;
+    private long id;
 
     //FK originaria da tabela chat
-    private int idChat;
+    private long idChat;
     private LocalDate dataInicio;
     private boolean statusSessao;
     private LocalDate dataFim;
 
     //Construtor
-    public SessaoChat(int id, int idChat, LocalDate dataInicio, boolean statusSessao, LocalDate dataFim) {
+    public SessaoChat(long id, long idChat, LocalDate dataInicio, boolean statusSessao, LocalDate dataFim) {
+
         this.id = id;
         this.idChat = idChat;
         this.dataInicio = dataInicio;
         this.statusSessao = statusSessao;
         this.dataFim = dataFim;
+
     }
 
     //Getters e Setters
 
     //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
+
         return id;
+
     }
 
     //OBS: O atributo idChat não tem setter, pois ele é a fk da tabela e nesse caso ela acaba sendo inválida
-    public int getIdChat() {
+    public long getIdChat() {
+
         return idChat;
+
     }
 
+    //OBS: O atributo dataInicio é imutável
     public LocalDate getDataInicio() {
+
         return dataInicio;
+
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
-        this.dataInicio = dataInicio;
-    }
+    public boolean getStatusSessao() {
 
-    public boolean isStatusSessao() {
         return statusSessao;
+
     }
 
     public void setStatusSessao(boolean statusSessao) {
+
         this.statusSessao = statusSessao;
+
     }
 
     public LocalDate getDataFim() {
+
         return dataFim;
+
     }
 
     public void setDataFim(LocalDate dataFim) {
+
         this.dataFim = dataFim;
+
     }
 
     //Método toString
     @Override
     public String toString(){
+
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do chat: "+ this.idChat + "\n" +
@@ -69,5 +83,7 @@ public class SessaoChat {
                 "Status da sessão: "+ this.statusSessao + "\n" +
                 "Data do fim: "+ this.dataFim + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
+
     }
+
 }

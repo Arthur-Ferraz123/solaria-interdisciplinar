@@ -6,10 +6,10 @@ public class Certificacao {
     //Atributos
 
     //PK da tabela
-    private int id;
+    private long id;
 
     //FK originada da tabela placa_solar
-    private int idPlacaSolar;
+    private long idPlacaSolar;
 
     private String selo;
     private String numeroRegistro;
@@ -18,9 +18,9 @@ public class Certificacao {
     private String documento;
 
     //Construtor
-
-    public Certificacao(int id, int idPlacaSolar, String selo, String numeroRegistro,
+    public Certificacao(long id, long idPlacaSolar, String selo, String numeroRegistro,
                         LocalDate dataEmissao, LocalDate validade, String documento) {
+
         this.id = id;
         this.idPlacaSolar = idPlacaSolar;
         this.selo = selo;
@@ -28,63 +28,89 @@ public class Certificacao {
         this.dataEmissao = dataEmissao;
         this.validade = validade;
         this.documento = documento;
+
     }
 
     //Getters e Setters
 
     //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
+
         return id;
+
     }
 
-    //OBS: O atributo idPlacaSolar não tem setter, pois ele é a fk da tabela e nesse caso ela acaba sendo inválida
-    public int getIdPlacaSolar() {
+    //OBS: O atributo idPlacaSolar é uma FK e é imutável, então não possui setter
+    public long getIdPlacaSolar() {
+
         return idPlacaSolar;
+
     }
 
     public String getSelo() {
+
         return selo;
+
     }
 
     public void setSelo(String selo) {
+
         this.selo = selo;
+
     }
 
     public String getNumeroRegistro() {
+
         return numeroRegistro;
+
     }
 
     public void setNumeroRegistro(String numeroRegistro) {
+
         this.numeroRegistro = numeroRegistro;
+
     }
 
     public LocalDate getDataEmissao() {
+
         return dataEmissao;
+
     }
 
     public void setDataEmissao(LocalDate dataEmissao) {
+
         this.dataEmissao = dataEmissao;
+
     }
 
     public LocalDate getValidade() {
+
         return validade;
+
     }
 
     public void setValidade(LocalDate validade) {
+
         this.validade = validade;
+
     }
 
     public String getDocumento() {
+
         return documento;
+
     }
 
     public void setDocumento(String documento) {
+
         this.documento = documento;
+
     }
 
     //Método toString
     @Override
     public String toString(){
+
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID da placa solar: "+ this.idPlacaSolar + "\n" +
@@ -94,5 +120,7 @@ public class Certificacao {
                 "Validade: "+ this.validade + "\n" +
                 "Documento: "+ this.documento + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
+
     }
+
 }

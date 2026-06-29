@@ -9,79 +9,126 @@ public class Mensagem {
     //Atributos
 
     //PK da tabela
-    private int id;
+    private long id;
 
     //FK originaria da tabela chat
-    private int idChat;
+    private long idChat;
 
     private String mensagem;
     private LocalDate dataEnvio;
     private LocalTime horarioEnvio;
-
-    //Avaliar o funcionamento desses atributos
     private String remetente;
-    private String tipoMensagem;
+
+    //Avaliar esses atributos
+    private String video;
+    private String imagem;
 
     //Construtor
-    public Mensagem(int id, int idChat, String mensagem, LocalDate dataEnvio, LocalTime horarioEnvio, String remetente, String tipoMensagem) {
+    public Mensagem(long id, long idChat, String mensagem, LocalDate dataEnvio, LocalTime horarioEnvio,
+                    String remetente, String video, String imagem) {
+
         this.id = id;
         this.idChat = idChat;
         this.mensagem = mensagem;
         this.dataEnvio = dataEnvio;
         this.horarioEnvio = horarioEnvio;
         this.remetente = remetente;
-        this.tipoMensagem = tipoMensagem;
+
+        //Avaliar esses atributos
+        this.video = video;
+        this.imagem = imagem;
+
     }
 
     //Getters e Setters
 
     //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
+
         return id;
+
     }
 
-    //OBS: O atributo idChat não tem setter, pois ele é a fk da tabela e nesse caso ela acaba sendo inválida
-    public int getIdChat() {
+    //OBS: O atributo idChat é uma FK e é imutável, então não possui setter
+    public long getIdChat() {
+
         return idChat;
+
     }
 
     public String getMensagem() {
+
         return mensagem;
+
     }
 
     public void setMensagem(String mensagem) {
+
         this.mensagem = mensagem;
+
     }
 
+    //OBS: O atributo dataEnvio é imutável
     public LocalDate getDataEnvio() {
+
         return dataEnvio;
+
     }
 
-    public void setDataEnvio(LocalDate dataEnvio) {
-        this.dataEnvio = dataEnvio;
-    }
-
+    //OBS: O atributo horarioEnvio é imutável
     public LocalTime getHorarioEnvio() {
+
         return horarioEnvio;
+
     }
 
-    public void setHorarioEnvio(LocalTime horarioEnvio) {
-        this.horarioEnvio = horarioEnvio;
-    }
-
+    //OBS: O atributo remetente é imutável
     public String getRemetente() {
+
         return remetente;
+
     }
 
-    public void setRemetente(String remetente) {
-        this.remetente = remetente;
+    // REAVALIAR A SITUAÇÃO DESSES CAMPOS
+    public String getVideo() {
+
+        return video;
+
     }
 
-    public String getTipoMensagem() {
-        return tipoMensagem;
+    public void setVideo(String video) {
+
+        this.video = video;
+
     }
 
-    public void setTipoMensagem(String tipoMensagem) {
-        this.tipoMensagem = tipoMensagem;
+    public String getImagem() {
+
+        return imagem;
+
     }
+
+    public void setImagem(String imagem) {
+
+        this.imagem = imagem;
+
+    }
+
+    //Método toString
+    @Override
+    public String toString(){
+
+        return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
+                "ID: "+ this.id + "\n" +
+                "ID do chat: "+ this.idChat + "\n" +
+                "Mensagem: "+ this.mensagem + "\n" +
+                "Data de envio: "+ this.dataEnvio + "\n" +
+                "Horário de envio: "+ this.horarioEnvio + "\n" +
+                "Remetente: "+ this.remetente + "\n" +
+                "Video: "+ this.video + "\n" +
+                "Imagem: "+ this.imagem + "\n" +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
+
+    }
+
 }

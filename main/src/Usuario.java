@@ -3,13 +3,11 @@ public class Usuario {
     //Atributos
 
     //PK da tabela
-    private int id;
+    private long id;
 
     private String email;
     private String senha;
     private String nome;
-
-    //Avaliar isso com os atributos da empresa técnica
     private String estado;
     private String cep;
     private int numero;
@@ -17,14 +15,13 @@ public class Usuario {
     private String complemento;
     private String cidade;
     private String logradouro;
-
-    //Avaliar a existência desse Atributo
-    private String tipoCliente;
+    private String tipoUsuario;
 
     //Construtor
-    public Usuario(int id, String email, String senha, String nome, String estado, String cep,
+    public Usuario(long id, String email, String senha, String nome, String estado, String cep,
                    int numero, String bairro, String complemento, String cidade,
-                   String logradouro, String tipoCliente) {
+                   String logradouro, String tipoUsuario) {
+
         this.id = id;
         this.email = email;
         this.senha = senha;
@@ -36,107 +33,150 @@ public class Usuario {
         this.complemento = complemento;
         this.cidade = cidade;
         this.logradouro = logradouro;
-        this.tipoCliente = tipoCliente;
+        this.tipoUsuario = tipoUsuario;
+
     }
 
     //Getters e Setters
 
     //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
+
         return id;
+
     }
 
     public String getEmail() {
+
         return email;
+
     }
 
     public void setEmail(String email) {
+
         this.email = email;
+
     }
 
     public String getSenha() {
+
         return senha;
+
     }
 
     public void setSenha(String senha) {
+
         this.senha = senha;
+
     }
 
     public String getNome() {
+
         return nome;
+
     }
 
     public void setNome(String nome) {
+
         this.nome = nome;
+
     }
 
     public String getEstado() {
+
         return estado;
+
     }
 
     public void setEstado(String estado) {
+
         this.estado = estado;
+
     }
 
     public String getCep() {
+
         return cep;
+
     }
 
     public void setCep(String cep) {
+
         this.cep = cep;
+
     }
 
     public int getNumero() {
+
         return numero;
+
     }
 
     public void setNumero(int numero) {
+
         this.numero = numero;
+
     }
 
     public String getBairro() {
+
         return bairro;
+
     }
 
     public void setBairro(String bairro) {
+
         this.bairro = bairro;
+
     }
 
     public String getComplemento() {
+
         return complemento;
+
     }
 
     public void setComplemento(String complemento) {
+
         this.complemento = complemento;
+
     }
 
     public String getCidade() {
+
         return cidade;
+
     }
 
     public void setCidade(String cidade) {
+
         this.cidade = cidade;
+
     }
 
     public String getLogradouro() {
+
         return logradouro;
+
     }
 
     public void setLogradouro(String logradouro) {
+
         this.logradouro = logradouro;
+
     }
 
-    public String getTipo_cliente() {
-        return tipoCliente;
-    }
+    //OBS: O atributo tipoUsuario não tem setter, pois ele é imutável
+    public String getTipoUsuario() {
 
-    public void setTipo_cliente(String tipoCliente) {
-        this.tipoCliente = tipoCliente;
+        return tipoUsuario;
+
     }
 
     //Método toString
     @Override
     public String toString(){
+
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "Email: "+ this.email + "\n" +
@@ -149,9 +189,9 @@ public class Usuario {
                 "Complemento: "+ this.complemento + "\n" +
                 "Cidade: "+ this.cidade + "\n" +
                 "Logradouro: "+ this.logradouro + "\n" +
-                "Tipo do cliente: "+ this.tipoCliente + "\n" +
+                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
-    }
 
+    }
 
 }

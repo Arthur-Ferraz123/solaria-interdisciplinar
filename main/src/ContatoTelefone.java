@@ -1,4 +1,6 @@
-public class Telefone {
+// Avaliar a existencia dessa classe
+
+public class ContatoTelefone {
 
     //Atributos
 
@@ -7,15 +9,15 @@ public class Telefone {
 
     private String telefone;
 
-    //FK originada da tabela usuario ou empresa_tecnica
-    private long idUsuario;
+    //FK originada da tabela contato
+    private long idContato;
 
     //Construtor
-    public Telefone(long id, String telefone, long idUsuario) {
+    public ContatoTelefone(long id, String telefone, long idContato) {
 
         this.id = id;
         this.telefone = telefone;
-        this.idUsuario = idUsuario;
+        this.idContato = idContato;
 
     }
 
@@ -40,10 +42,10 @@ public class Telefone {
 
     }
 
-    //OBS: O atributo idUsuario é uma FK e é imutável, então não possui setter
-    public long getIdUsuario() {
+    //OBS: O atributo idContato é uma FK e é imutável, então não possui setter
+    public long getIdContato() {
 
-        return idUsuario;
+        return idContato;
 
     }
 
@@ -54,7 +56,7 @@ public class Telefone {
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "Telefone: "+ this.telefone + "\n" +
-                "ID do usuário: "+ this.idUsuario + "\n" +
+                "ID do contato: "+ this.idContato + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

@@ -9,11 +9,10 @@ public class Postagem {
     //Atributos
 
     //PK da tabela
-    private int id;
+    private long id;
 
     //FK originada da tabela perfil
-    private int idPerfil;
-
+    private long idPerfil;
 
     private String texto;
     private LocalDate dataPublicacao;
@@ -25,7 +24,9 @@ public class Postagem {
     private String imagem;
 
     //Construtor
-    public Postagem(int id, int idPerfil, String texto, LocalDate dataPublicacao, int quantidadeVisualizacoes, LocalTime horarioPublicacao, String video, String imagem) {
+    public Postagem(long id, long idPerfil, String texto, LocalDate dataPublicacao,
+                    int quantidadeVisualizacoes, LocalTime horarioPublicacao, String video, String imagem) {
+
         this.id = id;
         this.idPerfil = idPerfil;
         this.texto = texto;
@@ -34,71 +35,93 @@ public class Postagem {
         this.horarioPublicacao = horarioPublicacao;
         this.video = video;
         this.imagem = imagem;
+
     }
 
     //Getters e Setters
 
     //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
+
         return id;
+
     }
 
-    //OBS: O atributo idPerfil não tem setter, pois ele é a fk da tabela e nesse caso ela acaba sendo inválida
-    public int getIdPerfil() {
+    //OBS: O atributo idPerfil é uma FK e é imutável, então não possui setter
+    public long getIdPerfil() {
+
         return idPerfil;
+
     }
 
     public String getTexto() {
+
         return texto;
+
     }
 
     public void setTexto(String texto) {
+
         this.texto = texto;
+
     }
 
+    //OBS: O atributo dataPublicacao é imutável
     public LocalDate getDataPublicacao() {
-        return dataPublicacao;
-    }
 
-    public void setDataPublicacao(LocalDate dataPublicacao) {
-        this.dataPublicacao = dataPublicacao;
+        return dataPublicacao;
+
     }
 
     public int getQuantidadeVisualizacoes() {
+
         return quantidadeVisualizacoes;
+
     }
 
     public void setQuantidadeVisualizacoes(int quantidadeVisualizacoes) {
+
         this.quantidadeVisualizacoes = quantidadeVisualizacoes;
+
     }
 
+    //OBS: O atributo horarioPublicacao é imutável
     public LocalTime getHorarioPublicacao() {
+
         return horarioPublicacao;
+
     }
 
-    public void setHorarioPublicacao(LocalTime horarioPublicacao) {
-        this.horarioPublicacao = horarioPublicacao;
-    }
+    // REAVALIAR A SITUAÇÃO ATUAL DESSES ATRIBUTOS
 
     public String getVideo() {
+
         return video;
+
     }
 
     public void setVideo(String video) {
+
         this.video = video;
+
     }
 
     public String getImagem() {
+
         return imagem;
+
     }
 
     public void setImagem(String imagem) {
+
         this.imagem = imagem;
+
     }
 
     //Método toString
     @Override
     public String toString(){
+
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do perfil: "+ this.idPerfil + "\n" +
@@ -109,5 +132,7 @@ public class Postagem {
                 "Vídeo: "+ this.video + "\n" +
                 "Imagem: "+ this.imagem + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
+
     }
+
 }
