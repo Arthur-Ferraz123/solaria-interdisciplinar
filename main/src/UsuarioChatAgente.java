@@ -2,17 +2,17 @@ public class UsuarioChatAgente {
     //Atributos
 
     //PK da tabela
-    private int id;
+    private long id;
 
     //FK originaria da tabela usuario
-    private int idUsuario;
+    private long idUsuario;
 
     //FK originaria da tabela chat
-    private int idChat;
+    private long idChat;
 
     //Construtor
 
-    public UsuarioChatAgente(int id, int idUsuario, int idChat) {
+    public UsuarioChatAgente(long id, long idUsuario, long idChat) {
 
         this.id = id;
         this.idUsuario = idUsuario;
@@ -23,21 +23,21 @@ public class UsuarioChatAgente {
     //Getters e Setters
 
     //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
 
         return id;
 
     }
 
     //OBS: O atributo idUsuario é uma FK e é imutável, então não possui setter
-    public int getIdUsuario() {
+    public long getIdUsuario() {
 
         return idUsuario;
 
     }
 
     //OBS: O atributo idChat é uma FK e é imutável, então não possui setter
-    public int getIdChat() {
+    public long getIdChat() {
 
         return idChat;
 

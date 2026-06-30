@@ -3,7 +3,7 @@ public class EmpresaTecnica {
     //Atributos
 
     //PK da tabela
-    private int id;
+    private long id;
 
     private String cnpj;
     private String nome;
@@ -18,7 +18,7 @@ public class EmpresaTecnica {
     private String logadouro;
 
     //Construtor
-    public EmpresaTecnica(int id, String cnpj, String nome, String email, String senha, String estado,
+    public EmpresaTecnica(long id, String cnpj, String nome, String email, String senha, String estado,
                           String cep, int numero, String bairro, String complemento, String cidade,
                           String logadouro) {
 
@@ -40,7 +40,7 @@ public class EmpresaTecnica {
     //Getters e Setters
 
     //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
 
         return id;
 

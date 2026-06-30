@@ -18,11 +18,12 @@ public class PlacaSolar {
     private double peso;
     private String grauProtecao;
     private double eficiencia;
+    private String descricao;
 
     //Construtor
     public PlacaSolar(long id, long idFornecedor, String modelo, String sku, String tecnologia, String dimensao,
                       boolean estoque, double potencia, String fabricante, double peso, String grauProtecao,
-                      double eficiencia) {
+                      double eficiencia, String descricao) {
 
         this.id = id;
         this.idFornecedor = idFornecedor;
@@ -36,6 +37,7 @@ public class PlacaSolar {
         this.peso = peso;
         this.grauProtecao = grauProtecao;
         this.eficiencia = eficiencia;
+        this.descricao = descricao;
 
     }
 
@@ -175,6 +177,18 @@ public class PlacaSolar {
 
     }
 
+    public String getDescricao() {
+
+        return descricao;
+
+    }
+
+    public void setDescricao(String descricao) {
+
+        this.descricao = descricao;
+
+    }
+
     //Método toString
     @Override
     public String toString(){
@@ -192,6 +206,7 @@ public class PlacaSolar {
                 "Peso: "+ this.peso + "kg" + "\n" +
                 "Grau de proteção: "+ this.grauProtecao + "\n" +
                 "Eficiência: "+ this.eficiencia + "\n" +
+                "Descrição: "+ this.descricao + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }
