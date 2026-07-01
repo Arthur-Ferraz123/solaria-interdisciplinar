@@ -11,13 +11,16 @@ public class UsuarioChatCliente {
     //FK originaria da tabela chat
     private long idChat;
 
+    private String nomeCliente;
+
     //Construtor
 
-    public UsuarioChatCliente(long id, long idUsuario, long idChat) {
+    public UsuarioChatCliente(long id, long idUsuario, long idChat, String nomeCliente) {
 
         this.id = id;
         this.idUsuario = idUsuario;
         this.idChat = idChat;
+        this.nomeCliente = nomeCliente;
 
     }
 
@@ -44,6 +47,18 @@ public class UsuarioChatCliente {
 
     }
 
+    public String getNomeCliente() {
+
+        return nomeCliente;
+
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+
+        this.nomeCliente = nomeCliente;
+
+    }
+
     //Método toString
     @Override
     public String toString(){
@@ -52,6 +67,7 @@ public class UsuarioChatCliente {
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
                 "ID do chat: "+ this.idChat + "\n" +
+                "Nome do cliente: "+ this.nomeCliente + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

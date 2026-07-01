@@ -5,16 +5,12 @@ public class Chat {
     //PK da tabela
     private long id;
 
-    //SOB ANALISE ATÉ A APROVAÇÃO PELO NISFLEI
-    private String nomeCliente;
-    private String nomeAgente;
 
     //Construtor
-    public Chat(long id, String nomeCliente, String nomeAgente) {
+    public Chat(long id) {
 
         this.id = id;
-        this.nomeCliente = nomeCliente;
-        this.nomeAgente = nomeAgente;
+
 
     }
 
@@ -27,29 +23,7 @@ public class Chat {
 
     }
 
-    public String getNomeCliente() {
 
-        return nomeCliente;
-
-    }
-
-    public void setNomeCliente(String nomeCliente) {
-
-        this.nomeCliente = nomeCliente;
-
-    }
-
-    public String getNomeAgente() {
-
-        return nomeAgente;
-
-    }
-
-    public void setNomeAgente(String nomeAgente) {
-
-        this.nomeAgente = nomeAgente;
-
-    }
 
     //Método toString
     @Override
@@ -57,8 +31,6 @@ public class Chat {
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
-                "Nome do cliente: "+ this.nomeCliente + "\n" +
-                "Nome do agente: "+ this.nomeAgente + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }
