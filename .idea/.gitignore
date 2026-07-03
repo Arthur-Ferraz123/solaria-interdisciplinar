@@ -12,5 +12,5 @@
 #Restrição para não enviar o .env
 .env
 
-#Restrição da classe conexao enquanto não consigo usar o dotenv
-Conexao.java
+#Restrição da pasta conexao enquanto não consigo usar o dotenv
+conexao/
