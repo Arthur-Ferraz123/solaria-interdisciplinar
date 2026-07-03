@@ -77,7 +77,7 @@ public class Telefone {
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
-                "model.Telefone: "+ this.telefone + "\n" +
+                "Telefone: "+ this.telefone + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
                 "ID da empresa técnica: "+ this.idEmpresaTecnica + "\n" +
                 "ID do contato: "+ this.idContato + "\n" +

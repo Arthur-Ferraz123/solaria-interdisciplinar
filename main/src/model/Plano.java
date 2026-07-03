@@ -72,7 +72,7 @@ public class Plano {
 
         return "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: " + this.id + "\n" +
-                "model.Plano: " + this.plano + "\n" +
+                "Plano: " + this.plano + "\n" +
                 "Valor: R$" + this.valor + "\n" +
                 "Tipo de mensalidade: " + this.tipoMensalidade + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
