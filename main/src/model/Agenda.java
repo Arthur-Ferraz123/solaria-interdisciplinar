@@ -1,3 +1,5 @@
+package model;
+
 //Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 

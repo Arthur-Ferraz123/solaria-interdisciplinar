@@ -1,23 +1,27 @@
-public class Fornecedor {
+package model;
+
+public class Perfil {
 
     //Atributos
 
     //PK da tabela
     private long id;
 
-    //FK originada da tabela usuario
+    //FK originada da tabela usuario ou empresa_tecnica
     private long idUsuario;
 
-    private String tipoFornecedor;
-    private String cnpj;
+    private String descricao;
+
+    //Avaliar a existência desse atributo
+    private String tipoUsuario;
 
     //Construtor
-    public Fornecedor(long id, long idUsuario, String tipoFornecedor, String cnpj) {
+    public Perfil(long id, long idUsuario, String descricao, String tipoUsuario) {
 
         this.id = id;
         this.idUsuario = idUsuario;
-        this.tipoFornecedor = tipoFornecedor;
-        this.cnpj = cnpj;
+        this.descricao = descricao;
+        this.tipoUsuario = tipoUsuario;
 
     }
 
@@ -37,22 +41,22 @@ public class Fornecedor {
 
     }
 
-    public String getTipoFornecedor() {
+    public String getDescricao() {
 
-        return tipoFornecedor;
-
-    }
-
-    public void setTipoFornecedor(String tipoFornecedor) {
-
-        this.tipoFornecedor = tipoFornecedor;
+        return descricao;
 
     }
 
-    //OBS: O atributo cnpj não tem setter, pois ele será imutável
-    public String getCnpj() {
+    public void setDescricao(String descricao) {
 
-        return cnpj;
+        this.descricao = descricao;
+
+    }
+
+    //OBS: O atributo tipoUsuario é imutável, então não possui setter
+    public String getTipoUsuario() {
+
+        return tipoUsuario;
 
     }
 
@@ -63,8 +67,8 @@ public class Fornecedor {
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "Tipo do fornecedor: "+ this.tipoFornecedor + "\n" +
-                "CNPJ: "+ this.cnpj + "\n" +
+                "Descrição: "+ this.descricao + "\n" +
+                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

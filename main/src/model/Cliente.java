@@ -1,25 +1,23 @@
-public class UsuarioChatAgente {
+package model;
+
+public class Cliente{
+
     //Atributos
 
     //PK da tabela
     private long id;
 
-    //FK originaria da tabela usuario
+    //FK originada da tabela usuario
     private long idUsuario;
 
-    //FK originaria da tabela chat
-    private long idChat;
-
-    private String nomeAgente;
+    private String cnpj;
 
     //Construtor
-
-    public UsuarioChatAgente(long id, long idUsuario, long idChat, String nomeAgente) {
+    public Cliente(long id, long idUsuario, String cnpj) {
 
         this.id = id;
         this.idUsuario = idUsuario;
-        this.idChat = idChat;
-        this.nomeAgente = nomeAgente;
+        this.cnpj = cnpj;
 
     }
 
@@ -39,25 +37,12 @@ public class UsuarioChatAgente {
 
     }
 
-    //OBS: O atributo idChat é uma FK e é imutável, então não possui setter
-    public long getIdChat() {
+    //OBS: O atributo cnpj não tem setter, pois ele será imutável
+    public String getCnpj() {
 
-        return idChat;
-
-    }
-
-    public String getNomeAgente() {
-
-        return nomeAgente;
+        return cnpj;
 
     }
-
-    public void setNomeAgente(String nomeAgente) {
-
-        this.nomeAgente = nomeAgente;
-
-    }
-
 
     //Método toString
     @Override
@@ -66,9 +51,9 @@ public class UsuarioChatAgente {
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "ID do chat: "+ this.idChat + "\n" +
-                "Nome do agente: "+ this.nomeAgente + "\n" +
+                "CNPJ: "+ this.cnpj + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
+
 
     }
 

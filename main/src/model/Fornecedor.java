@@ -1,25 +1,25 @@
-public class Perfil {
+package model;
+
+public class Fornecedor {
 
     //Atributos
 
     //PK da tabela
     private long id;
 
-    //FK originada da tabela usuario ou empresa_tecnica
+    //FK originada da tabela usuario
     private long idUsuario;
 
-    private String descricao;
-
-    //Avaliar a existência desse atributo
-    private String tipoUsuario;
+    private String tipoFornecedor;
+    private String cnpj;
 
     //Construtor
-    public Perfil(long id, long idUsuario, String descricao, String tipoUsuario) {
+    public Fornecedor(long id, long idUsuario, String tipoFornecedor, String cnpj) {
 
         this.id = id;
         this.idUsuario = idUsuario;
-        this.descricao = descricao;
-        this.tipoUsuario = tipoUsuario;
+        this.tipoFornecedor = tipoFornecedor;
+        this.cnpj = cnpj;
 
     }
 
@@ -39,22 +39,22 @@ public class Perfil {
 
     }
 
-    public String getDescricao() {
+    public String getTipoFornecedor() {
 
-        return descricao;
-
-    }
-
-    public void setDescricao(String descricao) {
-
-        this.descricao = descricao;
+        return tipoFornecedor;
 
     }
 
-    //OBS: O atributo tipoUsuario é imutável, então não possui setter
-    public String getTipoUsuario() {
+    public void setTipoFornecedor(String tipoFornecedor) {
 
-        return tipoUsuario;
+        this.tipoFornecedor = tipoFornecedor;
+
+    }
+
+    //OBS: O atributo cnpj não tem setter, pois ele será imutável
+    public String getCnpj() {
+
+        return cnpj;
 
     }
 
@@ -65,8 +65,8 @@ public class Perfil {
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "Descrição: "+ this.descricao + "\n" +
-                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
+                "Tipo do fornecedor: "+ this.tipoFornecedor + "\n" +
+                "CNPJ: "+ this.cnpj + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

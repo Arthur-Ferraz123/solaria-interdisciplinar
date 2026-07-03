@@ -1,3 +1,5 @@
+package model;
+
 //Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 
@@ -121,7 +123,7 @@ public class Mensagem {
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do chat: "+ this.idChat + "\n" +
-                "Mensagem: "+ this.mensagem + "\n" +
+                "model.Mensagem: "+ this.mensagem + "\n" +
                 "Data de envio: "+ this.dataEnvio + "\n" +
                 "Horário de envio: "+ this.horarioEnvio + "\n" +
                 "Remetente: "+ this.remetente + "\n" +
