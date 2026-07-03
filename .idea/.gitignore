@@ -12,3 +12,5 @@
 #Restrição para não enviar o .env
 .env
 
+#restrição na classe Conexao.java
+**/Conexao.java
