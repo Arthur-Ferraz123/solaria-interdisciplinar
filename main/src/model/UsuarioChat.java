@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade cliente
+ * Representa a entidade usuário chat
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -9,61 +9,51 @@ package model;
  * @version 1.0.0
  */
 
-public class Cliente{
+public class UsuarioChat {
 
     //Atributos
 
     /**
-     * Identificador único do cliente.
+     * Identificador único do usuário chat.
      * Imutável por ser um identificador (PK).
      */
 
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é o cliente.
+     * Identificador único do {@link Chat} (FK) ao qual o usuário chat pertence.
+     * Imutável por conta da estruturação do sistema.
+     */
+
+    private long idChat;
+
+    /**
+     * Identificador único do {@link Usuario} (FK) que é o usuário chat.
      * Imutável por conta da estruturação do sistema.
      */
 
     private long idUsuario;
 
-    /**
-     * Indica qual a variação do usuário.
-     * Imutável por conta da estruturação do sistema.
-     * Valores aceitos:
-     */
-
-    private String tipoUsuario;
-
-    /**
-     * CNPJ do cliente.
-     * Imutável por conta da estruturação do sistema.
-     * Deve seguir o padrão previsto em {@link }.
-     */
-
-    private String cnpj;
-
     //Construtor
 
     /**
-     * Construtor completo da classe Cliente
+     * Construtor completo da classe UsuarioChat
      *
-     * @param id Identificador único do cliente (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o cliente.
-     * @param tipoUsuario Qual a variação do usuário.
-     * @param cnpj CNPJ do cliente.
+     * @param id Identificador único do usuário chat (PK).
+     * @param idChat Identificador único do {@link Chat} (FK) ao qual o usuário chat pertence.
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o usuário chat.
      */
 
-    public Cliente(long id, long idUsuario, String tipoUsuario, String cnpj) {
+    public UsuarioChat(long id, long idChat, long idUsuario) {
 
         this.id = id;
+        this.idChat = idChat;
         this.idUsuario = idUsuario;
-        this.tipoUsuario = tipoUsuario;
-        this.cnpj = cnpj;
 
     }
 
     //Getters e Setters
+
 
     public long getId() {
 
@@ -71,21 +61,15 @@ public class Cliente{
 
     }
 
+    public long getIdChat() {
+
+        return idChat;
+
+    }
+
     public long getIdUsuario() {
 
         return idUsuario;
-
-    }
-
-    public String getTipoUsuario() {
-
-        return tipoUsuario;
-
-    }
-
-    public String getCnpj() {
-
-        return cnpj;
 
     }
 
@@ -105,11 +89,9 @@ public class Cliente{
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
+                "ID do chat: "+ this.idChat + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
-                "CNPJ: "+ this.cnpj + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
-
 
     }
 

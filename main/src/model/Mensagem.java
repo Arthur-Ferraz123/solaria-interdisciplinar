@@ -6,26 +6,89 @@ import java.time.LocalDate;
 //Import do objeto utilizado para representar datatypes do tipo time no java
 import java.time.LocalTime;
 
+/**
+ * Representa a entidade mensagem
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class Mensagem {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único da mensagem.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
-    //FK originaria da tabela chat
+    /**
+     * Identificador único do {@link Chat} (FK) ao qual a mensagem pertence.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private long idChat;
 
+    /**
+     * Texto da mensagem.
+     */
+
     private String mensagem;
+
+    /**
+     * Data que a mensagem foi enviada.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private LocalDate dataEnvio;
+
+    /**
+     * Horário que a mensagem foi enviada.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private LocalTime horarioEnvio;
+
+    /**
+     * Nome de quem enviou a mensagem.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private String remetente;
 
-    //Avaliar esses atributos
+    /**
+     * Link para o video da mensagem.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private String video;
+
+    /**
+     * Link para a imagem da mensagem.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private String imagem;
 
     //Construtor
+
+    /**
+     * Construtor completo da classe Mensagem
+     *
+     * @param id Identificador único da mensagem (PK).
+     * @param idChat Identificador único do {@link Chat} (FK) ao qual a mensagem pertence.
+     * @param mensagem Texto da mensagem.
+     * @param dataEnvio Data que a mensagem foi enviada.
+     * @param horarioEnvio Horário que a mensagem foi enviada.
+     * @param remetente Nome de quem enviou a mensagem.
+     * @param video Link para o video da mensagem.
+     * @param imagem Link para a imagem da mensagem.
+     */
+
     public Mensagem(long id, long idChat, String mensagem, LocalDate dataEnvio, LocalTime horarioEnvio,
                     String remetente, String video, String imagem) {
 
@@ -35,8 +98,6 @@ public class Mensagem {
         this.dataEnvio = dataEnvio;
         this.horarioEnvio = horarioEnvio;
         this.remetente = remetente;
-
-        //Avaliar esses atributos
         this.video = video;
         this.imagem = imagem;
 
@@ -44,14 +105,12 @@ public class Mensagem {
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
 
     }
 
-    //OBS: O atributo idChat é uma FK e é imutável, então não possui setter
     public long getIdChat() {
 
         return idChat;
@@ -70,37 +129,27 @@ public class Mensagem {
 
     }
 
-    //OBS: O atributo dataEnvio é imutável
     public LocalDate getDataEnvio() {
 
         return dataEnvio;
 
     }
 
-    //OBS: O atributo horarioEnvio é imutável
     public LocalTime getHorarioEnvio() {
 
         return horarioEnvio;
 
     }
 
-    //OBS: O atributo remetente é imutável
     public String getRemetente() {
 
         return remetente;
 
     }
 
-    // REAVALIAR A SITUAÇÃO DESSES CAMPOS
     public String getVideo() {
 
         return video;
-
-    }
-
-    public void setVideo(String video) {
-
-        this.video = video;
 
     }
 
@@ -110,13 +159,17 @@ public class Mensagem {
 
     }
 
-    public void setImagem(String imagem) {
-
-        this.imagem = imagem;
-
-    }
-
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 

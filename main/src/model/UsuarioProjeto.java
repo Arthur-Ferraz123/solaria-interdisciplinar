@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade cliente
+ * Representa a entidade usuário projeto
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -9,57 +9,55 @@ package model;
  * @version 1.0.0
  */
 
-public class Cliente{
+public class UsuarioProjeto {
 
     //Atributos
 
     /**
-     * Identificador único do cliente.
+     * Identificador único do usuário projeto.
      * Imutável por ser um identificador (PK).
      */
 
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é o cliente.
+     * Identificador único do {@link Projeto} (FK) ao qual o usuário projeto está envolvido.
+     * Imutável por conta da estruturação do sistema.
+     */
+
+    private long idProjeto;
+
+    /**
+     * Identificador único do {@link Usuario} (FK) que é o usuário projeto.
      * Imutável por conta da estruturação do sistema.
      */
 
     private long idUsuario;
 
     /**
-     * Indica qual a variação do usuário.
+     * Indica se o usuário projeto é o dono do projeto.
      * Imutável por conta da estruturação do sistema.
-     * Valores aceitos:
      */
 
-    private String tipoUsuario;
-
-    /**
-     * CNPJ do cliente.
-     * Imutável por conta da estruturação do sistema.
-     * Deve seguir o padrão previsto em {@link }.
-     */
-
-    private String cnpj;
+    private boolean donoDoProjeto;
 
     //Construtor
 
     /**
-     * Construtor completo da classe Cliente
+     * Construtor completo da classe UsuarioProjeto
      *
-     * @param id Identificador único do cliente (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o cliente.
-     * @param tipoUsuario Qual a variação do usuário.
-     * @param cnpj CNPJ do cliente.
+     * @param id Identificador único do usuário projeto (PK).
+     * @param idProjeto Identificador único do {@link Projeto} (FK) ao qual o usuário projeto está envolvido.
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o usuário projeto.
+     * @param donoDoProjeto Indica se o usuário projeto é o dono do projeto.
      */
 
-    public Cliente(long id, long idUsuario, String tipoUsuario, String cnpj) {
+    public UsuarioProjeto(long id, long idProjeto, long idUsuario, boolean donoDoProjeto) {
 
         this.id = id;
+        this.idProjeto = idProjeto;
         this.idUsuario = idUsuario;
-        this.tipoUsuario = tipoUsuario;
-        this.cnpj = cnpj;
+        this.donoDoProjeto = donoDoProjeto;
 
     }
 
@@ -68,6 +66,11 @@ public class Cliente{
     public long getId() {
 
         return id;
+    }
+
+    public long getIdProjeto() {
+
+        return idProjeto;
 
     }
 
@@ -77,15 +80,9 @@ public class Cliente{
 
     }
 
-    public String getTipoUsuario() {
+    public boolean isDonoDoProjeto() {
 
-        return tipoUsuario;
-
-    }
-
-    public String getCnpj() {
-
-        return cnpj;
+        return donoDoProjeto;
 
     }
 
@@ -105,11 +102,10 @@ public class Cliente{
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
+                "ID do projeto: "+ this.idProjeto + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
-                "CNPJ: "+ this.cnpj + "\n" +
+                "É o dono do projeto: "+ this.donoDoProjeto + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
-
 
     }
 

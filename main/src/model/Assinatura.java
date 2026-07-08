@@ -3,66 +3,104 @@ package model;
 //Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 
+/**
+ * Representa a entidade assinatura
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class Assinatura {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único da assinatura.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
-    //FK originada da tabela usuario
+    /**
+     * Identificador único do {@link Usuario} (FK) que é realiza a assinatura.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private long idUsuario;
 
-    //FK originada da tabela empresa_tecnica
-    private long idEmpresaTecnica;
-
-    //FK originada da tabela plano
+    /**
+     * Identificador único do {@link Plano} (FK) atual da assinatura.
+     * Imutável por conta da estruturação do sistema.
+     */
     private long idPlano;
 
+    /**
+     * Indica de qual o status atual da assinatura.
+     * Valores aceitos:
+     */
+
     private String statusAssinatura;
+
+    /**
+     * Indica se a assinatura debita automaticamente da conta.
+     */
+
     private boolean renovacaoAutomatica;
+
+    /**
+     * Data que a assinatura foi iniciada ou a última vez que foi paga.
+     */
+
     private LocalDate dataInicio;
-    private LocalDate dataFim;
+
+    /**
+     * Data de vencimento da assinatura.
+     */
+
+    private LocalDate validade;
 
     //Construtor
 
-    public Assinatura(long id, long idUsuario, long idEmpresaTecnica, long idPlano, String statusAssinatura, boolean renovacaoAutomatica, LocalDate dataInicio, LocalDate dataFim) {
+    /**
+     * Construtor completo da classe Assinatura
+     *
+     * @param id Identificador único da assinatura (PK).
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é realiza a assinatura.
+     * @param idPlano Identificador único do {@link Plano} (FK) atual da assinatura.
+     * @param statusAssinatura Qual o status atual da assinatura.
+     * @param renovacaoAutomatica A assinatura debita ou não automaticamente da conta.
+     * @param dataInicio Data que a assinatura foi iniciada ou a última vez que foi paga.
+     * @param validade Data de vencimento da assinatura.
+     */
+
+    public Assinatura(long id, long idUsuario, long idPlano, String statusAssinatura, boolean renovacaoAutomatica, LocalDate dataInicio, LocalDate validade) {
 
         this.id = id;
         this.idUsuario = idUsuario;
-        this.idEmpresaTecnica = idEmpresaTecnica;
         this.idPlano = idPlano;
         this.statusAssinatura = statusAssinatura;
         this.renovacaoAutomatica = renovacaoAutomatica;
         this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+        this.validade = validade;
 
     }
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
 
     }
 
-    //OBS: O atributo idUsuario é uma FK e é imutável, então não possui setter
     public long getIdUsuario() {
 
         return idUsuario;
 
     }
 
-    //OBS: O atributo idEmpresaTecnica é uma FK e é imutável, então não possui setter
-    public long getIdEmpresaTecnica() {
-
-        return idEmpresaTecnica;
-
-    }
-
-    //OBS: O atributo idPlano é uma FK e é imutável, então não possui setter
     public long getIdPlano() {
 
         return idPlano;
@@ -81,7 +119,7 @@ public class Assinatura {
 
     }
 
-    public boolean getRenovacaoAutomatica() {
+    public boolean isRenovacaoAutomatica() {
 
         return renovacaoAutomatica;
 
@@ -93,40 +131,52 @@ public class Assinatura {
 
     }
 
-    //OBS: O atributo dataInicio é imutável
     public LocalDate getDataInicio() {
 
         return dataInicio;
 
     }
 
+    public void setDataInicio(LocalDate dataInicio) {
 
-    public LocalDate getDataFim() {
-
-        return dataFim;
+        this.dataInicio = dataInicio;
 
     }
 
-    //Validar a existência conforme a alteração do status
-    public void setDataFim(LocalDate dataFim) {
+    public LocalDate getDataFim() {
 
-        this.dataFim = dataFim;
+        return validade;
+
+    }
+
+    public void setDataFim(LocalDate validade) {
+
+        this.validade = validade;
 
     }
 
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString() {
 
         return "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: " + this.id + "\n" +
                 "ID do usuário: " + this.idUsuario + "\n" +
-                "ID da empresa técnica: " + this.idEmpresaTecnica + "\n" +
                 "ID do plano: " + this.idPlano + "\n" +
                 "Status da assinatura: " + this.statusAssinatura + "\n" +
                 "Renovação automática: " + this.renovacaoAutomatica + "\n" +
                 "Data de inicio: " + this.dataInicio + "\n" +
-                "Data do fim: " + this.dataFim + "\n" +
+                "Validade: " + this.validade + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

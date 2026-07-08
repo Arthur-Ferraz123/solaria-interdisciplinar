@@ -3,28 +3,83 @@ package model;
 //Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 
+/**
+ * Representa a entidade certificação
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
+
 public class Certificacao {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único da certificação.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
-    //FK originada da tabela placa_solar
-    private long idPlacaSolar;
+    /**
+     * Identificador único do {@link Fornecedor} (FK) que possuí a certificação.
+     * Imutável por conta da estruturação do sistema.
+     */
+
+    private long idFornecedor;
+
+    /**
+     * Selo da certificação.
+     */
 
     private String selo;
+
+    /**
+     * Número de registro da certificação.
+     */
+
     private String numeroRegistro;
+
+    /**
+     * Data que a certificação foi emitida.
+     */
+
     private LocalDate dataEmissao;
+
+    /**
+     * Data de validade da certificação.
+     */
+
     private LocalDate validade;
+
+    /**
+     * Link do documento da certificação.
+     */
+
     private String documento;
 
     //Construtor
-    public Certificacao(long id, long idPlacaSolar, String selo, String numeroRegistro,
+
+    /**
+     * Construtor completo da classe Certificacao
+     *
+     * @param id Identificador único da certificação (PK).
+     * @param idFornecedor Identificador único do {@link Fornecedor} (FK) que possuí a certificação.
+     * @param selo Selo da certificação.
+     * @param numeroRegistro Número de registro da certificação.
+     * @param dataEmissao Data que a certificação foi emitida.
+     * @param validade Data de validade da certificação.
+     * @param documento Link do documento da certificação.
+     */
+
+    public Certificacao(long id, long idFornecedor, String selo, String numeroRegistro,
                         LocalDate dataEmissao, LocalDate validade, String documento) {
 
         this.id = id;
-        this.idPlacaSolar = idPlacaSolar;
+        this.idFornecedor = idFornecedor;
         this.selo = selo;
         this.numeroRegistro = numeroRegistro;
         this.dataEmissao = dataEmissao;
@@ -35,17 +90,15 @@ public class Certificacao {
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
 
     }
 
-    //OBS: O atributo idPlacaSolar é uma FK e é imutável, então não possui setter
-    public long getIdPlacaSolar() {
+    public long getIdFornecedor() {
 
-        return idPlacaSolar;
+        return idFornecedor;
 
     }
 
@@ -110,12 +163,22 @@ public class Certificacao {
     }
 
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
-                "ID da placa solar: "+ this.idPlacaSolar + "\n" +
+                "ID do fornecedor: "+ this.idFornecedor + "\n" +
                 "Selo: "+ this.selo + "\n" +
                 "Número de registro: "+ this.numeroRegistro + "\n" +
                 "Data de emissão: "+ this.dataEmissao + "\n" +

@@ -1,37 +1,76 @@
 package model;
 
+/**
+ * Representa a entidade telefone
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b>.</p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class Telefone {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único do telefone.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
+
+    /**
+     * Número do telefone.
+     * Deve seguir o padrão previsto em {@link }
+     */
 
     private String telefone;
 
-    //FK originada da tabela usuario
+    /**
+     * Indica qual o tipo do telefone.
+     * Valores aceitos:
+     */
+
+    private String tipo;
+
+    /**
+     * Identificador único do {@link Usuario} (FK) dono do telefone.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private long idUsuario;
 
-    //FK originada da tabela empresa_tecnica
-    private long idEmpresaTecnica;
+    /**
+     * Indica se o telefone é o principal do {@link Usuario}.
+     */
 
-    //FK originada da tabela contato
-    private long idContato;
+    private boolean principal;
 
     //Construtor
-    public Telefone(long id, String telefone, long idUsuario, long idEmpresaTecnica, long idContato) {
+
+    /**
+     * Construtor completo da classe Telefone
+     *
+     * @param id Identificador único do telefone (PK).
+     * @param telefone Número do telefone.
+     * @param tipo Tipo do telefone.
+     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do telefone.
+     * @param principal O telefone é o principal do {@link Usuario}.
+     */
+
+    public Telefone(long id, String telefone, String tipo, long idUsuario, boolean principal) {
 
         this.id = id;
         this.telefone = telefone;
+        this.tipo = tipo;
         this.idUsuario = idUsuario;
-        this.idEmpresaTecnica = idEmpresaTecnica;
-        this.idContato = idContato;
+        this.principal = principal;
 
     }
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
@@ -50,37 +89,56 @@ public class Telefone {
 
     }
 
-    //OBS: O atributo idUsuario é uma FK e é imutável, então não possui setter
+    public String getTipo() {
+
+        return tipo;
+
+    }
+
+    public void setTipo(String tipo) {
+
+        this.tipo = tipo;
+
+    }
+
     public long getIdUsuario() {
 
         return idUsuario;
 
     }
 
-    //OBS: O atributo idEmpresaTecnica é uma FK e é imutável, então não possui setter
-    public long getIdEmpresaTecnica() {
+    public boolean isPrincipal() {
 
-        return idEmpresaTecnica;
+        return principal;
 
     }
 
-    //OBS: O atributo idContato é uma FK e é imutável, então não possui setter
-    public long getIdContato() {
+    public void setPrincipal(boolean principal) {
 
-        return idContato;
+        this.principal = principal;
 
     }
 
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "Telefone: "+ this.telefone + "\n" +
+                "Tipo do telefone: "+ this.tipo + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "ID da empresa técnica: "+ this.idEmpresaTecnica + "\n" +
-                "ID do contato: "+ this.idContato + "\n" +
+                "Principal: "+ this.principal + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

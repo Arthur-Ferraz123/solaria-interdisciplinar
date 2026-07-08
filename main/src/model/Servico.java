@@ -1,23 +1,59 @@
 package model;
 
+/**
+ * Representa a entidade serviço
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class Servico {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único do serviço.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
-    //FK originada da tabela empresa_tecnica
-    private long idEmpresa;
+    /**
+     * Identificador único da {@link EmpresaTecnica} (FK) que realiza o serviço.
+     * Imutável por conta da estruturação do sistema.
+     */
+
+    private long idEmpresaTecnica;
+
+    /**
+     * Nome do serviço.
+     */
 
     private String servico;
+
+    /**
+     * Descrição sobre o que é feito no serviço.
+     */
+
     private String descricao;
 
     //Construtor
-    public Servico(long id, long idEmpresa, String servico, String descricao) {
+
+    /**
+     * Construtor completo da classe Servico
+     *
+     * @param id Identificador único do serviço (PK).
+     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que realiza o serviço.
+     * @param servico Nome do serviço.
+     * @param descricao Descrição sobre o que é feito no serviço.
+     */
+
+    public Servico(long id, long idEmpresaTecnica, String servico, String descricao) {
 
         this.id = id;
-        this.idEmpresa = idEmpresa;
+        this.idEmpresaTecnica = idEmpresaTecnica;
         this.servico = servico;
         this.descricao = descricao;
 
@@ -25,17 +61,15 @@ public class Servico {
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
 
     }
 
-    //OBS: O atributo idEmpresa é uma FK e é imutável, então não possui setter
-    public long getIdEmpresa() {
+    public long getIdEmpresaTecnica() {
 
-        return idEmpresa;
+        return idEmpresaTecnica;
 
     }
 
@@ -64,12 +98,22 @@ public class Servico {
     }
 
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
-                "ID da empresa: "+ this.idEmpresa + "\n" +
+                "ID da empresa técnica: "+ this.idEmpresaTecnica + "\n" +
                 "Serviço: "+ this.servico + "\n" +
                 "Descrição: "+ this.descricao + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";

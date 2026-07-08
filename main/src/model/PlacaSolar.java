@@ -1,30 +1,120 @@
 package model;
 
+/**
+ * Representa a entidade placa solar
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class PlacaSolar {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único da placa solar.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
-    //FK originada da tabela fornecedor
+    /**
+     * Identificador único do {@link Fornecedor} (FK) que vende a placa solar.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private long idFornecedor;
 
+    /**
+     * Nome do modelo da placa solar.
+     */
+
     private String modelo;
+
+    /**
+     * Código SKU (Stock Keeping Unit), o código alfanumérico identificador do modelo e lote da placa solar.
+     */
+
     private String sku;
+
+    /**
+     * Tecnologia presente na placa.
+     */
+
     private String tecnologia;
-    private String dimensao;
-    private boolean estoque;
+
+    /**
+     * Tamanho da placa.
+     */
+
+    private String dimensoes;
+
+    /**
+     * Indica se a placa está ou não em estoque.
+     */
+
+    private boolean emEstoque;
+
+    /**
+     * Potência da placa em Watts.
+     */
+
     private double potencia;
+
+    /**
+     * Nome da fabricante da placa.
+     */
+
     private String fabricante;
+
+    /**
+     * Peso da placa em quilogramas.
+     */
+
     private double peso;
+
+    /**
+     * Qual tipo de proteção a placa possuí.
+     */
+
     private String grauProtecao;
+
+    /**
+     * Eficiência pratica da placa.
+     */
+
     private double eficiencia;
+
+    /**
+     * Descrição sobre a placa.
+     */
+
     private String descricao;
 
     //Construtor
-    public PlacaSolar(long id, long idFornecedor, String modelo, String sku, String tecnologia, String dimensao,
-                      boolean estoque, double potencia, String fabricante, double peso, String grauProtecao,
+
+    /**
+     * Construtor completo da classe PlacaSolar
+     *
+     * @param id Identificador único da placa solar (PK).
+     * @param idFornecedor Identificador único do {@link Fornecedor} (FK) que vende a placa solar.
+     * @param modelo Nome do modelo da placa solar.
+     * @param sku Código SKU (Stock Keeping Unit), o código alfanumérico identificador do modelo e lote da placa solar.
+     * @param tecnologia Tecnologia presente na placa.
+     * @param dimensoes Tamanho da placa.
+     * @param emEstoque A placa está ou não em estoque.
+     * @param potencia Potência da placa em Watts.
+     * @param fabricante Nome da fabricante da placa.
+     * @param peso Peso da placa em quilogramas.
+     * @param grauProtecao Qual tipo de proteção a placa possuí.
+     * @param eficiencia Eficiência pratica da placa.
+     * @param descricao Descrição sobre a placa.
+     */
+
+    public PlacaSolar(long id, long idFornecedor, String modelo, String sku, String tecnologia, String dimensoes,
+                      boolean emEstoque, double potencia, String fabricante, double peso, String grauProtecao,
                       double eficiencia, String descricao) {
 
         this.id = id;
@@ -32,8 +122,8 @@ public class PlacaSolar {
         this.modelo = modelo;
         this.sku = sku;
         this.tecnologia = tecnologia;
-        this.dimensao = dimensao;
-        this.estoque = estoque;
+        this.dimensoes = dimensoes;
+        this.emEstoque = emEstoque;
         this.potencia = potencia;
         this.fabricante = fabricante;
         this.peso = peso;
@@ -45,14 +135,12 @@ public class PlacaSolar {
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
 
     }
 
-    //OBS: O atributo idFornecedor é uma FK e é imutável, então não possui setter
     public long getIdFornecedor() {
 
         return idFornecedor;
@@ -95,27 +183,27 @@ public class PlacaSolar {
 
     }
 
-    public String getDimensao() {
+    public String getDimensoes() {
 
-        return dimensao;
-
-    }
-
-    public void setDimensao(String dimensao) {
-
-        this.dimensao = dimensao;
+        return dimensoes;
 
     }
 
-    public boolean getEstoque() {
+    public void setDimensoes(String dimensoes) {
 
-        return estoque;
+        this.dimensoes = dimensoes;
 
     }
 
-    public void setEstoque(boolean estoque) {
+    public boolean isEmEstoque() {
 
-        this.estoque = estoque;
+        return emEstoque;
+
+    }
+
+    public void setEmEstoque(boolean emEstoque) {
+
+        this.emEstoque = emEstoque;
 
     }
 
@@ -192,6 +280,16 @@ public class PlacaSolar {
     }
 
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 
@@ -201,13 +299,13 @@ public class PlacaSolar {
                 "Modelo: "+ this.modelo + "\n" +
                 "SKU: "+ this.sku + "\n" +
                 "Tecnologia: "+ this.tecnologia + "\n" +
-                "Dimensão: "+ this.dimensao + "\n" +
-                "Estoque: "+ this.estoque + "\n" +
+                "Dimensão: "+ this.dimensoes + "\n" +
+                "Está em estoque: "+ this.emEstoque + "\n" +
                 "Potência: "+ this.potencia + "w" + "\n" +
                 "Fabricante: "+ this.fabricante + "\n" +
                 "Peso: "+ this.peso + "kg" + "\n" +
                 "Grau de proteção: "+ this.grauProtecao + "\n" +
-                "Eficiência: "+ this.eficiencia + "\n" +
+                "Eficiência: "+ this.eficiencia + "w" + "\n" +
                 "Descrição: "+ this.descricao + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 

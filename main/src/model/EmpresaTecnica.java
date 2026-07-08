@@ -1,197 +1,134 @@
 package model;
 
+/**
+ * Representa a entidade empresa técnica
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class EmpresaTecnica {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único da empresa técnica.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
+    /**
+     * Identificador único do {@link Usuario} (FK) que é a empresa técnica.
+     * Imutável por conta da estruturação do sistema.
+     */
+
+    private long idUsuario;
+
+    /**
+     * Indica qual a variação do usuário.
+     * Imutável por conta da estruturação do sistema.
+     * Valores aceitos:
+     */
+
+    private String tipoUsuario;
+
+    /**
+     * CNPJ da empresa técnica.
+     * Imutável por conta da estruturação do sistema.
+     * Deve seguir o padrão previsto em {@link }.
+     */
+
     private String cnpj;
-    private String nome;
-    private String email;
-    private String senha;
-    private String estado;
-    private String cep;
-    private int numero;
-    private String bairro;
-    private String complemento;
-    private String cidade;
-    private String logadouro;
+
+    /**
+     * Razão social da empresa técnica
+     */
+
+    private String razaoSocial;
 
     //Construtor
-    public EmpresaTecnica(long id, String cnpj, String nome, String email, String senha, String estado,
-                          String cep, int numero, String bairro, String complemento, String cidade,
-                          String logadouro) {
+
+    /**
+     * Construtor completo da classe EmpresaTecnica
+     *
+     * @param id Identificador único da empresa técnica (PK).
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é a empresa técnica.
+     * @param tipoUsuario Indica qual a variação do usuário.
+     * @param cnpj CNPJ da empresa técnica.
+     * @param razaoSocial Razão social da empresa técnica.
+     */
+
+    public EmpresaTecnica(long id, long idUsuario, String tipoUsuario, String cnpj, String razaoSocial) {
 
         this.id = id;
+        this.idUsuario = idUsuario;
+        this.tipoUsuario = tipoUsuario;
         this.cnpj = cnpj;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.estado = estado;
-        this.cep = cep;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.logadouro = logadouro;
+        this.razaoSocial = razaoSocial;
 
     }
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
 
     }
 
-    //OBS: O atributo cnpj não tem setter, pois ele será imutável
+    public long getIdUsuario() {
+
+        return idUsuario;
+
+    }
+
+    public String getTipoUsuario() {
+
+        return tipoUsuario;
+
+    }
+
     public String getCnpj() {
 
         return cnpj;
 
     }
 
-    public String getNome() {
+    public String getRazaoSocial() {
 
-        return nome;
-
-    }
-
-    public void setNome(String nome) {
-
-        this.nome = nome;
+        return razaoSocial;
 
     }
 
-    public String getEmail() {
+    public void setRazaoSocial(String razaoSocial) {
 
-        return email;
-
-    }
-
-    public void setEmail(String email) {
-
-        this.email = email;
-
-    }
-
-    public String getSenha() {
-
-        return senha;
-
-    }
-
-    public void setSenha(String senha) {
-
-        this.senha = senha;
-
-    }
-
-    public String getEstado() {
-
-        return estado;
-
-    }
-
-    public void setEstado(String estado) {
-
-        this.estado = estado;
-
-    }
-
-    public String getCep() {
-
-        return cep;
-
-    }
-
-    public void setCep(String cep) {
-
-        this.cep = cep;
-
-    }
-
-    public int getNumero() {
-
-        return numero;
-
-    }
-
-    public void setNumero(int numero) {
-
-        this.numero = numero;
-
-    }
-
-    public String getBairro() {
-
-        return bairro;
-
-    }
-
-    public void setBairro(String bairro) {
-
-        this.bairro = bairro;
-
-    }
-
-    public String getComplemento() {
-
-        return complemento;
-
-    }
-
-    public void setComplemento(String complemento) {
-
-        this.complemento = complemento;
-
-    }
-
-    public String getCidade() {
-
-        return cidade;
-
-    }
-
-    public void setCidade(String cidade) {
-
-        this.cidade = cidade;
-
-    }
-
-    public String getLogadouro() {
-
-        return logadouro;
-
-    }
-
-    public void setLogadouro(String logadouro) {
-
-        this.logadouro = logadouro;
+        this.razaoSocial = razaoSocial;
 
     }
 
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
+                "ID do usuário: "+ this.idUsuario + "\n" +
+                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
                 "CNPJ: "+ this.cnpj + "\n" +
-                "Nome: "+ this.nome + "\n" +
-                "Email: "+ this.email + "\n" +
-                "Senha: "+ this.senha + "\n" +
-                "Estado: "+ this.estado + "\n" +
-                "CEP: "+ this.cep + "\n" +
-                "Número: "+ this.numero + "\n" +
-                "Bairro: "+ this.bairro + "\n" +
-                "Complemento: "+ this.complemento + "\n" +
-                "Cidade: "+ this.cidade + "\n" +
-                "Logradouro: "+ this.logadouro + "\n" +
+                "Razão social: "+ this.razaoSocial + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

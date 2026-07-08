@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade perfil
+ * Representa a entidade projeto
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -9,53 +9,53 @@ package model;
  * @version 1.0.0
  */
 
-public class Perfil {
+public class Projeto {
 
     //Atributos
 
     /**
-     * Identificador único do perfil.
+     * Identificador único do projeto.
      * Imutável por ser um identificador (PK).
      */
 
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) dono do perfil.
+     * Identificador único do {@link Chat} (FK) do projeto.
      * Imutável por conta da estruturação do sistema.
      */
 
-    private long idUsuario;
+    private long idChat;
 
     /**
-     * Descrição sobre o perfil.
+     * Nome do projeto.
+     */
+
+    private String nome;
+
+    /**
+     * Descrição do projeto.
      */
 
     private String descricao;
 
-    /**
-     * Link para a foto do perfil.
-     */
-
-    private String fotoPerfil;
-
     //Construtor
 
     /**
-     * Construtor completo da classe Perfil
+     * Construtor completo da classe Projeto
      *
-     * @param id Identificador único do perfil (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do perfil.
-     * @param descricao Descrição sobre o perfil.
-     * @param fotoPerfil Link para a foto do perfil.
+     * @param id Identificador único do projeto (PK).
+     * @param idChat Identificador único do {@link Chat} (FK) do projeto.
+     * @param nome Nome do projeto.
+     * @param descricao Descrição do projeto.
      */
 
-    public Perfil(long id, long idUsuario, String descricao, String fotoPerfil) {
+    public Projeto(long id, long idChat, String nome, String descricao) {
 
         this.id = id;
-        this.idUsuario = idUsuario;
+        this.idChat = idChat;
+        this.nome = nome;
         this.descricao = descricao;
-        this.fotoPerfil = fotoPerfil;
 
     }
 
@@ -67,9 +67,21 @@ public class Perfil {
 
     }
 
-    public long getIdUsuario() {
+    public long getIdChat() {
 
-        return idUsuario;
+        return idChat;
+
+    }
+
+    public String getNome() {
+
+        return nome;
+
+    }
+
+    public void setNome(String nome) {
+
+        this.nome = nome;
 
     }
 
@@ -82,18 +94,6 @@ public class Perfil {
     public void setDescricao(String descricao) {
 
         this.descricao = descricao;
-
-    }
-
-    public String getFotoPerfil() {
-
-        return fotoPerfil;
-
-    }
-
-    public void setFotoPerfil(String fotoPerfil) {
-
-        this.fotoPerfil = fotoPerfil;
 
     }
 
@@ -113,9 +113,9 @@ public class Perfil {
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
-                "ID do usuário: "+ this.idUsuario + "\n" +
+                "ID do chat: "+ this.idChat + "\n" +
+                "Nome: "+ this.nome + "\n" +
                 "Descrição: "+ this.descricao + "\n" +
-                "Foto do perfil: "+ this.fotoPerfil + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

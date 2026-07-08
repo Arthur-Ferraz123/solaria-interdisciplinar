@@ -1,77 +1,114 @@
 package model;
 
+/**
+ * Representa a entidade contato
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class Contato {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único do contato.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
-    private String email;
-    private String nome;
+    /**
+     * Identificador único do {@link Usuario} (FK) contatador.
+     * Imutável por conta da estruturação do sistema.
+     */
 
-    //FK originada da tabela usuario
-    private long idUsuario;
+    private long idUsuarioContatador;
 
-    //Construtor
-    public Contato(long id, String email, String nome, long idUsuario) {
+    /**
+     * Identificador único do {@link Usuario} (FK) contatado.
+     * Imutável por conta da estruturação do sistema.
+     */
+
+    private long idUsuarioContatado;
+
+    /**
+     * Representa um apelido dado ao contatado.
+     */
+
+    private String apelido;
+
+    /**
+     * Construtor completo da classe Contato
+     *
+     * @param id Identificador único do contato (PK).
+     * @param idUsuarioContatador Identificador único do {@link Usuario} (FK) contatador.
+     * @param idUsuarioContatado Identificador único do {@link Usuario} (FK) contatado.
+     * @param apelido Apelido dado ao contatado.
+     */
+
+    public Contato(long id, long idUsuarioContatador, long idUsuarioContatado, String apelido) {
 
         this.id = id;
-        this.email = email;
-        this.nome = nome;
-        this.idUsuario = idUsuario;
+        this.idUsuarioContatador = idUsuarioContatador;
+        this.idUsuarioContatado = idUsuarioContatado;
+        this.apelido = apelido;
 
     }
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
 
     }
 
-    public String getEmail() {
+    public long getIdUsuarioContatador() {
 
-        return email;
-
-    }
-
-    public void setEmail(String email) {
-
-        this.email = email;
+        return idUsuarioContatador;
 
     }
 
-    public String getNome() {
+    public long getIdUsuarioContatado() {
 
-        return nome;
-
-    }
-
-    public void setNome(String nome) {
-
-        this.nome = nome;
+        return idUsuarioContatado;
 
     }
 
-    //OBS: O atributo idUsuario é uma FK e é imutável, então não possui setter
-    public long getIdUsuario() {
+    public String getApelido() {
 
-        return idUsuario;
+        return apelido;
+
+    }
+
+    public void setApelido(String apelido) {
+
+        this.apelido = apelido;
 
     }
 
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
-                "Email: "+ this.email + "\n" +
-                "Nome: "+ this.nome + "\n" +
-                "Id do usuário: "+ this.idUsuario + "\n" +
+                "Id do usuário contatador: "+ this.idUsuarioContatador + "\n" +
+                "Id do usuário contatado: "+ this.idUsuarioContatado + "\n" +
+                "Apelido: "+ this.apelido + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

@@ -1,47 +1,77 @@
 package model;
 
+/**
+ * Representa a entidade usuário
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b>.</p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class Usuario {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único do usuário.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
+    /**
+     * E-mail do usuário.
+     * Deve seguir o padrão previsto em {@link }.
+     */
+
     private String email;
+
+    /**
+     * Senha usada pelo usuário.
+     * Deve seguir o padrão previsto em {@link }.
+     */
+
     private String senha;
+
+    /**
+     * Nome do usuário.
+     */
+
     private String nome;
-    private String estado;
-    private String cep;
-    private int numero;
-    private String bairro;
-    private String complemento;
-    private String cidade;
-    private String logradouro;
+
+    /**
+     * Indica qual a variação do usuário.
+     * Imutável por conta da estruturação do sistema.
+     * Valores aceitos:
+     */
+
     private String tipoUsuario;
 
     //Construtor
-    public Usuario(long id, String email, String senha, String nome, String estado, String cep,
-                   int numero, String bairro, String complemento, String cidade,
-                   String logradouro, String tipoUsuario) {
+
+    /**
+     * Construtor completo da classe Usuario
+     *
+     * @param id Identificador único do usuário (PK).
+     * @param email E-mail do usuário.
+     * @param senha Senha utilizada pelo usuário.
+     * @param nome Nome do usuário.
+     * @param tipoUsuario Qual a variação do usuário.
+     */
+
+    public Usuario(long id, String email, String senha, String nome, String tipoUsuario) {
 
         this.id = id;
         this.email = email;
         this.senha = senha;
         this.nome = nome;
-        this.estado = estado;
-        this.cep = cep;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.logradouro = logradouro;
         this.tipoUsuario = tipoUsuario;
 
     }
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
@@ -84,91 +114,6 @@ public class Usuario {
 
     }
 
-    public String getEstado() {
-
-        return estado;
-
-    }
-
-    public void setEstado(String estado) {
-
-        this.estado = estado;
-
-    }
-
-    public String getCep() {
-
-        return cep;
-
-    }
-
-    public void setCep(String cep) {
-
-        this.cep = cep;
-
-    }
-
-    public int getNumero() {
-
-        return numero;
-
-    }
-
-    public void setNumero(int numero) {
-
-        this.numero = numero;
-
-    }
-
-    public String getBairro() {
-
-        return bairro;
-
-    }
-
-    public void setBairro(String bairro) {
-
-        this.bairro = bairro;
-
-    }
-
-    public String getComplemento() {
-
-        return complemento;
-
-    }
-
-    public void setComplemento(String complemento) {
-
-        this.complemento = complemento;
-
-    }
-
-    public String getCidade() {
-
-        return cidade;
-
-    }
-
-    public void setCidade(String cidade) {
-
-        this.cidade = cidade;
-
-    }
-
-    public String getLogradouro() {
-
-        return logradouro;
-
-    }
-
-    public void setLogradouro(String logradouro) {
-
-        this.logradouro = logradouro;
-
-    }
-
-    //OBS: O atributo tipoUsuario não tem setter, pois ele é imutável
     public String getTipoUsuario() {
 
         return tipoUsuario;
@@ -176,6 +121,16 @@ public class Usuario {
     }
 
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 
@@ -184,13 +139,6 @@ public class Usuario {
                 "Email: "+ this.email + "\n" +
                 "Senha: "+ this.senha + "\n" +
                 "Nome: "+ this.nome + "\n" +
-                "Estado: "+ this.estado + "\n" +
-                "CEP: "+ this.cep + "\n" +
-                "Número: "+ this.numero + "\n" +
-                "Bairro: "+ this.bairro + "\n" +
-                "Complemento: "+ this.complemento + "\n" +
-                "Cidade: "+ this.cidade + "\n" +
-                "Logradouro: "+ this.logradouro + "\n" +
                 "Tipo do usuário: "+ this.tipoUsuario + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 

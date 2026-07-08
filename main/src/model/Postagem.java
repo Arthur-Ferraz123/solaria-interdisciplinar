@@ -6,26 +6,88 @@ import java.time.LocalDate;
 //Import do objeto utilizado para representar datatypes do tipo time no java
 import java.time.LocalTime;
 
+/**
+ * Representa a entidade usuário
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class Postagem {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único da postagem.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
-    //FK originada da tabela perfil
+    /**
+     * Identificador único do {@link Perfil} (FK) dono da postagem.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private long idPerfil;
 
+    /**
+     * Texto existênte na postagem.
+     */
+
     private String texto;
+
+    /**
+     * Indica de qual a data que a postagem foi salva no sistema.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private LocalDate dataPublicacao;
+
+    /**
+     * Indica a quantidade de {@link Perfil} que visualizaram a postagem.
+     */
+
     private int quantidadeVisualizacoes;
+
+    /**
+     * Indica de qual o horário que a postagem foi salva no sistema.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private LocalTime horarioPublicacao;
 
-    //Verificar como vai funcionar esses atributos
+    /**
+     * Link para o video da postagem.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private String video;
+
+    /**
+     * Link para a imagem da postagem.
+     * Imutável por conta da estruturação do sistema.
+     */
+
     private String imagem;
 
     //Construtor
+
+    /**
+     * Construtor completo da classe Postagem
+     *
+     * @param id Identificador único da postagem (PK).
+     * @param idPerfil Identificador único do {@link Perfil} (FK) dono da postagem.
+     * @param texto Texto existênte na postagem.
+     * @param dataPublicacao Qual a data que a postagem foi salva no sistema.
+     * @param quantidadeVisualizacoes Quantidade de {@link Perfil} visualizaram a postagem.
+     * @param horarioPublicacao Qual o horário que a postagem foi salva no sistema.
+     * @param video Link para o video da postagem.
+     * @param imagem Link para a imagem da postagem.
+     */
+
     public Postagem(long id, long idPerfil, String texto, LocalDate dataPublicacao,
                     int quantidadeVisualizacoes, LocalTime horarioPublicacao, String video, String imagem) {
 
@@ -42,14 +104,12 @@ public class Postagem {
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
 
     }
 
-    //OBS: O atributo idPerfil é uma FK e é imutável, então não possui setter
     public long getIdPerfil() {
 
         return idPerfil;
@@ -68,7 +128,6 @@ public class Postagem {
 
     }
 
-    //OBS: O atributo dataPublicacao é imutável
     public LocalDate getDataPublicacao() {
 
         return dataPublicacao;
@@ -87,24 +146,15 @@ public class Postagem {
 
     }
 
-    //OBS: O atributo horarioPublicacao é imutável
     public LocalTime getHorarioPublicacao() {
 
         return horarioPublicacao;
 
     }
 
-    // REAVALIAR A SITUAÇÃO ATUAL DESSES ATRIBUTOS
-
     public String getVideo() {
 
         return video;
-
-    }
-
-    public void setVideo(String video) {
-
-        this.video = video;
 
     }
 
@@ -114,13 +164,17 @@ public class Postagem {
 
     }
 
-    public void setImagem(String imagem) {
-
-        this.imagem = imagem;
-
-    }
-
     //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
     @Override
     public String toString(){
 

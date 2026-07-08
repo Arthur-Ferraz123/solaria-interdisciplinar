@@ -1,17 +1,54 @@
 package model;
 
+/**
+ * Representa a entidade plano
+ *
+ * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
+ *
+ * @author Eduardo Vicente Bisneto
+ * @version 1.0.0
+ */
+
 public class Plano {
 
     //Atributos
 
-    //PK da tabela
+    /**
+     * Identificador único do plano.
+     * Imutável por ser um identificador (PK).
+     */
+
     private long id;
 
+    /**
+     * Nome do plano.
+     */
+
     private String plano;
+
+    /**
+     * Valor do plano em reais.
+     */
+
     private double valor;
+
+    /**
+     * Indica de qual o tipo da mensalidade.
+     * Valores aceitos:
+     */
+
     private String tipoMensalidade;
 
     //Construtor
+
+    /**
+     * Construtor completo da classe Plano
+     *
+     * @param id Identificador único do plano (PK).
+     * @param plano Nome do plano.
+     * @param valor Valor do plano em reais.
+     * @param tipoMensalidade Indica de qual o tipo da mensalidade.
+     */
 
     public Plano(long id, String plano, double valor, String tipoMensalidade) {
 
@@ -24,7 +61,6 @@ public class Plano {
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
     public long getId() {
 
         return id;
@@ -66,6 +102,18 @@ public class Plano {
         this.tipoMensalidade = tipoMensalidade;
 
     }
+
+    //Método toString
+
+    /**
+     * Retorna uma representação completa dos valores de <b>todos</b> os atributos da classe.
+     * <p>
+     *     O formato possuí o <i>nome do atributo com <b>algumas alterações</b></i> para facilitar a compreensão,
+     *     seguido de seu valor.
+     * </p>
+     * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
+     */
+
 
     @Override
     public String toString() {
