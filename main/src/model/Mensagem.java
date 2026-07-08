@@ -60,20 +60,6 @@ public class Mensagem {
 
     private String remetente;
 
-    /**
-     * Link para o video da mensagem.
-     * Imutável por conta da estruturação do sistema.
-     */
-
-    private String video;
-
-    /**
-     * Link para a imagem da mensagem.
-     * Imutável por conta da estruturação do sistema.
-     */
-
-    private String imagem;
-
     //Construtor
 
     /**
@@ -85,12 +71,10 @@ public class Mensagem {
      * @param dataEnvio Data que a mensagem foi enviada.
      * @param horarioEnvio Horário que a mensagem foi enviada.
      * @param remetente Nome de quem enviou a mensagem.
-     * @param video Link para o video da mensagem.
-     * @param imagem Link para a imagem da mensagem.
      */
 
     public Mensagem(long id, long idChat, String mensagem, LocalDate dataEnvio, LocalTime horarioEnvio,
-                    String remetente, String video, String imagem) {
+                    String remetente) {
 
         this.id = id;
         this.idChat = idChat;
@@ -98,8 +82,6 @@ public class Mensagem {
         this.dataEnvio = dataEnvio;
         this.horarioEnvio = horarioEnvio;
         this.remetente = remetente;
-        this.video = video;
-        this.imagem = imagem;
 
     }
 
@@ -147,18 +129,6 @@ public class Mensagem {
 
     }
 
-    public String getVideo() {
-
-        return video;
-
-    }
-
-    public String getImagem() {
-
-        return imagem;
-
-    }
-
     //Método toString
 
     /**
@@ -180,8 +150,6 @@ public class Mensagem {
                 "Data de envio: "+ this.dataEnvio + "\n" +
                 "Horário de envio: "+ this.horarioEnvio + "\n" +
                 "Remetente: "+ this.remetente + "\n" +
-                "Video: "+ this.video + "\n" +
-                "Imagem: "+ this.imagem + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

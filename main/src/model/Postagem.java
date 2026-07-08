@@ -59,20 +59,6 @@ public class Postagem {
 
     private LocalTime horarioPublicacao;
 
-    /**
-     * Link para o video da postagem.
-     * Imutável por conta da estruturação do sistema.
-     */
-
-    private String video;
-
-    /**
-     * Link para a imagem da postagem.
-     * Imutável por conta da estruturação do sistema.
-     */
-
-    private String imagem;
-
     //Construtor
 
     /**
@@ -84,12 +70,10 @@ public class Postagem {
      * @param dataPublicacao Qual a data que a postagem foi salva no sistema.
      * @param quantidadeVisualizacoes Quantidade de {@link Perfil} visualizaram a postagem.
      * @param horarioPublicacao Qual o horário que a postagem foi salva no sistema.
-     * @param video Link para o video da postagem.
-     * @param imagem Link para a imagem da postagem.
      */
 
     public Postagem(long id, long idPerfil, String texto, LocalDate dataPublicacao,
-                    int quantidadeVisualizacoes, LocalTime horarioPublicacao, String video, String imagem) {
+                    int quantidadeVisualizacoes, LocalTime horarioPublicacao) {
 
         this.id = id;
         this.idPerfil = idPerfil;
@@ -97,8 +81,6 @@ public class Postagem {
         this.dataPublicacao = dataPublicacao;
         this.quantidadeVisualizacoes = quantidadeVisualizacoes;
         this.horarioPublicacao = horarioPublicacao;
-        this.video = video;
-        this.imagem = imagem;
 
     }
 
@@ -152,18 +134,6 @@ public class Postagem {
 
     }
 
-    public String getVideo() {
-
-        return video;
-
-    }
-
-    public String getImagem() {
-
-        return imagem;
-
-    }
-
     //Método toString
 
     /**
@@ -185,8 +155,6 @@ public class Postagem {
                 "Data de publicação: "+ this.dataPublicacao + "\n" +
                 "Quantidade de visualizações: "+ this.quantidadeVisualizacoes + "\n" +
                 "Horário de publicação: "+ this.horarioPublicacao + "\n" +
-                "Vídeo: "+ this.video + "\n" +
-                "Imagem: "+ this.imagem + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

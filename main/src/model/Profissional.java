@@ -36,10 +36,10 @@ public class Profissional {
     private String tipoUsuario;
 
     /**
-     * Indica qual função o profissional exerce.
+     * Indica qual profissão o profissional exerce.
      */
 
-    private String funcao;
+    private String profissao;
 
     /**
      * CPF do profissional.
@@ -63,17 +63,17 @@ public class Profissional {
      * @param id Identificador único do profissional (PK).
      * @param idUsuario Identificador único do {@link Usuario} (FK) que é o profissional.
      * @param tipoUsuario Qual a variação do usuário.
-     * @param funcao Função que o profissional exerce.
+     * @param profissao Profissão que o profissional exerce.
      * @param cpf CPF do profissional.
      * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
      */
 
-    public Profissional(long id, long idUsuario, String tipoUsuario, String funcao, String cpf, long idEmpresaTecnica) {
+    public Profissional(long id, long idUsuario, String tipoUsuario, String profissao, String cpf, long idEmpresaTecnica) {
 
         this.id = id;
         this.idUsuario = idUsuario;
         this.tipoUsuario = tipoUsuario;
-        this.funcao = funcao;
+        this.profissao = profissao;
         this.cpf = cpf;
         this.idEmpresaTecnica = idEmpresaTecnica;
 
@@ -99,15 +99,15 @@ public class Profissional {
 
     }
 
-    public String getFuncao() {
+    public String setProfissao() {
 
-        return funcao;
+        return profissao;
 
     }
 
-    public void setFuncao(String funcao) {
+    public void setProfissao(String profissao) {
 
-        this.funcao = funcao;
+        this.profissao = profissao;
 
     }
 
@@ -147,7 +147,7 @@ public class Profissional {
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
                 "Tipo do usuário: "+ this.tipoUsuario + "\n" +
-                "Função: "+ this.funcao + "\n" +
+                "Profissão: "+ this.profissao + "\n" +
                 "CPF: "+ this.cpf + "\n" +
                 "ID da empresa técnica: "+ this.idEmpresaTecnica + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";

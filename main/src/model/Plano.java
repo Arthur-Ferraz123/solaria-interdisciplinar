@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade plano
+ * Representa a entidade nome
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -14,20 +14,27 @@ public class Plano {
     //Atributos
 
     /**
-     * Identificador único do plano.
+     * Identificador único do nome.
      * Imutável por ser um identificador (PK).
      */
 
     private long id;
 
     /**
-     * Nome do plano.
+     * Nome do nome.
      */
 
-    private String plano;
+    private String nome;
 
     /**
-     * Valor do plano em reais.
+     * Indica qual tipo de usuário que o plano é direcionado
+     * Valores aceitos:
+     */
+
+    private String tipoUsuarioDestinado;
+
+    /**
+     * Valor do nome em reais.
      */
 
     private double valor;
@@ -44,16 +51,17 @@ public class Plano {
     /**
      * Construtor completo da classe Plano
      *
-     * @param id Identificador único do plano (PK).
-     * @param plano Nome do plano.
-     * @param valor Valor do plano em reais.
+     * @param id Identificador único do nome (PK).
+     * @param nome Nome do nome.
+     * @param valor Valor do nome em reais.
      * @param tipoMensalidade Indica de qual o tipo da mensalidade.
      */
 
-    public Plano(long id, String plano, double valor, String tipoMensalidade) {
+    public Plano(long id, String nome, String tipoUsuarioDestinado, double valor, String tipoMensalidade) {
 
         this.id = id;
-        this.plano = plano;
+        this.nome = nome;
+        this.tipoUsuarioDestinado = tipoUsuarioDestinado;
         this.valor = valor;
         this.tipoMensalidade = tipoMensalidade;
 
@@ -67,15 +75,27 @@ public class Plano {
 
     }
 
-    public String getPlano() {
+    public String getNome() {
 
-        return plano;
+        return nome;
 
     }
 
-    public void setPlano(String plano) {
+    public void setNome(String nome) {
 
-        this.plano = plano;
+        this.nome = nome;
+
+    }
+
+    public String getTipoUsuarioDestinado() {
+
+        return tipoUsuarioDestinado;
+
+    }
+
+    public void setTipoUsuarioDestinado(String tipoUsuarioDestinado) {
+
+        this.tipoUsuarioDestinado = tipoUsuarioDestinado;
 
     }
 
@@ -120,7 +140,8 @@ public class Plano {
 
         return "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: " + this.id + "\n" +
-                "Plano: " + this.plano + "\n" +
+                "Nome: " + this.nome + "\n" +
+                "Tipo usuário destinado: " + this.tipoUsuarioDestinado + "\n" +
                 "Valor: R$" + this.valor + "\n" +
                 "Tipo de mensalidade: " + this.tipoMensalidade + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";

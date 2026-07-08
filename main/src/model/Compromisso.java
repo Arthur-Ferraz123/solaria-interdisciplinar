@@ -58,10 +58,10 @@ public class Compromisso {
     private LocalTime horarioCompromisso;
 
     /**
-     * Data do intervalo previsto para a conclusão do compromisso.
+     * Data prevista para a conclusão do compromisso.
      */
 
-    private LocalDate intervaloPrevistoParaConclusao;
+    private LocalDate dataPrevistaParaConclusao;
 
     //Construtor
 
@@ -74,10 +74,10 @@ public class Compromisso {
      * @param descricao Descrição sobre o que será feito no compromisso.
      * @param dataCompromisso Data de realização do compromisso.
      * @param horarioCompromisso Horário de realização do compromisso.
-     * @param intervaloPrevistoParaConclusao Data do intervalo previsto para a conclusão do compromisso.
+     * @param dataPrevistaParaConclusao Data prevista para a conclusão do compromisso.
      */
 
-    public Compromisso(long id, long idUsuarioProjeto, String nome, String descricao, LocalDate dataCompromisso, LocalTime horarioCompromisso, LocalDate intervaloPrevistoParaConclusao) {
+    public Compromisso(long id, long idUsuarioProjeto, String nome, String descricao, LocalDate dataCompromisso, LocalTime horarioCompromisso, LocalDate dataPrevistaParaConclusao) {
 
         this.id = id;
         this.idUsuarioProjeto = idUsuarioProjeto;
@@ -85,7 +85,7 @@ public class Compromisso {
         this.descricao = descricao;
         this.dataCompromisso = dataCompromisso;
         this.horarioCompromisso = horarioCompromisso;
-        this.intervaloPrevistoParaConclusao = intervaloPrevistoParaConclusao;
+        this.dataPrevistaParaConclusao = dataPrevistaParaConclusao;
 
     }
 
@@ -151,15 +151,15 @@ public class Compromisso {
 
     }
 
-    public LocalDate getIntervaloPrevistoParaConclusao() {
+    public LocalDate getDataPrevistaParaConclusao() {
 
-        return intervaloPrevistoParaConclusao;
+        return dataPrevistaParaConclusao;
 
     }
 
-    public void setIntervaloPrevistoParaConclusao(LocalDate intervaloPrevistoParaConclusao) {
+    public void setDataPrevistaParaConclusao(LocalDate dataPrevistaParaConclusao) {
 
-        this.intervaloPrevistoParaConclusao = intervaloPrevistoParaConclusao;
+        this.dataPrevistaParaConclusao = dataPrevistaParaConclusao;
 
     }
 
@@ -184,7 +184,7 @@ public class Compromisso {
                 "Descrição: "+ this.descricao + "\n" +
                 "Data do compromisso: "+ this.dataCompromisso + "\n" +
                 "Horário do compromisso: "+ this.horarioCompromisso + "\n" +
-                "Intervalo previsto para a conclusão: "+ this.intervaloPrevistoParaConclusao + "\n" +
+                "Intervalo previsto para a conclusão: "+ this.dataPrevistaParaConclusao + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

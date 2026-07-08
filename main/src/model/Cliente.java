@@ -110,7 +110,6 @@ public class Cliente{
                 "CNPJ: "+ this.cnpj + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
-
     }
 
 }
