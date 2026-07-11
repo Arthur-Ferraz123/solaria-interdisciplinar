@@ -50,6 +50,8 @@ public class Usuario {
 
     //Construtor
 
+    public Usuario(){};
+
     /**
      * Construtor completo da classe Usuario
      *
@@ -63,6 +65,24 @@ public class Usuario {
     public Usuario(long id, String email, String senha, String nome, String tipoUsuario) {
 
         this.id = id;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+        this.tipoUsuario = tipoUsuario;
+
+    }
+
+    /**
+     * Construtor para o DAO da classe Usuario
+     *
+     * @param email E-mail do usuário.
+     * @param senha Senha utilizada pelo usuário.
+     * @param nome Nome do usuário.
+     * @param tipoUsuario Qual a variação do usuário.
+     */
+
+    public Usuario(String email, String senha, String nome, String tipoUsuario) {
+
         this.email = email;
         this.senha = senha;
         this.nome = nome;

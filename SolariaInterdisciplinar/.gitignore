@@ -9,8 +9,10 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 
-#restrição na classe conexao.Conexao.java
-**/Conexao.java
-
 #Restrição da main de testes
 Main.java
+
+#Restrição para não enviar o .env
+src/main/resources/.env
+
+**/target
