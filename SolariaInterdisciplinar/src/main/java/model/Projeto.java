@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Projeto {
 
     //Atributos
@@ -17,26 +16,22 @@ public class Projeto {
      * Identificador único do projeto.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Chat} (FK) do projeto.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idChat;
 
     /**
      * Nome do projeto.
      */
-
     private String nome;
 
     /**
      * Descrição do projeto.
      */
-
     private String descricao;
 
     //Construtor
@@ -49,11 +44,41 @@ public class Projeto {
      * @param nome Nome do projeto.
      * @param descricao Descrição do projeto.
      */
-
     public Projeto(long id, long idChat, String nome, String descricao) {
 
         this.id = id;
         this.idChat = idChat;
+        this.nome = nome;
+        this.descricao = descricao;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ProjetoDAO#insert(Projeto)}
+     *
+     * @param idChat Identificador único do {@link Chat} (FK) do projeto.
+     * @param nome Nome do projeto.
+     * @param descricao Descrição do projeto.
+     */
+    public Projeto(long idChat, String nome, String descricao) {
+
+        this.idChat = idChat;
+        this.nome = nome;
+        this.descricao = descricao;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ProjetoDAO#insert(Projeto)}
+     *
+     * @param id Identificador único do projeto (PK).
+     * @param nome Nome do projeto.
+     * @param descricao Descrição do projeto.
+     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     */
+    public Projeto(long id, String nome, String descricao, boolean daoUpdate) {
+
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
 
@@ -107,7 +132,6 @@ public class Projeto {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

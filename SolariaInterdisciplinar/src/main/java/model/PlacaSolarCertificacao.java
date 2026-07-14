@@ -1,14 +1,13 @@
 package model;
 
 /**
- * Representa a entidade placa solar certificação
+ * Representa a entidade PlacaSolarCertificação
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class PlacaSolarCertificacao {
 
     //Atributos
@@ -17,21 +16,18 @@ public class PlacaSolarCertificacao {
      * Identificador único da placa solar certificação.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único da {@link PlacaSolar} (FK) ao qual a placa solar certificação se aplica.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idPlacaSolar;
 
     /**
      * Identificador único da {@link Certificacao} (FK) da placa solar certificação.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idCertificacao;
 
     //Construtor
@@ -43,10 +39,22 @@ public class PlacaSolarCertificacao {
      * @param idPlacaSolar Identificador único da {@link PlacaSolar} (FK) ao qual a placa solar certificação se aplica.
      * @param idCertificacao Identificador único da {@link Certificacao} (FK) da placa solar certificação.
      */
-
     public PlacaSolarCertificacao(long id, long idPlacaSolar, long idCertificacao) {
 
         this.id = id;
+        this.idPlacaSolar = idPlacaSolar;
+        this.idCertificacao = idCertificacao;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.PlacaSolarCertificacaoDAO#insert(PlacaSolarCertificacao)}
+     *
+     * @param idPlacaSolar Identificador único da {@link PlacaSolar} (FK) ao qual a placa solar certificação se aplica.
+     * @param idCertificacao Identificador único da {@link Certificacao} (FK) da placa solar certificação.
+     */
+    public PlacaSolarCertificacao(long idPlacaSolar, long idCertificacao) {
+
         this.idPlacaSolar = idPlacaSolar;
         this.idCertificacao = idCertificacao;
 
@@ -82,7 +90,6 @@ public class PlacaSolarCertificacao {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class UsuarioProjeto {
 
     //Atributos
@@ -17,28 +16,24 @@ public class UsuarioProjeto {
      * Identificador único do usuário projeto.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Projeto} (FK) ao qual o usuário projeto está envolvido.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idProjeto;
 
     /**
      * Identificador único do {@link Usuario} (FK) que é o usuário projeto.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     /**
      * Indica se o usuário projeto é o dono do projeto.
      * Imutável por conta da estruturação do sistema.
      */
-
     private boolean donoDoProjeto;
 
     //Construtor
@@ -51,10 +46,24 @@ public class UsuarioProjeto {
      * @param idUsuario Identificador único do {@link Usuario} (FK) que é o usuário projeto.
      * @param donoDoProjeto Indica se o usuário projeto é o dono do projeto.
      */
-
     public UsuarioProjeto(long id, long idProjeto, long idUsuario, boolean donoDoProjeto) {
 
         this.id = id;
+        this.idProjeto = idProjeto;
+        this.idUsuario = idUsuario;
+        this.donoDoProjeto = donoDoProjeto;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.UsuarioProjetoDAO#insert(UsuarioProjeto)}
+     *
+     * @param idProjeto Identificador único do {@link Projeto} (FK) ao qual o usuário projeto está envolvido.
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o usuário projeto.
+     * @param donoDoProjeto Indica se o usuário projeto é o dono do projeto.
+     */
+    public UsuarioProjeto(long idProjeto, long idUsuario, boolean donoDoProjeto) {
+
         this.idProjeto = idProjeto;
         this.idUsuario = idUsuario;
         this.donoDoProjeto = donoDoProjeto;

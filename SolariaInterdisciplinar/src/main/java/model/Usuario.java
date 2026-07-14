@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Usuario {
 
     //Atributos
@@ -17,38 +16,33 @@ public class Usuario {
      * Identificador único do usuário.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * E-mail do usuário.
      * Deve seguir o padrão previsto em {@link }.
      */
-
     private String email;
 
     /**
      * Senha usada pelo usuário.
      * Deve seguir o padrão previsto em {@link }.
      */
-
     private String senha;
 
     /**
      * Nome do usuário.
      */
-
     private String nome;
 
     /**
      * Indica qual a variação do usuário.
      * Imutável por conta da estruturação do sistema.
-     * Valores aceitos:
+     * Valores aceitos: {"CLIENTE", "FORNECEDOR", "PROFISSIONAL", "EMPRESA_TECNICA"}
      */
-
     private String tipoUsuario;
 
-    //Construtor
+    //Construtores
 
     public Usuario(){};
 
@@ -61,7 +55,6 @@ public class Usuario {
      * @param nome Nome do usuário.
      * @param tipoUsuario Qual a variação do usuário.
      */
-
     public Usuario(long id, String email, String senha, String nome, String tipoUsuario) {
 
         this.id = id;
@@ -73,20 +66,36 @@ public class Usuario {
     }
 
     /**
-     * Construtor para o DAO da classe Usuario
+     * Construtor para o {@link dao.UsuarioDAO#insert(Usuario)}
      *
      * @param email E-mail do usuário.
      * @param senha Senha utilizada pelo usuário.
      * @param nome Nome do usuário.
      * @param tipoUsuario Qual a variação do usuário.
      */
-
     public Usuario(String email, String senha, String nome, String tipoUsuario) {
 
         this.email = email;
         this.senha = senha;
         this.nome = nome;
         this.tipoUsuario = tipoUsuario;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.UsuarioDAO#update(Usuario)}
+     *
+     * @param id Identificador único do usuário (PK).
+     * @param email E-mail do usuário.
+     * @param senha Senha utilizada pelo usuário.
+     * @param nome Nome do usuário.
+     */
+    public Usuario(long id, String email, String senha, String nome) {
+
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
 
     }
 
@@ -150,7 +159,6 @@ public class Usuario {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

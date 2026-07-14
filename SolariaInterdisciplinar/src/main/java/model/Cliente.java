@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Cliente{
 
     //Atributos
@@ -17,14 +16,12 @@ public class Cliente{
      * Identificador único do cliente.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Usuario} (FK) que é o cliente.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     /**
@@ -32,7 +29,6 @@ public class Cliente{
      * Imutável por conta da estruturação do sistema.
      * Valores aceitos:
      */
-
     private String tipoUsuario;
 
     /**
@@ -40,8 +36,12 @@ public class Cliente{
      * Imutável por conta da estruturação do sistema.
      * Deve seguir o padrão previsto em {@link }.
      */
-
     private String cnpj;
+
+    /**
+     * Razão social do cliente.
+     */
+    private String razaoSocial;
 
     //Construtor
 
@@ -52,14 +52,43 @@ public class Cliente{
      * @param idUsuario Identificador único do {@link Usuario} (FK) que é o cliente.
      * @param tipoUsuario Qual a variação do usuário.
      * @param cnpj CNPJ do cliente.
+     * @param razaoSocial Razão social do cliente.
      */
-
-    public Cliente(long id, long idUsuario, String tipoUsuario, String cnpj) {
+    public Cliente(long id, long idUsuario, String tipoUsuario, String cnpj, String razaoSocial) {
 
         this.id = id;
         this.idUsuario = idUsuario;
         this.tipoUsuario = tipoUsuario;
         this.cnpj = cnpj;
+        this.razaoSocial = razaoSocial;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ClienteDAO#insert(Cliente)}
+     *
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o cliente.
+     * @param cnpj CNPJ do cliente.
+     * @param razaoSocial Razão social do cliente.
+     */
+    public Cliente(long idUsuario, String cnpj, String razaoSocial) {
+
+        this.idUsuario = idUsuario;
+        this.cnpj = cnpj;
+        this.razaoSocial = razaoSocial;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ClienteDAO#insert(Cliente)}
+     *
+     * @param id Identificador único do cliente (PK).
+     * @param razaoSocial Razão social do cliente.
+     */
+    public Cliente(long id, String razaoSocial) {
+
+        this.id = id;
+        this.razaoSocial = razaoSocial;
 
     }
 
@@ -89,6 +118,18 @@ public class Cliente{
 
     }
 
+    public String getRazaoSocial() {
+
+        return razaoSocial;
+
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+
+        this.razaoSocial = razaoSocial;
+
+    }
+
     //Método toString
 
     /**
@@ -99,7 +140,6 @@ public class Cliente{
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 
@@ -108,6 +148,7 @@ public class Cliente{
                 "ID do usuário: "+ this.idUsuario + "\n" +
                 "Tipo do usuário: "+ this.tipoUsuario + "\n" +
                 "CNPJ: "+ this.cnpj + "\n" +
+                "Razão social: " + this.razaoSocial + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

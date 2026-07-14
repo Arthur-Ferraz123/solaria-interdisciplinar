@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class EmpresaTecnica {
 
     //Atributos
@@ -17,14 +16,12 @@ public class EmpresaTecnica {
      * Identificador único da empresa técnica.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Usuario} (FK) que é a empresa técnica.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     /**
@@ -32,7 +29,6 @@ public class EmpresaTecnica {
      * Imutável por conta da estruturação do sistema.
      * Valores aceitos:
      */
-
     private String tipoUsuario;
 
     /**
@@ -40,13 +36,11 @@ public class EmpresaTecnica {
      * Imutável por conta da estruturação do sistema.
      * Deve seguir o padrão previsto em {@link }.
      */
-
     private String cnpj;
 
     /**
      * Razão social da empresa técnica
      */
-
     private String razaoSocial;
 
     //Construtor
@@ -60,13 +54,38 @@ public class EmpresaTecnica {
      * @param cnpj CNPJ da empresa técnica.
      * @param razaoSocial Razão social da empresa técnica.
      */
-
     public EmpresaTecnica(long id, long idUsuario, String tipoUsuario, String cnpj, String razaoSocial) {
 
         this.id = id;
         this.idUsuario = idUsuario;
         this.tipoUsuario = tipoUsuario;
         this.cnpj = cnpj;
+        this.razaoSocial = razaoSocial;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.EmpresaTecnicaDAO#insert(EmpresaTecnica)}
+     *
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é a empresa técnica.
+     * @param cnpj CNPJ da empresa técnica.
+     * @param razaoSocial Razão social da empresa técnica.
+     */
+    public EmpresaTecnica(long idUsuario, String cnpj, String razaoSocial) {
+
+        this.idUsuario = idUsuario;
+        this.cnpj = cnpj;
+        this.razaoSocial = razaoSocial;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.EmpresaTecnicaDAO#insert(EmpresaTecnica)}
+     *
+     * @param razaoSocial Razão social da empresa técnica.
+     */
+    public EmpresaTecnica(String razaoSocial) {
+
         this.razaoSocial = razaoSocial;
 
     }
@@ -119,7 +138,6 @@ public class EmpresaTecnica {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

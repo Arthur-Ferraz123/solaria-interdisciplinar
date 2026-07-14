@@ -2,6 +2,8 @@ package dao;
 
 import conexao.Conexao;
 
+import model.Endereco;
+import model.Telefone;
 import model.Usuario;
 
 import java.sql.Connection;
@@ -17,30 +19,31 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Usuário
+ * Classe responsável pelo DAO da entidade Telefone
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-public class UsuarioDAO implements GenericDAO<Usuario> {
 
-    public int insert(Usuario usuario){
+public class TelefoneDAO implements GenericDAO<Telefone> {
+
+    public int insert(Telefone telefone){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
         try{
 
-        String insert = "insert into usuario(email, senha, nome, tipo_usuario) values(?, ?, ?, ?)";
+            String insert = "insert into telefone(telefone, tipo, id_usuario, principal) values(?, ?, ?, ?)";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(insert);
+            PreparedStatement preparedStatement = connection.prepareStatement(insert);
 
-        preparedStatement.setString(1, usuario.getEmail() );
-        preparedStatement.setString(2, usuario.getSenha());
-        preparedStatement.setString(3, usuario.getNome());
-        preparedStatement.setString(4, usuario.getTipoUsuario() );
+            preparedStatement.setString(1, telefone.getTelefone() );
+            preparedStatement.setString(2, telefone.getTipo());
+            preparedStatement.setLong(3, telefone.getIdUsuario());
+            preparedStatement.setBoolean(4, telefone.isPrincipal() );
 
-        return preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate();
 
         } catch (SQLException sqlException){
 
@@ -49,9 +52,9 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                "23503".equals(codigoSQLException) ||
-                "23505".equals(codigoSQLException) ||
-                "23514".equals(codigoSQLException) ){
+                    "23503".equals(codigoSQLException) ||
+                    "23505".equals(codigoSQLException) ||
+                    "23514".equals(codigoSQLException) ){
 
                 return -1;
             }
@@ -70,14 +73,14 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
-    public Usuario readById(long id){
+    public Telefone readById(long id){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
         try {
 
-            String readById = "select * from usuario where id = ?";
+            String readById = "select * from telefone where id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(readById);
 
@@ -87,12 +90,12 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
             if (resultSet.next()){
 
-                return new Usuario(
+                return new Telefone(
                         resultSet.getLong("id"),
-                        resultSet.getString("email"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario")
+                        resultSet.getString("telefone"),
+                        resultSet.getString("tipo"),
+                        resultSet.getLong("id_usuario"),
+                        resultSet.getBoolean("principal")
                 );
 
             }
@@ -114,32 +117,32 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     /**
      * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é um email.
      *
-     * @param email email do {@link Usuario} que se está buscando.
-     * @return O usuário e todos os seus dados.
+     * @param telefone número do {@link Telefone} que se está buscando.
+     * @return O Telefone com todos os seus dados.
      */
-    public Usuario readByEmail(String email){
+    public Telefone readByTelefone(String telefone){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
         try {
 
-            String readById = "select * from usuario where email = ?";
+            String readById = "select * from telefone where telefone = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(readById);
 
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, telefone);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()){
 
-                return new Usuario(
+                return new Telefone(
                         resultSet.getLong("id"),
-                        resultSet.getString("email"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario")
+                        resultSet.getString("telefone"),
+                        resultSet.getString("tipo"),
+                        resultSet.getLong("id_usuario"),
+                        resultSet.getBoolean("principal")
                 );
 
             }
@@ -158,15 +161,15 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
-    public List<Usuario> readAll(){
+    public List<Telefone> readAll(){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Telefone> telefones = new ArrayList<>();
 
         try {
 
-            String readAll = "select * from usuario";
+            String readAll = "select * from telefone";
 
             PreparedStatement preparedStatement = connection.prepareStatement(readAll);
 
@@ -174,17 +177,17 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
             while (resultSet.next()){
 
-                 usuarios.add(new Usuario(
+                telefones.add(new Telefone(
                         resultSet.getLong("id"),
-                        resultSet.getString("email"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario")
+                        resultSet.getString("telefone"),
+                        resultSet.getString("tipo"),
+                        resultSet.getLong("id_usuario"),
+                        resultSet.getBoolean("principal")
                 ));
 
             }
 
-            return usuarios;
+            return telefones;
 
         } catch (Exception exception){
 
@@ -199,39 +202,39 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     /**
-     * Variação do método {@link #readAll()}. A diferença é que o tipoUsario é usado como parametro de busca.
-     * @param tipoUsuario Veja os valores possíveis em {@link Usuario}.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo tipoUsuario que o parametro.
+     * Variação do método {@link #readAll()}. A diferença é que o idUsuario é usado como parametro de busca.
+     * @param idUsuario ID de quem possuí o telefone buscado.
+     * @return Uma lista com todos os registro da tabela que possuem o mesmo idUsuario que o parametro.
      */
-    public List<Usuario> readAllbyTipoUsuario(String tipoUsuario){
+    public List<Telefone> readAllByIdUsuario(long idUsuario){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Telefone> telefones = new ArrayList<>();
 
         try {
 
-            String readAll = "select * from usuario where tipo_usuario = ?";
+            String readAll = "select * from telefone where id_usuario = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(readAll);
 
-            preparedStatement.setString(1, tipoUsuario);
+            preparedStatement.setLong(1, idUsuario);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
 
-                usuarios.add(new Usuario(
+                telefones.add(new Telefone(
                         resultSet.getLong("id"),
-                        resultSet.getString("email"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario")
+                        resultSet.getString("telefone"),
+                        resultSet.getString("tipo"),
+                        resultSet.getLong("id_usuario"),
+                        resultSet.getBoolean("principal")
                 ));
 
             }
 
-            return usuarios;
+            return telefones;
 
         } catch (Exception exception){
 
@@ -245,21 +248,21 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
-    public int update(Usuario usuario){
+    public int update(Telefone telefone){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
         try{
 
-            String update = "update usuario set email = ?, senha = ?, nome = ? where id = ?";
+            String update = "update telefone set telefone = ?, tipo = ?, principal = ? where id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
 
-            preparedStatement.setString(1, usuario.getEmail() );
-            preparedStatement.setString(2, usuario.getSenha() );
-            preparedStatement.setString(3, usuario.getNome() );
-            preparedStatement.setLong(4, usuario.getId());
+            preparedStatement.setString(1, telefone.getTelefone() );
+            preparedStatement.setString(2, telefone.getTipo() );
+            preparedStatement.setBoolean(3, telefone.isPrincipal() );
+            preparedStatement.setLong(4, telefone.getId());
 
             return preparedStatement.executeUpdate();
 
@@ -270,9 +273,9 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                "23503".equals(codigoSQLException) ||
-                "23505".equals(codigoSQLException) ||
-                "23514".equals(codigoSQLException) ){
+                    "23503".equals(codigoSQLException) ||
+                    "23505".equals(codigoSQLException) ||
+                    "23514".equals(codigoSQLException) ){
 
                 return -1;
             }
@@ -298,7 +301,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         try{
 
-            String delete = "delete from usuario where id = ?";
+            String delete = "delete from telefone where id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(delete);
 
@@ -332,22 +335,22 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o email é usado como clausula de apagamento.
-     * @param email Email do {@link Usuario}.
+     * Variação do método {@link #deleteById(long)}. A diferença é que o número de telefone é usado como clausula de apagamento.
+     * @param telefone Número do {@link Telefone}.
      * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
      */
-    public int deleteByEmail(String email){
+    public int deleteByTelefone(String telefone){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
         try{
 
-            String delete = "delete from usuario where email = ?";
+            String delete = "delete from telefone where telefone = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(delete);
 
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, telefone);
 
             return preparedStatement.executeUpdate();
 

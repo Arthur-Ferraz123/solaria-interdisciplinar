@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Avaliacao {
 
     //Atributos
@@ -17,34 +16,29 @@ public class Avaliacao {
      * Identificador único da avaliação.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Usuario} (FK) avaliador.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuarioAvaliador;
 
     /**
      * Identificador único do {@link Usuario} (FK) avaliado.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuarioAvaliado;
 
     /**
      * Um comentário associado a avaliação.
      */
-
     private String comentario;
 
     /**
      * Indica a positividade da avaliação.
-     * O valor deve estar entre 1 e 5.
+     * O valor deve estar entre 0 e 5.
      */
-
     private int quantidadeEstrelas;
 
     //Construtor
@@ -58,12 +52,43 @@ public class Avaliacao {
      * @param comentario Um comentário associado a avaliação.
      * @param quantidadeEstrelas A positividade da avaliação.
      */
-
     public Avaliacao(long id, long idUsuarioAvaliador, long idUsuarioAvaliado, String comentario, int quantidadeEstrelas) {
 
         this.id = id;
         this.idUsuarioAvaliador = idUsuarioAvaliador;
         this.idUsuarioAvaliado = idUsuarioAvaliado;
+        this.comentario = comentario;
+        this.quantidadeEstrelas = quantidadeEstrelas;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.AvaliacaoDAO#insert(Avaliacao)}
+     *
+     * @param idUsuarioAvaliador Identificador único do {@link Usuario} (FK) avaliador.
+     * @param idUsuarioAvaliado Identificador único do {@link Usuario} (FK) avaliado.
+     * @param comentario Um comentário associado a avaliação.
+     * @param quantidadeEstrelas A positividade da avaliação.
+     */
+    public Avaliacao(long idUsuarioAvaliador, long idUsuarioAvaliado, String comentario, int quantidadeEstrelas) {
+
+        this.idUsuarioAvaliador = idUsuarioAvaliador;
+        this.idUsuarioAvaliado = idUsuarioAvaliado;
+        this.comentario = comentario;
+        this.quantidadeEstrelas = quantidadeEstrelas;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.AvaliacaoDAO#update(Avaliacao)}
+     *
+     * @param id Identificador único da avaliação (PK).
+     * @param comentario Um comentário associado a avaliação.
+     * @param quantidadeEstrelas A positividade da avaliação.
+     */
+    public Avaliacao(long id, String comentario, int quantidadeEstrelas) {
+
+        this.id = id;
         this.comentario = comentario;
         this.quantidadeEstrelas = quantidadeEstrelas;
 
@@ -123,7 +148,6 @@ public class Avaliacao {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

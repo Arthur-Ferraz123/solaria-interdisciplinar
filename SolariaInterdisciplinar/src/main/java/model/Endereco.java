@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Endereco {
 
     //Atributos
@@ -17,61 +16,52 @@ public class Endereco {
      * Identificador único do endereço.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Usuario} (FK) dono do endereço.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     /**
      * Indica qual o estado do endereço.
      * Valores aceitos:
      */
-
     private String estado;
 
     /**
      * Nome da cidade que o endereço se situa.
      */
-
     private String cidade;
 
     /**
      * Nome do bairro que o endereço se situa.
      */
-
     private String bairro;
 
     /**
      * CEP do endereço.
      * Deve seguir o padrão previsto em {@link }.
      */
-
     private String cep;
 
     /**
      * Nome do logradouro do endereço se situa.
      */
-
     private String logradouro;
 
     /**
      * Número do endereço.
      */
-
     private String numero;
 
     /**
      * Complemento caso necessário para facilitar encontrar o endereço.
      */
-
     private String complemento;
 
-    //Construtor
+    //Construtores
 
     /**
      * Construtor completo da classe Endereco
@@ -86,11 +76,61 @@ public class Endereco {
      * @param numero Número do endereço.
      * @param complemento Complemento caso necessário para facilitar encontrar o endereço.
      */
-
     public Endereco(long id, long idUsuario, String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento) {
 
         this.id = id;
         this.idUsuario = idUsuario;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.EnderecoDAO#insert(Endereco)}
+     *
+     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do endereço.
+     * @param estado Qual o estado do endereço.
+     * @param cidade Nome da cidade que o endereço se situa.
+     * @param bairro Nome do bairro que o endereço se situa.
+     * @param cep CEP do endereço.
+     * @param logradouro Nome do logradouro do endereço se situa.
+     * @param numero Número do endereço.
+     * @param complemento Complemento caso necessário para facilitar encontrar o endereço.
+     */
+    public Endereco(long idUsuario, String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento) {
+
+        this.idUsuario = idUsuario;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.EnderecoDAO#update(Endereco)}
+     *
+     * @param id Identificador único do endereço (PK).
+     * @param estado Qual o estado do endereço.
+     * @param cidade Nome da cidade que o endereço se situa.
+     * @param bairro Nome do bairro que o endereço se situa.
+     * @param cep CEP do endereço.
+     * @param logradouro Nome do logradouro do endereço se situa.
+     * @param numero Número do endereço.
+     * @param complemento Complemento caso necessário para facilitar encontrar o endereço.
+     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     */
+    public Endereco(long id, String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento, boolean daoUpdate) {
+
+        this.id = id;
         this.estado = estado;
         this.cidade = cidade;
         this.bairro = bairro;
@@ -209,7 +249,6 @@ public class Endereco {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

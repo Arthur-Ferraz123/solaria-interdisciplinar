@@ -1,20 +1,17 @@
 package model;
 
-//Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 
-//Import do objeto utilizado para representar datatypes do tipo time no java
 import java.time.LocalTime;
 
 /**
- * Representa a entidade usuário
+ * Representa a entidade postagem
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Postagem {
 
     //Atributos
@@ -23,40 +20,34 @@ public class Postagem {
      * Identificador único da postagem.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Perfil} (FK) dono da postagem.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idPerfil;
 
     /**
      * Texto existênte na postagem.
      */
-
     private String texto;
 
     /**
      * Indica de qual a data que a postagem foi salva no sistema.
      * Imutável por conta da estruturação do sistema.
      */
-
     private LocalDate dataPublicacao;
 
     /**
      * Indica a quantidade de {@link Perfil} que visualizaram a postagem.
      */
-
-    private int quantidadeVisualizacoes;
+    private long quantidadeVisualizacoes;
 
     /**
      * Indica de qual o horário que a postagem foi salva no sistema.
      * Imutável por conta da estruturação do sistema.
      */
-
     private LocalTime horarioPublicacao;
 
     //Construtor
@@ -71,9 +62,8 @@ public class Postagem {
      * @param quantidadeVisualizacoes Quantidade de {@link Perfil} visualizaram a postagem.
      * @param horarioPublicacao Qual o horário que a postagem foi salva no sistema.
      */
-
     public Postagem(long id, long idPerfil, String texto, LocalDate dataPublicacao,
-                    int quantidadeVisualizacoes, LocalTime horarioPublicacao) {
+                    long quantidadeVisualizacoes, LocalTime horarioPublicacao) {
 
         this.id = id;
         this.idPerfil = idPerfil;
@@ -84,6 +74,33 @@ public class Postagem {
 
     }
 
+    /**
+     * Construtor para o {@link dao.PostagemDAO#insert(Postagem)}
+     *
+     * @param idPerfil Identificador único do {@link Perfil} (FK) dono da postagem.
+     * @param texto Texto existênte na postagem.
+     */
+    public Postagem(long idPerfil, String texto) {
+
+        this.idPerfil = idPerfil;
+        this.texto = texto;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.PostagemDAO#update(Postagem)}
+     *
+     * @param id Identificador único do {@link Perfil} (FK) dono da postagem.
+     * @param texto Texto existênte na postagem.
+     */
+    public Postagem(long id, String texto, long quantidadeVisualizacoes) {
+
+        this.id = id;
+        this.texto = texto;
+        this.quantidadeVisualizacoes = quantidadeVisualizacoes;
+
+    }
+    
     //Getters e Setters
 
     public long getId() {
@@ -116,13 +133,13 @@ public class Postagem {
 
     }
 
-    public int getQuantidadeVisualizacoes() {
+    public long getQuantidadeVisualizacoes() {
 
         return quantidadeVisualizacoes;
 
     }
 
-    public void setQuantidadeVisualizacoes(int quantidadeVisualizacoes) {
+    public void setQuantidadeVisualizacoes(long quantidadeVisualizacoes) {
 
         this.quantidadeVisualizacoes = quantidadeVisualizacoes;
 
@@ -144,7 +161,6 @@ public class Postagem {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

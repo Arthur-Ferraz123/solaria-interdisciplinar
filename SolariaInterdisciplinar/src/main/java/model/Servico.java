@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Servico {
 
     //Atributos
@@ -17,26 +16,22 @@ public class Servico {
      * Identificador único do serviço.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único da {@link EmpresaTecnica} (FK) que realiza o serviço.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idEmpresaTecnica;
 
     /**
      * Nome do serviço.
      */
-
     private String servico;
 
     /**
      * Descrição sobre o que é feito no serviço.
      */
-
     private String descricao;
 
     //Construtor
@@ -49,11 +44,38 @@ public class Servico {
      * @param servico Nome do serviço.
      * @param descricao Descrição sobre o que é feito no serviço.
      */
-
     public Servico(long id, long idEmpresaTecnica, String servico, String descricao) {
 
         this.id = id;
         this.idEmpresaTecnica = idEmpresaTecnica;
+        this.servico = servico;
+        this.descricao = descricao;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ServicoDAO#insert(Servico)}
+     *
+     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que realiza o serviço.
+     * @param servico Nome do serviço.
+     * @param descricao Descrição sobre o que é feito no serviço.
+     */
+    public Servico(long idEmpresaTecnica, String servico, String descricao) {
+
+        this.idEmpresaTecnica = idEmpresaTecnica;
+        this.servico = servico;
+        this.descricao = descricao;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ServicoDAO#update(Servico)}
+     *
+     * @param servico Nome do serviço.
+     * @param descricao Descrição sobre o que é feito no serviço.
+     */
+    public Servico(String servico, String descricao) {
+
         this.servico = servico;
         this.descricao = descricao;
 
@@ -107,7 +129,6 @@ public class Servico {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

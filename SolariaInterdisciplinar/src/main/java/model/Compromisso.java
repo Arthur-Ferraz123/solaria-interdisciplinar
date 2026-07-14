@@ -1,9 +1,7 @@
 package model;
 
-//Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 
-//Import do objeto utilizado para representar datatypes do tipo time no java
 import java.time.LocalTime;
 
 /**
@@ -14,7 +12,6 @@ import java.time.LocalTime;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Compromisso {
 
     //Atributos
@@ -23,44 +20,37 @@ public class Compromisso {
      * Identificador único do compromisso.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link UsuarioProjeto} (FK) dono do compromisso.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuarioProjeto;
 
     /**
      * Nome do compromisso.
      */
-
     private String nome;
 
     /**
      * Descrição sobre o que será feito no compromisso.
      */
-
     private String descricao;
 
     /**
      * Data de realização do compromisso.
      */
-
     private LocalDate dataCompromisso;
 
     /**
      * Horário de realização do compromisso.
      */
-
     private LocalTime horarioCompromisso;
 
     /**
      * Data prevista para a conclusão do compromisso.
      */
-
     private LocalDate dataPrevistaParaConclusao;
 
     //Construtor
@@ -76,11 +66,53 @@ public class Compromisso {
      * @param horarioCompromisso Horário de realização do compromisso.
      * @param dataPrevistaParaConclusao Data prevista para a conclusão do compromisso.
      */
-
     public Compromisso(long id, long idUsuarioProjeto, String nome, String descricao, LocalDate dataCompromisso, LocalTime horarioCompromisso, LocalDate dataPrevistaParaConclusao) {
 
         this.id = id;
         this.idUsuarioProjeto = idUsuarioProjeto;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.dataCompromisso = dataCompromisso;
+        this.horarioCompromisso = horarioCompromisso;
+        this.dataPrevistaParaConclusao = dataPrevistaParaConclusao;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.CompromissoDAO#insert(Compromisso)}
+     *
+     * @param idUsuarioProjeto Identificador único do {@link UsuarioProjeto} (FK) dono do compromisso.
+     * @param nome Nome do compromisso.
+     * @param descricao Descrição sobre o que será feito no compromisso.
+     * @param dataCompromisso Data de realização do compromisso.
+     * @param horarioCompromisso Horário de realização do compromisso.
+     * @param dataPrevistaParaConclusao Data prevista para a conclusão do compromisso.
+     */
+    public Compromisso(long idUsuarioProjeto, String nome, String descricao, LocalDate dataCompromisso, LocalTime horarioCompromisso, LocalDate dataPrevistaParaConclusao) {
+
+        this.idUsuarioProjeto = idUsuarioProjeto;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.dataCompromisso = dataCompromisso;
+        this.horarioCompromisso = horarioCompromisso;
+        this.dataPrevistaParaConclusao = dataPrevistaParaConclusao;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.CompromissoDAO#update(Compromisso)}
+     *
+     * @param id Identificador único do compromisso (PK).
+     * @param nome Nome do compromisso.
+     * @param descricao Descrição sobre o que será feito no compromisso.
+     * @param dataCompromisso Data de realização do compromisso.
+     * @param horarioCompromisso Horário de realização do compromisso.
+     * @param dataPrevistaParaConclusao Data prevista para a conclusão do compromisso.
+     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     */
+    public Compromisso(long id, String nome, String descricao, LocalDate dataCompromisso, LocalTime horarioCompromisso, LocalDate dataPrevistaParaConclusao, boolean daoUpdate) {
+
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.dataCompromisso = dataCompromisso;
@@ -173,7 +205,6 @@ public class Compromisso {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

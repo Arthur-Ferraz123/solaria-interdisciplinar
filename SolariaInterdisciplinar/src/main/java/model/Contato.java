@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Contato {
 
     //Atributos
@@ -17,28 +16,26 @@ public class Contato {
      * Identificador único do contato.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Usuario} (FK) contatador.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuarioContatador;
 
     /**
      * Identificador único do {@link Usuario} (FK) contatado.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuarioContatado;
 
     /**
      * Representa um apelido dado ao contatado.
      */
-
     private String apelido;
+
+    //Construtor
 
     /**
      * Construtor completo da classe Contato
@@ -48,12 +45,39 @@ public class Contato {
      * @param idUsuarioContatado Identificador único do {@link Usuario} (FK) contatado.
      * @param apelido Apelido dado ao contatado.
      */
-
     public Contato(long id, long idUsuarioContatador, long idUsuarioContatado, String apelido) {
 
         this.id = id;
         this.idUsuarioContatador = idUsuarioContatador;
         this.idUsuarioContatado = idUsuarioContatado;
+        this.apelido = apelido;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ContatoDAO#insert(Contato)}
+     *
+     * @param idUsuarioContatador Identificador único do {@link Usuario} (FK) contatador.
+     * @param idUsuarioContatado Identificador único do {@link Usuario} (FK) contatado.
+     * @param apelido Apelido dado ao contatado.
+     */
+    public Contato(long idUsuarioContatador, long idUsuarioContatado, String apelido) {
+
+        this.idUsuarioContatador = idUsuarioContatador;
+        this.idUsuarioContatado = idUsuarioContatado;
+        this.apelido = apelido;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ContatoDAO#update(Contato)}
+     *
+     * @param id Identificador único do contato (PK).
+     * @param apelido Apelido dado ao contatado.
+     */
+    public Contato(long id, String apelido) {
+
+        this.id = id;
         this.apelido = apelido;
 
     }

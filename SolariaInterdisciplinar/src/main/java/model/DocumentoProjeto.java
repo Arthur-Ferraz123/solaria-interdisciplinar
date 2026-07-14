@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class DocumentoProjeto {
 
     //Atributos
@@ -17,44 +16,68 @@ public class DocumentoProjeto {
      * Identificador único do documento projeto.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Projeto} (FK) ao qual o documento pertence.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idProjeto;
 
     /**
      * Identificador único do {@link UsuarioProjeto} (FK) que criou o documento projeto.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuarioCriador;
 
     /**
      * Link do documento.
      */
-
     private String documento;
 
     //Construtor
 
     /**
      * Construtor completo da classe DocumentoProjeto
+     *
      * @param id Identificador único do documento projeto (PK).
      * @param idProjeto Identificador único do {@link Projeto} (FK) ao qual o documento pertence.
      * @param idUsuarioCriador Identificador único do {@link UsuarioProjeto} (FK) que criou o documento projeto.
      * @param documento Link do documento
      */
-
     public DocumentoProjeto(long id, long idProjeto, long idUsuarioCriador, String documento) {
 
         this.id = id;
         this.idProjeto = idProjeto;
         this.idUsuarioCriador = idUsuarioCriador;
+        this.documento = documento;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.DocumentoProjetoDAO#insert(DocumentoProjeto)}
+     *
+     * @param idProjeto Identificador único do {@link Projeto} (FK) ao qual o documento pertence.
+     * @param idUsuarioCriador Identificador único do {@link UsuarioProjeto} (FK) que criou o documento projeto.
+     * @param documento Link do documento
+     */
+    public DocumentoProjeto(long idProjeto, long idUsuarioCriador, String documento) {
+
+        this.idProjeto = idProjeto;
+        this.idUsuarioCriador = idUsuarioCriador;
+        this.documento = documento;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.DocumentoProjetoDAO#insert(DocumentoProjeto)}
+     *
+     * @param id Identificador único do documento projeto (PK).
+     * @param documento Link do documento
+     */
+    public DocumentoProjeto(long id, String documento) {
+
+        this.id = id;
         this.documento = documento;
 
     }
@@ -101,7 +124,6 @@ public class DocumentoProjeto {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

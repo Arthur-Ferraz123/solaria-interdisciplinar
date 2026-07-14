@@ -1,6 +1,5 @@
 package model;
 
-//Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 
 /**
@@ -11,7 +10,6 @@ import java.time.LocalDate;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Qualificacao {
 
     //Atributos
@@ -20,75 +18,63 @@ public class Qualificacao {
      * Identificador único da qualificação.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Profissional} (FK) que possuí a qualificação.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idProfissional;
 
     /**
      * Nome do órgão que emitiu a qualificação.
      */
-
     private String orgaoExpeditor;
 
     /**
      * Nome da qualificação.
      */
-
     private String nome;
 
     /**
      * O tipo credencial da qualificação.
      * Valores aceitos:
      */
-
     private String tipoCredencial;
 
     /**
      * Data que a qualificação foi emitida.
      */
-
     private LocalDate dataEmissao;
 
     /**
      * Data que a qualificação expira, no caso de ela expirar.
      */
-
     private LocalDate validade;
 
     /**
      * Carga horária realizada para obter a qualificação.
      */
-
     private double cargaHorariaCurso;
 
     /**
      * Número de registro da qualificação.
      */
-
     private String numeroRegistro;
 
     /**
      * Link do documento da qualificação.
      */
-
     private String documento;
 
     /**
      * No caso de ser uma NR qual o número.
      */
-
     private String numeroNr;
 
     /**
      * Qual fabricante de placas o certificado se aplica.
      */
-
     private String fabricanteCertificado;
 
     //Construtor
@@ -109,12 +95,76 @@ public class Qualificacao {
      * @param numeroNr No caso de ser uma NR qual o número.
      * @param fabricanteCertificado Qual fabricante de placas o certificado se aplica.
      */
-
     public Qualificacao(long id, long idProfissional, String orgaoExpeditor, String nome, String tipoCredencial, LocalDate dataEmissao,
                         LocalDate validade, double cargaHorariaCurso, String numeroRegistro, String documento, String numeroNr, String fabricanteCertificado) {
 
         this.id = id;
         this.idProfissional = idProfissional;
+        this.orgaoExpeditor = orgaoExpeditor;
+        this.nome = nome;
+        this.tipoCredencial = tipoCredencial;
+        this.dataEmissao = dataEmissao;
+        this.validade = validade;
+        this.cargaHorariaCurso = cargaHorariaCurso;
+        this.numeroRegistro = numeroRegistro;
+        this.documento = documento;
+        this.numeroNr = numeroNr;
+        this.fabricanteCertificado = fabricanteCertificado;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.CertificacaoDAO#insert(Certificacao)}
+     *
+     * @param idProfissional Identificador único do {@link Profissional} (FK) que possuí a qualificação.
+     * @param orgaoExpeditor Nome do órgão que emitiu a qualificação.
+     * @param nome Nome da qualificação.
+     * @param tipoCredencial O tipo credencial da qualificação.
+     * @param dataEmissao Data que a qualificação foi emitida.
+     * @param validade Data que a qualificação expira, no caso de ela expirar.
+     * @param cargaHorariaCurso Carga horária realizada para obter a qualificação.
+     * @param numeroRegistro Número de registro da qualificação.
+     * @param documento Link do documento da qualificação.
+     * @param numeroNr No caso de ser uma NR qual o número.
+     * @param fabricanteCertificado Qual fabricante de placas o certificado se aplica.
+     */
+    public Qualificacao(long idProfissional, String orgaoExpeditor, String nome, String tipoCredencial, LocalDate dataEmissao,
+                        LocalDate validade, double cargaHorariaCurso, String numeroRegistro, String documento, String numeroNr, String fabricanteCertificado) {
+
+        this.idProfissional = idProfissional;
+        this.orgaoExpeditor = orgaoExpeditor;
+        this.nome = nome;
+        this.tipoCredencial = tipoCredencial;
+        this.dataEmissao = dataEmissao;
+        this.validade = validade;
+        this.cargaHorariaCurso = cargaHorariaCurso;
+        this.numeroRegistro = numeroRegistro;
+        this.documento = documento;
+        this.numeroNr = numeroNr;
+        this.fabricanteCertificado = fabricanteCertificado;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.CertificacaoDAO#insert(Certificacao)}
+     *
+     * @param id Identificador único da qualificação (PK).
+     * @param orgaoExpeditor Nome do órgão que emitiu a qualificação.
+     * @param nome Nome da qualificação.
+     * @param tipoCredencial O tipo credencial da qualificação.
+     * @param dataEmissao Data que a qualificação foi emitida.
+     * @param validade Data que a qualificação expira, no caso de ela expirar.
+     * @param cargaHorariaCurso Carga horária realizada para obter a qualificação.
+     * @param numeroRegistro Número de registro da qualificação.
+     * @param documento Link do documento da qualificação.
+     * @param numeroNr No caso de ser uma NR qual o número.
+     * @param fabricanteCertificado Qual fabricante de placas o certificado se aplica.
+     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     */
+    public Qualificacao(long id, String orgaoExpeditor, String nome, String tipoCredencial, LocalDate dataEmissao,
+                        LocalDate validade, double cargaHorariaCurso, String numeroRegistro, String documento, String numeroNr, String fabricanteCertificado, boolean daoUpdate) {
+
+        this.id = id;
         this.orgaoExpeditor = orgaoExpeditor;
         this.nome = nome;
         this.tipoCredencial = tipoCredencial;
@@ -272,7 +322,6 @@ public class Qualificacao {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

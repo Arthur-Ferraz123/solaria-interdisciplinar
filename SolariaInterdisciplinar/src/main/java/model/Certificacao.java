@@ -1,6 +1,5 @@
 package model;
 
-//Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 
 /**
@@ -11,8 +10,6 @@ import java.time.LocalDate;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
-
 public class Certificacao {
 
     //Atributos
@@ -21,44 +18,37 @@ public class Certificacao {
      * Identificador único da certificação.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Fornecedor} (FK) que possuí a certificação.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idFornecedor;
 
     /**
      * Selo da certificação.
      */
-
     private String selo;
 
     /**
      * Número de registro da certificação.
      */
-
     private String numeroRegistro;
 
     /**
      * Data que a certificação foi emitida.
      */
-
     private LocalDate dataEmissao;
 
     /**
      * Data de validade da certificação.
      */
-
     private LocalDate validade;
 
     /**
      * Link do documento da certificação.
      */
-
     private String documento;
 
     //Construtor
@@ -74,12 +64,54 @@ public class Certificacao {
      * @param validade Data de validade da certificação.
      * @param documento Link do documento da certificação.
      */
-
     public Certificacao(long id, long idFornecedor, String selo, String numeroRegistro,
                         LocalDate dataEmissao, LocalDate validade, String documento) {
 
         this.id = id;
         this.idFornecedor = idFornecedor;
+        this.selo = selo;
+        this.numeroRegistro = numeroRegistro;
+        this.dataEmissao = dataEmissao;
+        this.validade = validade;
+        this.documento = documento;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.CertificacaoDAO#insert(Certificacao)}
+     *
+     * @param idFornecedor Identificador único do {@link Fornecedor} (FK) que possuí a certificação.
+     * @param selo Selo da certificação.
+     * @param numeroRegistro Número de registro da certificação.
+     * @param dataEmissao Data que a certificação foi emitida.
+     * @param validade Data de validade da certificação.
+     * @param documento Link do documento da certificação.
+     */
+    public Certificacao(long idFornecedor, String selo, String numeroRegistro, LocalDate dataEmissao, LocalDate validade, String documento) {
+
+        this.idFornecedor = idFornecedor;
+        this.selo = selo;
+        this.numeroRegistro = numeroRegistro;
+        this.dataEmissao = dataEmissao;
+        this.validade = validade;
+        this.documento = documento;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.CertificacaoDAO#update(Certificacao)}
+     *
+     * @param id Identificador único da certificação (PK).
+     * @param selo Selo da certificação.
+     * @param numeroRegistro Número de registro da certificação.
+     * @param dataEmissao Data que a certificação foi emitida.
+     * @param validade Data de validade da certificação.
+     * @param documento Link do documento da certificação.
+     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     */
+    public Certificacao(long id, String selo, String numeroRegistro, LocalDate dataEmissao, LocalDate validade, String documento, boolean daoUpdate) {
+
+        this.id = id;
         this.selo = selo;
         this.numeroRegistro = numeroRegistro;
         this.dataEmissao = dataEmissao;
@@ -172,7 +204,6 @@ public class Certificacao {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Midia {
 
     //Atributos
@@ -17,28 +16,24 @@ public class Midia {
      * Identificador único da mídia.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único da {@link Postagem} (FK) ao qual a midia pertence.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idPostagem;
 
     /**
      * Identificador único da {@link Mensagem} (FK) ao qual a midia pertence.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idMensagem;
 
     /**
      * Link da mídia.
      * Imutável por conta da estruturação do sistema.
      */
-
     private String midia;
 
     /**
@@ -46,7 +41,6 @@ public class Midia {
      * Imutável por conta da estruturação do sistema.
      * Valores aceitos: {"VIDEO", "IMAGEM"}.
      */
-
     private String tipoMidia;
 
     //Construtor
@@ -60,12 +54,43 @@ public class Midia {
      * @param midia Link da mídia.
      * @param tipoMidia Indica o tipo da mídia.
      */
-
     public Midia(long id, long idPostagem, long idMensagem, String midia, String tipoMidia) {
 
         this.id = id;
         this.idPostagem = idPostagem;
         this.idMensagem = idMensagem;
+        this.midia = midia;
+        this.tipoMidia = tipoMidia;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.MidiaDAO#insert(Midia)}
+     *
+     * @param idPostagem Identificador único da {@link Postagem} (FK) ao qual a midia pertence.
+     * @param idMensagem Identificador único da {@link Mensagem} (FK) ao qual a midia pertence.
+     * @param midia Link da mídia.
+     * @param tipoMidia Indica o tipo da mídia.
+     */
+    public Midia(long idPostagem, long idMensagem, String midia, String tipoMidia) {
+
+        this.idPostagem = idPostagem;
+        this.idMensagem = idMensagem;
+        this.midia = midia;
+        this.tipoMidia = tipoMidia;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.MidiaDAO#update(Midia)}
+     *
+     * @param id Identificador único da mídia (PK).
+     * @param midia Link da mídia.
+     * @param tipoMidia Indica o tipo da mídia.
+     */
+    public Midia(long id, String midia, String tipoMidia) {
+
+        this.id = id;
         this.midia = midia;
         this.tipoMidia = tipoMidia;
 
@@ -113,7 +138,6 @@ public class Midia {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

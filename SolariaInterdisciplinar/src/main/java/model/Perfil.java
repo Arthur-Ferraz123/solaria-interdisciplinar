@@ -17,29 +17,25 @@ public class Perfil {
      * Identificador único do perfil.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Usuario} (FK) dono do perfil.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     /**
      * Descrição sobre o perfil.
      */
-
     private String descricao;
 
     /**
      * Link para a foto do perfil.
      */
-
     private String fotoPerfil;
 
-    //Construtor
+    //Construtores
 
     /**
      * Construtor completo da classe Perfil
@@ -49,11 +45,41 @@ public class Perfil {
      * @param descricao Descrição sobre o perfil.
      * @param fotoPerfil Link para a foto do perfil.
      */
-
     public Perfil(long id, long idUsuario, String descricao, String fotoPerfil) {
 
         this.id = id;
         this.idUsuario = idUsuario;
+        this.descricao = descricao;
+        this.fotoPerfil = fotoPerfil;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.PerfilDAO#insert(Perfil)}
+     *
+     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do perfil.
+     * @param descricao Descrição sobre o perfil.
+     * @param fotoPerfil Link para a foto do perfil.
+     */
+    public Perfil(long idUsuario, String descricao, String fotoPerfil) {
+
+        this.idUsuario = idUsuario;
+        this.descricao = descricao;
+        this.fotoPerfil = fotoPerfil;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.PerfilDAO#update(Perfil)}
+     *
+     * @param id Identificador único do perfil (PK).
+     * @param descricao Descrição sobre o perfil.
+     * @param fotoPerfil Link para a foto do perfil.
+     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     */
+    public Perfil(long id, String descricao, String fotoPerfil, boolean daoUpdate) {
+
+        this.id = id;
         this.descricao = descricao;
         this.fotoPerfil = fotoPerfil;
 
@@ -107,7 +133,6 @@ public class Perfil {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

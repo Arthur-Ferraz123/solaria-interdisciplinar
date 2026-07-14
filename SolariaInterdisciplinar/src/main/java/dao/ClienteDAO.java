@@ -2,6 +2,8 @@ package dao;
 
 import conexao.Conexao;
 
+import model.Cliente;
+import model.Telefone;
 import model.Usuario;
 
 import java.sql.Connection;
@@ -17,249 +19,27 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Usuário
+ * Classe responsável pelo DAO da entidade Cliente
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-public class UsuarioDAO implements GenericDAO<Usuario> {
+public class ClienteDAO implements GenericDAO<Cliente> {
 
-    public int insert(Usuario usuario){
+    public int insert(Cliente cliente){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
         try{
 
-        String insert = "insert into usuario(email, senha, nome, tipo_usuario) values(?, ?, ?, ?)";
+            String insert = "insert into cliente(id_usuario, cnpj, razao_social) values(?, ?, ?)";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(insert);
+            PreparedStatement preparedStatement = connection.prepareStatement(insert);
 
-        preparedStatement.setString(1, usuario.getEmail() );
-        preparedStatement.setString(2, usuario.getSenha());
-        preparedStatement.setString(3, usuario.getNome());
-        preparedStatement.setString(4, usuario.getTipoUsuario() );
-
-        return preparedStatement.executeUpdate();
-
-        } catch (SQLException sqlException){
-
-            String codigoSQLException = sqlException.getSQLState();
-
-            //Verificação se a exceção foi causada por um dado inválido.
-            //A verificação ocorre usando o código das exceções relacionadas a esse fator.
-            if ("23502".equals(codigoSQLException) ||
-                "23503".equals(codigoSQLException) ||
-                "23505".equals(codigoSQLException) ||
-                "23514".equals(codigoSQLException) ){
-
-                return -1;
-            }
-
-            return -2;
-
-        } catch (Exception exception){
-
-            return -3;
-
-        } finally {
-
-            conexao.desconectar();
-
-        }
-
-    }
-
-    public Usuario readById(long id){
-
-        Conexao conexao = new Conexao();
-        Connection connection = conexao.conectar();
-
-        try {
-
-            String readById = "select * from usuario where id = ?";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(readById);
-
-            preparedStatement.setLong(1, id);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()){
-
-                return new Usuario(
-                        resultSet.getLong("id"),
-                        resultSet.getString("email"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario")
-                );
-
-            }
-
-            return null;
-
-        } catch (Exception exception){
-
-            return null;
-
-        } finally {
-
-            conexao.desconectar();
-
-        }
-
-    }
-
-    /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é um email.
-     *
-     * @param email email do {@link Usuario} que se está buscando.
-     * @return O usuário e todos os seus dados.
-     */
-    public Usuario readByEmail(String email){
-
-        Conexao conexao = new Conexao();
-        Connection connection = conexao.conectar();
-
-        try {
-
-            String readById = "select * from usuario where email = ?";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(readById);
-
-            preparedStatement.setString(1, email);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()){
-
-                return new Usuario(
-                        resultSet.getLong("id"),
-                        resultSet.getString("email"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario")
-                );
-
-            }
-
-            return null;
-
-        } catch (Exception exception){
-
-            return null;
-
-        } finally {
-
-            conexao.desconectar();
-
-        }
-
-    }
-
-    public List<Usuario> readAll(){
-
-        Conexao conexao = new Conexao();
-        Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
-
-        try {
-
-            String readAll = "select * from usuario";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(readAll);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()){
-
-                 usuarios.add(new Usuario(
-                        resultSet.getLong("id"),
-                        resultSet.getString("email"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario")
-                ));
-
-            }
-
-            return usuarios;
-
-        } catch (Exception exception){
-
-            return null;
-
-        } finally {
-
-            conexao.desconectar();
-
-        }
-
-    }
-
-    /**
-     * Variação do método {@link #readAll()}. A diferença é que o tipoUsario é usado como parametro de busca.
-     * @param tipoUsuario Veja os valores possíveis em {@link Usuario}.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo tipoUsuario que o parametro.
-     */
-    public List<Usuario> readAllbyTipoUsuario(String tipoUsuario){
-
-        Conexao conexao = new Conexao();
-        Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
-
-        try {
-
-            String readAll = "select * from usuario where tipo_usuario = ?";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(readAll);
-
-            preparedStatement.setString(1, tipoUsuario);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()){
-
-                usuarios.add(new Usuario(
-                        resultSet.getLong("id"),
-                        resultSet.getString("email"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario")
-                ));
-
-            }
-
-            return usuarios;
-
-        } catch (Exception exception){
-
-            return null;
-
-        } finally {
-
-            conexao.desconectar();
-
-        }
-
-    }
-
-    public int update(Usuario usuario){
-
-        Conexao conexao = new Conexao();
-        Connection connection = conexao.conectar();
-
-        try{
-
-            String update = "update usuario set email = ?, senha = ?, nome = ? where id = ?";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(update);
-
-            preparedStatement.setString(1, usuario.getEmail() );
-            preparedStatement.setString(2, usuario.getSenha() );
-            preparedStatement.setString(3, usuario.getNome() );
-            preparedStatement.setLong(4, usuario.getId());
+            preparedStatement.setLong(1, cliente.getIdUsuario() );
+            preparedStatement.setString(2, cliente.getCnpj());
+            preparedStatement.setString(3, cliente.getRazaoSocial());
 
             return preparedStatement.executeUpdate();
 
@@ -291,6 +71,225 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
+    public Cliente readById(long id){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try {
+
+            String readById = "select * from cliente where id = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(readById);
+
+            preparedStatement.setLong(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+
+                return new Cliente(
+                        resultSet.getLong("id"),
+                        resultSet.getLong("id_usuario"),
+                        resultSet.getString("tipo_usuario"),
+                        resultSet.getString("cnpj"),
+                        resultSet.getString("razao_social")
+                );
+
+            }
+
+            return null;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    /**
+     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o idUsuario.
+     *
+     * @param idUsuario Identificador único (PK) do {@link model.Usuario} que é o cliente.
+     * @return O Cliente com todos os seus dados.
+     */
+    public Cliente readByIdUsuario(long idUsuario){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try {
+
+            String readById = "select * from cliente where id_usuario = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(readById);
+
+            preparedStatement.setLong(1, idUsuario);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+
+                return new Cliente(
+                        resultSet.getLong("id"),
+                        resultSet.getLong("id_usuario"),
+                        resultSet.getString("tipo_usuario"),
+                        resultSet.getString("cnpj"),
+                        resultSet.getString("razao_social")
+                );
+
+            }
+
+            return null;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    /**
+     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o cnpj.
+     *
+     * @param cnpj CNPJ do {@link Cliente} que se está buscando.
+     * @return O Cliente com todos os seus dados.
+     */
+    public Cliente readByCnpj(String cnpj){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try {
+
+            String readById = "select * from cliente where cnpj = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(readById);
+
+            preparedStatement.setString(1, cnpj);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+
+                return new Cliente(
+                        resultSet.getLong("id"),
+                        resultSet.getLong("id_usuario"),
+                        resultSet.getString("tipo_usuario"),
+                        resultSet.getString("cnpj"),
+                        resultSet.getString("razao_social")
+                );
+
+            }
+
+            return null;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    public List<Cliente> readAll(){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+        List<Cliente> clientes = new ArrayList<>();
+
+        try {
+
+            String readAll = "select * from cliente";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(readAll);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                clientes.add(new Cliente(
+                        resultSet.getLong("id"),
+                        resultSet.getLong("id_usuario"),
+                        resultSet.getString("tipo_usuario"),
+                        resultSet.getString("cnpj"),
+                        resultSet.getString("razao_social")
+                ));
+
+            }
+
+            return clientes;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    public int update(Cliente cliente){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try{
+
+            String update = "update cliente set razao_social = ? where id = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+
+            preparedStatement.setString(1, cliente.getRazaoSocial() );
+            preparedStatement.setLong(2, cliente.getId());
+
+            return preparedStatement.executeUpdate();
+
+        } catch (SQLException sqlException){
+
+            String codigoSQLException = sqlException.getSQLState();
+
+            //Verificação se a exceção foi causada por um dado inválido.
+            //A verificação ocorre usando o código das exceções relacionadas a esse fator.
+            if ("23502".equals(codigoSQLException) ||
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException)){
+
+                return -1;
+            }
+
+            return -2;
+
+        } catch (Exception exception){
+
+            return -3;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -298,7 +297,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         try{
 
-            String delete = "delete from usuario where id = ?";
+            String delete = "delete from cliente where id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(delete);
 
@@ -332,22 +331,67 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o email é usado como clausula de apagamento.
-     * @param email Email do {@link Usuario}.
+     * Variação do método {@link #deleteById(long)}. A diferença é que o idUsuario é usado como clausula de apagamento.
+     * @param idUsuario Identificador único (PK) do {@link Usuario} que é o cliente.
      * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
      */
-    public int deleteByEmail(String email){
+    public int deleteByIdUsuario(long idUsuario){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
         try{
 
-            String delete = "delete from usuario where email = ?";
+            String delete = "delete from cliente where id_usuario = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(delete);
 
-            preparedStatement.setString(1, email);
+            preparedStatement.setLong(1, idUsuario);
+
+            return preparedStatement.executeUpdate();
+
+        } catch (SQLException sqlException) {
+
+            String codigoSQLException = sqlException.getSQLState();
+
+            //Verificação se a exceção foi causada por uma foreign key existente.
+            //A verificação ocorre usando o código da exceção relacionada a esse fator.
+            if ("23503".equals(codigoSQLException)){
+
+                return -1;
+            }
+
+            return -2;
+
+        }catch (Exception exception){
+
+            return -3;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    /**
+     * Variação do método {@link #deleteById(long)}. A diferença é que o idUsuario é usado como clausula de apagamento.
+     * @param cnpj CNPJ do cliente.
+     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     */
+    public int deleteByCnpj(String cnpj){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try{
+
+            String delete = "delete from cliente where cnpj = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(delete);
+
+            preparedStatement.setString(1, cnpj);
 
             return preparedStatement.executeUpdate();
 

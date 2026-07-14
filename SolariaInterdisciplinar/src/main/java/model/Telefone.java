@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Telefone {
 
     //Atributos
@@ -17,37 +16,32 @@ public class Telefone {
      * Identificador único do telefone.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Número do telefone.
      * Deve seguir o padrão previsto em {@link }
      */
-
     private String telefone;
 
     /**
      * Indica qual o tipo do telefone.
      * Valores aceitos:
      */
-
     private String tipo;
 
     /**
      * Identificador único do {@link Usuario} (FK) dono do telefone.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     /**
      * Indica se o telefone é o principal do {@link Usuario}.
      */
-
     private boolean principal;
 
-    //Construtor
+    //Construtores
 
     /**
      * Construtor completo da classe Telefone
@@ -58,13 +52,44 @@ public class Telefone {
      * @param idUsuario Identificador único do {@link Usuario} (FK) dono do telefone.
      * @param principal O telefone é o principal do {@link Usuario}.
      */
-
     public Telefone(long id, String telefone, String tipo, long idUsuario, boolean principal) {
 
         this.id = id;
         this.telefone = telefone;
         this.tipo = tipo;
         this.idUsuario = idUsuario;
+        this.principal = principal;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.TelefoneDAO#insert(Telefone)}
+     *
+     * @param telefone Número do telefone.
+     * @param tipo Tipo do telefone.
+     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do telefone.
+     * @param principal O telefone é o principal do {@link Usuario}.
+     */
+    public Telefone(String telefone, String tipo, long idUsuario, boolean principal) {
+
+        this.telefone = telefone;
+        this.tipo = tipo;
+        this.idUsuario = idUsuario;
+        this.principal = principal;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.TelefoneDAO#update(Telefone)}
+     *
+     * @param telefone Número do telefone.
+     * @param tipo Tipo do telefone.
+     * @param principal O telefone é o principal do {@link Usuario}.
+     */
+    public Telefone(String telefone, String tipo, boolean principal) {
+
+        this.telefone = telefone;
+        this.tipo = tipo;
         this.principal = principal;
 
     }
@@ -129,7 +154,6 @@ public class Telefone {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

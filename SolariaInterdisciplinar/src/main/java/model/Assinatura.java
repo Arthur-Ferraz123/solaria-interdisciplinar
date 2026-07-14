@@ -1,6 +1,5 @@
 package model;
 
-//Import do objeto utilizado para representar datatypes do tipo date no java
 import java.time.LocalDate;
 
 /**
@@ -11,7 +10,6 @@ import java.time.LocalDate;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Assinatura {
 
     //Atributos
@@ -20,19 +18,16 @@ public class Assinatura {
      * Identificador único da assinatura.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Usuario} (FK) que é realiza a assinatura.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     /**
      * Identificador único do {@link Plano} (FK) atual da assinatura.
-     * Imutável por conta da estruturação do sistema.
      */
     private long idPlano;
 
@@ -40,25 +35,21 @@ public class Assinatura {
      * Indica de qual o status atual da assinatura.
      * Valores aceitos:
      */
-
     private String statusAssinatura;
 
     /**
      * Indica se a assinatura debita automaticamente da conta.
      */
-
     private boolean renovacaoAutomatica;
 
     /**
      * Data que a assinatura foi iniciada ou a última vez que foi paga.
      */
-
     private LocalDate dataInicio;
 
     /**
      * Data de vencimento da assinatura.
      */
-
     private LocalDate validade;
 
     //Construtor
@@ -74,11 +65,53 @@ public class Assinatura {
      * @param dataInicio Data que a assinatura foi iniciada ou a última vez que foi paga.
      * @param validade Data de vencimento da assinatura.
      */
-
     public Assinatura(long id, long idUsuario, long idPlano, String statusAssinatura, boolean renovacaoAutomatica, LocalDate dataInicio, LocalDate validade) {
 
         this.id = id;
         this.idUsuario = idUsuario;
+        this.idPlano = idPlano;
+        this.statusAssinatura = statusAssinatura;
+        this.renovacaoAutomatica = renovacaoAutomatica;
+        this.dataInicio = dataInicio;
+        this.validade = validade;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.AssinaturaDAO#insert(Assinatura)}
+     *
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é realiza a assinatura.
+     * @param idPlano Identificador único do {@link Plano} (FK) atual da assinatura.
+     * @param statusAssinatura Qual o status atual da assinatura.
+     * @param renovacaoAutomatica A assinatura debita ou não automaticamente da conta.
+     * @param dataInicio Data que a assinatura foi iniciada ou a última vez que foi paga.
+     * @param validade Data de vencimento da assinatura.
+     */
+    public Assinatura(long idUsuario, long idPlano, String statusAssinatura, boolean renovacaoAutomatica, LocalDate dataInicio, LocalDate validade) {
+
+        this.idUsuario = idUsuario;
+        this.idPlano = idPlano;
+        this.statusAssinatura = statusAssinatura;
+        this.renovacaoAutomatica = renovacaoAutomatica;
+        this.dataInicio = dataInicio;
+        this.validade = validade;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.AssinaturaDAO#insert(Assinatura)}
+     *
+     * @param id Identificador único da assinatura (PK).
+     * @param idPlano Identificador único do {@link Plano} (FK) atual da assinatura.
+     * @param statusAssinatura Qual o status atual da assinatura.
+     * @param renovacaoAutomatica A assinatura debita ou não automaticamente da conta.
+     * @param dataInicio Data que a assinatura foi iniciada ou a última vez que foi paga.
+     * @param validade Data de vencimento da assinatura.
+     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     */
+    public Assinatura(long id, long idPlano, String statusAssinatura, boolean renovacaoAutomatica, LocalDate dataInicio, LocalDate validade, boolean daoUpdate) {
+
+        this.id = id;
         this.idPlano = idPlano;
         this.statusAssinatura = statusAssinatura;
         this.renovacaoAutomatica = renovacaoAutomatica;
@@ -143,13 +176,13 @@ public class Assinatura {
 
     }
 
-    public LocalDate getDataFim() {
+    public LocalDate getValidade() {
 
         return validade;
 
     }
 
-    public void setDataFim(LocalDate validade) {
+    public void setValidade(LocalDate validade) {
 
         this.validade = validade;
 
@@ -165,7 +198,6 @@ public class Assinatura {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString() {
 

@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class UsuarioChat {
 
     //Atributos
@@ -17,21 +16,18 @@ public class UsuarioChat {
      * Identificador único do usuário chat.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Chat} (FK) ao qual o usuário chat pertence.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idChat;
 
     /**
      * Identificador único do {@link Usuario} (FK) que é o usuário chat.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     //Construtor
@@ -43,7 +39,6 @@ public class UsuarioChat {
      * @param idChat Identificador único do {@link Chat} (FK) ao qual o usuário chat pertence.
      * @param idUsuario Identificador único do {@link Usuario} (FK) que é o usuário chat.
      */
-
     public UsuarioChat(long id, long idChat, long idUsuario) {
 
         this.id = id;
@@ -51,6 +46,8 @@ public class UsuarioChat {
         this.idUsuario = idUsuario;
 
     }
+
+
 
     //Getters e Setters
 
@@ -83,7 +80,6 @@ public class UsuarioChat {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

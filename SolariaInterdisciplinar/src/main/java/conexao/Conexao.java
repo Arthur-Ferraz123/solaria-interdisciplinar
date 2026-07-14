@@ -1,15 +1,11 @@
 package conexao;
 
-//Import da classe utilizada para ler o arquivo .env
 import io.github.cdimascio.dotenv.Dotenv;
 
-//Import da classe utilizada para realizar conexões JDBC
 import java.sql.DriverManager;
 
-//Import da interface utilizada para armazenar conexões JDBC ativas
 import java.sql.Connection;
 
-//Import da classe utilizada para representar erros que ocorrem no banco de dados
 import java.sql.SQLException;
 
 /**
@@ -65,7 +61,7 @@ public class Conexao {
 
             return null;
 
-            //Para casos de erros quando o driver do PostgreSQL é carregado ou ao criar a conexão JDBC
+
         } catch (SQLException | ClassNotFoundException e) {
 
             e.printStackTrace();
@@ -73,6 +69,11 @@ public class Conexao {
             return null;
 
 
+        } catch (Exception e){
+
+            e.printStackTrace();
+
+            return null;
         }
 
     }
@@ -85,7 +86,6 @@ public class Conexao {
 
         try {
 
-            //Verifica se a conexão está ativa e a desconecta
             if (connection != null && !connection.isClosed()) {
 
                 System.out.println("desconectou!");
@@ -94,11 +94,13 @@ public class Conexao {
 
             }
 
-            //Para caso de erro no .close
         } catch (SQLException e) {
 
             e.printStackTrace();
 
+        } catch (Exception e){
+
+            e.printStackTrace();
         }
 
     }

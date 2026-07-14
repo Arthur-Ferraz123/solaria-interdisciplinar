@@ -8,7 +8,6 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Profissional {
 
     //Atributos
@@ -17,14 +16,12 @@ public class Profissional {
      * Identificador único do profissional.
      * Imutável por ser um identificador (PK).
      */
-
     private long id;
 
     /**
      * Identificador único do {@link Usuario} (FK) que é o profissional.
      * Imutável por conta da estruturação do sistema.
      */
-
     private long idUsuario;
 
     /**
@@ -32,13 +29,11 @@ public class Profissional {
      * Imutável por conta da estruturação do sistema.
      * Valores aceitos:
      */
-
     private String tipoUsuario;
 
     /**
      * Indica qual profissão o profissional exerce.
      */
-
     private String profissao;
 
     /**
@@ -46,13 +41,11 @@ public class Profissional {
      * Imutável por conta da estruturação do sistema.
      * Deve seguir o padrão previsto em {@link }.
      */
-
     private String cpf;
 
     /**
      * Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
      */
-
     private long idEmpresaTecnica;
 
     //Construtor
@@ -67,7 +60,6 @@ public class Profissional {
      * @param cpf CPF do profissional.
      * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
      */
-
     public Profissional(long id, long idUsuario, String tipoUsuario, String profissao, String cpf, long idEmpresaTecnica) {
 
         this.id = id;
@@ -75,6 +67,38 @@ public class Profissional {
         this.tipoUsuario = tipoUsuario;
         this.profissao = profissao;
         this.cpf = cpf;
+        this.idEmpresaTecnica = idEmpresaTecnica;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ProfissionalDAO#insert(Profissional)}
+     *
+     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o profissional.
+     * @param profissao Profissão que o profissional exerce.
+     * @param cpf CPF do profissional.
+     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
+     */
+    public Profissional(long idUsuario,String profissao, String cpf, long idEmpresaTecnica) {
+
+        this.idUsuario = idUsuario;
+        this.profissao = profissao;
+        this.cpf = cpf;
+        this.idEmpresaTecnica = idEmpresaTecnica;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ProfissionalDAO#update(Profissional)}
+     *
+     * @param id Identificador único do profissional (PK).
+     * @param profissao Profissão que o profissional exerce.
+     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
+     */
+    public Profissional(long id, String profissao, long idEmpresaTecnica) {
+
+        this.id = id;
+        this.profissao = profissao;
         this.idEmpresaTecnica = idEmpresaTecnica;
 
     }
@@ -99,7 +123,7 @@ public class Profissional {
 
     }
 
-    public String setProfissao() {
+    public String getProfissao() {
 
         return profissao;
 
@@ -139,7 +163,6 @@ public class Profissional {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 
