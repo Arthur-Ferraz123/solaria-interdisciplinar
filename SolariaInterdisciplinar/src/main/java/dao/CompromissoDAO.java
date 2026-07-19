@@ -25,13 +25,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Compromisso
+ * Classe responsável pelo DAO da entidade compromisso
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class CompromissoDAO implements GenericDAO<Compromisso> {
 
+    @Override
     public int insert(Compromisso compromisso){
 
         Conexao conexao = new Conexao();
@@ -59,18 +60,18 @@ public class CompromissoDAO implements GenericDAO<Compromisso> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -80,6 +81,7 @@ public class CompromissoDAO implements GenericDAO<Compromisso> {
 
     }
 
+    @Override
     public Compromisso readById(long id){
 
         Conexao conexao = new Conexao();
@@ -123,6 +125,7 @@ public class CompromissoDAO implements GenericDAO<Compromisso> {
 
     }
 
+    @Override
     public List<Compromisso> readAll(){
 
         Conexao conexao = new Conexao();
@@ -165,6 +168,12 @@ public class CompromissoDAO implements GenericDAO<Compromisso> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idUsuarioProjeto é utilizado como parametro de filtragem.
+     *
+     * @param idUsuarioProjeto Valor do atributo idUsuarioProjeto dos {@link model.Compromisso} que se buscam.
+     * @return Todos os dados registrados de todos os Compromisso encontrados.
+     */
     public List<Compromisso> readAllByIdUsuarioProjeto(long idUsuarioProjeto){
 
         Conexao conexao = new Conexao();
@@ -209,6 +218,7 @@ public class CompromissoDAO implements GenericDAO<Compromisso> {
 
     }
 
+    @Override
     public int update(Compromisso compromisso){
 
         Conexao conexao = new Conexao();
@@ -236,18 +246,18 @@ public class CompromissoDAO implements GenericDAO<Compromisso> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         } catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -257,6 +267,7 @@ public class CompromissoDAO implements GenericDAO<Compromisso> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -280,14 +291,14 @@ public class CompromissoDAO implements GenericDAO<Compromisso> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

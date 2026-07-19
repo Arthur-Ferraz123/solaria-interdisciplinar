@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade avaliação
+ * Representa a entidade avaliacao
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,30 +13,30 @@ public class Avaliacao {
     //Atributos
 
     /**
-     * Identificador único da avaliação.
-     * Imutável por ser um identificador (PK).
+     * ID da avaliacao registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) avaliador.
+     * ID do {@link Usuario} que está realizando a avaliacao. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuarioAvaliador;
 
     /**
-     * Identificador único do {@link Usuario} (FK) avaliado.
+     * ID do {@link Usuario} que está sendo avaliado. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuarioAvaliado;
 
     /**
-     * Um comentário associado a avaliação.
+     * Um comentário associado a avaliacao.
      */
     private String comentario;
 
     /**
-     * Indica a positividade da avaliação.
+     * Indica a positividade da avaliacao.
      * O valor deve estar entre 0 e 5.
      */
     private int quantidadeEstrelas;
@@ -46,9 +46,9 @@ public class Avaliacao {
     /**
      * Construtor completo da classe Avaliacao
      *
-     * @param id Identificador único da avaliação (PK).
-     * @param idUsuarioAvaliador Identificador único do {@link Usuario} (FK) avaliador.
-     * @param idUsuarioAvaliado Identificador único do {@link Usuario} (FK) avaliado.
+     * @param id ID da avaliacao registrado no banco de dados.
+     * @param idUsuarioAvaliador ID do {@link Usuario} que está realizando a avaliacao. (FK)
+     * @param idUsuarioAvaliado ID do {@link Usuario} que está recebendo a avaliacao. (FK)
      * @param comentario Um comentário associado a avaliação.
      * @param quantidadeEstrelas A positividade da avaliação.
      */
@@ -65,8 +65,8 @@ public class Avaliacao {
     /**
      * Construtor para o {@link dao.AvaliacaoDAO#insert(Avaliacao)}
      *
-     * @param idUsuarioAvaliador Identificador único do {@link Usuario} (FK) avaliador.
-     * @param idUsuarioAvaliado Identificador único do {@link Usuario} (FK) avaliado.
+     * @param idUsuarioAvaliador ID do {@link Usuario} que está realizando a avaliacao. (FK)
+     * @param idUsuarioAvaliado ID do {@link Usuario} que está recebendo a avaliacao. (FK)
      * @param comentario Um comentário associado a avaliação.
      * @param quantidadeEstrelas A positividade da avaliação.
      */
@@ -81,18 +81,18 @@ public class Avaliacao {
 
     /**
      * Construtor para o {@link dao.AvaliacaoDAO#update(Avaliacao)}
-     *
-     * @param id Identificador único da avaliação (PK).
+     *.
      * @param comentario Um comentário associado a avaliação.
      * @param quantidadeEstrelas A positividade da avaliação.
+     * @param id ID da avaliacao registrado no banco de dados
      */
-    public Avaliacao(long id, String comentario, int quantidadeEstrelas) {
+    public Avaliacao(String comentario, int quantidadeEstrelas, long id) {
 
-        this.id = id;
         this.comentario = comentario;
         this.quantidadeEstrelas = quantidadeEstrelas;
-
+        this.id = id;
     }
+
 
     //Getters e Setters
 

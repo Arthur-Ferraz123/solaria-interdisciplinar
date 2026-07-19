@@ -3,6 +3,7 @@ package dao;
 import conexao.Conexao;
 
 import model.Fornecedor;
+
 import model.PlacaSolar;
 
 import java.sql.Connection;
@@ -18,13 +19,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Placa Solar
+ * Classe responsável pelo DAO da entidade placa_solar
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
 
+    @Override
     public int insert(PlacaSolar placaSolar){
 
         Conexao conexao = new Conexao();
@@ -40,14 +42,14 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
             preparedStatement.setString(2, placaSolar.getModelo());
             preparedStatement.setString(3, placaSolar.getSku());
             preparedStatement.setString(4, placaSolar.getTecnologia() );
-            preparedStatement.setString(4, placaSolar.getDimensoes() );
-            preparedStatement.setBoolean(4, placaSolar.isEmEstoque() );
-            preparedStatement.setDouble(4, placaSolar.getPotencia() );
-            preparedStatement.setString(4, placaSolar.getFabricante() );
-            preparedStatement.setDouble(4, placaSolar.getPeso() );
-            preparedStatement.setString(4, placaSolar.getGrauProtecao() );
-            preparedStatement.setDouble(4, placaSolar.getEficiencia() );
-            preparedStatement.setString(4, placaSolar.getDescricao() );
+            preparedStatement.setString(5, placaSolar.getDimensoes() );
+            preparedStatement.setBoolean(6, placaSolar.isEmEstoque() );
+            preparedStatement.setDouble(7, placaSolar.getPotencia() );
+            preparedStatement.setString(8, placaSolar.getFabricante() );
+            preparedStatement.setDouble(9, placaSolar.getPeso() );
+            preparedStatement.setString(10, placaSolar.getGrauProtecao() );
+            preparedStatement.setDouble(11, placaSolar.getEficiencia() );
+            preparedStatement.setString(12, placaSolar.getDescricao() );
 
             return preparedStatement.executeUpdate();
 
@@ -58,18 +60,18 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -79,6 +81,7 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
 
     }
 
+    @Override
     public PlacaSolar readById(long id){
 
         Conexao conexao = new Conexao();
@@ -128,6 +131,7 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
 
     }
 
+    @Override
     public List<PlacaSolar> readAll(){
 
         Conexao conexao = new Conexao();
@@ -177,9 +181,10 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
     }
 
     /**
-     * Variação do método {@link #readAll()}. A diferença é que o idFornecedor é usado como parametro de busca.
-     * @param idFornecedor Identificador único do {@link Fornecedor} que vende as placas solares procuradas.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo idFornecedor que o parametro.
+     * Variação do {@link #readAll}. A diferença é que o atributo idFornecedor é utilizado como parametro de filtragem.
+     *
+     * @param idFornecedor Valor do atributo idFornecedor das {@link model.PlacaSolar} que se buscam.
+     * @return Todos os dados registrados de todas as PlacaSolar encontradas.
      */
     public List<PlacaSolar> readAllByIdFornecedor(long idFornecedor){
 
@@ -231,6 +236,7 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
 
     }
 
+    @Override
     public int update(PlacaSolar placaSolar){
 
         Conexao conexao = new Conexao();
@@ -264,18 +270,18 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -285,6 +291,7 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -308,14 +315,14 @@ public class PlacaSolarDAO implements GenericDAO<PlacaSolar> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Plano
+ * Classe responsável pelo DAO da entidade plano
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
@@ -49,18 +49,18 @@ public class PlanoDAO implements GenericDAO<Plano> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -151,6 +151,12 @@ public class PlanoDAO implements GenericDAO<Plano> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o tipoUsuarioDestinado cep é utilizado como parametro de filtragem.
+     *
+     * @param tipoUsuarioDestinado Valor do tipoUsuarioDestinado cep dos {@link model.Plano} que se buscam.
+     * @return Todos os dados registrados de todos os Plano encontradas.
+     */
     public List<Plano> readAllByTipoUsuarioDestinado(String tipoUsuarioDestinado){
 
         Conexao conexao = new Conexao();
@@ -193,6 +199,12 @@ public class PlanoDAO implements GenericDAO<Plano> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o tipoMensalidade cep é utilizado como parametro de filtragem.
+     *
+     * @param tipoMensalidade Valor do tipoMensalidade cep dos {@link model.Plano} que se buscam.
+     * @return Todos os dados registrados de todos os Plano encontradas.
+     */
     public List<Plano> readAllByTipoMensalidade(String tipoMensalidade){
 
         Conexao conexao = new Conexao();
@@ -261,18 +273,18 @@ public class PlanoDAO implements GenericDAO<Plano> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -305,14 +317,14 @@ public class PlanoDAO implements GenericDAO<Plano> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

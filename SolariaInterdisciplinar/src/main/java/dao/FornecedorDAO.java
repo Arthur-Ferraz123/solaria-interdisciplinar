@@ -19,13 +19,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Fornecedor
+ * Classe responsável pelo DAO da entidade fornecedor
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
+    @Override
     public int insert(Fornecedor fornecedor){
 
         Conexao conexao = new Conexao();
@@ -55,14 +56,14 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -72,6 +73,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
     }
 
+    @Override
     public Fornecedor readById(long id){
 
         Conexao conexao = new Conexao();
@@ -115,10 +117,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o idUsuario.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo idUsuario é usado como parametro de busca ao invés do atributo id.
      *
-     * @param idUsuario Identificador único (PK) do {@link model.Usuario} que é o Fornecedor.
-     * @return O Fornecedor com todos os seus dados.
+     * @param idUsuario Atributo idUsuario de um {@link model.Fornecedor}.
+     * @return Todos os dados registrados do Fornecedor buscado.
      */
     public Fornecedor readByIdUsuario(long idUsuario){
 
@@ -163,10 +165,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o cnpj.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo cnpj é usado como parametro de busca ao invés do atributo id.
      *
-     * @param cnpj CNPJ do {@link Fornecedor} que se está buscando.
-     * @return O Fornecedor com todos os seus dados.
+     * @param cnpj Atributo cnpj de um {@link model.Fornecedor}.
+     * @return Todos os dados registrados do Fornecedor buscado.
      */
     public Fornecedor readByCnpj(String cnpj){
 
@@ -210,6 +212,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
     }
 
+    @Override
     public List<Fornecedor> readAll(){
 
         Conexao conexao = new Conexao();
@@ -252,9 +255,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
     }
 
     /**
-     * Variação do método {@link #readAll()}. A diferença é que o tipoFornecedor é usado como parametro de busca.
-     * @param tipoFornecedor Veja os valores possíveis em {@link Fornecedor}.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo tipoFornecedor que o parametro.
+     * Variação do {@link #readAll}. A diferença é que o atributo tipoFornecedor é utilizado como parametro de filtragem.
+     *
+     * @param tipoFornecedor Valor do atributo tipoFornecedor dos {@link model.Fornecedor} que se buscam.
+     * @return Todos os dados registrados de todos os Fornecedor encontrados.
      */
     public List<Fornecedor> readAllByTipoFornecedor(String tipoFornecedor){
 
@@ -299,6 +303,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
     }
 
+    @Override
     public int update(Fornecedor fornecedor){
 
         Conexao conexao = new Conexao();
@@ -327,14 +332,14 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -344,6 +349,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -367,14 +373,14 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -385,9 +391,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o idUsuario é usado como clausula de apagamento.
-     * @param idUsuario Identificador único (PK) do {@link Usuario} que é o Fornecedor.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo idUsuario é utilizado como parametro de apagamento.
+     *
+     * @param idUsuario Atributo idUsuario de um {@link model.Fornecedor}.
+     * @return A quantidade de registros pagados.
      */
     public int deleteByIdUsuario(long idUsuario){
 
@@ -412,14 +419,14 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -430,9 +437,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o CNPJ é usado como clausula de apagamento.
-     * @param cnpj CNPJ do Fornecedor.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo cnpj é utilizado como parametro de apagamento.
+     *
+     * @param cnpj Atributo cnpj de um {@link model.Fornecedor}.
+     * @return A quantidade de registros pagados.
      */
     public int deleteByCnpj(String cnpj){
 
@@ -457,14 +465,14 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

@@ -17,13 +17,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Usuário
+ * Classe responsável pelo DAO da entidade midia
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class MidiaDAO implements GenericDAO<Midia> {
 
+    @Override
     public int insert(Midia midia){
 
         Conexao conexao = new Conexao();
@@ -49,18 +50,18 @@ public class MidiaDAO implements GenericDAO<Midia> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -70,6 +71,7 @@ public class MidiaDAO implements GenericDAO<Midia> {
 
     }
 
+    @Override
     public Midia readById(long id){
 
         Conexao conexao = new Conexao();
@@ -111,6 +113,7 @@ public class MidiaDAO implements GenericDAO<Midia> {
 
     }
 
+    @Override
     public List<Midia> readAll(){
 
         Conexao conexao = new Conexao();
@@ -151,6 +154,12 @@ public class MidiaDAO implements GenericDAO<Midia> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idPostagem é utilizado como parametro de filtragem.
+     *
+     * @param idPostagem Valor do atributo idPostagem das {@link model.Postagem} que se buscam.
+     * @return Todos os dados registrados de todas as Postagem encontradas.
+     */
     public List<Midia> readAllByIdPostagem(long idPostagem){
 
         Conexao conexao = new Conexao();
@@ -193,6 +202,12 @@ public class MidiaDAO implements GenericDAO<Midia> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idMensagem é utilizado como parametro de filtragem.
+     *
+     * @param idMensagem Valor do atributo idMensagem das {@link model.Postagem} que se buscam.
+     * @return Todos os dados registrados de todas as Postagem encontradas.
+     */
     public List<Midia> readAllByIdMensagem(long idMensagem){
 
         Conexao conexao = new Conexao();
@@ -235,6 +250,7 @@ public class MidiaDAO implements GenericDAO<Midia> {
 
     }
 
+    @Override
     public int update(Midia midia){
 
         Conexao conexao = new Conexao();
@@ -259,18 +275,18 @@ public class MidiaDAO implements GenericDAO<Midia> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -280,6 +296,7 @@ public class MidiaDAO implements GenericDAO<Midia> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -303,14 +320,14 @@ public class MidiaDAO implements GenericDAO<Midia> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

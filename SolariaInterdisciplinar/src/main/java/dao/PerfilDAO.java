@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Perfil
+ * Classe responsável pelo DAO da entidade perfil
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
@@ -49,18 +49,18 @@ public class PerfilDAO implements GenericDAO<Perfil> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -111,10 +111,10 @@ public class PerfilDAO implements GenericDAO<Perfil> {
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o idUsuario.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo idUsuario é usado como parametro de busca ao invés do atributo id.
      *
-     * @param idUsuario idUsuario do {@link Usuario} que possuí o perfil buscado.
-     * @return O usuário e todos os seus dados.
+     * @param idUsuario Atributo idUsuario de um {@link model.Perfil}.
+     * @return Todos os dados registrados do Perfil buscado.
      */
     public Perfil readByIdUsuario(long idUsuario){
 
@@ -219,18 +219,18 @@ public class PerfilDAO implements GenericDAO<Perfil> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -263,14 +263,14 @@ public class PerfilDAO implements GenericDAO<Perfil> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -281,9 +281,10 @@ public class PerfilDAO implements GenericDAO<Perfil> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o idUsuario é usado como clausula de apagamento.
-     * @param idUsuario O identificador único (PK) do {@link Usuario} que possuí o perfil.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo idUsuario é utilizado como parametro de apagamento.
+     *
+     * @param idUsuario Atributo idUsuario de um {@link model.Perfil}.
+     * @return A quantidade de registros pagados.
      */
     public int deleteByIdUsuario(long idUsuario){
 
@@ -308,14 +309,14 @@ public class PerfilDAO implements GenericDAO<Perfil> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

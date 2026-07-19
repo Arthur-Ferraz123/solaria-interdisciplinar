@@ -17,13 +17,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Usuário
+ * Classe responsável pelo DAO da entidade usuario
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class UsuarioDAO implements GenericDAO<Usuario> {
 
+    @Override
     public int insert(Usuario usuario){
 
         Conexao conexao = new Conexao();
@@ -53,14 +54,14 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -70,6 +71,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
+    @Override
     public Usuario readById(long id){
 
         Conexao conexao = new Conexao();
@@ -112,10 +114,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é um email.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo email é usado como parametro de busca ao invés do atributo id.
      *
-     * @param email email do {@link Usuario} que se está buscando.
-     * @return O usuário e todos os seus dados.
+     * @param email Atributo email de um {@link model.Usuario}.
+     * @return Todos os dados registrados do Usuario buscado.
      */
     public Usuario readByEmail(String email){
 
@@ -158,6 +160,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
+    @Override
     public List<Usuario> readAll(){
 
         Conexao conexao = new Conexao();
@@ -199,9 +202,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     /**
-     * Variação do método {@link #readAll()}. A diferença é que o tipoUsario é usado como parametro de busca.
-     * @param tipoUsuario Veja os valores possíveis em {@link Usuario}.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo tipoUsuario que o parametro.
+     * Variação do {@link #readAll}. A diferença é que o atributo tipoUsuario é utilizado como parametro de filtragem.
+     *
+     * @param tipoUsuario Valor do atributo tipoUsuario dos {@link model.Usuario} que se buscam.
+     * @return Todos os dados registrados de todos os Usuario encontradas.
      */
     public List<Usuario> readAllbyTipoUsuario(String tipoUsuario){
 
@@ -245,6 +249,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
+    @Override
     public int update(Usuario usuario){
 
         Conexao conexao = new Conexao();
@@ -274,14 +279,14 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -291,6 +296,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -314,14 +320,14 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -332,9 +338,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o email é usado como clausula de apagamento.
-     * @param email Email do {@link Usuario}.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo email é utilizado como parametro de apagamento.
+     *
+     * @param email Atributo email de um {@link model.Usuario}.
+     * @return A quantidade de registros apagados.
      */
     public int deleteByEmail(String email){
 
@@ -359,14 +366,14 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

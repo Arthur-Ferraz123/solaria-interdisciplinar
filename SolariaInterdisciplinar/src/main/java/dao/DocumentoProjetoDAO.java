@@ -17,13 +17,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade DocumentoProjeto
+ * Classe responsável pelo DAO da entidade documento_projeto
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
 
+    @Override
     public int insert(DocumentoProjeto documentoProjeto){
 
         Conexao conexao = new Conexao();
@@ -49,18 +50,18 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -70,6 +71,7 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
 
     }
 
+    @Override
     public DocumentoProjeto readById(long id){
 
         Conexao conexao = new Conexao();
@@ -110,6 +112,7 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
 
     }
 
+    @Override
     public List<DocumentoProjeto> readAll(){
 
         Conexao conexao = new Conexao();
@@ -149,6 +152,12 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idProjeto é utilizado como parametro de filtragem.
+     *
+     * @param idProjeto Valor do atributo idProjeto dos {@link model.DocumentoProjeto} que se buscam.
+     * @return Todos os dados registrados de todos os DocumentoProjeto encontrados.
+     */
     public List<DocumentoProjeto> readAllByIdProjeto(long idProjeto){
 
         Conexao conexao = new Conexao();
@@ -190,6 +199,12 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idUsuarioCriador é utilizado como parametro de filtragem.
+     *
+     * @param idUsuarioCriador Valor do atributo idUsuarioCriador dos {@link model.DocumentoProjeto} que se buscam.
+     * @return Todos os dados registrados de todos os DocumentoProjeto encontrados.
+     */
     public List<DocumentoProjeto> readAllByIdUsuarioCriador(long idUsuarioCriador){
 
         Conexao conexao = new Conexao();
@@ -231,6 +246,7 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
 
     }
 
+    @Override
     public int update(DocumentoProjeto documentoProjeto){
 
         Conexao conexao = new Conexao();
@@ -254,18 +270,18 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -275,6 +291,7 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -298,14 +315,14 @@ public class DocumentoProjetoDAO implements GenericDAO<DocumentoProjeto> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

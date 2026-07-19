@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade usuário chat
+ * Representa a entidade usuario_chat
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,19 +13,19 @@ public class UsuarioChat {
     //Atributos
 
     /**
-     * Identificador único do usuário chat.
-     * Imutável por ser um identificador (PK).
+     * ID do usuario_chat registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Chat} (FK) ao qual o usuário chat pertence.
+     * ID do {@link Chat} que o usuario_chat participa. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idChat;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é o usuário chat.
+     * ID do {@link Usuario} que é o usuario_chat. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
@@ -35,9 +35,9 @@ public class UsuarioChat {
     /**
      * Construtor completo da classe UsuarioChat
      *
-     * @param id Identificador único do usuário chat (PK).
-     * @param idChat Identificador único do {@link Chat} (FK) ao qual o usuário chat pertence.
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o usuário chat.
+     * @param id ID do usuario_chat registrado no banco de dados.
+     * @param idChat ID do {@link Chat} que o usuario_chat participa. (FK)
+     * @param idUsuario ID do {@link Usuario} que é o usuario_chat. (FK)
      */
     public UsuarioChat(long id, long idChat, long idUsuario) {
 
@@ -47,7 +47,18 @@ public class UsuarioChat {
 
     }
 
+    /**
+     * Construtor para o {@link dao.UsuarioChatDAO#insert(UsuarioChat)}
+     *
+     * @param idChat ID do {@link Chat} que o usuario_chat participa. (FK)
+     * @param idUsuario ID do {@link Usuario} que é o usuario_chat. (FK)
+     */
+    public UsuarioChat(long idChat, long idUsuario) {
 
+        this.idChat = idChat;
+        this.idUsuario = idUsuario;
+
+    }
 
     //Getters e Setters
 

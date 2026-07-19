@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade placa solar
+ * Representa a entidade placa_solar
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,19 +13,19 @@ public class PlacaSolar {
     //Atributos
 
     /**
-     * Identificador único da placa solar.
-     * Imutável por ser um identificador (PK).
+     * ID da placa_solar registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Fornecedor} (FK) que vende a placa solar.
+     * ID do {@link Fornecedor} que vende a placa_solar. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idFornecedor;
 
     /**
-     * Nome do modelo da placa solar.
+     * Nome do modelo da placa_solar.
      */
     private String modelo;
 
@@ -35,47 +35,48 @@ public class PlacaSolar {
     private String sku;
 
     /**
-     * Tecnologia presente na placa.
+     * Tecnologia presente na placa_solar.
+     * Valores aceitos: {"MONOCRISTALINO", "POLICRISTALINO", "FILME_FINO"}
      */
     private String tecnologia;
 
     /**
-     * Tamanho da placa.
+     * Tamanho da placa_solar.
      */
     private String dimensoes;
 
     /**
-     * Indica se a placa está ou não em estoque.
+     * Indica se a placa_solar está ou não em estoque.
      */
     private boolean emEstoque;
 
     /**
-     * Potência da placa em Watts.
+     * Potência da placa_solar em Watts.
      */
     private double potencia;
 
     /**
-     * Nome da fabricante da placa.
+     * Nome da fabricante da placa_solar.
      */
     private String fabricante;
 
     /**
-     * Peso da placa em quilogramas.
+     * Peso da placa_solar em quilogramas.
      */
     private double peso;
 
     /**
-     * Qual tipo de proteção a placa possuí.
+     * Qual tipo de proteção a placa_solar possuí.
      */
     private String grauProtecao;
 
     /**
-     * Eficiência pratica da placa.
+     * Eficiência pratica da placa_solar.
      */
     private double eficiencia;
 
     /**
-     * Descrição sobre a placa.
+     * Descrição sobre a placa_solar.
      */
     private String descricao;
 
@@ -84,19 +85,19 @@ public class PlacaSolar {
     /**
      * Construtor completo da classe PlacaSolar
      *
-     * @param id Identificador único da placa solar (PK).
-     * @param idFornecedor Identificador único do {@link Fornecedor} (FK) que vende a placa solar.
-     * @param modelo Nome do modelo da placa solar.
+     * @param id ID da placa_solar registrado no banco de dados.
+     * @param idFornecedor ID do {@link Fornecedor} que vende a placa_solar. (FK)
+     * @param modelo Nome do modelo da placa_solar.
      * @param sku Código SKU (Stock Keeping Unit), o código alfanumérico que o vendedor utiliza como identificador do modelo.
-     * @param tecnologia Tecnologia presente na placa.
-     * @param dimensoes Tamanho da placa.
-     * @param emEstoque A placa está ou não em estoque.
-     * @param potencia Potência da placa em Watts.
-     * @param fabricante Nome da fabricante da placa.
-     * @param peso Peso da placa em quilogramas.
-     * @param grauProtecao Qual tipo de proteção a placa possuí.
-     * @param eficiencia Eficiência pratica da placa.
-     * @param descricao Descrição sobre a placa.
+     * @param tecnologia Tecnologia presente na placa_solar.
+     * @param dimensoes Tamanho da placa_solar.
+     * @param emEstoque A placa_solar está ou não em estoque.
+     * @param potencia Potência da placa_solar em Watts.
+     * @param fabricante Nome da fabricante da placa_solar.
+     * @param peso Peso da placa_solar em quilogramas.
+     * @param grauProtecao Qual tipo de proteção a placa_solar possuí.
+     * @param eficiencia Eficiência pratica da placa_solar.
+     * @param descricao Descrição sobre a placa_solar.
      */
     public PlacaSolar(long id, long idFornecedor, String modelo, String sku, String tecnologia, String dimensoes,
                       boolean emEstoque, double potencia, String fabricante, double peso, String grauProtecao,
@@ -121,18 +122,18 @@ public class PlacaSolar {
     /**
      * Construtor para o {@link dao.PlacaSolarDAO#insert(PlacaSolar)}
      *
-     * @param idFornecedor Identificador único do {@link Fornecedor} (FK) que vende a placa solar.
-     * @param modelo Nome do modelo da placa solar.
+     * @param idFornecedor ID do {@link Fornecedor} que vende a placa_solar. (FK)
+     * @param modelo Nome do modelo da placa_solar.
      * @param sku Código SKU (Stock Keeping Unit), o código alfanumérico que o vendedor utiliza como identificador do modelo.
-     * @param tecnologia Tecnologia presente na placa.
-     * @param dimensoes Tamanho da placa.
-     * @param emEstoque A placa está ou não em estoque.
-     * @param potencia Potência da placa em Watts.
-     * @param fabricante Nome da fabricante da placa.
-     * @param peso Peso da placa em quilogramas.
-     * @param grauProtecao Qual tipo de proteção a placa possuí.
-     * @param eficiencia Eficiência pratica da placa.
-     * @param descricao Descrição sobre a placa.
+     * @param tecnologia Tecnologia presente na placa_solar.
+     * @param dimensoes Tamanho da placa_solar.
+     * @param emEstoque A placa_solar está ou não em estoque.
+     * @param potencia Potência da placa_solar em Watts.
+     * @param fabricante Nome da fabricante da placa_solar.
+     * @param peso Peso da placa_solar em quilogramas.
+     * @param grauProtecao Qual tipo de proteção a placa_solar possuí.
+     * @param eficiencia Eficiência pratica da placa_solar.
+     * @param descricao Descrição sobre a placa_solar.
      */
     public PlacaSolar(long idFornecedor, String modelo, String sku, String tecnologia, String dimensoes,
                       boolean emEstoque, double potencia, String fabricante, double peso, String grauProtecao,
@@ -156,25 +157,23 @@ public class PlacaSolar {
     /**
      * Construtor para o {@link dao.PlacaSolarDAO#update(PlacaSolar)}
      *
-     * @param id Identificador único da placa solar (PK).
-     * @param modelo Nome do modelo da placa solar.
+     * @param modelo Nome do modelo da placa_solar.
      * @param sku Código SKU (Stock Keeping Unit), o código alfanumérico que o vendedor utiliza como identificador do modelo.
-     * @param tecnologia Tecnologia presente na placa.
-     * @param dimensoes Tamanho da placa.
-     * @param emEstoque A placa está ou não em estoque.
-     * @param potencia Potência da placa em Watts.
-     * @param fabricante Nome da fabricante da placa.
-     * @param peso Peso da placa em quilogramas.
-     * @param grauProtecao Qual tipo de proteção a placa possuí.
-     * @param eficiencia Eficiência pratica da placa.
-     * @param descricao Descrição sobre a placa.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param tecnologia Tecnologia presente na placa_solar.
+     * @param dimensoes Tamanho da placa_solar.
+     * @param emEstoque A placa_solar está ou não em estoque.
+     * @param potencia Potência da placa_solar em Watts.
+     * @param fabricante Nome da fabricante da placa_solar.
+     * @param peso Peso da placa_solar em quilogramas.
+     * @param grauProtecao Qual tipo de proteção a placa_solar possuí.
+     * @param eficiencia Eficiência pratica da placa_solar.
+     * @param descricao Descrição sobre a placa_solar.
+     * @param id ID da placa_solar registrado no banco de dados.
      */
-    public PlacaSolar(long id, String modelo, String sku, String tecnologia, String dimensoes,
+    public PlacaSolar(String modelo, String sku, String tecnologia, String dimensoes,
                       boolean emEstoque, double potencia, String fabricante, double peso, String grauProtecao,
-                      double eficiencia, String descricao, boolean daoUpdate) {
+                      double eficiencia, String descricao, long id) {
 
-        this.id = id;
         this.modelo = modelo;
         this.sku = sku;
         this.tecnologia = tecnologia;
@@ -186,6 +185,7 @@ public class PlacaSolar {
         this.grauProtecao = grauProtecao;
         this.eficiencia = eficiencia;
         this.descricao = descricao;
+        this.id = id;
 
     }
 

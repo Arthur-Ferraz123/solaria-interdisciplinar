@@ -13,13 +13,13 @@ public class Profissional {
     //Atributos
 
     /**
-     * Identificador único do profissional.
-     * Imutável por ser um identificador (PK).
+     * ID da assinatura registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é o profissional.
+     * ID do {@link Usuario} que é o profissional. (FK) (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
@@ -27,7 +27,7 @@ public class Profissional {
     /**
      * Indica qual a variação do usuário.
      * Imutável por conta da estruturação do sistema.
-     * Valores aceitos:
+     * Valor aceito: "PROFISSIONAL"
      */
     private String tipoUsuario;
 
@@ -37,14 +37,14 @@ public class Profissional {
     private String profissao;
 
     /**
-     * CPF do profissional.
+     * CPF do profissional. (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      * Deve seguir o padrão previsto em {@link }.
      */
     private String cpf;
 
     /**
-     * Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
+     * ID da {@link EmpresaTecnica} que o profissional trabalha. (FK)
      */
     private long idEmpresaTecnica;
 
@@ -53,12 +53,12 @@ public class Profissional {
     /**
      * Construtor completo da classe Profissional
      *
-     * @param id Identificador único do profissional (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o profissional.
+     * @param id ID da assinatura registrado no banco de dados.
+     * @param idUsuario ID do {@link Usuario} que é o profissional. (FK) (UNIQUE)
      * @param tipoUsuario Qual a variação do usuário.
      * @param profissao Profissão que o profissional exerce.
-     * @param cpf CPF do profissional.
-     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
+     * @param cpf CPF do profissional. (UNIQUE)
+     * @param idEmpresaTecnica ID da {@link EmpresaTecnica} que o profissional trabalha. (FK)
      */
     public Profissional(long id, long idUsuario, String tipoUsuario, String profissao, String cpf, long idEmpresaTecnica) {
 
@@ -74,10 +74,10 @@ public class Profissional {
     /**
      * Construtor para o {@link dao.ProfissionalDAO#insert(Profissional)}
      *
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o profissional.
+     * @param idUsuario ID do {@link Usuario} que é o profissional. (FK) (UNIQUE)
      * @param profissao Profissão que o profissional exerce.
-     * @param cpf CPF do profissional.
-     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
+     * @param cpf CPF do profissional. (UNIQUE)
+     * @param idEmpresaTecnica ID da {@link EmpresaTecnica} que o profissional trabalha. (FK)
      */
     public Profissional(long idUsuario,String profissao, String cpf, long idEmpresaTecnica) {
 
@@ -91,15 +91,15 @@ public class Profissional {
     /**
      * Construtor para o {@link dao.ProfissionalDAO#update(Profissional)}
      *
-     * @param id Identificador único do profissional (PK).
      * @param profissao Profissão que o profissional exerce.
-     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que o profissional trabalha.
+     * @param idEmpresaTecnica ID da {@link EmpresaTecnica} que o profissional trabalha. (FK)
+     * @param id ID da assinatura registrado no banco de dados.
      */
-    public Profissional(long id, String profissao, long idEmpresaTecnica) {
+    public Profissional(String profissao, long idEmpresaTecnica, long id) {
 
-        this.id = id;
         this.profissao = profissao;
         this.idEmpresaTecnica = idEmpresaTecnica;
+        this.id = id;
 
     }
 

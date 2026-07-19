@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Telefone
+ * Classe responsável pelo DAO da entidade telefone
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 public class TelefoneDAO implements GenericDAO<Telefone> {
 
+    @Override
     public int insert(Telefone telefone){
 
         Conexao conexao = new Conexao();
@@ -52,18 +53,18 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -73,6 +74,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
     }
 
+    @Override
     public Telefone readById(long id){
 
         Conexao conexao = new Conexao();
@@ -115,10 +117,10 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é um email.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo telefone é usado como parametro de busca ao invés do atributo id.
      *
-     * @param telefone número do {@link Telefone} que se está buscando.
-     * @return O Telefone com todos os seus dados.
+     * @param telefone Atributo telefone de um {@link model.Telefone}.
+     * @return Todos os dados registrados do Telefone buscado.
      */
     public Telefone readByTelefone(String telefone){
 
@@ -161,6 +163,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
     }
 
+    @Override
     public List<Telefone> readAll(){
 
         Conexao conexao = new Conexao();
@@ -202,9 +205,10 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
     }
 
     /**
-     * Variação do método {@link #readAll()}. A diferença é que o idUsuario é usado como parametro de busca.
-     * @param idUsuario ID de quem possuí o telefone buscado.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo idUsuario que o parametro.
+     * Variação do {@link #readAll}. A diferença é que o atributo idUsuario é utilizado como parametro de filtragem.
+     *
+     * @param idUsuario Valor do atributo idUsuario dos {@link model.Telefone} que se buscam.
+     * @return Todos os dados registrados de todos os Telefone encontradas.
      */
     public List<Telefone> readAllByIdUsuario(long idUsuario){
 
@@ -248,6 +252,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
     }
 
+    @Override
     public int update(Telefone telefone){
 
         Conexao conexao = new Conexao();
@@ -273,18 +278,18 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -294,6 +299,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -317,14 +323,14 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -335,9 +341,10 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o número de telefone é usado como clausula de apagamento.
-     * @param telefone Número do {@link Telefone}.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo telefone é utilizado como parametro de apagamento.
+     *
+     * @param telefone Atributo idUsuario de um {@link model.Telefone}.
+     * @return A quantidade de registros apagados.
      */
     public int deleteByTelefone(String telefone){
 
@@ -362,14 +369,14 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

@@ -13,8 +13,8 @@ public class Chat {
     //Atributos
 
     /**
-     * Identificador único do chat.
-     * Imutável por ser um identificador (PK).
+     * ID do chat registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
@@ -26,9 +26,9 @@ public class Chat {
     //Construtor
 
     /**
-     * Construtor completo da classe Chat e para o {@link dao.ChatDAO#update(Chat)}
+     * Construtor completo da classe Chat
      *
-     * @param id Identificador único do chat (PK).
+     * @param id ID do chat registrado no banco de dados.
      * @param nome Nome do chat.
      */
     public Chat(long id, String nome) {
@@ -46,6 +46,19 @@ public class Chat {
     public Chat(String nome) {
 
         this.nome = nome;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.ChatDAO#update(Chat)}
+     *
+     * @param nome Nome do chat.
+     * @param id ID do chat registrado no banco de dados.
+     */
+    public Chat(String nome, long id) {
+
+        this.nome = nome;
+        this.id = id;
 
     }
 

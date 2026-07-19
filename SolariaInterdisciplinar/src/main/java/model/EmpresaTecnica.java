@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade empresa técnica
+ * Representa a entidade empresa_tecnica
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,26 +13,26 @@ public class EmpresaTecnica {
     //Atributos
 
     /**
-     * Identificador único da empresa técnica.
-     * Imutável por ser um identificador (PK).
+     * ID da empresa_tecnica registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é a empresa técnica.
+     * ID do {@link Usuario} que é a empresa_tecnica. (FK) (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
 
     /**
-     * Indica qual a variação do usuário.
+     * Indica qual a variação do {@link Usuario}.
      * Imutável por conta da estruturação do sistema.
-     * Valores aceitos:
+     * O único valor aceito é "EMPRESA_TECNICA".
      */
     private String tipoUsuario;
 
     /**
-     * CNPJ da empresa técnica.
+     * CNPJ da empresa técnica. (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      * Deve seguir o padrão previsto em {@link }.
      */
@@ -48,11 +48,11 @@ public class EmpresaTecnica {
     /**
      * Construtor completo da classe EmpresaTecnica
      *
-     * @param id Identificador único da empresa técnica (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é a empresa técnica.
+     * @param id ID da empresa_tecnica registrado no banco de dados.
+     * @param idUsuario ID do {@link Usuario} que é a empresa_tecnica. (FK) (UNIQUE)
      * @param tipoUsuario Indica qual a variação do usuário.
-     * @param cnpj CNPJ da empresa técnica.
-     * @param razaoSocial Razão social da empresa técnica.
+     * @param cnpj CNPJ da empresa_tecnica. (UNIQUE)
+     * @param razaoSocial Razão social da empresa_tecnica.
      */
     public EmpresaTecnica(long id, long idUsuario, String tipoUsuario, String cnpj, String razaoSocial) {
 
@@ -67,9 +67,9 @@ public class EmpresaTecnica {
     /**
      * Construtor para o {@link dao.EmpresaTecnicaDAO#insert(EmpresaTecnica)}
      *
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é a empresa técnica.
-     * @param cnpj CNPJ da empresa técnica.
-     * @param razaoSocial Razão social da empresa técnica.
+     * @param idUsuario ID do {@link Usuario} que é a empresa_tecnica. (FK) (UNIQUE)
+     * @param cnpj CNPJ da empresa_tecnica. (UNIQUE)
+     * @param razaoSocial Razão social da empresa_tecnica.
      */
     public EmpresaTecnica(long idUsuario, String cnpj, String razaoSocial) {
 
@@ -80,13 +80,15 @@ public class EmpresaTecnica {
     }
 
     /**
-     * Construtor para o {@link dao.EmpresaTecnicaDAO#insert(EmpresaTecnica)}
+     * Construtor para o {@link dao.EmpresaTecnicaDAO#update(EmpresaTecnica)}
      *
-     * @param razaoSocial Razão social da empresa técnica.
+     * @param razaoSocial Razão social da empresa_tecnica.
+     * @param id ID da empresa_tecnica registrado no banco de dados.
      */
-    public EmpresaTecnica(String razaoSocial) {
+    public EmpresaTecnica(String razaoSocial, long id) {
 
         this.razaoSocial = razaoSocial;
+        this.id = id;
 
     }
 

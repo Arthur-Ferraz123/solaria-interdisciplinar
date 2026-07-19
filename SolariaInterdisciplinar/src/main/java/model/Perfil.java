@@ -8,19 +8,18 @@ package model;
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
-
 public class Perfil {
 
     //Atributos
 
     /**
-     * Identificador único do perfil.
-     * Imutável por ser um identificador (PK).
+     * ID do perfil registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) dono do perfil.
+     * ID do {@link Usuario} que é possuí o perfil. (FK) (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
@@ -40,8 +39,8 @@ public class Perfil {
     /**
      * Construtor completo da classe Perfil
      *
-     * @param id Identificador único do perfil (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do perfil.
+     * @param id ID do perfil registrado no banco de dados.
+     * @param idUsuario ID do {@link Usuario} que é possuí o perfil. (FK) (UNIQUE)
      * @param descricao Descrição sobre o perfil.
      * @param fotoPerfil Link para a foto do perfil.
      */
@@ -57,7 +56,7 @@ public class Perfil {
     /**
      * Construtor para o {@link dao.PerfilDAO#insert(Perfil)}
      *
-     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do perfil.
+     * @param idUsuario ID do {@link Usuario} que é possuí o perfil. (FK) (UNIQUE)
      * @param descricao Descrição sobre o perfil.
      * @param fotoPerfil Link para a foto do perfil.
      */
@@ -72,16 +71,15 @@ public class Perfil {
     /**
      * Construtor para o {@link dao.PerfilDAO#update(Perfil)}
      *
-     * @param id Identificador único do perfil (PK).
      * @param descricao Descrição sobre o perfil.
      * @param fotoPerfil Link para a foto do perfil.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param id ID do perfil registrado no banco de dados.
      */
-    public Perfil(long id, String descricao, String fotoPerfil, boolean daoUpdate) {
+    public Perfil(String descricao, String fotoPerfil, long id) {
 
-        this.id = id;
         this.descricao = descricao;
         this.fotoPerfil = fotoPerfil;
+        this.id = id;
 
     }
 

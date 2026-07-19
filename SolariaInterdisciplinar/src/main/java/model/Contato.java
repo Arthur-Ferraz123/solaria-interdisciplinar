@@ -13,19 +13,19 @@ public class Contato {
     //Atributos
 
     /**
-     * Identificador único do contato.
-     * Imutável por ser um identificador (PK).
+     * ID do contato registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) contatador.
+     * ID do {@link Usuario} que realizará o contato. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuarioContatador;
 
     /**
-     * Identificador único do {@link Usuario} (FK) contatado.
+     * ID do {@link Usuario} que receberá o contato. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuarioContatado;
@@ -40,9 +40,9 @@ public class Contato {
     /**
      * Construtor completo da classe Contato
      *
-     * @param id Identificador único do contato (PK).
-     * @param idUsuarioContatador Identificador único do {@link Usuario} (FK) contatador.
-     * @param idUsuarioContatado Identificador único do {@link Usuario} (FK) contatado.
+     * @param id ID da assinatura registrado no banco de dados.
+     * @param idUsuarioContatador ID do {@link Usuario} que realizará o contato. (FK)
+     * @param idUsuarioContatado ID do {@link Usuario} que receberá o contato. (FK)
      * @param apelido Apelido dado ao contatado.
      */
     public Contato(long id, long idUsuarioContatador, long idUsuarioContatado, String apelido) {
@@ -57,8 +57,8 @@ public class Contato {
     /**
      * Construtor para o {@link dao.ContatoDAO#insert(Contato)}
      *
-     * @param idUsuarioContatador Identificador único do {@link Usuario} (FK) contatador.
-     * @param idUsuarioContatado Identificador único do {@link Usuario} (FK) contatado.
+     * @param idUsuarioContatador ID do {@link Usuario} que realizará o contato. (FK)
+     * @param idUsuarioContatado ID do {@link Usuario} que receberá o contato. (FK)
      * @param apelido Apelido dado ao contatado.
      */
     public Contato(long idUsuarioContatador, long idUsuarioContatado, String apelido) {
@@ -72,13 +72,13 @@ public class Contato {
     /**
      * Construtor para o {@link dao.ContatoDAO#update(Contato)}
      *
-     * @param id Identificador único do contato (PK).
      * @param apelido Apelido dado ao contatado.
+     * @param id Identificador único do contato (PK).
      */
-    public Contato(long id, String apelido) {
+    public Contato(String apelido, long id) {
 
-        this.id = id;
         this.apelido = apelido;
+        this.id = id;
 
     }
 
@@ -124,7 +124,6 @@ public class Contato {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

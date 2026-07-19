@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 
 /**
- * Representa a entidade certificação
+ * Representa a entidade certificacao
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -15,39 +15,39 @@ public class Certificacao {
     //Atributos
 
     /**
-     * Identificador único da certificação.
-     * Imutável por ser um identificador (PK).
+     * ID da certificacao registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Fornecedor} (FK) que possuí a certificação.
+     * ID do {@link Fornecedor} que a certificacao se aplica. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idFornecedor;
 
     /**
-     * Selo da certificação.
+     * Selo da certificacao.
      */
     private String selo;
 
     /**
-     * Número de registro da certificação.
+     * Número de registro da certificacao.
      */
     private String numeroRegistro;
 
     /**
-     * Data que a certificação foi emitida.
+     * Data que a certificacao foi emitida.
      */
     private LocalDate dataEmissao;
 
     /**
-     * Data de validade da certificação.
+     * Data de validade da certificacao.
      */
     private LocalDate validade;
 
     /**
-     * Link do documento da certificação.
+     * Link do documento da certificacao.
      */
     private String documento;
 
@@ -56,8 +56,8 @@ public class Certificacao {
     /**
      * Construtor completo da classe Certificacao
      *
-     * @param id Identificador único da certificação (PK).
-     * @param idFornecedor Identificador único do {@link Fornecedor} (FK) que possuí a certificação.
+     * @param id ID da certificacao registrado no banco de dados.
+     * @param idFornecedor ID do {@link Fornecedor} que a certificacao se aplica. (FK)
      * @param selo Selo da certificação.
      * @param numeroRegistro Número de registro da certificação.
      * @param dataEmissao Data que a certificação foi emitida.
@@ -80,12 +80,12 @@ public class Certificacao {
     /**
      * Construtor para o {@link dao.CertificacaoDAO#insert(Certificacao)}
      *
-     * @param idFornecedor Identificador único do {@link Fornecedor} (FK) que possuí a certificação.
-     * @param selo Selo da certificação.
-     * @param numeroRegistro Número de registro da certificação.
-     * @param dataEmissao Data que a certificação foi emitida.
-     * @param validade Data de validade da certificação.
-     * @param documento Link do documento da certificação.
+     * @param idFornecedor ID do {@link Fornecedor} que a certificacao se aplica. (FK)
+     * @param selo Selo da certificacao.
+     * @param numeroRegistro Número de registro da certificacao.
+     * @param dataEmissao Data que a certificacao foi emitida.
+     * @param validade Data de validade da certificacao.
+     * @param documento Link do documento da certificacao.
      */
     public Certificacao(long idFornecedor, String selo, String numeroRegistro, LocalDate dataEmissao, LocalDate validade, String documento) {
 
@@ -101,22 +101,21 @@ public class Certificacao {
     /**
      * Construtor para o {@link dao.CertificacaoDAO#update(Certificacao)}
      *
-     * @param id Identificador único da certificação (PK).
-     * @param selo Selo da certificação.
-     * @param numeroRegistro Número de registro da certificação.
-     * @param dataEmissao Data que a certificação foi emitida.
-     * @param validade Data de validade da certificação.
-     * @param documento Link do documento da certificação.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param selo Selo da certificacao.
+     * @param numeroRegistro Número de registro da certificacao.
+     * @param dataEmissao Data que a certificacao foi emitida.
+     * @param validade Data de validade da certificacao.
+     * @param documento Link do documento da certificacao.
+     * @param id ID da certificacao registrado no banco de dados.
      */
-    public Certificacao(long id, String selo, String numeroRegistro, LocalDate dataEmissao, LocalDate validade, String documento, boolean daoUpdate) {
+    public Certificacao(String selo, String numeroRegistro, LocalDate dataEmissao, LocalDate validade, String documento, long id) {
 
-        this.id = id;
         this.selo = selo;
         this.numeroRegistro = numeroRegistro;
         this.dataEmissao = dataEmissao;
         this.validade = validade;
         this.documento = documento;
+        this.id = id;
 
     }
 

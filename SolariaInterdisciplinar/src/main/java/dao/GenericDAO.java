@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Interface para representar o esqueleto mínimo de um DAO no projeto.
+ * Interface para representar o esqueleto mínimo de um DAO no projeto.
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
@@ -20,10 +20,23 @@ import java.util.List;
 public interface GenericDAO<T> {
 
     /**
+     * Em caso de erro por constraint do BD essa constante deve ser retornada.
+     */
+    public final int ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD = -1;
+
+    /**
+     * Em caso de erro relacionado ao banco de dados essa constante deve ser retornada.
+     */
+    public final int ERRO_NO_BD = -2;
+
+    /**
+     * Em caso de erro genérico essa constante deve ser retornada.
+     */
+    public final int ERRO_GENERICO = -3;
+
+    /**
      * Realiza o insert a partir de um objeto feito pelo construtor criado para o DAO em {@link T}
-     * Em caso de erro por constraint -1 deve ser retornado.
-     * Em caso de erro relacionado ao banco de dados -2 deve ser retornado.
-     * Em caso de um erro não relacionado ao banco de dados -3 deve ser retornado.
+     * Veja as constantes da interface para compreender como deve ser feito o tratamento de exceções.
      *
      * @param objeto Objeto feito a partir do construtor feito para o DAO.
      * @return Se nenhuma exceção for lançada retorna o número de linhas alteradas.
@@ -34,7 +47,7 @@ public interface GenericDAO<T> {
      * Busca um {@link T} a partir do id.
      * Em caso de inexistência do id retornar null.
      *
-     * @param id Identificador unico (FK) da entidade.
+     * @param id ID da entidade.
      * @return A entidade com todos os seus dados.
      */
     public T readById(long id);
@@ -48,9 +61,7 @@ public interface GenericDAO<T> {
 
     /**
      * Realiza um update a partir do construtor feito para o DAO em {@link T}
-     * Em caso de erro por constraint -1 deve ser retornado.
-     * Em caso de erro relacionado ao banco de dados -2 deve ser retornado.
-     * Em caso de um erro não relacionado ao banco de dados -3 deve ser retornado.
+     * Veja as constantes da interface para compreender como deve ser feito o tratamento de exceções.
      *
      * @param objeto Objeto feito a partir do construtor feito para o DAO.
      * @return Se nenhuma exceção for lançada retorna o número de linhas alteradas.
@@ -58,12 +69,10 @@ public interface GenericDAO<T> {
     public int update(T objeto);
 
     /**
-     * Deleta um {@link T} a partir do seu identificador único (PK).
-     * Em caso de erro por foreign key retorna deve -1
-     * Em caso de erro relacionado ao banco de dados -2 deve ser retornado.
-     * Em caso de um erro não relacionado ao banco de dados -3 deve ser retornado.
+     * Deleta um {@link T} a partir do seu ID.
+     * Veja as constantes da interface para compreender como deve ser feito o tratamento de exceções.
      *
-     * @param id Identificador únido (Pk) da entidade.
+     * @param id ID da entidade.
      * @return  Se nenhuma exceção for lançada retorna o número de linhas alteradas.
      */
     public int deleteById(long id);

@@ -19,13 +19,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Mensagem
+ * Classe responsável pelo DAO da entidade mensagem
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class MensagemDAO implements GenericDAO<Mensagem> {
 
+    @Override
     public int insert(Mensagem mensagem){
 
         Conexao conexao = new Conexao();
@@ -54,14 +55,14 @@ public class MensagemDAO implements GenericDAO<Mensagem> {
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -71,6 +72,7 @@ public class MensagemDAO implements GenericDAO<Mensagem> {
 
     }
 
+    @Override
     public Mensagem readById(long id){
 
         Conexao conexao = new Conexao();
@@ -113,6 +115,7 @@ public class MensagemDAO implements GenericDAO<Mensagem> {
 
     }
 
+    @Override
     public List<Mensagem> readAll(){
 
         Conexao conexao = new Conexao();
@@ -154,6 +157,12 @@ public class MensagemDAO implements GenericDAO<Mensagem> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idChat é utilizado como parametro de filtragem.
+     *
+     * @param idChat Valor do atributo idChat das {@link model.Mensagem} que se buscam.
+     * @return Todos os dados registrados de todas as Mensagem encontradas.
+     */
     public List<Mensagem> readAllByIdChat(long idChat){
 
         Conexao conexao = new Conexao();
@@ -197,6 +206,7 @@ public class MensagemDAO implements GenericDAO<Mensagem> {
 
     }
 
+    @Override
     public int update(Mensagem mensagem){
 
         Conexao conexao = new Conexao();
@@ -224,14 +234,14 @@ public class MensagemDAO implements GenericDAO<Mensagem> {
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -241,6 +251,7 @@ public class MensagemDAO implements GenericDAO<Mensagem> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -264,14 +275,14 @@ public class MensagemDAO implements GenericDAO<Mensagem> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

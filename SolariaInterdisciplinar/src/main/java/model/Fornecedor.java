@@ -13,32 +13,32 @@ public class Fornecedor {
     //Atributos
 
     /**
-     * Identificador único do fornecedor.
-     * Imutável por ser um identificador (PK).
+     * ID do fornecedor registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é o fornecedor.
+     * ID do {@link Usuario} que é o fornecedor. (FK) (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
 
     /**
-     * Indica qual a variação do usuário.
+     * Indica qual a variação do {@link Usuario}.
      * Imutável por conta da estruturação do sistema.
-     * Valores aceitos:
+     * O único valor aceito é "FORNECEDOR".
      */
     private String tipoUsuario;
 
     /**
-     * Indica se ele é fabricante ou distribuidor
+     * Indica se ele é fabricante ou distribuidor.
      * Valores aceitos: {"FABRICANTE", "DISTRIBUIDOR"}
      */
     private String tipoFornecedor;
 
     /**
-     * CNPJ do fornecedor.
+     * CNPJ do fornecedor. (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      * Deve seguir o padrão previsto em {@link }.
      */
@@ -54,11 +54,11 @@ public class Fornecedor {
     /**
      * Construtor completo da classe Fornecedor
      *
-     * @param id Identificador único do fornecedor (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o fornecedor.
+     * @param id ID do fornecedor registrado no banco de dados.
+     * @param idUsuario ID do {@link Usuario} que é o fornecedor. (FK) (UNIQUE)
      * @param tipoUsuario Qual a variação do usuário.
-     * @param tipoFornecedor Indica qual tipo de placas solares o fornecedor mais trabalha.
-     * @param cnpj CNPJ do fornecedor.
+     * @param tipoFornecedor Indica se ele é fabricante ou distribuidor.
+     * @param cnpj CNPJ do fornecedor. (UNIQUE)
      * @param razaoSocial Razão social do fornecedor
      */
     public Fornecedor(long id, long idUsuario, String tipoUsuario, String tipoFornecedor, String cnpj, String razaoSocial) {
@@ -75,9 +75,9 @@ public class Fornecedor {
     /**
      * Construtor para o {@link dao.FornecedorDAO#insert(Fornecedor)}
      * 
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o fornecedor.
-     * @param tipoFornecedor Indica qual tipo de placas solares o fornecedor mais trabalha.
-     * @param cnpj CNPJ do fornecedor.
+     * @param idUsuario ID do {@link Usuario} que é o fornecedor. (FK) (UNIQUE)
+     * @param tipoFornecedor Indica se ele é fabricante ou distribuidor.
+     * @param cnpj CNPJ do fornecedor. (UNIQUE)
      * @param razaoSocial Razão social do fornecedor
      */
     public Fornecedor(long idUsuario, String tipoFornecedor, String cnpj, String razaoSocial) {
@@ -92,15 +92,15 @@ public class Fornecedor {
     /**
      * Construtor para o {@link dao.FornecedorDAO#update(Fornecedor)}
      *
-     * @param id Identificador único do fornecedor (PK).
-     * @param tipoFornecedor Indica qual tipo de placas solares o fornecedor mais trabalha.
+     * @param tipoFornecedor Indica se ele é fabricante ou distribuidor.
      * @param razaoSocial Razão social do fornecedor
+     * @param id ID do fornecedor registrado no banco de dados.
      */
-    public Fornecedor(long id, String tipoFornecedor, String razaoSocial) {
+    public Fornecedor(String tipoFornecedor, String razaoSocial, long id) {
 
-        this.id = id;
         this.tipoFornecedor = tipoFornecedor;
         this.razaoSocial = razaoSocial;
+        this.id = id;
 
     }
 

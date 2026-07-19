@@ -17,13 +17,13 @@ public class Mensagem {
     //Atributos
 
     /**
-     * Identificador único da mensagem.
-     * Imutável por ser um identificador (PK).
+     * ID da mensagem registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Chat} (FK) ao qual a mensagem pertence.
+     * ID do {@link Chat} que é a mensagem foi enviada. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idChat;
@@ -56,8 +56,8 @@ public class Mensagem {
     /**
      * Construtor completo da classe Mensagem
      *
-     * @param id Identificador único da mensagem (PK).
-     * @param idChat Identificador único do {@link Chat} (FK) ao qual a mensagem pertence.
+     * @param id ID da mensagem registrado no banco de dados.
+     * @param idChat ID do {@link Chat} que é a mensagem foi enviada. (FK)
      * @param mensagem Texto da mensagem.
      * @param dataEnvio Data que a mensagem foi enviada.
      * @param horarioEnvio Horário que a mensagem foi enviada.
@@ -78,7 +78,7 @@ public class Mensagem {
     /**
      * Construtor para o {@link dao.MensagemDAO#insert(Mensagem)}
      *
-     * @param idChat Identificador único do {@link Chat} (FK) ao qual a mensagem pertence.
+     * @param idChat ID do {@link Chat} que é a mensagem foi enviada. (FK)
      * @param mensagem Texto da mensagem.
      * @param remetente Nome de quem enviou a mensagem.
      */
@@ -93,13 +93,13 @@ public class Mensagem {
     /**
      * Construtor para o {@link dao.MensagemDAO#update(Mensagem)}
      *
-     * @param id Identificador único da mensagem (PK).
      * @param mensagem Texto da mensagem.
+     * @param id ID da mensagem registrado no banco de dados.
      */
-    public Mensagem(long id, String mensagem) {
+    public Mensagem(String mensagem, long id) {
 
-        this.id = id;
         this.mensagem = mensagem;
+        this.id = id;
 
     }
 

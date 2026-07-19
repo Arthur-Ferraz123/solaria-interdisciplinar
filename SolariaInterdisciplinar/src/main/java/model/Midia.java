@@ -13,19 +13,19 @@ public class Midia {
     //Atributos
 
     /**
-     * Identificador único da mídia.
-     * Imutável por ser um identificador (PK).
+     * ID da midia registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único da {@link Postagem} (FK) ao qual a midia pertence.
+     * ID da {@link Postagem} que é a midia é atrelada. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idPostagem;
 
     /**
-     * Identificador único da {@link Mensagem} (FK) ao qual a midia pertence.
+     * ID da {@link Mensagem} que é a midia é atrelada. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idMensagem;
@@ -39,7 +39,7 @@ public class Midia {
     /**
      * Indica o tipo da mídia.
      * Imutável por conta da estruturação do sistema.
-     * Valores aceitos: {"VIDEO", "IMAGEM"}.
+     * Valores aceitos: {"IMAGEM", "VIDEO", "DOCUMENTO"}.
      */
     private String tipoMidia;
 
@@ -48,9 +48,9 @@ public class Midia {
     /**
      * Construtor completo da classe Midia
      *
-     * @param id Identificador único da mídia (PK).
-     * @param idPostagem Identificador único da {@link Postagem} (FK) ao qual a midia pertence.
-     * @param idMensagem Identificador único da {@link Mensagem} (FK) ao qual a midia pertence.
+     * @param id ID da midia registrado no banco de dados.
+     * @param idPostagem ID da {@link Postagem} que é a midia é atrelada. (FK)
+     * @param idMensagem ID da {@link Mensagem} que é a midia é atrelada. (FK)
      * @param midia Link da mídia.
      * @param tipoMidia Indica o tipo da mídia.
      */
@@ -67,8 +67,8 @@ public class Midia {
     /**
      * Construtor para o {@link dao.MidiaDAO#insert(Midia)}
      *
-     * @param idPostagem Identificador único da {@link Postagem} (FK) ao qual a midia pertence.
-     * @param idMensagem Identificador único da {@link Mensagem} (FK) ao qual a midia pertence.
+     * @param idPostagem ID da {@link Postagem} que é a midia é atrelada. (FK)
+     * @param idMensagem ID da {@link Mensagem} que é a midia é atrelada. (FK)
      * @param midia Link da mídia.
      * @param tipoMidia Indica o tipo da mídia.
      */
@@ -84,15 +84,15 @@ public class Midia {
     /**
      * Construtor para o {@link dao.MidiaDAO#update(Midia)}
      *
-     * @param id Identificador único da mídia (PK).
      * @param midia Link da mídia.
      * @param tipoMidia Indica o tipo da mídia.
+     * @param id Identificador único da mídia (PK).
      */
-    public Midia(long id, String midia, String tipoMidia) {
+    public Midia( String midia, String tipoMidia, long id) {
 
-        this.id = id;
         this.midia = midia;
         this.tipoMidia = tipoMidia;
+        this.id = id;
 
     }
 

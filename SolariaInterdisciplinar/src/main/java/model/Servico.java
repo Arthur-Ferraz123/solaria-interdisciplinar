@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade serviço
+ * Representa a entidade servico
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,24 +13,24 @@ public class Servico {
     //Atributos
 
     /**
-     * Identificador único do serviço.
-     * Imutável por ser um identificador (PK).
+     * ID do servico registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único da {@link EmpresaTecnica} (FK) que realiza o serviço.
+     * ID da {@link EmpresaTecnica} que presta o servico. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idEmpresaTecnica;
 
     /**
-     * Nome do serviço.
+     * Nome do servico.
      */
     private String servico;
 
     /**
-     * Descrição sobre o que é feito no serviço.
+     * Descrição sobre o que é feito no servico.
      */
     private String descricao;
 
@@ -39,10 +39,10 @@ public class Servico {
     /**
      * Construtor completo da classe Servico
      *
-     * @param id Identificador único do serviço (PK).
-     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que realiza o serviço.
-     * @param servico Nome do serviço.
-     * @param descricao Descrição sobre o que é feito no serviço.
+     * @param id ID do servico registrado no banco de dados.
+     * @param idEmpresaTecnica ID da {@link EmpresaTecnica} que presta o servico. (FK)
+     * @param servico Nome do servico.
+     * @param descricao Descrição sobre o que é feito no servico.
      */
     public Servico(long id, long idEmpresaTecnica, String servico, String descricao) {
 
@@ -56,9 +56,9 @@ public class Servico {
     /**
      * Construtor para o {@link dao.ServicoDAO#insert(Servico)}
      *
-     * @param idEmpresaTecnica Identificador único da {@link EmpresaTecnica} (FK) que realiza o serviço.
-     * @param servico Nome do serviço.
-     * @param descricao Descrição sobre o que é feito no serviço.
+     * @param idEmpresaTecnica ID da {@link EmpresaTecnica} que presta o servico. (FK)
+     * @param servico Nome do servico.
+     * @param descricao Descrição sobre o que é feito no servico.
      */
     public Servico(long idEmpresaTecnica, String servico, String descricao) {
 
@@ -71,13 +71,15 @@ public class Servico {
     /**
      * Construtor para o {@link dao.ServicoDAO#update(Servico)}
      *
-     * @param servico Nome do serviço.
-     * @param descricao Descrição sobre o que é feito no serviço.
+     * @param servico Nome do servico.
+     * @param descricao Descrição sobre o que é feito no servico.
+     * @param id ID do servico registrado no banco de dados.
      */
-    public Servico(String servico, String descricao) {
+    public Servico(String servico, String descricao, long id) {
 
         this.servico = servico;
         this.descricao = descricao;
+        this.id = id;
 
     }
 

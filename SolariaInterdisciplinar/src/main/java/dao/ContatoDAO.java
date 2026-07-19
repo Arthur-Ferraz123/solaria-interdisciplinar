@@ -17,13 +17,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Contato
+ * Classe responsável pelo DAO da entidade contato
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class ContatoDAO implements GenericDAO<Contato> {
 
+    @Override
     public int insert(Contato contato){
 
         Conexao conexao = new Conexao();
@@ -48,18 +49,19 @@ public class ContatoDAO implements GenericDAO<Contato> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
+
 
         } finally {
 
@@ -69,6 +71,7 @@ public class ContatoDAO implements GenericDAO<Contato> {
 
     }
 
+    @Override
     public Contato readById(long id){
 
         Conexao conexao = new Conexao();
@@ -109,6 +112,7 @@ public class ContatoDAO implements GenericDAO<Contato> {
 
     }
 
+    @Override
     public List<Contato> readAll(){
 
         Conexao conexao = new Conexao();
@@ -149,9 +153,10 @@ public class ContatoDAO implements GenericDAO<Contato> {
     }
 
     /**
-     * Variação do método {@link #readAll()}. A diferença é que o idUsuarioContatador é usada como parametro de busca.
-     * @param idUsuarioContatador O id de quem se deseja buscar os contatos.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo estado que o parametro.
+     * Variação do {@link #readAll}. A diferença é que o atributo idUsuarioContatador é utilizado como parametro de filtragem.
+     *
+     * @param idUsuarioContatador Valor do atributo idUsuarioContatador dos {@link model.Contato} que se buscam.
+     * @return Todos os dados registrados de todos os Contato encontrados.
      */
     public List<Contato> readAllByIdUsuarioContatador(long idUsuarioContatador){
 
@@ -195,9 +200,10 @@ public class ContatoDAO implements GenericDAO<Contato> {
     }
 
     /**
-     * Variação do método {@link #readAll()}. A diferença é que o idUsuarioContatado é usada como parametro de busca.
-     * @param idUsuarioContatado O id de quem se deseja buscar todos que a tem contatos.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo estado que o parametro.
+     * Variação do {@link #readAll}. A diferença é que o atributo idUsuarioContatado é utilizado como parametro de filtragem.
+     *
+     * @param idUsuarioContatado Valor do atributo idUsuarioContatado dos {@link model.Contato} que se buscam.
+     * @return Todos os dados registrados de todos os Contato encontrados.
      */
     public List<Contato> readAllByIdUsuarioContatado(long idUsuarioContatado){
 
@@ -240,6 +246,7 @@ public class ContatoDAO implements GenericDAO<Contato> {
 
     }
 
+    @Override
     public int update(Contato contato){
 
         Conexao conexao = new Conexao();
@@ -263,18 +270,18 @@ public class ContatoDAO implements GenericDAO<Contato> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -284,6 +291,7 @@ public class ContatoDAO implements GenericDAO<Contato> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -307,14 +315,14 @@ public class ContatoDAO implements GenericDAO<Contato> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

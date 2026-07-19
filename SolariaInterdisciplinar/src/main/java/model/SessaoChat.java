@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 
 /**
- * Representa a entidade sessão chat
+ * Representa a entidade sessao_chat
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -15,30 +15,30 @@ public class SessaoChat {
     //Atributos
 
     /**
-     * Identificador único da sessão chat.
-     * Imutável por ser um identificador (PK).
+     * ID da sessao_chat registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Chat} (FK) ao qual a sessão chat é relacionada.
+     * ID do {@link Chat} que a sessao_chat atua. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idChat;
 
     /**
-     * Indica a data que o chat foi iniciado.
+     * Indica a data que a sessao_chat foi iniciada.
      * Imutável por conta da estruturação do sistema.
      */
     private LocalDate dataInicio;
 
     /**
-     * Indica se a sessão chat está ou não ativa.
+     * Indica se a sessao_chat está ou não ativa.
      */
     private boolean statusSessao;
 
     /**
-     * Indica a data em que o chat foi finalizado.
+     * Indica a data em que a sessao_chat foi finalizada.
      */
     private LocalDate dataFim;
 
@@ -47,11 +47,11 @@ public class SessaoChat {
     /**
      * Construtor completo da classe SessaoChat
      *
-     * @param id Identificador único da sessão chat (PK).
-     * @param idChat Identificador único do {@link Chat} (FK) ao qual a sessão chat é relacionada.
-     * @param dataInicio A data que o chat foi iniciado.
-     * @param statusSessao A sessão chat está ou não ativa.
-     * @param dataFim A data em que o chat foi finalizado.
+     * @param id ID da sessao_chat registrado no banco de dados.
+     * @param idChat ID do {@link Chat} que a sessao_chat atua. (FK)
+     * @param dataInicio A data que a sessao_chat foi iniciada.
+     * @param statusSessao A sessao_chat está ou não ativa.
+     * @param dataFim A data em que a sessao_chat foi finalizada.
      */
     public SessaoChat(long id, long idChat, LocalDate dataInicio, boolean statusSessao, LocalDate dataFim) {
 
@@ -66,9 +66,9 @@ public class SessaoChat {
     /**
      * Construtor para o {@link dao.SessaoChatDAO#insert(SessaoChat)}
      *
-     * @param idChat Identificador único do {@link Chat} (FK) ao qual a sessão chat é relacionada.
-     * @param statusSessao A sessão chat está ou não ativa.
-     * @param dataFim A data em que o chat foi finalizado.
+     * @param idChat ID do {@link Chat} que a sessao_chat atua. (FK)
+     * @param statusSessao A sessao_chat está ou não ativa.
+     * @param dataFim A data em que a sessao_chat foi finalizada.
      */
     public SessaoChat(long idChat, boolean statusSessao, LocalDate dataFim) {
 
@@ -81,16 +81,15 @@ public class SessaoChat {
     /**
      * Construtor para o {@link dao.SessaoChatDAO#update(SessaoChat)}
      *
-     * @param idChat Identificador único do {@link Chat} (FK) ao qual a sessão chat é relacionada.
-     * @param statusSessao A sessão chat está ou não ativa.
-     * @param dataFim A data em que o chat foi finalizado.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param statusSessao A sessao_chat está ou não ativa.
+     * @param dataFim A data em que a sessao_chat foi finalizada.
+     * @param id ID da sessao_chat registrado no banco de dados.
      */
-    public SessaoChat(long idChat, boolean statusSessao, LocalDate dataFim, boolean daoUpdate) {
+    public SessaoChat(boolean statusSessao, LocalDate dataFim, long id) {
 
-        this.idChat = idChat;
         this.statusSessao = statusSessao;
         this.dataFim = dataFim;
+        this.id = idChat;
 
     }
 

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade endereço
+ * Representa a entidade endereco
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,51 +13,51 @@ public class Endereco {
     //Atributos
 
     /**
-     * Identificador único do endereço.
-     * Imutável por ser um identificador (PK).
+     * ID da endereco registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) dono do endereço.
+     * ID do {@link Usuario} que é dono do endereco. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
 
     /**
-     * Indica qual o estado do endereço.
-     * Valores aceitos:
+     * Indica qual o estado do endereco.
+     * Valores aceitos: {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}
      */
     private String estado;
 
     /**
-     * Nome da cidade que o endereço se situa.
+     * Nome da cidade que o endereco se situa.
      */
     private String cidade;
 
     /**
-     * Nome do bairro que o endereço se situa.
+     * Nome do bairro que o endereco se situa.
      */
     private String bairro;
 
     /**
-     * CEP do endereço.
+     * CEP do endereco.
      * Deve seguir o padrão previsto em {@link }.
      */
     private String cep;
 
     /**
-     * Nome do logradouro do endereço se situa.
+     * Nome do logradouro do endereco se situa.
      */
     private String logradouro;
 
     /**
-     * Número do endereço.
+     * Número do endereco.
      */
     private String numero;
 
     /**
-     * Complemento caso necessário para facilitar encontrar o endereço.
+     * Complemento caso necessário para facilitar encontrar o endereco.
      */
     private String complemento;
 
@@ -66,15 +66,15 @@ public class Endereco {
     /**
      * Construtor completo da classe Endereco
      *
-     * @param id Identificador único do endereço (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do endereço.
-     * @param estado Qual o estado do endereço.
-     * @param cidade Nome da cidade que o endereço se situa.
-     * @param bairro Nome do bairro que o endereço se situa.
-     * @param cep CEP do endereço.
-     * @param logradouro Nome do logradouro do endereço se situa.
-     * @param numero Número do endereço.
-     * @param complemento Complemento caso necessário para facilitar encontrar o endereço.
+     * @param id ID da endereco registrado no banco de dados.
+     * @param idUsuario ID do {@link Usuario} que é dono do endereco. (FK)
+     * @param estado Qual o estado do endereco.
+     * @param cidade Nome da cidade que o endereco se situa.
+     * @param bairro Nome do bairro que o endereco se situa.
+     * @param cep CEP do endereco.
+     * @param logradouro Nome do logradouro do endereco se situa.
+     * @param numero Número do endereco.
+     * @param complemento Complemento caso necessário para facilitar encontrar o endereco.
      */
     public Endereco(long id, long idUsuario, String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento) {
 
@@ -93,14 +93,14 @@ public class Endereco {
     /**
      * Construtor para o {@link dao.EnderecoDAO#insert(Endereco)}
      *
-     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do endereço.
-     * @param estado Qual o estado do endereço.
-     * @param cidade Nome da cidade que o endereço se situa.
-     * @param bairro Nome do bairro que o endereço se situa.
-     * @param cep CEP do endereço.
-     * @param logradouro Nome do logradouro do endereço se situa.
-     * @param numero Número do endereço.
-     * @param complemento Complemento caso necessário para facilitar encontrar o endereço.
+     * @param idUsuario ID do {@link Usuario} que é dono do endereco. (FK)
+     * @param estado Qual o estado do endereco.
+     * @param cidade Nome da cidade que o endereco se situa.
+     * @param bairro Nome do bairro que o endereco se situa.
+     * @param cep CEP do endereco.
+     * @param logradouro Nome do logradouro do endereco se situa.
+     * @param numero Número do endereco.
+     * @param complemento Complemento caso necessário para facilitar encontrar o endereco.
      */
     public Endereco(long idUsuario, String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento) {
 
@@ -118,19 +118,17 @@ public class Endereco {
     /**
      * Construtor para o {@link dao.EnderecoDAO#update(Endereco)}
      *
-     * @param id Identificador único do endereço (PK).
-     * @param estado Qual o estado do endereço.
-     * @param cidade Nome da cidade que o endereço se situa.
-     * @param bairro Nome do bairro que o endereço se situa.
-     * @param cep CEP do endereço.
-     * @param logradouro Nome do logradouro do endereço se situa.
-     * @param numero Número do endereço.
-     * @param complemento Complemento caso necessário para facilitar encontrar o endereço.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param estado Qual o estado do endereco.
+     * @param cidade Nome da cidade que o endereco se situa.
+     * @param bairro Nome do bairro que o endereco se situa.
+     * @param cep CEP do endereco.
+     * @param logradouro Nome do logradouro do endereco se situa.
+     * @param numero Número do endereco.
+     * @param complemento Complemento caso necessário para facilitar encontrar o endereco.
+     * @param id ID da endereco registrado no banco de dados.
      */
-    public Endereco(long id, String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento, boolean daoUpdate) {
+    public Endereco(String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento, long id) {
 
-        this.id = id;
         this.estado = estado;
         this.cidade = cidade;
         this.bairro = bairro;
@@ -138,6 +136,7 @@ public class Endereco {
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
+        this.id = id;
 
     }
 

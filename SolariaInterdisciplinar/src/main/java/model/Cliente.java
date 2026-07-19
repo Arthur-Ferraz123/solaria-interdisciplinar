@@ -13,26 +13,26 @@ public class Cliente{
     //Atributos
 
     /**
-     * Identificador único do cliente.
-     * Imutável por ser um identificador (PK).
+     * ID do cliente registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é o cliente.
+     * ID do {@link Usuario} que é o cliente. (FK) (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
 
     /**
-     * Indica qual a variação do usuário.
+     * Indica qual a variação do {@link Usuario}.
      * Imutável por conta da estruturação do sistema.
-     * Valores aceitos:
+     * O único valor aceito é "CLIENTE".
      */
     private String tipoUsuario;
 
     /**
-     * CNPJ do cliente.
+     * CNPJ do cliente. (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      * Deve seguir o padrão previsto em {@link }.
      */
@@ -48,10 +48,10 @@ public class Cliente{
     /**
      * Construtor completo da classe Cliente
      *
-     * @param id Identificador único do cliente (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o cliente.
+     * @param id ID do cliente registrado no banco de dados.
+     * @param idUsuario ID do {@link Usuario} que é o cliente. (FK) (UNIQUE)
      * @param tipoUsuario Qual a variação do usuário.
-     * @param cnpj CNPJ do cliente.
+     * @param cnpj CNPJ do cliente. (UNIQUE)
      * @param razaoSocial Razão social do cliente.
      */
     public Cliente(long id, long idUsuario, String tipoUsuario, String cnpj, String razaoSocial) {
@@ -67,8 +67,8 @@ public class Cliente{
     /**
      * Construtor para o {@link dao.ClienteDAO#insert(Cliente)}
      *
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o cliente.
-     * @param cnpj CNPJ do cliente.
+     * @param idUsuario ID do {@link Usuario} que é o cliente. (FK) (UNIQUE)
+     * @param cnpj CNPJ do cliente. (UNIQUE)
      * @param razaoSocial Razão social do cliente.
      */
     public Cliente(long idUsuario, String cnpj, String razaoSocial) {
@@ -80,17 +80,18 @@ public class Cliente{
     }
 
     /**
-     * Construtor para o {@link dao.ClienteDAO#insert(Cliente)}
+     * Construtor para o {@link dao.ClienteDAO#update(Cliente)}
      *
-     * @param id Identificador único do cliente (PK).
      * @param razaoSocial Razão social do cliente.
+     * @param id ID do cliente registrado no banco de dados.
      */
-    public Cliente(long id, String razaoSocial) {
+    public Cliente(String razaoSocial, long id) {
 
-        this.id = id;
         this.razaoSocial = razaoSocial;
+        this.id = id;
 
     }
+
 
     //Getters e Setters
 

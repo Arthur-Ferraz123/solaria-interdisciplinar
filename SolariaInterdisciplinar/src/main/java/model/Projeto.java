@@ -13,13 +13,13 @@ public class Projeto {
     //Atributos
 
     /**
-     * Identificador único do projeto.
-     * Imutável por ser um identificador (PK).
+     * ID da assinatura registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Chat} (FK) do projeto.
+     * ID do {@link Chat} atrelado ao projeto. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idChat;
@@ -39,8 +39,8 @@ public class Projeto {
     /**
      * Construtor completo da classe Projeto
      *
-     * @param id Identificador único do projeto (PK).
-     * @param idChat Identificador único do {@link Chat} (FK) do projeto.
+     * @param id ID da assinatura registrado no banco de dados.
+     * @param idChat ID do {@link Chat} atrelado ao projeto. (FK)
      * @param nome Nome do projeto.
      * @param descricao Descrição do projeto.
      */
@@ -56,7 +56,7 @@ public class Projeto {
     /**
      * Construtor para o {@link dao.ProjetoDAO#insert(Projeto)}
      *
-     * @param idChat Identificador único do {@link Chat} (FK) do projeto.
+     * @param idChat ID do {@link Chat} atrelado ao projeto. (FK)
      * @param nome Nome do projeto.
      * @param descricao Descrição do projeto.
      */
@@ -69,14 +69,13 @@ public class Projeto {
     }
 
     /**
-     * Construtor para o {@link dao.ProjetoDAO#insert(Projeto)}
+     * Construtor para o {@link dao.ProjetoDAO#update(Projeto)}
      *
-     * @param id Identificador único do projeto (PK).
      * @param nome Nome do projeto.
      * @param descricao Descrição do projeto.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param id ID da assinatura registrado no banco de dados.
      */
-    public Projeto(long id, String nome, String descricao, boolean daoUpdate) {
+    public Projeto(String nome, String descricao, long id) {
 
         this.id = id;
         this.nome = nome;

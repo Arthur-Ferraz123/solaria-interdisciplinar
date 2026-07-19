@@ -17,13 +17,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade UsuarioProjeto
+ * Classe responsável pelo DAO da entidade usuario_projeto
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class UsuarioProjetoDAO implements GenericDAO<UsuarioProjeto> {
 
+    @Override
     public int insert(UsuarioProjeto usuarioProjeto){
 
         Conexao conexao = new Conexao();
@@ -48,18 +49,18 @@ public class UsuarioProjetoDAO implements GenericDAO<UsuarioProjeto> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -69,6 +70,7 @@ public class UsuarioProjetoDAO implements GenericDAO<UsuarioProjeto> {
 
     }
 
+    @Override
     public UsuarioProjeto readById(long id){
 
         Conexao conexao = new Conexao();
@@ -109,6 +111,7 @@ public class UsuarioProjetoDAO implements GenericDAO<UsuarioProjeto> {
 
     }
 
+    @Override
     public List<UsuarioProjeto> readAll(){
 
         Conexao conexao = new Conexao();
@@ -148,6 +151,12 @@ public class UsuarioProjetoDAO implements GenericDAO<UsuarioProjeto> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idProjeto é utilizado como parametro de filtragem.
+     *
+     * @param idProjeto Valor do atributo idProjeto dos {@link model.UsuarioProjeto} que se buscam.
+     * @return Todos os dados registrados de todos os UsuarioProjeto encontradas.
+     */
     public List<UsuarioProjeto> readAllByIdProjeto(long idProjeto){
 
         Conexao conexao = new Conexao();
@@ -189,6 +198,12 @@ public class UsuarioProjetoDAO implements GenericDAO<UsuarioProjeto> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idUsuario é utilizado como parametro de filtragem.
+     *
+     * @param idUsuario Valor do atributo idUsuario dos {@link model.UsuarioProjeto} que se buscam.
+     * @return Todos os dados registrados de todos os UsuarioProjeto encontradas.
+     */
     public List<UsuarioProjeto> readAllByIdUsuario(long idUsuario){
 
         Conexao conexao = new Conexao();
@@ -230,12 +245,16 @@ public class UsuarioProjetoDAO implements GenericDAO<UsuarioProjeto> {
 
     }
 
+    @Override
     public int update(UsuarioProjeto usuarioProjeto){
 
+        //Essa entidade não suporta um método para o update.
+        //Porque os seus atributos são imutáveis.
         return 0;
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -259,14 +278,14 @@ public class UsuarioProjetoDAO implements GenericDAO<UsuarioProjeto> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

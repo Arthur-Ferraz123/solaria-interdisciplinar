@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade documento projeto
+ * Representa a entidade documento_projeto
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,19 +13,19 @@ public class DocumentoProjeto {
     //Atributos
 
     /**
-     * Identificador único do documento projeto.
-     * Imutável por ser um identificador (PK).
+     * ID do documento_projeto registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Projeto} (FK) ao qual o documento pertence.
+     * ID do {@link Projeto} que ao qual esse documento_projeto faz parte. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idProjeto;
 
     /**
-     * Identificador único do {@link UsuarioProjeto} (FK) que criou o documento projeto.
+     * ID do {@link UsuarioProjeto} que fez o documento_projeto. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuarioCriador;
@@ -40,10 +40,10 @@ public class DocumentoProjeto {
     /**
      * Construtor completo da classe DocumentoProjeto
      *
-     * @param id Identificador único do documento projeto (PK).
-     * @param idProjeto Identificador único do {@link Projeto} (FK) ao qual o documento pertence.
-     * @param idUsuarioCriador Identificador único do {@link UsuarioProjeto} (FK) que criou o documento projeto.
-     * @param documento Link do documento
+     * @param id ID do documento_projeto registrado no banco de dados.
+     * @param idProjeto ID do {@link Projeto} que ao qual esse documento_projeto faz parte. (FK)
+     * @param idUsuarioCriador ID do {@link UsuarioProjeto} que fez o documento_projeto. (FK)
+     * @param documento Link do documento.
      */
     public DocumentoProjeto(long id, long idProjeto, long idUsuarioCriador, String documento) {
 
@@ -57,9 +57,9 @@ public class DocumentoProjeto {
     /**
      * Construtor para o {@link dao.DocumentoProjetoDAO#insert(DocumentoProjeto)}
      *
-     * @param idProjeto Identificador único do {@link Projeto} (FK) ao qual o documento pertence.
-     * @param idUsuarioCriador Identificador único do {@link UsuarioProjeto} (FK) que criou o documento projeto.
-     * @param documento Link do documento
+     * @param idProjeto ID do {@link Projeto} que ao qual esse documento_projeto faz parte. (FK)
+     * @param idUsuarioCriador ID do {@link UsuarioProjeto} que fez o documento_projeto. (FK)
+     * @param documento Link do documento.
      */
     public DocumentoProjeto(long idProjeto, long idUsuarioCriador, String documento) {
 
@@ -70,15 +70,15 @@ public class DocumentoProjeto {
     }
 
     /**
-     * Construtor para o {@link dao.DocumentoProjetoDAO#insert(DocumentoProjeto)}
+     * Construtor para o {@link dao.DocumentoProjetoDAO#update(DocumentoProjeto)}
      *
-     * @param id Identificador único do documento projeto (PK).
-     * @param documento Link do documento
+     * @param documento Link do documento.
+     * @param id ID do documento_projeto registrado no banco de dados.
      */
-    public DocumentoProjeto(long id, String documento) {
+    public DocumentoProjeto(String documento, long id) {
 
-        this.id = id;
         this.documento = documento;
+        this.id = id;
 
     }
 

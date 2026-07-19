@@ -18,13 +18,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade PlacaSolarCertificacao
+ * Classe responsável pelo DAO da entidade placa_solar_certificacao
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertificacao> {
 
+    @Override
     public int insert(PlacaSolarCertificacao placaSolarCertificacao){
 
         Conexao conexao = new Conexao();
@@ -53,14 +54,14 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -70,6 +71,7 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
 
     }
 
+    @Override
     public PlacaSolarCertificacao readById(long id){
 
         Conexao conexao = new Conexao();
@@ -110,10 +112,10 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o idPlacaSolar.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo idPlacaSolar é usado como parametro de busca ao invés do atributo id.
      *
-     * @param idPlacaSolar idPlacaSolar da {@link PlacaSolarCertificacao} buscada.
-     * @return O PlacaSolarCertificacao com todos os seus dados.
+     * @param idPlacaSolar Atributo idPlacaSolar de uma {@link model.PlacaSolarCertificacao}.
+     * @return Todos os dados registrados da PlacaSolarCertificacao buscado.
      */
     public PlacaSolarCertificacao readByIdPlacaSolar(long idPlacaSolar){
 
@@ -155,10 +157,10 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o idPlacaSolar.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo idCertificacao é usado como parametro de busca ao invés do atributo id.
      *
-     * @param idCertificacao idCertificacao da {@link PlacaSolarCertificacao} buscada.
-     * @return O PlacaSolarCertificacao com todos os seus dados.
+     * @param idCertificacao Atributo idCertificacao de uma {@link model.PlacaSolarCertificacao}.
+     * @return Todos os dados registrados da PlacaSolarCertificacao buscado.
      */
     public PlacaSolarCertificacao readByIdCertificacao(long idCertificacao){
 
@@ -199,6 +201,7 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
 
     }
 
+    @Override
     public List<PlacaSolarCertificacao> readAll(){
 
         Conexao conexao = new Conexao();
@@ -237,14 +240,16 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
 
     }
 
+    @Override
     public int update(PlacaSolarCertificacao placaSolarCertificacao){
 
         //Essa entidade não suporta um método para o update.
-        //Todos os seus atributos são imutáveis
+        //Porque os seus atributos são imutáveis.
         return 0;
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -268,14 +273,14 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -286,9 +291,10 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o idUsuario é usado como clausula de apagamento.
-     * @param idPlacaSolar idPlacaSolar da {@link PlacaSolarCertificacao} que se deseja deletar.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo idPlacaSolar é utilizado como parametro de apagamento.
+     *
+     * @param idPlacaSolar Atributo idPlacaSolar de uma {@link model.PlacaSolarCertificacao}.
+     * @return A quantidade de registros pagados.
      */
     public int deleteByIdPlacaSolar(long idPlacaSolar){
 
@@ -313,14 +319,14 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -331,9 +337,10 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o idUsuario é usado como clausula de apagamento.
-     * @param idCertificacao idCertificacao da {@link PlacaSolarCertificacao} que se deseja deletar.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo idCertificacao é utilizado como parametro de apagamento.
+     *
+     * @param idCertificacao Atributo idCertificacao de uma {@link model.PlacaSolarCertificacao}.
+     * @return A quantidade de registros pagados.
      */
     public int deleteByIdCertificacao(long idCertificacao){
 
@@ -358,14 +365,14 @@ public class PlacaSolarCertificacaoDAO implements GenericDAO<PlacaSolarCertifica
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

@@ -17,13 +17,13 @@ public class Compromisso {
     //Atributos
 
     /**
-     * Identificador único do compromisso.
-     * Imutável por ser um identificador (PK).
+     * ID do compromisso registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link UsuarioProjeto} (FK) dono do compromisso.
+     * ID do {@link UsuarioProjeto} que possuí o compromisso. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuarioProjeto;
@@ -58,8 +58,8 @@ public class Compromisso {
     /**
      * Construtor completo da classe Compromisso
      *
-     * @param id Identificador único do compromisso (PK).
-     * @param idUsuarioProjeto Identificador único do {@link UsuarioProjeto} (FK) dono do compromisso.
+     * @param id ID do compromisso registrado no banco de dados.
+     * @param idUsuarioProjeto ID do {@link UsuarioProjeto} que possuí o compromisso. (FK)
      * @param nome Nome do compromisso.
      * @param descricao Descrição sobre o que será feito no compromisso.
      * @param dataCompromisso Data de realização do compromisso.
@@ -81,7 +81,7 @@ public class Compromisso {
     /**
      * Construtor para o {@link dao.CompromissoDAO#insert(Compromisso)}
      *
-     * @param idUsuarioProjeto Identificador único do {@link UsuarioProjeto} (FK) dono do compromisso.
+     * @param idUsuarioProjeto ID do {@link UsuarioProjeto} que possuí o compromisso. (FK)
      * @param nome Nome do compromisso.
      * @param descricao Descrição sobre o que será feito no compromisso.
      * @param dataCompromisso Data de realização do compromisso.
@@ -102,22 +102,21 @@ public class Compromisso {
     /**
      * Construtor para o {@link dao.CompromissoDAO#update(Compromisso)}
      *
-     * @param id Identificador único do compromisso (PK).
      * @param nome Nome do compromisso.
      * @param descricao Descrição sobre o que será feito no compromisso.
      * @param dataCompromisso Data de realização do compromisso.
      * @param horarioCompromisso Horário de realização do compromisso.
      * @param dataPrevistaParaConclusao Data prevista para a conclusão do compromisso.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param id ID do compromisso registrado no banco de dados.
      */
-    public Compromisso(long id, String nome, String descricao, LocalDate dataCompromisso, LocalTime horarioCompromisso, LocalDate dataPrevistaParaConclusao, boolean daoUpdate) {
+    public Compromisso(String nome, String descricao, LocalDate dataCompromisso, LocalTime horarioCompromisso, LocalDate dataPrevistaParaConclusao, long id) {
 
-        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.dataCompromisso = dataCompromisso;
         this.horarioCompromisso = horarioCompromisso;
         this.dataPrevistaParaConclusao = dataPrevistaParaConclusao;
+        this.id = id;
 
     }
 
@@ -215,7 +214,7 @@ public class Compromisso {
                 "Descrição: "+ this.descricao + "\n" +
                 "Data do compromisso: "+ this.dataCompromisso + "\n" +
                 "Horário do compromisso: "+ this.horarioCompromisso + "\n" +
-                "Intervalo previsto para a conclusão: "+ this.dataPrevistaParaConclusao + "\n" +
+                "Data prevista para a conclusão: "+ this.dataPrevistaParaConclusao + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     }

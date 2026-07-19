@@ -20,13 +20,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Qualificacao
+ * Classe responsável pelo DAO da entidade qualificacao
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class QualificacaoDAO implements GenericDAO<Qualificacao> {
 
+    @Override
     public int insert(Qualificacao qualificacao){
 
         Conexao conexao = new Conexao();
@@ -59,18 +60,18 @@ public class QualificacaoDAO implements GenericDAO<Qualificacao> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -80,6 +81,7 @@ public class QualificacaoDAO implements GenericDAO<Qualificacao> {
 
     }
 
+    @Override
     public Qualificacao readById(long id){
 
         Conexao conexao = new Conexao();
@@ -128,6 +130,7 @@ public class QualificacaoDAO implements GenericDAO<Qualificacao> {
 
     }
 
+    @Override
     public List<Qualificacao> readAll(){
 
         Conexao conexao = new Conexao();
@@ -175,6 +178,12 @@ public class QualificacaoDAO implements GenericDAO<Qualificacao> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idProfissional é utilizado como parametro de filtragem.
+     *
+     * @param idProfissional Valor do atributo idProfissional das {@link model.Qualificacao} que se buscam.
+     * @return Todos os dados registrados de todas as Qualificacao encontradas.
+     */
     public List<Qualificacao> readAllByIdProfissional(long idProfissional){
 
         Conexao conexao = new Conexao();
@@ -224,6 +233,62 @@ public class QualificacaoDAO implements GenericDAO<Qualificacao> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo tipoCredencial é utilizado como parametro de filtragem.
+     *
+     * @param tipoCredencial Valor do atributo tipoCredencial das {@link model.Qualificacao} que se buscam.
+     * @return Todos os dados registrados de todas as Qualificacao encontradas.
+     */
+    public List<Qualificacao> readAllByTipoCredencial(String tipoCredencial){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+        List<Qualificacao> qualificacaos = new ArrayList<>();
+
+        try {
+
+            String readAll = "select * from qualificacao where tipo_credencial = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(readAll);
+
+            preparedStatement.setString(1, tipoCredencial);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                qualificacaos.add(new Qualificacao(
+                        resultSet.getLong("id"),
+                        resultSet.getLong("id_profissional"),
+                        resultSet.getString("orgao_expeditor"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("tipo_credencial"),
+                        resultSet.getObject("data_emissao", LocalDate.class),
+                        resultSet.getObject("validade", LocalDate.class),
+                        resultSet.getDouble("carga_horaria_curso"),
+                        resultSet.getString("numero_registro"),
+                        resultSet.getString("documento"),
+                        resultSet.getString("numero_nr"),
+                        resultSet.getString("fabricante_certificado")
+                ));
+
+            }
+
+            return qualificacaos;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    @Override
     public int update(Qualificacao qualificacao){
 
         Conexao conexao = new Conexao();
@@ -256,18 +321,18 @@ public class QualificacaoDAO implements GenericDAO<Qualificacao> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -277,6 +342,7 @@ public class QualificacaoDAO implements GenericDAO<Qualificacao> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -300,14 +366,14 @@ public class QualificacaoDAO implements GenericDAO<Qualificacao> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade PlacaSolarCertificação
+ * Representa a entidade placa_solar_certificacao
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,19 +13,19 @@ public class PlacaSolarCertificacao {
     //Atributos
 
     /**
-     * Identificador único da placa solar certificação.
-     * Imutável por ser um identificador (PK).
+     * ID da placa_solar_certificacao registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único da {@link PlacaSolar} (FK) ao qual a placa solar certificação se aplica.
+     * ID da {@link PlacaSolar} que a placa_solar_certificacao se aplica. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idPlacaSolar;
 
     /**
-     * Identificador único da {@link Certificacao} (FK) da placa solar certificação.
+     * ID da {@link Certificacao} que a placa_solar_certificacao aplica. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idCertificacao;
@@ -33,11 +33,11 @@ public class PlacaSolarCertificacao {
     //Construtor
 
     /**
-     * Construtor completo da classe PlacaSolarCertificação
+     * Construtor completo da classe PlacaSolarCertificacao
      *
-     * @param id Identificador único da placa solar certificação (PK).
-     * @param idPlacaSolar Identificador único da {@link PlacaSolar} (FK) ao qual a placa solar certificação se aplica.
-     * @param idCertificacao Identificador único da {@link Certificacao} (FK) da placa solar certificação.
+     * @param id ID da placa_solar_certificacao registrado no banco de dados.
+     * @param idPlacaSolar ID da {@link PlacaSolar} que a placa_solar_certificacao se aplica. (FK)
+     * @param idCertificacao ID da {@link Certificacao} que a placa_solar_certificacao aplica. (FK)
      */
     public PlacaSolarCertificacao(long id, long idPlacaSolar, long idCertificacao) {
 
@@ -50,8 +50,8 @@ public class PlacaSolarCertificacao {
     /**
      * Construtor para o {@link dao.PlacaSolarCertificacaoDAO#insert(PlacaSolarCertificacao)}
      *
-     * @param idPlacaSolar Identificador único da {@link PlacaSolar} (FK) ao qual a placa solar certificação se aplica.
-     * @param idCertificacao Identificador único da {@link Certificacao} (FK) da placa solar certificação.
+     * @param idPlacaSolar ID da {@link PlacaSolar} que a placa_solar_certificacao se aplica. (FK)
+     * @param idCertificacao ID da {@link Certificacao} que a placa_solar_certificacao aplica. (FK)
      */
     public PlacaSolarCertificacao(long idPlacaSolar, long idCertificacao) {
 

@@ -17,19 +17,19 @@ public class Postagem {
     //Atributos
 
     /**
-     * Identificador único da postagem.
-     * Imutável por ser um identificador (PK).
+     * ID da postagem registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Perfil} (FK) dono da postagem.
+     * ID do {@link Perfil} que realizou a postagem. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idPerfil;
 
     /**
-     * Texto existênte na postagem.
+     * Texto existente na postagem.
      */
     private String texto;
 
@@ -55,8 +55,8 @@ public class Postagem {
     /**
      * Construtor completo da classe Postagem
      *
-     * @param id Identificador único da postagem (PK).
-     * @param idPerfil Identificador único do {@link Perfil} (FK) dono da postagem.
+     * @param id ID da postagem registrado no banco de dados.
+     * @param idPerfil ID do {@link Perfil} que realizou a postagem. (FK)
      * @param texto Texto existênte na postagem.
      * @param dataPublicacao Qual a data que a postagem foi salva no sistema.
      * @param quantidadeVisualizacoes Quantidade de {@link Perfil} visualizaram a postagem.
@@ -77,7 +77,7 @@ public class Postagem {
     /**
      * Construtor para o {@link dao.PostagemDAO#insert(Postagem)}
      *
-     * @param idPerfil Identificador único do {@link Perfil} (FK) dono da postagem.
+     * @param idPerfil ID do {@link Perfil} que realizou a postagem. (FK)
      * @param texto Texto existênte na postagem.
      */
     public Postagem(long idPerfil, String texto) {
@@ -90,14 +90,15 @@ public class Postagem {
     /**
      * Construtor para o {@link dao.PostagemDAO#update(Postagem)}
      *
-     * @param id Identificador único do {@link Perfil} (FK) dono da postagem.
      * @param texto Texto existênte na postagem.
+     * @param quantidadeVisualizacoes Numero atual de visualizações.
+     * @param id ID da postagem registrado no banco de dados.
      */
-    public Postagem(long id, String texto, long quantidadeVisualizacoes) {
+    public Postagem(String texto, long quantidadeVisualizacoes, long id) {
 
-        this.id = id;
         this.texto = texto;
         this.quantidadeVisualizacoes = quantidadeVisualizacoes;
+        this.id = id;
 
     }
     

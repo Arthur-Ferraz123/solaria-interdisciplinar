@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 
 /**
- * Representa a entidade qualificação
+ * Representa a entidade qualificacao
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -15,55 +15,55 @@ public class Qualificacao {
     //Atributos
 
     /**
-     * Identificador único da qualificação.
-     * Imutável por ser um identificador (PK).
+     * ID da qualificacao registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Profissional} (FK) que possuí a qualificação.
+     * ID do {@link Profissional} que é possuí a qualificacao. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idProfissional;
 
     /**
-     * Nome do órgão que emitiu a qualificação.
+     * Nome do órgão que emitiu a qualificacao.
      */
     private String orgaoExpeditor;
 
     /**
-     * Nome da qualificação.
+     * Nome da qualificacao.
      */
     private String nome;
 
     /**
-     * O tipo credencial da qualificação.
-     * Valores aceitos:
+     * O tipo credencial da qualificacao.
+     * Valores aceitos: {"DIPLOMA_DE_GRADUACAO", "DIPLOMA_TECNICO", "DIPLOMA_POS_GRADUACAO", "NR", "REGISTRO_PROFISSIONAL", "CERTIFICACAO_DE_FABRICANTE", "CURSO_LIVRE"}
      */
     private String tipoCredencial;
 
     /**
-     * Data que a qualificação foi emitida.
+     * Data que a qualificacao foi emitida.
      */
     private LocalDate dataEmissao;
 
     /**
-     * Data que a qualificação expira, no caso de ela expirar.
+     * Data que a qualificacao expira, no caso de ela expirar.
      */
     private LocalDate validade;
 
     /**
-     * Carga horária realizada para obter a qualificação.
+     * Carga horária realizada para obter a qualificacao.
      */
     private double cargaHorariaCurso;
 
     /**
-     * Número de registro da qualificação.
+     * Número de registro da qualificacao.
      */
     private String numeroRegistro;
 
     /**
-     * Link do documento da qualificação.
+     * Link do documento da qualificacao.
      */
     private String documento;
 
@@ -82,16 +82,16 @@ public class Qualificacao {
     /**
      * Construtor completo da classe Qualificacao
      *
-     * @param id Identificador único da qualificação (PK).
-     * @param idProfissional Identificador único do {@link Profissional} (FK) que possuí a qualificação.
-     * @param orgaoExpeditor Nome do órgão que emitiu a qualificação.
-     * @param nome Nome da qualificação.
-     * @param tipoCredencial O tipo credencial da qualificação.
-     * @param dataEmissao Data que a qualificação foi emitida.
-     * @param validade Data que a qualificação expira, no caso de ela expirar.
-     * @param cargaHorariaCurso Carga horária realizada para obter a qualificação.
-     * @param numeroRegistro Número de registro da qualificação.
-     * @param documento Link do documento da qualificação.
+     * @param id ID da qualificacao registrado no banco de dados.
+     * @param idProfissional ID do {@link Profissional} que é possuí a qualificacao. (FK)
+     * @param orgaoExpeditor Nome do órgão que emitiu a qualificacao.
+     * @param nome Nome da qualificacao.
+     * @param tipoCredencial O tipo credencial da qualificacao.
+     * @param dataEmissao Data que a qualificacao foi emitida.
+     * @param validade Data que a qualificacao expira, no caso de ela expirar.
+     * @param cargaHorariaCurso Carga horária realizada para obter a qualificacao.
+     * @param numeroRegistro Número de registro da qualificacao.
+     * @param documento Link do documento da qualificacao.
      * @param numeroNr No caso de ser uma NR qual o número.
      * @param fabricanteCertificado Qual fabricante de placas o certificado se aplica.
      */
@@ -116,15 +116,15 @@ public class Qualificacao {
     /**
      * Construtor para o {@link dao.CertificacaoDAO#insert(Certificacao)}
      *
-     * @param idProfissional Identificador único do {@link Profissional} (FK) que possuí a qualificação.
-     * @param orgaoExpeditor Nome do órgão que emitiu a qualificação.
-     * @param nome Nome da qualificação.
-     * @param tipoCredencial O tipo credencial da qualificação.
-     * @param dataEmissao Data que a qualificação foi emitida.
-     * @param validade Data que a qualificação expira, no caso de ela expirar.
-     * @param cargaHorariaCurso Carga horária realizada para obter a qualificação.
-     * @param numeroRegistro Número de registro da qualificação.
-     * @param documento Link do documento da qualificação.
+     * @param idProfissional ID do {@link Profissional} que é possuí a qualificacao. (FK)
+     * @param orgaoExpeditor Nome do órgão que emitiu a qualificacao.
+     * @param nome Nome da qualificacao.
+     * @param tipoCredencial O tipo credencial da qualificacao.
+     * @param dataEmissao Data que a qualificacao foi emitida.
+     * @param validade Data que a qualificacao expira, no caso de ela expirar.
+     * @param cargaHorariaCurso Carga horária realizada para obter a qualificacao.
+     * @param numeroRegistro Número de registro da qualificacao.
+     * @param documento Link do documento da qualificacao.
      * @param numeroNr No caso de ser uma NR qual o número.
      * @param fabricanteCertificado Qual fabricante de placas o certificado se aplica.
      */
@@ -146,25 +146,23 @@ public class Qualificacao {
     }
 
     /**
-     * Construtor para o {@link dao.CertificacaoDAO#insert(Certificacao)}
+     * Construtor para o {@link dao.CertificacaoDAO#update(Certificacao)}
      *
-     * @param id Identificador único da qualificação (PK).
-     * @param orgaoExpeditor Nome do órgão que emitiu a qualificação.
-     * @param nome Nome da qualificação.
-     * @param tipoCredencial O tipo credencial da qualificação.
-     * @param dataEmissao Data que a qualificação foi emitida.
-     * @param validade Data que a qualificação expira, no caso de ela expirar.
-     * @param cargaHorariaCurso Carga horária realizada para obter a qualificação.
-     * @param numeroRegistro Número de registro da qualificação.
-     * @param documento Link do documento da qualificação.
+     * @param orgaoExpeditor Nome do órgão que emitiu a qualificacao.
+     * @param nome Nome da qualificacao.
+     * @param tipoCredencial O tipo credencial da qualificacao.
+     * @param dataEmissao Data que a qualificacao foi emitida.
+     * @param validade Data que a qualificacao expira, no caso de ela expirar.
+     * @param cargaHorariaCurso Carga horária realizada para obter a qualificacao.
+     * @param numeroRegistro Número de registro da qualificacao.
+     * @param documento Link do documento da qualificacao.
      * @param numeroNr No caso de ser uma NR qual o número.
      * @param fabricanteCertificado Qual fabricante de placas o certificado se aplica.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param id ID da qualificacao registrado no banco de dados.
      */
-    public Qualificacao(long id, String orgaoExpeditor, String nome, String tipoCredencial, LocalDate dataEmissao,
-                        LocalDate validade, double cargaHorariaCurso, String numeroRegistro, String documento, String numeroNr, String fabricanteCertificado, boolean daoUpdate) {
+    public Qualificacao(String orgaoExpeditor, String nome, String tipoCredencial, LocalDate dataEmissao,
+                        LocalDate validade, double cargaHorariaCurso, String numeroRegistro, String documento, String numeroNr, String fabricanteCertificado, long id) {
 
-        this.id = id;
         this.orgaoExpeditor = orgaoExpeditor;
         this.nome = nome;
         this.tipoCredencial = tipoCredencial;
@@ -175,6 +173,7 @@ public class Qualificacao {
         this.documento = documento;
         this.numeroNr = numeroNr;
         this.fabricanteCertificado = fabricanteCertificado;
+        this.id = id;
 
     }
 

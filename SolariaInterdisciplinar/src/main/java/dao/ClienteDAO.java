@@ -19,13 +19,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Cliente
+ * Classe responsável pelo DAO da entidade cliente
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class ClienteDAO implements GenericDAO<Cliente> {
 
+    @Override
     public int insert(Cliente cliente){
 
         Conexao conexao = new Conexao();
@@ -54,14 +55,14 @@ public class ClienteDAO implements GenericDAO<Cliente> {
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         } catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -71,6 +72,7 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 
     }
 
+    @Override
     public Cliente readById(long id){
 
         Conexao conexao = new Conexao();
@@ -113,10 +115,10 @@ public class ClienteDAO implements GenericDAO<Cliente> {
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o idUsuario.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo idUsuario é usado como parametro de busca ao invés do atributo id.
      *
-     * @param idUsuario Identificador único (PK) do {@link model.Usuario} que é o cliente.
-     * @return O Cliente com todos os seus dados.
+     * @param idUsuario Atributo idUsuario de um {@link model.Cliente}.
+     * @return Todos os dados registrados do Cliente buscado.
      */
     public Cliente readByIdUsuario(long idUsuario){
 
@@ -160,10 +162,10 @@ public class ClienteDAO implements GenericDAO<Cliente> {
     }
 
     /**
-     * Variação do método {@link #readById(long)}. A diferença é que o parametro de busca é o cnpj.
+     * Variação do {@link #readById(long)}. A diferença é que o atributo cnpj é usado como parametro de busca ao invés do atributo id.
      *
-     * @param cnpj CNPJ do {@link Cliente} que se está buscando.
-     * @return O Cliente com todos os seus dados.
+     * @param cnpj Atributo cnpj de um {@link model.Cliente}.
+     * @return Todos os dados registrados do Cliente buscado.
      */
     public Cliente readByCnpj(String cnpj){
 
@@ -206,6 +208,7 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 
     }
 
+    @Override
     public List<Cliente> readAll(){
 
         Conexao conexao = new Conexao();
@@ -246,6 +249,7 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 
     }
 
+    @Override
     public int update(Cliente cliente){
 
         Conexao conexao = new Conexao();
@@ -273,14 +277,14 @@ public class ClienteDAO implements GenericDAO<Cliente> {
                 "23505".equals(codigoSQLException) ||
                 "23514".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         } catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -290,6 +294,7 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -313,14 +318,14 @@ public class ClienteDAO implements GenericDAO<Cliente> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -331,9 +336,10 @@ public class ClienteDAO implements GenericDAO<Cliente> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o idUsuario é usado como clausula de apagamento.
-     * @param idUsuario Identificador único (PK) do {@link Usuario} que é o cliente.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo idUsuario é utilizado como parametro de apagamento.
+     *
+     * @param idUsuario Atributo idUsuario de um {@link model.Cliente}.
+     * @return A quantidade de registros apagados.
      */
     public int deleteByIdUsuario(long idUsuario){
 
@@ -358,14 +364,14 @@ public class ClienteDAO implements GenericDAO<Cliente> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -376,9 +382,10 @@ public class ClienteDAO implements GenericDAO<Cliente> {
     }
 
     /**
-     * Variação do método {@link #deleteById(long)}. A diferença é que o idUsuario é usado como clausula de apagamento.
-     * @param cnpj CNPJ do cliente.
-     * @return Mesmo padrão de retorno que o {@link #deleteById(long)}.
+     * Variação do {@link #deleteById(long)}. A diferença é que o atributo cnpj é utilizado como parametro de apagamento.
+     *
+     * @param cnpj Atributo cnpj de um {@link model.Cliente}.
+     * @return A quantidade de registros apagados.
      */
     public int deleteByCnpj(String cnpj){
 
@@ -403,14 +410,14 @@ public class ClienteDAO implements GenericDAO<Cliente> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

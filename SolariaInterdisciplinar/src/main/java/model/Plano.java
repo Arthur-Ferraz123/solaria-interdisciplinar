@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade Plano
+ * Representa a entidade plano
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,41 +13,42 @@ public class Plano {
     //Atributos
 
     /**
-     * Identificador único do Plano.
-     * Imutável por ser um identificador (PK).
+     * ID do plano registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Nome do nome.
+     * Nome do plano.
      */
     private String nome;
 
     /**
-     * Indica qual tipo de usuário que o plano é direcionado
-     * Valores aceitos:
+     * Indica qual tipo de usuário que o plano é direcionado.
+     * Valores aceitos: {"FORNECEDOR", "PROFISSIONAL", "EMPRESA_TECNICA"}
      */
     private String tipoUsuarioDestinado;
 
     /**
-     * Valor do Plano em reais.
+     * Valor do plano em reais.
      */
     private double valor;
 
     /**
-     * Indica de qual o tipo da mensalidade.
-     * Valores aceitos:
+     * Indica qual o tipo da mensalidade.
+     * Valores aceitos: {"MENSAL", "TRIMESTRAL", "ANUAL"}
      */
     private String tipoMensalidade;
 
     //Construtor
 
     /**
-     * Construtor completo da classe Plano e para o {@link dao.PlanoDAO#update(Plano)}
+     * Construtor completo da classe Plano
      *
-     * @param id Identificador único do nome (PK).
-     * @param nome Nome do Plano.
-     * @param valor Valor do Plano em reais.
+     * @param id ID do plano registrado no banco de dados.
+     * @param nome Nome do plano.
+     * @param tipoUsuarioDestinado Indica qual tipo de usuário que o plano é direcionado.
+     * @param valor Valor do plano em reais.
      * @param tipoMensalidade Indica de qual o tipo da mensalidade.
      */
     public Plano(long id, String nome, String tipoUsuarioDestinado, double valor, String tipoMensalidade) {
@@ -63,10 +64,10 @@ public class Plano {
     /**
      * Construtor para o {@link dao.PlanoDAO#insert(Plano)}
      *
-     * @param nome
-     * @param tipoUsuarioDestinado
-     * @param valor
-     * @param tipoMensalidade
+     * @param nome Nome do Plano.
+     * @param tipoUsuarioDestinado Indica qual tipo de usuário que o plano é direcionado.
+     * @param valor Valor do plano em reais.
+     * @param tipoMensalidade Indica qual o tipo da mensalidade.
      */
     public Plano(String nome, String tipoUsuarioDestinado, double valor, String tipoMensalidade) {
 
@@ -74,6 +75,25 @@ public class Plano {
         this.tipoUsuarioDestinado = tipoUsuarioDestinado;
         this.valor = valor;
         this.tipoMensalidade = tipoMensalidade;
+
+    }
+
+    /**
+     * Construtor para o {@link dao.PlanoDAO#update(Plano)}
+     *
+     * @param nome Nome do Plano.
+     * @param tipoUsuarioDestinado Indica qual tipo de usuário que o plano é direcionado.
+     * @param valor Valor do Plano em reais.
+     * @param tipoMensalidade Indica qual o tipo da mensalidade.
+     * @param id ID do plano registrado no banco de dados.
+     */
+    public Plano(String nome, String tipoUsuarioDestinado, double valor, String tipoMensalidade, long id) {
+
+        this.nome = nome;
+        this.tipoUsuarioDestinado = tipoUsuarioDestinado;
+        this.valor = valor;
+        this.tipoMensalidade = tipoMensalidade;
+        this.id = id;
 
     }
 

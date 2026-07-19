@@ -19,13 +19,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Postagem
+ * Classe responsável pelo DAO da entidade postagem
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class PostagemDAO implements GenericDAO<Postagem> {
 
+    @Override
     public int insert(Postagem postagem){
 
         Conexao conexao = new Conexao();
@@ -49,18 +50,18 @@ public class PostagemDAO implements GenericDAO<Postagem> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -70,6 +71,7 @@ public class PostagemDAO implements GenericDAO<Postagem> {
 
     }
 
+    @Override
     public Postagem readById(long id){
 
         Conexao conexao = new Conexao();
@@ -112,6 +114,7 @@ public class PostagemDAO implements GenericDAO<Postagem> {
 
     }
 
+    @Override
     public List<Postagem> readAll(){
 
         Conexao conexao = new Conexao();
@@ -153,6 +156,12 @@ public class PostagemDAO implements GenericDAO<Postagem> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idPerfil é utilizado como parametro de filtragem.
+     *
+     * @param idPerfil Valor do atributo idPerfil das {@link model.Postagem} que se buscam.
+     * @return Todos os dados registrados de todas as Postagem encontradas.
+     */
     public List<Postagem> readAllByIdPerfil(long idPerfil){
 
         Conexao conexao = new Conexao();
@@ -196,6 +205,7 @@ public class PostagemDAO implements GenericDAO<Postagem> {
 
     }
 
+    @Override
     public int update(Postagem postagem){
 
         Conexao conexao = new Conexao();
@@ -220,18 +230,18 @@ public class PostagemDAO implements GenericDAO<Postagem> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -241,6 +251,7 @@ public class PostagemDAO implements GenericDAO<Postagem> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -264,14 +275,14 @@ public class PostagemDAO implements GenericDAO<Postagem> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

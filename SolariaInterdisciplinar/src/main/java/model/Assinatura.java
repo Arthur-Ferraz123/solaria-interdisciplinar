@@ -15,25 +15,25 @@ public class Assinatura {
     //Atributos
 
     /**
-     * Identificador único da assinatura.
-     * Imutável por ser um identificador (PK).
+     * ID da assinatura registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é realiza a assinatura.
+     * ID do {@link Usuario} que realiza a assinatura. (FK) (UNIQUE)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
 
     /**
-     * Identificador único do {@link Plano} (FK) atual da assinatura.
+     * ID do {@link Plano} atual da assinatura. (FK)
      */
     private long idPlano;
 
     /**
-     * Indica de qual o status atual da assinatura.
-     * Valores aceitos:
+     * Indica qual o estado atual da assinatura.
+     * Valores aceitos: {"INATIVA", "ATIVA", "EM_PROCESSAMENTO", "VENCIDA", "AGUARDANDO_PAGAMENTO"}
      */
     private String statusAssinatura;
 
@@ -57,9 +57,9 @@ public class Assinatura {
     /**
      * Construtor completo da classe Assinatura
      *
-     * @param id Identificador único da assinatura (PK).
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é realiza a assinatura.
-     * @param idPlano Identificador único do {@link Plano} (FK) atual da assinatura.
+     * @param id ID da assinatura registrado no banco de dados.
+     * @param idUsuario ID do {@link Usuario} que realiza a assinatura. (FK) (UNIQUE)
+     * @param idPlano ID do {@link Plano} atual da assinatura. (FK)
      * @param statusAssinatura Qual o status atual da assinatura.
      * @param renovacaoAutomatica A assinatura debita ou não automaticamente da conta.
      * @param dataInicio Data que a assinatura foi iniciada ou a última vez que foi paga.
@@ -80,8 +80,8 @@ public class Assinatura {
     /**
      * Construtor para o {@link dao.AssinaturaDAO#insert(Assinatura)}
      *
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é realiza a assinatura.
-     * @param idPlano Identificador único do {@link Plano} (FK) atual da assinatura.
+     * @param idUsuario ID do {@link Usuario} que realiza a assinatura. (FK) (UNIQUE)
+     * @param idPlano ID do {@link Plano} atual da assinatura. (FK)
      * @param statusAssinatura Qual o status atual da assinatura.
      * @param renovacaoAutomatica A assinatura debita ou não automaticamente da conta.
      * @param dataInicio Data que a assinatura foi iniciada ou a última vez que foi paga.
@@ -99,24 +99,23 @@ public class Assinatura {
     }
 
     /**
-     * Construtor para o {@link dao.AssinaturaDAO#insert(Assinatura)}
+     * Construtor para o {@link dao.AssinaturaDAO#update(Assinatura)}
      *
-     * @param id Identificador único da assinatura (PK).
-     * @param idPlano Identificador único do {@link Plano} (FK) atual da assinatura.
+     * @param idPlano ID do {@link Plano} atual da assinatura. (FK)
      * @param statusAssinatura Qual o status atual da assinatura.
      * @param renovacaoAutomatica A assinatura debita ou não automaticamente da conta.
      * @param dataInicio Data que a assinatura foi iniciada ou a última vez que foi paga.
      * @param validade Data de vencimento da assinatura.
-     * @param daoUpdate Parâmetro passado somente para indicar o construtor
+     * @param id ID da assinatura registrado no banco de dados.
      */
-    public Assinatura(long id, long idPlano, String statusAssinatura, boolean renovacaoAutomatica, LocalDate dataInicio, LocalDate validade, boolean daoUpdate) {
+    public Assinatura(long idPlano, String statusAssinatura, boolean renovacaoAutomatica, LocalDate dataInicio, LocalDate validade, long id) {
 
-        this.id = id;
         this.idPlano = idPlano;
         this.statusAssinatura = statusAssinatura;
         this.renovacaoAutomatica = renovacaoAutomatica;
         this.dataInicio = dataInicio;
         this.validade = validade;
+        this.id = id;
 
     }
 

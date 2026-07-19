@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a entidade usuário projeto
+ * Representa a entidade usuario_projeto
  *
  * <p>Observação: Os atributos que não possuem informações sobre sua mutabilidade são <b>mutáveis</b></p>
  *
@@ -13,25 +13,25 @@ public class UsuarioProjeto {
     //Atributos
 
     /**
-     * Identificador único do usuário projeto.
-     * Imutável por ser um identificador (PK).
+     * ID do usuario_projeto registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Identificador único do {@link Projeto} (FK) ao qual o usuário projeto está envolvido.
+     * ID do {@link Projeto} que usuario_projeto faz parte. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idProjeto;
 
     /**
-     * Identificador único do {@link Usuario} (FK) que é o usuário projeto.
+     * ID do {@link Usuario} que é o usuario_projeto. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
 
     /**
-     * Indica se o usuário projeto é o dono do projeto.
+     * Indica se o usuario_projeto é o dono do projeto.
      * Imutável por conta da estruturação do sistema.
      */
     private boolean donoDoProjeto;
@@ -41,10 +41,10 @@ public class UsuarioProjeto {
     /**
      * Construtor completo da classe UsuarioProjeto
      *
-     * @param id Identificador único do usuário projeto (PK).
-     * @param idProjeto Identificador único do {@link Projeto} (FK) ao qual o usuário projeto está envolvido.
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o usuário projeto.
-     * @param donoDoProjeto Indica se o usuário projeto é o dono do projeto.
+     * @param id ID do usuario_projeto registrado no banco de dados.
+     * @param idProjeto ID do {@link Projeto} que usuario_projeto faz parte. (FK)
+     * @param idUsuario ID do {@link Usuario} que é o usuario_projeto. (FK)
+     * @param donoDoProjeto Indica se o usuario_projeto é o dono do projeto.
      */
     public UsuarioProjeto(long id, long idProjeto, long idUsuario, boolean donoDoProjeto) {
 
@@ -58,9 +58,9 @@ public class UsuarioProjeto {
     /**
      * Construtor para o {@link dao.UsuarioProjetoDAO#insert(UsuarioProjeto)}
      *
-     * @param idProjeto Identificador único do {@link Projeto} (FK) ao qual o usuário projeto está envolvido.
-     * @param idUsuario Identificador único do {@link Usuario} (FK) que é o usuário projeto.
-     * @param donoDoProjeto Indica se o usuário projeto é o dono do projeto.
+     * @param idProjeto ID do {@link Projeto} que usuario_projeto faz parte. (FK)
+     * @param idUsuario ID do {@link Usuario} que é o usuario_projeto. (FK)
+     * @param donoDoProjeto Indica se o usuario_projeto é o dono do projeto.
      */
     public UsuarioProjeto(long idProjeto, long idUsuario, boolean donoDoProjeto) {
 
@@ -105,7 +105,6 @@ public class UsuarioProjeto {
      * </p>
      * @return Uma String no formato <b>"Nome do atributo: Valor"</b>
      */
-
     @Override
     public String toString(){
 

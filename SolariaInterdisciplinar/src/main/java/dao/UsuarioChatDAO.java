@@ -17,13 +17,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade UsuarioChat
+ * Classe responsável pelo DAO da entidade usuario_chat
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class UsuarioChatDAO implements GenericDAO<UsuarioChat> {
 
+    @Override
     public int insert(UsuarioChat usuarioChat){
 
         Conexao conexao = new Conexao();
@@ -47,18 +48,18 @@ public class UsuarioChatDAO implements GenericDAO<UsuarioChat> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
-        } catch (Exception exception){
+        }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 
@@ -68,6 +69,7 @@ public class UsuarioChatDAO implements GenericDAO<UsuarioChat> {
 
     }
 
+    @Override
     public UsuarioChat readById(long id){
 
         Conexao conexao = new Conexao();
@@ -107,6 +109,7 @@ public class UsuarioChatDAO implements GenericDAO<UsuarioChat> {
 
     }
 
+    @Override
     public List<UsuarioChat> readAll(){
 
         Conexao conexao = new Conexao();
@@ -145,6 +148,12 @@ public class UsuarioChatDAO implements GenericDAO<UsuarioChat> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idUsuario é utilizado como parametro de filtragem.
+     *
+     * @param idUsuario Valor do atributo idUsuario dos {@link model.UsuarioChat} que se buscam.
+     * @return Todos os dados registrados de todos os UsuarioChat encontrados.
+     */
     public List<UsuarioChat> readAllByIdUsuario(long idUsuario){
 
         Conexao conexao = new Conexao();
@@ -185,6 +194,12 @@ public class UsuarioChatDAO implements GenericDAO<UsuarioChat> {
 
     }
 
+    /**
+     * Variação do {@link #readAll}. A diferença é que o atributo idChat é utilizado como parametro de filtragem.
+     *
+     * @param idChat Valor do atributo idChat dos {@link model.UsuarioChat} que se buscam.
+     * @return Todos os dados registrados de todos os UsuarioChat encontrados.
+     */
     public List<UsuarioChat> readAllByIdChat(long idChat){
 
         Conexao conexao = new Conexao();
@@ -225,12 +240,16 @@ public class UsuarioChatDAO implements GenericDAO<UsuarioChat> {
 
     }
 
+    @Override
     public int update(UsuarioChat usuarioChat){
 
+        //Essa entidade não suporta um método para o update.
+        //Porque os seus atributos são imutáveis.
         return 0;
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
@@ -254,14 +273,14 @@ public class UsuarioChatDAO implements GenericDAO<UsuarioChat> {
             //A verificação ocorre usando o código da exceção relacionada a esse fator.
             if ("23503".equals(codigoSQLException)){
 
-                return -1;
+                return ERRO_POR_CONSTRAINT_DE_DADOS_NO_BD;
             }
 
-            return -2;
+            return ERRO_NO_BD;
 
         }catch (Exception exception){
 
-            return -3;
+            return ERRO_GENERICO;
 
         } finally {
 

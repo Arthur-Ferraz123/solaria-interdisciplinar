@@ -13,13 +13,13 @@ public class Telefone {
     //Atributos
 
     /**
-     * Identificador único do telefone.
-     * Imutável por ser um identificador (PK).
+     * ID do telefone registrado no banco de dados.
+     * Imutável por ser a PK.
      */
     private long id;
 
     /**
-     * Número do telefone.
+     * Número do telefone. (UNIQUE)
      * Deve seguir o padrão previsto em {@link }
      */
     private String telefone;
@@ -31,7 +31,7 @@ public class Telefone {
     private String tipo;
 
     /**
-     * Identificador único do {@link Usuario} (FK) dono do telefone.
+     * ID do {@link Usuario} que possuí o telefone. (FK)
      * Imutável por conta da estruturação do sistema.
      */
     private long idUsuario;
@@ -46,10 +46,10 @@ public class Telefone {
     /**
      * Construtor completo da classe Telefone
      *
-     * @param id Identificador único do telefone (PK).
-     * @param telefone Número do telefone.
+     * @param id ID do telefone registrado no banco de dados.
+     * @param telefone Número do telefone. (UNIQUE)
      * @param tipo Tipo do telefone.
-     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do telefone.
+     * @param idUsuario ID do {@link Usuario} que possuí o telefone. (FK)
      * @param principal O telefone é o principal do {@link Usuario}.
      */
     public Telefone(long id, String telefone, String tipo, long idUsuario, boolean principal) {
@@ -65,9 +65,9 @@ public class Telefone {
     /**
      * Construtor para o {@link dao.TelefoneDAO#insert(Telefone)}
      *
-     * @param telefone Número do telefone.
+     * @param telefone Número do telefone. (UNIQUE)
      * @param tipo Tipo do telefone.
-     * @param idUsuario Identificador único do {@link Usuario} (FK) dono do telefone.
+     * @param idUsuario ID do {@link Usuario} que possuí o telefone. (FK)
      * @param principal O telefone é o principal do {@link Usuario}.
      */
     public Telefone(String telefone, String tipo, long idUsuario, boolean principal) {
@@ -82,15 +82,17 @@ public class Telefone {
     /**
      * Construtor para o {@link dao.TelefoneDAO#update(Telefone)}
      *
-     * @param telefone Número do telefone.
+     * @param telefone Número do telefone. (UNIQUE)
      * @param tipo Tipo do telefone.
      * @param principal O telefone é o principal do {@link Usuario}.
+     * @param id ID do telefone registrado no banco de dados.
      */
-    public Telefone(String telefone, String tipo, boolean principal) {
+    public Telefone(String telefone, String tipo, boolean principal, long id) {
 
         this.telefone = telefone;
         this.tipo = tipo;
         this.principal = principal;
+        this.id = id;
 
     }
 

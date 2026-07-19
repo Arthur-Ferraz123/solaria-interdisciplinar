@@ -21,13 +21,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo DAO da entidade Certificacao
+ * Classe responsável pelo DAO da entidade certificacao
  *
  * @author Eduardo Vicente Bisneto
  * @version 1.0.0
  */
 public class CertificacaoDAO implements GenericDAO<Certificacao> {
 
+    @Override
     public int insert(Certificacao certificacao){
 
         Conexao conexao = new Conexao();
@@ -76,6 +77,7 @@ public class CertificacaoDAO implements GenericDAO<Certificacao> {
 
     }
 
+    @Override
     public Certificacao readById(long id){
 
         Conexao conexao = new Conexao();
@@ -119,6 +121,7 @@ public class CertificacaoDAO implements GenericDAO<Certificacao> {
 
     }
 
+    @Override
     public List<Certificacao> readAll(){
 
         Conexao conexao = new Conexao();
@@ -162,9 +165,10 @@ public class CertificacaoDAO implements GenericDAO<Certificacao> {
     }
 
     /**
-     * Variação do método {@link #readAll()}. A diferença é que o idFornecedor é usado como parametro de busca.
-     * @param idFornecedor idFornecedor das {@link Certificacao} buscadas.
-     * @return Uma lista com todos os registro da tabela que possuem o mesmo idFornecedor que o parametro.
+     * Variação do {@link #readAll}. A diferença é que o atributo idFornecedor é utilizado como parametro de filtragem.
+     *
+     * @param idFornecedor Valor do atributo idPlano das {@link model.Certificacao} que se buscam.
+     * @return Todos os dados registrados de todas as Certificacao encontradas.
      */
     public List<Certificacao> readAllByIdFornecedor(long idFornecedor){
 
@@ -210,6 +214,7 @@ public class CertificacaoDAO implements GenericDAO<Certificacao> {
 
     }
 
+    @Override
     public int update(Certificacao certificacao){
 
         Conexao conexao = new Conexao();
@@ -237,9 +242,9 @@ public class CertificacaoDAO implements GenericDAO<Certificacao> {
             //Verificação se a exceção foi causada por um dado inválido.
             //A verificação ocorre usando o código das exceções relacionadas a esse fator.
             if ("23502".equals(codigoSQLException) ||
-                    "23503".equals(codigoSQLException) ||
-                    "23505".equals(codigoSQLException) ||
-                    "23514".equals(codigoSQLException) ){
+                "23503".equals(codigoSQLException) ||
+                "23505".equals(codigoSQLException) ||
+                "23514".equals(codigoSQLException) ){
 
                 return -1;
             }
@@ -258,6 +263,7 @@ public class CertificacaoDAO implements GenericDAO<Certificacao> {
 
     }
 
+    @Override
     public int deleteById(long id){
 
         Conexao conexao = new Conexao();
