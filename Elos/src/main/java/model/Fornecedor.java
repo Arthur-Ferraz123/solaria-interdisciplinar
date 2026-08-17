@@ -1,63 +1,98 @@
+package model;
+
 public class Fornecedor {
 
     //Atributos
 
-    //PK da tabela
-    private int id;
+    private long id;
 
-    //FK originada da tabela usuario
-    private int idUsuario;
+    private long idUsuario;
 
-    //Verificar esse tipo fornecedor
+    private String tipoUsuario;
+
     private String tipoFornecedor;
 
     private String cnpj;
 
+    private String razaoSocial;
+
     //Construtor
-    public Fornecedor(int id, int idUsuario, String tipoFornecedor, String cnpj) {
+
+    public Fornecedor(long id, long idUsuario, String tipoUsuario, String tipoFornecedor, String cnpj, String razaoSocial) {
+
         this.id = id;
         this.idUsuario = idUsuario;
+        this.tipoUsuario = tipoUsuario;
         this.tipoFornecedor = tipoFornecedor;
         this.cnpj = cnpj;
+        this.razaoSocial = razaoSocial;
+
     }
 
     //Getters e Setters
 
-    //OBS: O atributo id não tem setter, pois ele é a pk da tabela
-    public int getId() {
+    public long getId() {
+
         return id;
+
     }
 
-    //OBS: O atributo idUsuario não tem setter, pois ele é a fk da tabela e nesse caso ela acaba sendo inválida
-    public int getIdUsuario() {
+    public long getIdUsuario() {
+
         return idUsuario;
+
+    }
+
+    public String getTipoUsuario() {
+
+        return tipoUsuario;
+
     }
 
     public String getTipoFornecedor() {
+
         return tipoFornecedor;
+
     }
 
     public void setTipoFornecedor(String tipoFornecedor) {
+
         this.tipoFornecedor = tipoFornecedor;
+
     }
 
-    //Verificar se o cnpj vai possuir setter
     public String getCnpj() {
+
         return cnpj;
+
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public String getRazaoSocial() {
+
+        return razaoSocial;
+
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+
+        this.razaoSocial = razaoSocial;
+
     }
 
     //Método toString
+
     @Override
     public String toString(){
+
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
+                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
                 "Tipo do fornecedor: "+ this.tipoFornecedor + "\n" +
                 "CNPJ: "+ this.cnpj + "\n" +
+                "Razão social: " + this.razaoSocial + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
+
     }
+
 }
