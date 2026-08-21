@@ -28,8 +28,6 @@ public interface GenericDAO<T> {
     //Método para realizar a validação de exceções dos métodos de insert, update e delete
     default public int descobrirErro(Exception exception){
 
-        Animal cachorro = new Cachorro();
-
         if (exception instanceof SQLException){
 
             SQLException sqlException = (SQLException) exception;

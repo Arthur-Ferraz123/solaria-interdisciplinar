@@ -21,17 +21,14 @@ public class Conexao {
             final String USUARIO = validarEnvs(VARIAVEIS_DE_AMBIENTE.get("DB_USUARIO"), "DB_USUARIO");
             final String SENHA = validarEnvs(VARIAVEIS_DE_AMBIENTE.get("DB_SENHA"), "DB_SENHA");
 
-            //Carrega o driver do PostgreSQL
             Class.forName("org.postgresql.Driver");
 
-            //Criação da conexão JDBC
             connection = DriverManager.getConnection(URL, USUARIO, SENHA);
 
             System.out.println("conectou!");
 
             return connection;
 
-            //Para casos de erros no .env
         } catch (NullPointerException | IllegalArgumentException e) {
 
             e.printStackTrace();

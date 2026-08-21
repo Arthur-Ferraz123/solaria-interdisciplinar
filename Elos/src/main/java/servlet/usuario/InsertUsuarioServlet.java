@@ -1,6 +1,5 @@
-package servlet.UsuarioServlet;
+package servlet.usuario;
 
-import com.sun.net.httpserver.Request;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +16,7 @@ public class InsertUsuarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
             throws ServletException, IOException {
 
-        RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher("/WEB-INF/view/Usuario/insertUsuario.jsp");
+        RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher("/WEB-INF/view/Usuario/crudUsuario.jsp");
 
         requestDispatcher.forward(httpServletRequest, httpServletResponse);
 
@@ -42,8 +41,7 @@ public class InsertUsuarioServlet extends HttpServlet {
 
 
 
-
-
+        httpServletResponse.sendRedirect("/WEB-INF/view/Usuario/crudUsuario.jsp");
 
     }
 
