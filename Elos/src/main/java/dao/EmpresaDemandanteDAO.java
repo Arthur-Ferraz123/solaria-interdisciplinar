@@ -14,6 +14,8 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+
 public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
 
@@ -39,7 +41,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
         } catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -78,7 +80,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
             }
 
-            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null,
+            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,
                                         null, false);
 
         } catch (Exception exception){
@@ -121,7 +123,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
             }
 
-            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null,
+            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,
                     null, false);
 
         } catch (Exception exception){
@@ -164,7 +166,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
             }
 
-            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null,
+            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,
                     null, false);
 
         } catch (Exception exception){
@@ -211,7 +213,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
         } catch (Exception exception){
 
-            return null;
+            return empresaDemandantes;
 
         } finally {
 
@@ -240,7 +242,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
         } catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -268,7 +270,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
         } catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -296,7 +298,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
         } catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -324,7 +326,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -351,7 +353,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -378,7 +380,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 

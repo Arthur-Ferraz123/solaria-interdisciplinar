@@ -3,21 +3,19 @@ package model;
 public class Fornecedor {
 
     //Atributos
+    private final long id;
 
-    private long id;
+    private final long idUsuario;
 
-    private long idUsuario;
-
-    private String tipoUsuario;
+    private final String tipoUsuario;
 
     private String tipoFornecedor;
 
-    private String cnpj;
+    private final String cnpj;
 
     private String razaoSocial;
 
     //Construtor
-
     public Fornecedor(long id, long idUsuario, String tipoUsuario, String tipoFornecedor, String cnpj, String razaoSocial) {
 
         this.id = id;
@@ -30,7 +28,6 @@ public class Fornecedor {
     }
 
     //Getters e Setters
-
     public long getId() {
 
         return id;
@@ -80,7 +77,6 @@ public class Fornecedor {
     }
 
     //Método toString
-
     @Override
     public String toString(){
 

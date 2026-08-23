@@ -3,10 +3,9 @@ package model;
 public class Endereco {
 
     //Atributos
+    private final long id;
 
-    private long id;
-
-    private long idUsuario;
+    private final long idUsuario;
 
     private String estado;
 
@@ -23,7 +22,6 @@ public class Endereco {
     private String complemento;
 
     //Construtor
-
     public Endereco(long id, long idUsuario, String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento) {
 
         this.id = id;
@@ -39,7 +37,6 @@ public class Endereco {
     }
 
     //Getters e Setters
-
     public long getId() {
 
         return id;
@@ -137,7 +134,6 @@ public class Endereco {
     }
 
     //Método toString
-
     @Override
     public String toString(){
 

@@ -1,49 +1,60 @@
 package servlet.usuario;
 
+import enums.GenericEnum;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.UsuarioService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-@WebServlet("/usuario-insert")
+import static enums.ErrosGerais.ERRO_GENERICO;
+
+@WebServlet("/crudUsuario-insert")
 public class InsertUsuarioServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher("/WEB-INF/view/Usuario/crudUsuario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
 
-        requestDispatcher.forward(httpServletRequest, httpServletResponse);
+        dispatcher.forward(request, response);
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
 
+        try{
 
-        String tipoUsuario = httpServletRequest.getParameter("tipoUsuario");
-        String email = httpServletRequest.getParameter("email");
-        String senha = httpServletRequest.getParameter("senha");
-        String nome = httpServletRequest.getParameter("nome");
-        String raioProcuraKm = httpServletRequest.getParameter("raioProcuraKm");
+            String tipoUsuario = request.getParameter("tipoUsuario");
+            String email = request.getParameter("email");
+            String senha = request.getParameter("senha");
+            String nome = request.getParameter("nome");
+            String raioProcuraKm = request.getParameter("raioProcuraKm");
 
+            ArrayList<GenericEnum> mensagens = UsuarioService.realizarInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
 
-        String mensagem = null;
+            request.setAttribute("mensagens", mensagens);
+            response.sendRedirect(request.getContextPath() + "/crudUsuario");
 
+        } catch (Exception exception){
 
+            ArrayList<GenericEnum> mensagens = new ArrayList<>();
 
+            mensagens.add(ERRO_GENERICO);
 
+            request.setAttribute("mensagens", mensagens);
+            response.sendRedirect(request.getContextPath() + "/crudUsuario");
 
-
-        httpServletResponse.sendRedirect("/WEB-INF/view/Usuario/crudUsuario.jsp");
+        }
 
     }
-
 
 }

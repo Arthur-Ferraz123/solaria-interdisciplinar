@@ -14,6 +14,8 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+
 public class ProfissionalDAO implements GenericDAO<Profissional> {
 
     @Override
@@ -38,7 +40,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -77,7 +79,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             }
 
-            return new Profissional(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null, null, REGISTRO_NAO_ENCONTRADO);
+            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
 
         } catch (Exception exception){
 
@@ -119,7 +121,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             }
 
-            return new Profissional(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null, null, REGISTRO_NAO_ENCONTRADO);
+            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
 
         } catch (Exception exception){
 
@@ -161,7 +163,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             }
 
-            return new Profissional(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null, null, REGISTRO_NAO_ENCONTRADO);
+            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
 
         } catch (Exception exception){
 
@@ -180,7 +182,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Profissional> profissionals = new ArrayList<>();
+        List<Profissional> profissionais = new ArrayList<>();
 
         try {
 
@@ -192,7 +194,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             while (resultSet.next()){
 
-                profissionals.add(new Profissional(
+                profissionais.add(new Profissional(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
                         resultSet.getString("tipo_usuario"),
@@ -203,11 +205,11 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             }
 
-            return profissionals;
+            return profissionais;
 
         } catch (Exception exception){
 
-            return null;
+            return profissionais;
 
         } finally {
 
@@ -221,7 +223,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Profissional> profissionals = new ArrayList<>();
+        List<Profissional> profissionais = new ArrayList<>();
 
         try {
 
@@ -235,7 +237,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             while (resultSet.next()){
 
-                profissionals.add(new Profissional(
+                profissionais.add(new Profissional(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
                         resultSet.getString("tipo_usuario"),
@@ -246,11 +248,11 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             }
 
-            return profissionals;
+            return profissionais;
 
         } catch (Exception exception){
 
-            return null;
+            return profissionais;
 
         } finally {
 
@@ -280,7 +282,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -309,7 +311,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -338,7 +340,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -366,7 +368,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -393,7 +395,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -420,7 +422,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 

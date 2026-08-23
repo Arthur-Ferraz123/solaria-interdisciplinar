@@ -14,6 +14,8 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+
 public class TelefoneDAO implements GenericDAO<Telefone> {
 
     @Override
@@ -37,7 +39,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
         }catch(Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -75,7 +77,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
             }
 
-            return new Telefone(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null, false);
+            return new Telefone(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, false);
 
         } catch (Exception exception){
 
@@ -116,7 +118,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
             }
 
-            return new Telefone(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null, false);
+            return new Telefone(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, false);
 
         } catch (Exception exception){
 
@@ -161,7 +163,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
         } catch (Exception exception){
 
-            return null;
+            return telefones;
 
         } finally {
 
@@ -203,7 +205,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
         } catch (Exception exception){
 
-            return null;
+            return telefones;
 
         } finally {
 
@@ -234,7 +236,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -263,7 +265,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -291,7 +293,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
         } catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -318,7 +320,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
         } catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 

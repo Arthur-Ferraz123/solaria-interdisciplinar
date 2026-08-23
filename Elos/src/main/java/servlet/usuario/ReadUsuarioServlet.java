@@ -9,20 +9,23 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "UsuarioServlet", value = "/crudUsuario")
+@WebServlet("/crudUsuario")
 public class ReadUsuarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException{
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/view/Usuario/crudUsuario.jsp");
-        requestDispatcher.forward(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
+        dispatcher.forward(request, response);
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+
     }
+
 }

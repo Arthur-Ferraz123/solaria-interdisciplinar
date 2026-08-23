@@ -3,21 +3,19 @@ package model;
 public class EmpresaDemandante {
 
     //Atributos
+    private final long id;
 
-    private long id;
+    private final long idUsuario;
 
-    private long idUsuario;
+    private final String tipoUsuario;
 
-    private String tipoUsuario;
-
-    private String cnpj;
+    private final String cnpj;
 
     private String razaoSocial;
 
     private boolean ehMandante;
 
     //Construtor
-
     public EmpresaDemandante(long id, long idUsuario, String tipoUsuario, String cnpj, String razaoSocial, boolean ehMandante) {
 
         this.id = id;
@@ -30,7 +28,6 @@ public class EmpresaDemandante {
     }
 
     //Getters e Setters
-
     public long getId() {
 
         return id;
@@ -80,7 +77,6 @@ public class EmpresaDemandante {
     }
 
     //Método toString
-
     @Override
     public String toString(){
 

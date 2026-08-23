@@ -14,6 +14,8 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+
 public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
     @Override
@@ -38,7 +40,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -77,7 +79,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
             }
 
-            return new Fornecedor(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null, null, null);
+            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, null);
 
         } catch (Exception exception){
 
@@ -119,7 +121,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
             }
 
-            return new Fornecedor(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null, null, null);
+            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, null);
 
         } catch (Exception exception){
 
@@ -161,7 +163,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
             }
 
-            return new Fornecedor(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null, null, null);
+            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, null);
 
 
         } catch (Exception exception){
@@ -208,7 +210,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         } catch (Exception exception){
 
-            return null;
+            return fornecedores;
 
         } finally {
 
@@ -251,7 +253,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         } catch (Exception exception){
 
-            return null;
+            return fornecedores;
 
         } finally {
 
@@ -281,7 +283,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -310,7 +312,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -339,7 +341,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -367,7 +369,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -394,7 +396,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -421,7 +423,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 

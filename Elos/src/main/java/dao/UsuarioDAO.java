@@ -14,6 +14,8 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+
 public class UsuarioDAO implements GenericDAO<Usuario> {
 
     @Override
@@ -39,7 +41,38 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    public int insertRaioProcuraKmNull(Usuario usuario){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try{
+
+            String insert = "insert into usuario(email, senha, nome, tipo_usuario) values(?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(insert);
+
+            preparedStatement.setString(1, usuario.getEmail() );
+            preparedStatement.setString(2, usuario.getSenha());
+            preparedStatement.setString(3, usuario.getNome());
+            preparedStatement.setString(4, usuario.getTipoUsuario());
+
+            return preparedStatement.executeUpdate();
+
+
+        }catch (Exception exception){
+
+            return classificarErro(exception);
 
         } finally {
 
@@ -78,7 +111,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
             }
 
-            return new Usuario(REGISTRO_NAO_ENCONTRADO, null, null, null, null, REGISTRO_NAO_ENCONTRADO);
+            return new Usuario(REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
 
         } catch (Exception exception){
 
@@ -120,7 +153,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
             }
 
-            return new Usuario(REGISTRO_NAO_ENCONTRADO, null, null, null, null, REGISTRO_NAO_ENCONTRADO);
+            return new Usuario(REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
 
         } catch (Exception exception){
 
@@ -176,7 +209,50 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
-    public List<Usuario> readAllbyTipoUsuario(String tipoUsuario){
+    public List<Usuario> readAllOrderBy(String ordenacao){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+
+            String read = "select * from usuario order by ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(read);
+
+            preparedStatement.setString(1, ordenacao);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                usuarios.add(new Usuario(
+                        resultSet.getLong("id"),
+                        resultSet.getString("email"),
+                        resultSet.getString("senha"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("tipo_usuario"),
+                        resultSet.getDouble("raio_procura_km")
+                ));
+
+            }
+
+            return usuarios;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    public List<Usuario> readAllByTipoUsuario(String tipoUsuario){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
@@ -189,6 +265,141 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
             PreparedStatement preparedStatement = connection.prepareStatement(read);
 
             preparedStatement.setString(1, tipoUsuario);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                usuarios.add(new Usuario(
+                        resultSet.getLong("id"),
+                        resultSet.getString("email"),
+                        resultSet.getString("senha"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("tipo_usuario"),
+                        resultSet.getDouble("raio_procura_km")
+                ));
+
+            }
+
+            return usuarios;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    public List<Usuario> readAllByTipoUsuarioOrderBy(String tipoUsuario, String ordenacao){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+
+            String read = "select * from usuario where tipo_usuario = ? order by ?";
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(read);
+
+            preparedStatement.setString(1, tipoUsuario);
+
+            preparedStatement.setString(2, ordenacao);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                usuarios.add(new Usuario(
+                        resultSet.getLong("id"),
+                        resultSet.getString("email"),
+                        resultSet.getString("senha"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("tipo_usuario"),
+                        resultSet.getDouble("raio_procura_km")
+                ));
+
+            }
+
+            return usuarios;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    public List<Usuario> readAllWhereRaioProcuraKmEntre(double raioProcuraKmBase, double raioProcuraKmTeto){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+
+            String read = "select * from usuario where raio_procura_km between ? and ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(read);
+
+            preparedStatement.setDouble(1, raioProcuraKmBase);
+            preparedStatement.setDouble(2, raioProcuraKmTeto);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                usuarios.add(new Usuario(
+                        resultSet.getLong("id"),
+                        resultSet.getString("email"),
+                        resultSet.getString("senha"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("tipo_usuario"),
+                        resultSet.getDouble("raio_procura_km")
+                ));
+
+            }
+
+            return usuarios;
+
+        } catch (Exception exception){
+
+            return null;
+
+        } finally {
+
+            conexao.desconectar();
+
+        }
+
+    }
+
+    public List<Usuario> readAllWhereRaioProcuraKmEntreOrderBy(double raioProcuraKmBase, double raioProcuraKmTeto, String ordenacao){
+
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+
+            String read = "select * from usuario where raio_procura_km between ? and ? order by ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(read);
+
+            preparedStatement.setDouble(1, raioProcuraKmBase);
+            preparedStatement.setDouble(2, raioProcuraKmTeto);
+            preparedStatement.setString(3, ordenacao);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -241,7 +452,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -271,7 +482,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -299,7 +510,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -326,7 +537,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 

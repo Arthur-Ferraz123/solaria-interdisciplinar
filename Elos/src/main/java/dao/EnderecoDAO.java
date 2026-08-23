@@ -14,6 +14,8 @@ import java.util.List;
 
 import java.util.ArrayList;
 
+import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+
 public class EnderecoDAO implements GenericDAO<Endereco> {
 
     @Override
@@ -41,7 +43,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -83,7 +85,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
             }
 
-            return new Endereco(REGISTRO_NAO_ENCONTRADO, REGISTRO_NAO_ENCONTRADO, null, null,
+            return new Endereco(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,
                           null, null, null, null, null);
 
         } catch (Exception exception){
@@ -133,7 +135,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         } catch (Exception exception){
 
-            return null;
+            return enderecos;
 
         } finally {
 
@@ -179,7 +181,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         } catch (Exception exception){
 
-            return null;
+            return enderecos;
 
         } finally {
 
@@ -225,7 +227,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         } catch (Exception exception){
 
-            return null;
+            return enderecos;
 
         } finally {
 
@@ -271,7 +273,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         } catch (Exception exception){
 
-            return null;
+            return enderecos;
 
         } finally {
 
@@ -317,7 +319,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         } catch (Exception exception){
 
-            return null;
+            return enderecos;
 
         } finally {
 
@@ -363,7 +365,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         } catch (Exception exception){
 
-            return null;
+            return enderecos;
 
         } finally {
 
@@ -398,7 +400,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
@@ -426,7 +428,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
         }catch (Exception exception){
 
-            return descobrirErro(exception);
+            return classificarErro(exception);
 
         } finally {
 
