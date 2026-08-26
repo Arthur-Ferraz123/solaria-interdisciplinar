@@ -2,6 +2,7 @@ package dao;
 
 import conexao.Conexao;
 
+import enums.ErrosDoSQL;
 import model.Telefone;
 
 import java.sql.Connection;
@@ -10,10 +11,14 @@ import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import java.util.ArrayList;
 
+import static enums.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
+import static enums.ErrosGerais.ERRO_GENERICO_NO_BD;
+import static enums.ErrosGerais.ERRO_GENERICO;
 import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
 
 public class TelefoneDAO implements GenericDAO<Telefone> {
@@ -37,9 +42,13 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
             return preparedStatement.executeUpdate();
 
-        }catch(Exception exception){
+        }catch (SQLException sqlException){
 
-            return classificarErro(exception);
+            return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
+
+        }catch (Exception exception){
+
+            return ERRO_GENERICO.getCodigo();
 
         } finally {
 
@@ -234,9 +243,13 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
             return preparedStatement.executeUpdate();
 
+        }catch (SQLException sqlException){
+
+            return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
+
         }catch (Exception exception){
 
-            return classificarErro(exception);
+            return ERRO_GENERICO.getCodigo();
 
         } finally {
 
@@ -263,9 +276,13 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
             return preparedStatement.executeUpdate();
 
+        }catch (SQLException sqlException){
+
+            return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
+
         }catch (Exception exception){
 
-            return classificarErro(exception);
+            return ERRO_GENERICO.getCodigo();
 
         } finally {
 
@@ -291,9 +308,13 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
             return preparedStatement.executeUpdate();
 
-        } catch (Exception exception){
+        }catch (SQLException sqlException){
 
-            return classificarErro(exception);
+            return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
+
+        }catch (Exception exception){
+
+            return ERRO_GENERICO.getCodigo();
 
         } finally {
 
@@ -318,9 +339,13 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
             return preparedStatement.executeUpdate();
 
-        } catch (Exception exception){
+        }catch (SQLException sqlException){
 
-            return classificarErro(exception);
+            return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
+
+        }catch (Exception exception){
+
+            return ERRO_GENERICO.getCodigo();
 
         } finally {
 

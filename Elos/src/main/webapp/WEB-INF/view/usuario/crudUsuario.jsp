@@ -12,6 +12,28 @@
         color: white;
     }
 
+    /* Alinha todos os elementos em uma única linha horizontal */
+    .formulario-linha {
+        display: flex;
+        flex-wrap: wrap; /* Permite quebrar a linha se a tela for muito pequena */
+        gap: 15px;       /* Cria um espaçamento igual entre os campos */
+        align-items: flex-end; /* Alinha os fundos dos campos na mesma altura */
+    }
+
+    /* Organiza o rótulo acima de cada respectivo campo */
+    .campo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Estilização básica para os inputs e selects ficarem padronizados */
+    .campo input, .campo select {
+        padding: 6px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
 </style>
 
 
@@ -29,6 +51,53 @@
 
     </tr>
 </table>
+
+<div class="formulario-linha">
+    <form action="${pageContext.request.contextPath}/crudUsuario" method="post">
+
+    <!-- Campo 1: Seleção (Existente) -->
+    <div class="campo">
+        <label for="clausulaWhereNome">clausulaWhereNome:</label>
+        <select id="clausulaWhereNome" name="clausulaWhereNome">
+            <option value="nenhum">Nenhuma</option>
+            <option value="ID">ID</option>
+            <option value="email">email</option>
+            <option value="tipo_usuario">Tipo usuário</option>
+            <option value="raio_procura_km">Raio de procura em km</option>
+        </select>
+    </div>
+
+    <!-- Campo 2: Texto (Novo) -->
+    <div class="campo">
+        <label for="clausulaWhereValor">clausulaWhereValor:</label>
+        <input type="text" id="clausulaWhereValor" name="clausulaWhereValor" placeholder="Digite seu nome">
+    </div>
+
+    <div class="campo">
+        <label for="clausulaWhereValor2">clausulaWhereValor2:</label>
+        <input type="text" id="clausulaWhereValor2" name="clausulaWhereValor2">
+    </div>
+
+    <!-- Campo 3: Seleção (Novo) -->
+    <div class="campo">
+        <label for="orderBy">orderBy:</label>
+        <select id="orderBy" name="orderBy">
+            <option value="nenhum">Nenhuma</option>
+            <option value="ID">ID</option>
+            <option value="email">email</option>
+            <option value="tipo_usuario">Tipo usuário</option>
+            <option value="raio_procura_km">Raio de procura em km</option>
+        </select>
+    </div>
+
+
+        <div style="margin-top: 10px;">
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+</div>
+
+
 
 <br>
 <br>
@@ -54,7 +123,6 @@
             </tr>
         </table>
 
-        <!-- Movidos para fora da tabela para manter o HTML válido -->
         <div style="margin-top: 10px;">
             <button type="submit">Enviar</button>
             <button type="button" id="close">Sair</button>

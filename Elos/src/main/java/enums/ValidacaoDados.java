@@ -19,7 +19,10 @@ public enum ValidacaoDados implements GenericEnum{
     EMAIL_INVALIDO(12, "O email inserido é inválido"),
     EMAIL_VAZIO(13, "Nenhum email foi inserido"),
     EMAIL_TAMANHO_INVALIDO(14, "O email inserido possui um tamanho maior que o permitido, insira um email com até 150 caracteres"),
-    IMPOSSIVEL_VALIDAR_NOME(15, "Não foi possível validar o nome pois o tipo de usuário inserido é inválido");
+    IMPOSSIVEL_VALIDAR_NOME(15, "Não foi possível validar o nome pois o tipo de usuário inserido é inválido"),
+    ID_INVALIDO(16, "O ID inserido é inválido"),
+    ORDER_BY_INVALIDO(17, "A clausula de ordenação é inválida"),
+    WHERE_INVALIDO(18, "O nome da clausula de filtragem é inválido");
 
     //Constantes do enum
     private final int codigo;

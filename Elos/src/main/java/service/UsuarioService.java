@@ -7,6 +7,7 @@ import enums.ValidacaoDados;
 import model.Usuario;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -15,7 +16,25 @@ import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
 
 public class UsuarioService {
 
-    //Métodos para realizar as ações dos servlets
+
+    //Métodos para realizar as ações do ReadUsuarioService
+    public static List<Usuario> realizarSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String orderBy, ArrayList<GenericEnum> errosEncontrados){
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+
+
+        return usuarios;
+
+    }
+
+    private static ArrayList<GenericEnum> validarUsuarioSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String orderBy, ArrayList<GenericEnum> errosEncontrados){
+
+
+
+    }
+
+    //Métodos para realizar as ações do InsertUsuarioServlet
     public static ArrayList<GenericEnum> realizarInsert(String email, String senha, String nome, String tipoUsuario, String raioProcuraKm){
 
         ArrayList<GenericEnum> mensagens = validarUsuarioInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
@@ -40,7 +59,7 @@ public class UsuarioService {
 
         ArrayList<GenericEnum> listaDeErros = new ArrayList<>();
 
-        ValidacaoDados validacaoEmail = validarEmail(email);
+        ValidacaoDados validacaoEmail = validarEmail(email, true);
         ValidacaoDados validacaoSenha = validarSenha(senha);
         ValidacaoDados validacaoTipoUsuario = validarTipoUsuario(tipoUsuario);
         ValidacaoDados validacaoNome = validarNome(nome, tipoUsuario);
@@ -60,7 +79,9 @@ public class UsuarioService {
 
         if(validacaoTipoUsuario != VALIDACAO_OK){
 
+
             listaDeErros.add(validacaoTipoUsuario);
+
             listaDeErros.add(IMPOSSIVEL_VALIDAR_NOME);
 
             validacaoNome = VALIDACAO_OK;
@@ -104,8 +125,64 @@ public class UsuarioService {
 
     }
 
-    //Métodos auxiliares do validarUsuarioInsert
-    private static ValidacaoDados validarEmail(String email) {
+    //
+
+    //Métodos auxiliares
+    private static ValidacaoDados validarWhere(String where){
+
+        if (where == null){return WHERE_INVALIDO;}
+
+        String whereTratada = where.trim().toLowerCase().replaceAll("á","a")
+                .replaceAll(" em","")
+                .replaceAll(" de","")
+                .replaceAll(" ", "_");
+
+        switch(where) {
+            case "id", "email", "nome", "tipo_usuario", "raio_procura_km", "nenhum":
+                return VALIDACAO_OK;
+            default:
+                return WHERE_INVALIDO;
+
+        }
+    }
+
+    private static ValidacaoDados validarOrderBy(String ordenacao){
+
+        if (ordenacao == null){return ORDER_BY_INVALIDO;}
+
+        String ordenacaoTratada = ordenacao.trim().toLowerCase().replaceAll("á","a")
+                                                                .replaceAll(" em","")
+                                                                .replaceAll(" de","")
+                                                                .replaceAll(" ", "_");
+
+        switch(ordenacaoTratada) {
+            case "id", "email", "nome", "tipo_usuario", "raio_procura_km", "nenhum":
+                return VALIDACAO_OK;
+            default:
+                return ORDER_BY_INVALIDO;
+
+        }
+    }
+
+    private static ValidacaoDados validarId(String id){
+
+        try {
+
+            String idTratado = id.trim();
+
+            long idConvertido = Long.parseLong(idTratado);
+
+            return VALIDACAO_OK;
+
+        } catch (NumberFormatException numberFormatException){
+
+            return ID_INVALIDO;
+
+        }
+
+    }
+
+    private static ValidacaoDados validarEmail(String email, boolean insert) {
 
         if (email == null) {
 
@@ -131,7 +208,7 @@ public class UsuarioService {
 
         ValidacaoDados emailNaoCadastrado = validarEmailNaoCadastrado(emailTratado);
 
-        if(emailNaoCadastrado != VALIDACAO_OK){
+        if(emailNaoCadastrado != VALIDACAO_OK && insert){
 
             return emailNaoCadastrado;
 

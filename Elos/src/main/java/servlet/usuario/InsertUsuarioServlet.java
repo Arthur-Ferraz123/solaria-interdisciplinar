@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import service.UsuarioService;
 
 import java.io.IOException;
@@ -41,8 +42,28 @@ public class InsertUsuarioServlet extends HttpServlet {
 
             ArrayList<GenericEnum> mensagens = UsuarioService.realizarInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
 
-            request.setAttribute("mensagens", mensagens);
-            response.sendRedirect(request.getContextPath() + "/crudUsuario");
+            if(!mensagens.isEmpty()){
+
+                request.setAttribute("mensagens", mensagens);
+
+                request.setAttribute("tipoUsuario", tipoUsuario);
+                request.setAttribute("email", email);
+                request.setAttribute("nome", nome);
+                request.setAttribute("raioProcuraKm", raioProcuraKm);
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
+                dispatcher.forward(request, response);
+
+
+            } else{
+
+                HttpSession session = request.getSession();
+
+                session.setAttribute("mensagens", mensagens);
+
+                response.sendRedirect(request.getContextPath() + "/crudUsuario");
+
+            }
 
         } catch (Exception exception){
 
@@ -51,7 +72,10 @@ public class InsertUsuarioServlet extends HttpServlet {
             mensagens.add(ERRO_GENERICO);
 
             request.setAttribute("mensagens", mensagens);
-            response.sendRedirect(request.getContextPath() + "/crudUsuario");
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
+            dispatcher.forward(request, response);
+
 
         }
 
