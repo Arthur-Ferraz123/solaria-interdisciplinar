@@ -18,13 +18,13 @@ public class Usuario {
 
     //Construtor
 
-    public Usuario(long id, String tipoUsuario, String email, String senha, String nome, double raioProcuraKm) {
+    public Usuario(long id, String email, String senha, String nome, String tipoUsuario, double raioProcuraKm) {
 
         this.id = id;
-        this.tipoUsuario = tipoUsuario;
         this.email = email;
         this.senha = senha;
         this.nome = nome;
+        this.tipoUsuario = tipoUsuario;
         this.raioProcuraKm = raioProcuraKm;
 
     }

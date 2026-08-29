@@ -264,7 +264,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
-    public List<Usuario> readAllOrderBy(String ordenacao){
+    public List<Usuario> readAllOrderBy(String ordenacao, String ordem){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
@@ -272,11 +272,9 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         try {
 
-            String read = "select * from usuario order by ?";
+            String read = "select * from usuario order by "+ordenacao+" "+ordem;
 
             PreparedStatement preparedStatement = connection.prepareStatement(read);
-
-            preparedStatement.setString(1, ordenacao);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -350,7 +348,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
-    public List<Usuario> readAllByTipoUsuarioOrderBy(String tipoUsuario, String ordenacao){
+    public List<Usuario> readAllByTipoUsuarioOrderBy(String tipoUsuario, String ordenacao, String ordem){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
@@ -358,14 +356,12 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         try {
 
-            String read = "select * from usuario where tipo_usuario = ? order by ?";
+            String read = "select * from usuario where tipo_usuario = ? order by "+ordenacao+" "+ordem;
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(read);
 
             preparedStatement.setString(1, tipoUsuario);
-
-            preparedStatement.setString(2, ordenacao);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -440,7 +436,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     }
 
-    public List<Usuario> readAllWhereRaioProcuraKmEntreOrderBy(double raioProcuraKmBase, double raioProcuraKmTeto, String ordenacao){
+    public List<Usuario> readAllWhereRaioProcuraKmEntreOrderBy(double raioProcuraKmBase, double raioProcuraKmTeto, String ordenacao, String ordem){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
@@ -448,13 +444,12 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
         try {
 
-            String read = "select * from usuario where raio_procura_km between ? and ? order by ?";
+            String read = "select * from usuario where raio_procura_km between ? and ? order by "+ordenacao+" "+ordem;
 
             PreparedStatement preparedStatement = connection.prepareStatement(read);
 
             preparedStatement.setDouble(1, raioProcuraKmBase);
             preparedStatement.setDouble(2, raioProcuraKmTeto);
-            preparedStatement.setString(3, ordenacao);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

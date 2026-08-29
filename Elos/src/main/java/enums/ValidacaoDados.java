@@ -5,8 +5,8 @@ public enum ValidacaoDados implements GenericEnum{
     //Variações do enum
     ATRIBUTO_NULL(-1, "Atributo null"),
     VALIDACAO_OK(0, "Dado válido"),
-    RAIO_PROCURA_KM_NAO_NUMERICO(1,"O raio de procura em km inserido não é um valor numérico"),
-    RAIO_PROCURA_KM_MENOR_OU_IGUAL_QUE_ZERO(2,"Insira um raio de procura em km maior que zero"),
+    RAIO_PROCURA_KM_NAO_NUMERICO(1,"Um ou mais raios de procura em km inseridos não são valores numéricos"),
+    RAIO_PROCURA_KM_MENOR_OU_IGUAL_QUE_ZERO(2,"Insira raios de procura em km maiores que zero"),
     TIPO_USUARIO_VAZIO(3,"Nenhum tipo de usuário foi inserido"),
     TIPO_USUARIO_INVALIDO(4, "O tipo de usuário que foi inserido é inválido"),
     NOME_VAZIO(5, "Nenhum nome foi inserido"),
@@ -22,7 +22,9 @@ public enum ValidacaoDados implements GenericEnum{
     IMPOSSIVEL_VALIDAR_NOME(15, "Não foi possível validar o nome pois o tipo de usuário inserido é inválido"),
     ID_INVALIDO(16, "O ID inserido é inválido"),
     ORDER_BY_INVALIDO(17, "A clausula de ordenação é inválida"),
-    WHERE_INVALIDO(18, "O nome da clausula de filtragem é inválido");
+    WHERE_INVALIDO(18, "O nome da clausula de filtragem é inválido"),
+    DADO_INVALIDO_GENERICO(19, "Algum dado inserido está inválido"),
+    ORDENACAO_INVALIDA(18, "A ordenação inserida é inválida");
 
     //Constantes do enum
     private final int codigo;

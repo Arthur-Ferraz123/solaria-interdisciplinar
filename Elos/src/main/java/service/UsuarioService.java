@@ -11,26 +11,277 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import static enums.ErrosGerais.*;
 import static enums.ValidacaoDados.*;
-import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
 
 public class UsuarioService {
 
+    public static Usuario exibirUsuarioUpdate(String id){
+
+        if(validarId(id).getCodigo() != VALIDACAO_OK.getCodigo()){
+
+            return null;
+
+        }
+
+        UsuarioDAO dao = new UsuarioDAO();
+
+        return dao.readById(Long.parseLong(id));
+
+    }
+
+    //Métodos para realizar as ações do DeleteUsuarioServlet
+    public static GenericEnum realizarDelete(String id){
+
+        ValidacaoDados erro = validarId(id);
+
+        if(erro.getCodigo() != VALIDACAO_OK.getCodigo()) {
+
+            return erro;
+
+        }
+
+        int resultado = deletarUsuario(id);
+
+        if(resultado > 0){
+
+            return null;
+
+        }
+
+        return descobrirErroGeral(resultado);
+
+
+    }
+
+    private static int deletarUsuario(String id){
+
+        long idConvertido = Long.parseLong(id.trim());
+
+        UsuarioDAO dao = new UsuarioDAO();
+
+        int resultado = dao.deleteById(idConvertido);
+
+        return resultado;
+
+
+    }
 
     //Métodos para realizar as ações do ReadUsuarioService
-    public static List<Usuario> realizarSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String orderBy, ArrayList<GenericEnum> errosEncontrados){
+    public static List<Usuario> realizarSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String orderBy, String ordenacao, ArrayList<GenericEnum> errosEncontrados){
 
         List<Usuario> usuarios = new ArrayList<>();
 
+        if(clausulaWhereNome == null && clausulaWhereValor == null && clausulaWhereValor2 == null && orderBy == null && ordenacao == null){
 
+            return lerUsuarios(null, null, null, null, null, true);
+
+        }
+
+        errosEncontrados.addAll(validarUsuarioSelect(clausulaWhereNome, clausulaWhereValor, clausulaWhereValor2, ordenacao, orderBy));
+
+        if (!errosEncontrados.isEmpty()){
+
+            return lerUsuarios(clausulaWhereNome, clausulaWhereValor, clausulaWhereValor2, orderBy, ordenacao,true);
+
+        }
+
+        usuarios = lerUsuarios(clausulaWhereNome, clausulaWhereValor, clausulaWhereValor2, orderBy, ordenacao,false);
+
+        if (usuarios.isEmpty()){
+
+            errosEncontrados.add(REGISTROS_NAO_ENCONTRADOS);
+
+        }
 
         return usuarios;
 
     }
 
-    private static ArrayList<GenericEnum> validarUsuarioSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String orderBy, ArrayList<GenericEnum> errosEncontrados){
+    private static List<Usuario> lerUsuarios(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String orderBy, String ordenacao, boolean erroEncontrado){
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+        UsuarioDAO dao = new UsuarioDAO();
+
+        if  (erroEncontrado){
+
+            return dao.readAll();
+
+        }
+
+        String clausulaWhereNomeTratado = clausulaWhereNome.trim().toLowerCase().replaceAll("á","a")
+                .replaceAll(" em","")
+                .replaceAll(" de","")
+                .replaceAll(" ", "_");
 
 
+        String orderByTratado = orderBy.trim().toLowerCase().replaceAll("á","a")
+                .replaceAll(" em","")
+                .replaceAll(" de","")
+                .replaceAll(" ", "_");
+
+
+        if (clausulaWhereNomeTratado.equalsIgnoreCase("id")){
+
+            long id = Long.parseLong(clausulaWhereValor.trim());
+
+            usuarios.add(dao.readById(id));
+
+            return usuarios;
+
+        }
+
+        if (clausulaWhereNomeTratado.equalsIgnoreCase("email")){
+
+            String emailTratado = clausulaWhereValor.toLowerCase().trim();
+
+            usuarios.add(dao.readByEmail(emailTratado));
+
+            return usuarios;
+
+        }
+
+        if (clausulaWhereNomeTratado.equalsIgnoreCase("nome")){
+
+            String nomeTratado = clausulaWhereValor.trim();
+
+            usuarios.add(dao.readByNome(nomeTratado));
+
+            return usuarios;
+
+        }
+
+        if (clausulaWhereNomeTratado.equalsIgnoreCase("nenhuma")){
+
+            usuarios = orderByTratado.equalsIgnoreCase("nenhuma") ? dao.readAll() : dao.readAllOrderBy(orderByTratado, ordenacao);
+
+            return usuarios;
+
+        }
+
+        if(clausulaWhereNomeTratado.equalsIgnoreCase("tipo_usuario")){
+
+            String tipoUsuarioTratado = clausulaWhereValor.toUpperCase();
+
+            usuarios = orderByTratado.equalsIgnoreCase("nenhuma") ?
+                            dao.readAllByTipoUsuario(tipoUsuarioTratado) :
+                            dao.readAllByTipoUsuarioOrderBy(tipoUsuarioTratado, orderByTratado, ordenacao);
+
+            return usuarios;
+
+
+        }
+
+        if(clausulaWhereNomeTratado.equalsIgnoreCase("raio_procura_km")){
+
+            double raioProcuraKmMin = Double.parseDouble(clausulaWhereValor.trim());
+            double raioProcuraKmMax = Double.parseDouble(clausulaWhereValor2.trim());
+
+            return orderByTratado.equalsIgnoreCase("nenhuma") ?
+                    dao.readAllWhereRaioProcuraKmEntre(raioProcuraKmMin, raioProcuraKmMax) :
+                    dao.readAllWhereRaioProcuraKmEntreOrderBy(raioProcuraKmMin, raioProcuraKmMax, orderBy, ordenacao);
+        }
+
+        return dao.readAll();
+
+    }
+
+    private static ArrayList<GenericEnum> validarUsuarioSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String ordenacao, String orderBy){
+
+        ArrayList<GenericEnum> erros = new ArrayList<>();
+
+        ValidacaoDados clausulaWhereNomeValidacao = validarWhere(clausulaWhereNome);
+
+        if (clausulaWhereNomeValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+
+            erros.add(clausulaWhereNomeValidacao);
+
+            return erros;
+
+        }
+
+
+        erros.addAll(validarClausulaWhereValor(clausulaWhereNome, clausulaWhereValor, clausulaWhereValor2));
+
+        ValidacaoDados orderByValidacao = validarOrderBy(orderBy);
+
+        if (orderByValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+
+            erros.add(orderByValidacao);
+
+        }
+
+        ValidacaoDados ordenacaoValidacao = validarSentidoOrdenacao(ordenacao);
+
+        if (ordenacaoValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+
+            erros.add(ordenacaoValidacao);
+
+        }
+
+
+
+        return erros;
+
+    }
+
+    private static ArrayList<GenericEnum> validarClausulaWhereValor(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2){
+
+        ArrayList<GenericEnum> dadosValidados = new ArrayList<>();
+
+        ValidacaoDados dadoValidado = null;
+        ValidacaoDados dadoValidado2 = null;
+
+        String clausulaWhereNomeTratado = clausulaWhereNome.trim().toLowerCase().replaceAll("á","a")
+                .replaceAll(" em","")
+                .replaceAll(" de","")
+                .replaceAll(" ", "_");
+
+        if (clausulaWhereNomeTratado.equalsIgnoreCase("id")){
+
+            dadoValidado = validarId(clausulaWhereValor);
+
+        } else if(clausulaWhereNomeTratado.equalsIgnoreCase("email")){
+
+            dadoValidado = validarEmail(clausulaWhereValor, false);
+
+        } else if(clausulaWhereNomeTratado.equalsIgnoreCase("nome")){
+
+            dadoValidado = validarNome(clausulaWhereValor, "PROFISSIONAL").getCodigo() == VALIDACAO_OK.getCodigo() ? validarNome(clausulaWhereValor, "PROFISSIONAL") : validarNome(clausulaWhereValor, "FORNECEDOR");
+
+        } else if(clausulaWhereNomeTratado.equalsIgnoreCase("tipo_usuario")){
+
+            dadoValidado = validarTipoUsuario(clausulaWhereValor);
+
+        } else if(clausulaWhereNomeTratado.equalsIgnoreCase("raio_procura_km")){
+
+            dadoValidado = validarRaioProcuraKm(clausulaWhereValor);
+            dadoValidado2 = validarRaioProcuraKm(clausulaWhereValor2);
+
+        } else if (clausulaWhereNomeTratado.equalsIgnoreCase("nenhuma")){
+
+            return dadosValidados;
+
+        }else {
+
+            dadoValidado = DADO_INVALIDO_GENERICO;
+
+        }
+
+        if (dadoValidado.getCodigo() != VALIDACAO_OK.getCodigo()){
+
+            dadosValidados.add(dadoValidado);
+
+        }
+
+        if (dadoValidado2 != null && dadoValidado2.getCodigo() != VALIDACAO_OK.getCodigo()){
+
+            dadosValidados.add(dadoValidado2);
+
+        }
+
+        return dadosValidados;
 
     }
 
@@ -121,13 +372,30 @@ public class UsuarioService {
         String tipoUsuarioTratado = tipoUsuario.toUpperCase();
         double raioProcuraKmTratado = raioProcuraKm == null ? ATRIBUTO_NULL.getCodigo() : Double.parseDouble(raioProcuraKm.trim());
 
-        return new Usuario(ATRIBUTO_NULL.getCodigo(), tipoUsuarioTratado, emailTratado, senhaTratada, nomeTratado, raioProcuraKmTratado);
+        return new Usuario(ATRIBUTO_NULL.getCodigo(), emailTratado, senhaTratada, nomeTratado, tipoUsuarioTratado, raioProcuraKmTratado);
 
     }
 
-    //
-
     //Métodos auxiliares
+    private static ValidacaoDados validarSentidoOrdenacao(String ordenacao){
+
+        if (ordenacao == null){return ORDENACAO_INVALIDA;}
+
+        String ordenacaoTratada = ordenacao.trim().toLowerCase().replaceAll("á","a")
+                .replaceAll(" em","")
+                .replaceAll(" de","")
+                .replaceAll(" ", "_");
+
+        switch(ordenacaoTratada) {
+            case "asc", "desc":
+                return VALIDACAO_OK;
+            default:
+                return ORDENACAO_INVALIDA;
+
+        }
+
+    }
+
     private static ValidacaoDados validarWhere(String where){
 
         if (where == null){return WHERE_INVALIDO;}
@@ -137,8 +405,8 @@ public class UsuarioService {
                 .replaceAll(" de","")
                 .replaceAll(" ", "_");
 
-        switch(where) {
-            case "id", "email", "nome", "tipo_usuario", "raio_procura_km", "nenhum":
+        switch(whereTratada) {
+            case "id", "email", "nome", "tipo_usuario", "raio_procura_km", "nenhuma":
                 return VALIDACAO_OK;
             default:
                 return WHERE_INVALIDO;
@@ -156,7 +424,7 @@ public class UsuarioService {
                                                                 .replaceAll(" ", "_");
 
         switch(ordenacaoTratada) {
-            case "id", "email", "nome", "tipo_usuario", "raio_procura_km", "nenhum":
+            case "id", "email", "nome", "tipo_usuario", "raio_procura_km", "nenhuma":
                 return VALIDACAO_OK;
             default:
                 return ORDER_BY_INVALIDO;
@@ -206,9 +474,15 @@ public class UsuarioService {
 
         }
 
+        if(!insert){
+
+            return VALIDACAO_OK;
+
+        }
+
         ValidacaoDados emailNaoCadastrado = validarEmailNaoCadastrado(emailTratado);
 
-        if(emailNaoCadastrado != VALIDACAO_OK && insert){
+        if(emailNaoCadastrado != VALIDACAO_OK){
 
             return emailNaoCadastrado;
 
