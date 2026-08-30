@@ -13,6 +13,7 @@ import service.UsuarioService;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import java.util.Enumeration;
 import static enums.ErrosGerais.ERRO_GENERICO;
 
 @WebServlet("/crudUsuario-insert")
@@ -21,64 +22,59 @@ public class InsertUsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
-
         dispatcher.forward(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-
         try{
+            HttpSession session = request.getSession();
 
-            String tipoUsuario = request.getParameter("tipoUsuario");
-            String email = request.getParameter("email");
-            String senha = request.getParameter("senha");
-            String nome = request.getParameter("nome");
-            String raioProcuraKm = request.getParameter("raioProcuraKm");
+            //Limpeza dos atributos da seção, para evitar casos dos pop-ups abrirem quando não deveriam
+            Enumeration<String> attributes = session.getAttributeNames();
+            while(attributes.hasMoreElements()){
+                session.removeAttribute(attributes.nextElement());
+            }
+
+            String tipoUsuario = request.getParameter("tipoUsuarioInsert");
+            String email = request.getParameter("emailInsert");
+            String senha = request.getParameter("senhaInsert");
+            String nome = request.getParameter("nomeInsert");
+            String raioProcuraKm = request.getParameter("raioProcuraKmInsert");
 
             ArrayList<GenericEnum> mensagens = UsuarioService.realizarInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
 
             if(!mensagens.isEmpty()){
+                session.setAttribute("mensagensInsert", mensagens);
+                session.setAttribute("tipoUsuarioInsert", tipoUsuario);
+                session.setAttribute("emailInsert", email);
+                session.setAttribute("nomeInsert", nome);
+                session.setAttribute("raioProcuraKmInsert", raioProcuraKm);
 
-                request.setAttribute("mensagens", mensagens);
+                //Atributo usado no javascript para abrir o pop-up
+                session.setAttribute("abrirInsert", true);
 
-                request.setAttribute("tipoUsuario", tipoUsuario);
-                request.setAttribute("email", email);
-                request.setAttribute("nome", nome);
-                request.setAttribute("raioProcuraKm", raioProcuraKm);
-
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
-                dispatcher.forward(request, response);
-
-
+                response.sendRedirect(request.getContextPath()+"/crudUsuario");
             } else{
-
-                HttpSession session = request.getSession();
-
-                session.setAttribute("mensagens", mensagens);
-
+                session.setAttribute("mensagemInsert", "O cadastro foi efetuado com sucesso");
                 response.sendRedirect(request.getContextPath() + "/crudUsuario");
+            }
+        } catch (Exception exception){
+            HttpSession session = request.getSession();
 
+            //Limpeza dos atributos da seção, para evitar casos dos pop-ups abrirem quando não deveriam
+            Enumeration<String> attributes = session.getAttributeNames();
+            while(attributes.hasMoreElements()){
+                session.removeAttribute(attributes.nextElement());
             }
 
-        } catch (Exception exception){
-
             ArrayList<GenericEnum> mensagens = new ArrayList<>();
-
             mensagens.add(ERRO_GENERICO);
 
-            request.setAttribute("mensagens", mensagens);
-
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
-            dispatcher.forward(request, response);
-
-
+            session.setAttribute("mensagensInsert", mensagens);
+            response.sendRedirect(request.getContextPath() + "/crudUsuario");
         }
-
     }
-
 }

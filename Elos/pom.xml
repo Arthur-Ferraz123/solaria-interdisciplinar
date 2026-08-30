@@ -33,7 +33,6 @@
           <version>5.2.2</version>
       </dependency>
 
-
       <!-- Servlet API (Tomcat 11 usa Jakarta EE 10) -->
       <dependency>
           <groupId>jakarta.servlet</groupId>

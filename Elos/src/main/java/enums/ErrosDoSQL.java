@@ -2,6 +2,7 @@ package enums;
 
 public enum ErrosDoSQL {
 
+    //Variações do enum
     STRING_DATA_RIGHT_TRUNCATION("22001"),
     INTEGRITY_CONSTRAINT_VIOLATION("23000"),
     RESTRICT_VIOLATION("23001"),
@@ -11,34 +12,29 @@ public enum ErrosDoSQL {
     CHECK_VIOLATION("23514"),
     EXCLUSION_VIOLATION("23P01");
 
+    //Constantes das variações
     private final String sqlState;
 
+    //Construtor
     ErrosDoSQL(String sqlState) {
-
         this.sqlState = sqlState;
-
     }
 
+    //Getter
     public String getSqlState() {
-
         return sqlState;
-
     }
 
+    //Método auxiliar
     public static boolean foiCausadoPorConstraint(String sqlState){
-
         for (ErrosDoSQL errosDoSQL : ErrosDoSQL.values()){
-
             if(errosDoSQL.getSqlState().equalsIgnoreCase(sqlState)){
-
                 return true;
 
             }
-
         }
 
         return false;
 
     }
-
 }

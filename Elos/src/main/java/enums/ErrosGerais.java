@@ -9,31 +9,26 @@ public enum ErrosGerais implements GenericEnum {
     REGISTRO_NAO_ENCONTRADO(-4, "O registro buscado não foi encontrado, verifique se os dados inseridos estão corretos"),
     REGISTROS_NAO_ENCONTRADOS(-5, "Os registros buscados não foram encontrados, verifique se os dados inseridos estão corretos");
 
-    //Constantes do enum
+    //Constantes das variações
     private final int codigo;
     private final String mensagem;
 
     //Construtor
     ErrosGerais(int codigo, String mensagem) {
-
         this.codigo = codigo;
         this.mensagem = mensagem;
-
     }
 
     //Getters
     public int getCodigo() {
-
         return codigo;
-
     }
 
     public String getMensagem() {
-
         return mensagem;
-
     }
 
+    //Método auxiliar
     public static ErrosGerais descobrirErroGeral(int codigo){
 
         for (ErrosGerais errosGerais : ErrosGerais.values()){
@@ -55,5 +50,4 @@ public enum ErrosGerais implements GenericEnum {
     public String exibirMensagem() {
         return getMensagem();
     }
-
 }

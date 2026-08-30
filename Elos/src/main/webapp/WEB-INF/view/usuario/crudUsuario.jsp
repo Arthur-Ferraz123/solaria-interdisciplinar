@@ -37,17 +37,14 @@
 
 </style>
 
-
-
-
 <body>
 
 <!-- Exibe mensagens de erro vindas do ReadUsuarioServlet, se houver -->
-<c:if test="${not empty errosEncontrados}">
+<c:if test="${not empty sessionScope.errosRead}">
     <div style="border:1px solid red; background:#ffe6e6; padding:10px; margin-bottom:10px;">
         <ul>
-            <c:forEach var="erro" items="${errosEncontrados}">
-                <li>${erro}</li>
+            <c:forEach var="erro" items="${sessionScope.errosRead}">
+                <li>${erro.exibirMensagem()}</li>
             </c:forEach>
         </ul>
     </div>
@@ -64,10 +61,10 @@
 
     </tr>
 
-    <!-- Linhas geradas a partir da lista "usuarios" retornada pelo ReadUsuarioServlet (/crudUsuario) -->
+    <!-- Read -->
     <c:choose>
-        <c:when test="${not empty usuarios}">
-            <c:forEach var="usuario" items="${usuarios}">
+        <c:when test="${not empty usuariosRead}">
+            <c:forEach var="usuario" items="${usuariosRead}">
                 <tr>
                     <td>${usuario.id}</td>
                     <td>${usuario.tipoUsuario}</td>
@@ -76,8 +73,8 @@
                     <td>${usuario.raioProcuraKm}</td>
                     <td>
                         <form action="${pageContext.request.contextPath}/crudUsuario-delete" method="post" style="margin: 0;">
-                        <!-- O campo hidden guarda o ID mas não aparece na tela -->
-                        <input type="hidden" name="id" value="${usuario.id}">
+
+                        <input type="hidden" name="idDelete" value="${usuario.id}">
 
                         <!-- Seu botão vermelho X -->
                         <button type="submit" style="background-color: red; color: black; font-weight: bold;">
@@ -87,7 +84,7 @@
                         </form>
 
                         <form action="${pageContext.request.contextPath}/crudUsuario-update" method="get" style="margin: 0;">
-                            <!-- O campo hidden guarda o ID mas não aparece na tela -->
+
                             <input type="hidden" name="idUpdate" value="${usuario.id}">
 
                             <!-- Seu botão vermelho X -->
@@ -111,7 +108,41 @@
     </c:choose>
 </table>
 
-<!-- insert-->
+<!-- pop up editar-->
+<dialog id="dialog1">
+    <form action="${pageContext.request.contextPath}/crudUsuario-update" method="post">
+
+        <input type="hidden" id="idUpdate" name="idUpdate" value="${sessionScope.usuarioUpdate.id}">
+        <input type="hidden" id="tipoUsuarioUpdate" name="tipoUsuarioUpdate" value="${sessionScope.usuarioUpdate.tipoUsuario}">
+
+        <table border="3px">
+            <tr>
+                <th><label for="idUpdate">ID</label></th>
+                <th><label for="tipoUsuarioUpdate">Tipo do usuário</label></th>
+                <th><label for="emailUpdate">Email</label></th>
+                <th><label for="senhaUpdate">Senha</label></th>
+                <th><label for="nomeUpdate">Nome</label></th>
+                <th><label for="raioProcuraKmUpdate">Raio de procura em km</label></th>
+            </tr>
+            <tr>
+                <td>${sessionScope.usuarioUpdate.id}</td>
+                <td>${sessionScope.usuarioUpdate.tipoUsuario}</td>
+                <td><input type="text" id="emailUpdate" name="emailUpdate" value="${sessionScope.usuarioUpdate.email}"required></td>
+                <td><input type="text" id="senhaUpdate" name="senhaUpdate"></td>
+                <td><input type="text" id="nomeUpdate" name="nomeUpdate" value="${sessionScope.usuarioUpdate.nome}" required></td>
+                <td><input type="text" id="raioProcuraKmUpdate" name="raioProcuraKmUpdate" value="${sessionScope.usuarioUpdate.raioProcuraKm}"required></td>
+            </tr>
+        </table>
+
+        <div style="margin-top: 10px;">
+            <button type="submit">Enviar</button>
+            <button type="button" id="fechar">Sair</button>
+        </div>
+    </form>
+</dialog>
+
+
+<!-- read caixas-->
 <div class="formulario-linha">
     <form action="${pageContext.request.contextPath}/crudUsuario" method="post">
 
@@ -168,46 +199,22 @@
 </div>
 
 
-<!-- pop up editar-->
-<dialog id="dialog1">
-    <form action="${pageContext.request.contextPath}/crudUsuario-update" method="post">
-        <table border="3px">
-            <tr>
-                <th><label for="idUpdate">ID</label></th>
-                <th><label for="tipoUsuarioUpdate">Tipo do usuário</label></th>
-                <th><label for="emailUpdate">Email</label></th>
-                <th><label for="senhaUpdate">Senha</label></th>
-                <th><label for="nomeUpdate">Nome</label></th>
-                <th><label for="raioProcuraKmUpdate">Raio de procura em km</label></th>
-            </tr>
-            <tr>
-                <td>${usuarioUpdate.id}</td>
-                <td>${usuarioUpdate.tipoUsuario}</td>
-                <td><input type="text" id="emailUpdate" name="emailUpdate" value="${usuarioUpdate.email}"required></td>
-                <td><input type="text" id="senhaUpdate"></td>
-                <td><input type="text" id="nomeUpdate" name="nomeUpdate" value="${usuarioUpdate.nome}" required></td>
-                <td><input type="text" id="raioProcuraKmUpdate" name="raioProcuraKmUpdate" value="${usuarioUpdate.raioProcuraKm}"required></td>
-            </tr>
-        </table>
 
-        <div style="margin-top: 10px;">
-            <button type="submit">Enviar</button>
-            <button type="button" id="fechar">Sair</button>
-        </div>
-    </form>
-</dialog>
 
 <br>
 <br>
 
 <button id="butao">Inserir</button>
 
+
+
+
 <!-- pop up inserir -->
 <dialog id="dialog">
     <form action="${pageContext.request.contextPath}/crudUsuario-insert" method="post">
         <table border="3px">
             <tr>
-                <th><label for="tipoUsuario">Tipo do usuário</label></th>
+                <th><label for="tipoUsuarioInsert">Tipo do usuário</label></th>
                 <th><label for="email">Email</label></th>
                 <th><label for="senha">Senha</label></th>
                 <th><label for="nome">Nome</label></th>
@@ -215,17 +222,16 @@
             </tr>
             <tr>
                 <td>
-
-                    <select id="tipoUsuario" name="tipoUsuario">
-                        <option value="FORNECEDOR">Fornecedor</option>
-                        <option value="EMPRESA_DEMANDANTE">Empresa demandante</option>
-                        <option value="PROFISSIONAL">Profissional</option>
+                    <select id="tipoUsuarioInsert" name="tipoUsuarioInsert" >
+                        <option value="FORNECEDOR" ${sessionScope.tipoUsuario == "FORNECEDOR" ? "selected" : ""}>Fornecedor</option>
+                        <option value="EMPRESA_DEMANDANTE" ${sessionScope.tipoUsuario == "EMPRESA_DEMANDANTE" ? "selected" : ""}>Empresa demandante</option>
+                        <option value="PROFISSIONAL" ${sessionScope.tipoUsuario == "PROFISSIONAL" ? "selected" : ""}>Profissional</option>
                     </select>
                 </td>
-                <td><input type="text" id="email" name="email" required></td>
-                <td><input type="text" id="senha" name="senha" required></td>
-                <td><input type="text" id="nome" name="nome" required></td>
-                <td><input type="text" id="raioProcuraKm" name="raioProcuraKm" required></td>
+                <td><input type="text" id="emailInsert" name="emailInsert" required value="${sessionScope.emailInsert}"></td>
+                <td><input type="text" id="senhaInsert" name="senhaInsert" required ></td>
+                <td><input type="text" id="nomeInsert" name="nomeInsert" required value="${sessionScope.nomeInsert}"></td>
+                <td><input type="text" id="raioProcuraKmInsert" name="raioProcuraKmInsert" value="${sessionScope.raioProcuraKmInsert}"></td>
             </tr>
         </table>
 
@@ -236,35 +242,64 @@
     </form>
 </dialog>
 
+<form id="casoSair" action="${pageContext.request.contextPath}/crudUsuario" method="post">
+
+    <input type="hidden" id="sairPressionado" name="sairPressionado">
+
+</form>
+
 <script>
 
     const butao = document.getElementById("butao");
     const modal = document.getElementById("dialog");
     const butao1 = document.getElementById("close");
 
-    const butao3 = document.getElementById("editar");
+    const abrirInsert = ${not empty sessionScope.abrirInsert ? sessionScope.abrirInsert : false};
+
+    const abrirUpdate = ${not empty sessionScope.abrirUpdate ? sessionScope.abrirUpdate : false};
+
     const modal1 = document.getElementById("dialog1");
+
+    console.log(abrirUpdate);
+    console.log(abrirInsert);
+
     const butao4 = document.getElementById("fechar");
 
-    butao3.onclick = function(){
-        modal.showModal();
+
+    butao4.onclick = function(){
+        document.getElementById("sairPressionado").value = "true";
+        document.getElementById("casoSair").submit();
     }
 
-    // Fecha o modal manualmente
-    butao4.onclick = function(){
-        modal1.close();
-    }
+    window.addEventListener('load', function (){
+
+        if(abrirInsert === true){
+
+            modal.showModal();
+
+        }
+
+        if(abrirUpdate === true){
+
+            modal1.showModal();
+
+        }
+
+    })
 
     // Abre o modal manualmente
     butao.onclick = function(){
         modal.showModal();
     }
 
+
+
     // Fecha o modal manualmente
     butao1.onclick = function(){
-        modal.close();
-    }
+        document.getElementById("sairPressionado").value = "true";
+        document.getElementById("casoSair").submit();
 
+    }
 
 </script>
 

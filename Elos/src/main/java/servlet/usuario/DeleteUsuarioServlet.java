@@ -13,6 +13,7 @@ import model.Usuario;
 import service.UsuarioService;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import static enums.ErrosGerais.ERRO_GENERICO;
 
@@ -22,49 +23,44 @@ public class DeleteUsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.sendRedirect(request.getContextPath() + "/crudUsuario");
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
+            HttpSession session = request.getSession();
 
-            String id = request.getParameter("id");
+            //Limpeza dos atributos da seção, para evitar casos dos pop-ups abrirem quando não deveriam
+            Enumeration<String> attributes = session.getAttributeNames();
+            while(attributes.hasMoreElements()){
+                session.removeAttribute(attributes.nextElement());
+            }
+
+            String id = request.getParameter("idDelete");
 
             GenericEnum erro = UsuarioService.realizarDelete(id);
 
             if(erro != null){
-
-                HttpSession session = request.getSession();
-
-                session.setAttribute("mensagem", erro.exibirMensagem());
-
+                session.setAttribute("mensagemDelete", erro.exibirMensagem());
                 response.sendRedirect(request.getContextPath() + "/crudUsuario");
-
             } else {
-
-                HttpSession session = request.getSession();
-
-                session.setAttribute("mensagem", "O usuário foi deletado com sucesso!");
-
+                session.setAttribute("mensagemDelete", "O usuário foi deletado com sucesso!");
                 response.sendRedirect(request.getContextPath() + "/crudUsuario");
-
             }
-
         } catch (Exception e){
 
             HttpSession session = request.getSession();
 
-            session.setAttribute("mensagem", ERRO_GENERICO.exibirMensagem());
+            //Limpeza dos atributos da seção, para evitar casos dos pop-ups abrirem quando não deveriam
+            Enumeration<String> attributes = session.getAttributeNames();
+            while(attributes.hasMoreElements()){
+                session.removeAttribute(attributes.nextElement());
+            }
 
+            session.setAttribute("mensagemDelete", ERRO_GENERICO.exibirMensagem());
             response.sendRedirect(request.getContextPath() + "/crudUsuario");
-
         }
-
     }
-
 }
