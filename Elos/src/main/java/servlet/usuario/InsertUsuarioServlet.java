@@ -22,8 +22,7 @@ public class InsertUsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath()+"/crudUsuario");
     }
 
     @Override
