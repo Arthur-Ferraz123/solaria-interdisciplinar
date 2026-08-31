@@ -23,8 +23,7 @@ public class ReadUsuarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException{
-
+            throws ServletException, IOException{
         try {
             HttpSession session = request.getSession();
 
@@ -48,19 +47,12 @@ public class ReadUsuarioServlet extends HttpServlet {
 
             usuariosRead.addAll(UsuarioService.realizarSelect(clausulaWhereNome, clausulaWhereValor, clausulaWhereValor2, orderBy, ordenacao, errosRead));
 
-            if (!errosRead.isEmpty()){
-                request.setAttribute("errosRead", errosRead);
-                request.setAttribute("usuariosRead", errosRead);
+            request.setAttribute("errosRead", errosRead);
+            request.setAttribute("usuariosRead", errosRead);
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
-                dispatcher.forward(request, response);
-            } else {
-                request.setAttribute("errosRead", errosRead);
-                request.setAttribute("usuariosRead", usuariosRead);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
+            dispatcher.forward(request, response);
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/usuario/crudUsuario.jsp");
-                dispatcher.forward(request, response);
-            }
         } catch (Exception e){
             ArrayList<GenericEnum> errosRead = new ArrayList<>();
             errosRead.add(ERRO_GENERICO);
