@@ -3,14 +3,14 @@ package model;
 public class Telefone {
 
     //Atributos
-    private long id;
-    private long idUsuario;
+    private final long id;
+    private final long idUsuario;
     private String telefone;
-    private String tipo;
+    private TiposTelefone tipo;
     private boolean principal;
 
     //Construtor
-    public Telefone(long id,  long idUsuario, String telefone, String tipo,boolean principal) {
+    public Telefone(long id,  long idUsuario, String telefone, TiposTelefone tipo,boolean principal) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.telefone = telefone;
@@ -35,11 +35,11 @@ public class Telefone {
         this.telefone = telefone;
     }
 
-    public String getTipo() {
+    public TiposTelefone getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TiposTelefone tipo) {
         this.tipo = tipo;
     }
 

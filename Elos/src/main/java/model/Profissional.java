@@ -3,18 +3,17 @@ package model;
 public class Profissional {
 
     //Atributos
-    private long id;
-    private long idUsuario;
-    private String tipoUsuario;
+    private final long id;
+    private final long idUsuario;
+    private final TiposUsuario tipoUsuario = TiposUsuario.PROFISSIONAL;
     private String profissao;
-    private String cpf;
+    private final String cpf;
     private long idFornecedor;
 
     //Construtor
-    public Profissional(long id, long idUsuario, String tipoUsuario, String profissao, String cpf, long idFornecedor) {
+    public Profissional(long id, long idUsuario, String profissao, String cpf, long idFornecedor) {
         this.id = id;
         this.idUsuario = idUsuario;
-        this.tipoUsuario = tipoUsuario;
         this.profissao = profissao;
         this.cpf = cpf;
         this.idFornecedor = idFornecedor;
@@ -29,7 +28,7 @@ public class Profissional {
         return idUsuario;
     }
 
-    public String getTipoUsuario() {
+    public TiposUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 

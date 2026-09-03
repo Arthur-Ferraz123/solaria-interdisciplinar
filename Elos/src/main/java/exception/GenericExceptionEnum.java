@@ -1,6 +1,6 @@
-package enums;
+package exception;
 
-public interface GenericEnum {
+public interface GenericExceptionEnum {
 
     //Método de assinatura
     public String exibirMensagem();

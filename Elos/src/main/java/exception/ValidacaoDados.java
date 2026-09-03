@@ -1,6 +1,6 @@
-package enums;
+package exception;
 
-public enum ValidacaoDados implements GenericEnum{
+public enum ValidacaoDados implements GenericExceptionEnum{
 
     //Variações do enum
     ATRIBUTO_NULL(-1, "Atributo null"),

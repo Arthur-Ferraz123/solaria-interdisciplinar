@@ -1,6 +1,6 @@
-package enums;
+package exception;
 
-public enum ErrosGerais implements GenericEnum {
+public enum ErrosGerais implements GenericExceptionEnum {
 
     //Variações do enum
     ERRO_POR_VIOLACAO_DE_REGRA_DO_BD(-1, "Um ou mais dados inseridos estão inválidos"),

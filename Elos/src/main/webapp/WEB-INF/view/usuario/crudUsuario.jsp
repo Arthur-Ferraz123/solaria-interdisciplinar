@@ -67,7 +67,7 @@
             <c:forEach var="usuario" items="${usuariosRead}">
                 <tr>
                     <td>${usuario.id}</td>
-                    <td>${usuario.tipoUsuario}</td>
+                    <td>${usuario.tipoUsuario.tipoUsuario}</td>
                     <td>${usuario.email}</td>
                     <td>${usuario.nome}</td>
                     <td>${usuario.raioProcuraKm}</td>
@@ -113,7 +113,7 @@
     <form action="${pageContext.request.contextPath}/crudUsuario-update" method="post">
 
         <input type="hidden" id="idUpdate" name="idUpdate" value="${sessionScope.usuarioUpdate.id}">
-        <input type="hidden" id="tipoUsuarioUpdate" name="tipoUsuarioUpdate" value="${sessionScope.usuarioUpdate.tipoUsuario}">
+        <input type="hidden" id="tipoUsuarioUpdate" name="tipoUsuarioUpdate" value="${sessionScope.usuarioUpdate.tipoUsuario.tipoUsuario}">
 
         <table border="3px">
             <tr>
@@ -126,7 +126,7 @@
             </tr>
             <tr>
                 <td>${sessionScope.usuarioUpdate.id}</td>
-                <td>${sessionScope.usuarioUpdate.tipoUsuario}</td>
+                <td>${sessionScope.usuarioUpdate.tipoUsuario.tipoUsuario}</td>
                 <td><input type="text" id="emailUpdate" name="emailUpdate" value="${sessionScope.usuarioUpdate.email}"required></td>
                 <td><input type="text" id="senhaUpdate" name="senhaUpdate"></td>
                 <td><input type="text" id="nomeUpdate" name="nomeUpdate" value="${sessionScope.usuarioUpdate.nome}" required></td>
@@ -223,9 +223,9 @@
             <tr>
                 <td>
                     <select id="tipoUsuarioInsert" name="tipoUsuarioInsert" >
-                        <option value="FORNECEDOR" ${sessionScope.tipoUsuario == "FORNECEDOR" ? "selected" : ""}>Fornecedor</option>
-                        <option value="EMPRESA_DEMANDANTE" ${sessionScope.tipoUsuario == "EMPRESA_DEMANDANTE" ? "selected" : ""}>Empresa demandante</option>
-                        <option value="PROFISSIONAL" ${sessionScope.tipoUsuario == "PROFISSIONAL" ? "selected" : ""}>Profissional</option>
+                        <option value="FORNECEDOR" ${sessionScope.tipoUsuario.tipoUsuario == "FORNECEDOR" ? "selected" : ""}>Fornecedor</option>
+                        <option value="EMPRESA_DEMANDANTE" ${sessionScope.tipoUsuario.tipoUsuario == "EMPRESA_DEMANDANTE" ? "selected" : ""}>Empresa demandante</option>
+                        <option value="PROFISSIONAL" ${sessionScope.tipoUsuario.tipoUsuario == "PROFISSIONAL" ? "selected" : ""}>Profissional</option>
                     </select>
                 </td>
                 <td><input type="text" id="emailInsert" name="emailInsert" required value="${sessionScope.emailInsert}"></td>

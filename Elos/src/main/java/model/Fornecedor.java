@@ -5,16 +5,15 @@ public class Fornecedor {
     //Atributos
     private final long id;
     private final long idUsuario;
-    private final String tipoUsuario;
-    private String tipoFornecedor;
+    private final TiposUsuario tipoUsuario = TiposUsuario.FORNECEDOR;
+    private TiposFornecedor tipoFornecedor;
     private final String cnpj;
     private String razaoSocial;
 
     //Construtor
-    public Fornecedor(long id, long idUsuario, String tipoUsuario, String tipoFornecedor, String cnpj, String razaoSocial) {
+    public Fornecedor(long id, long idUsuario, TiposFornecedor tipoFornecedor, String cnpj, String razaoSocial) {
         this.id = id;
         this.idUsuario = idUsuario;
-        this.tipoUsuario = tipoUsuario;
         this.tipoFornecedor = tipoFornecedor;
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
@@ -29,15 +28,15 @@ public class Fornecedor {
         return idUsuario;
     }
 
-    public String getTipoUsuario() {
+    public TiposUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 
-    public String getTipoFornecedor() {
+    public TiposFornecedor getTipoFornecedor() {
         return tipoFornecedor;
     }
 
-    public void setTipoFornecedor(String tipoFornecedor) {
+    public void setTipoFornecedor(TiposFornecedor tipoFornecedor) {
         this.tipoFornecedor = tipoFornecedor;
     }
 

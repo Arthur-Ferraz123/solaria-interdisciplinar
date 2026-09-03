@@ -1,6 +1,6 @@
 package servlet.usuario;
 
-import enums.GenericEnum;
+import exception.GenericExceptionEnum;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import static enums.ErrosGerais.ERRO_GENERICO;
+import static exception.ErrosGerais.ERRO_GENERICO;
 
 @WebServlet("/crudUsuario-update")
 public class UpdateUsuarioServlet extends HttpServlet{
@@ -69,7 +69,7 @@ public class UpdateUsuarioServlet extends HttpServlet{
             String nomeUpdate = request.getParameter("nomeUpdate");
             String raioProcuraKmUpdate = request.getParameter("raioProcuraKmUpdate");
 
-            ArrayList<GenericEnum> erros = UsuarioService.realizarUpdate(idUpdate, tipoUsuarioUpdate, emailUpdate, senhaUpdate, nomeUpdate, raioProcuraKmUpdate);
+            ArrayList<GenericExceptionEnum> erros = UsuarioService.realizarUpdate(idUpdate, tipoUsuarioUpdate, emailUpdate, senhaUpdate, nomeUpdate, raioProcuraKmUpdate);
 
             if(!erros.isEmpty()){
                 session.setAttribute("errosUpdate", erros);
@@ -87,7 +87,7 @@ public class UpdateUsuarioServlet extends HttpServlet{
         } catch (Exception e) {
             HttpSession session = request.getSession();
 
-            ArrayList<GenericEnum> erros = new ArrayList<>();
+            ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
             erros.add(ERRO_GENERICO);
 
             session.setAttribute("errosUpdate", erros);

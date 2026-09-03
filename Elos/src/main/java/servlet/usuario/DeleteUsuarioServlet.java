@@ -1,6 +1,6 @@
 package servlet.usuario;
 
-import enums.GenericEnum;
+import exception.GenericExceptionEnum;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +12,7 @@ import service.UsuarioService;
 import java.io.IOException;
 import java.util.Enumeration;
 
-import static enums.ErrosGerais.ERRO_GENERICO;
+import static exception.ErrosGerais.ERRO_GENERICO;
 
 @WebServlet("/crudUsuario-delete")
 public class DeleteUsuarioServlet extends HttpServlet {
@@ -37,7 +37,7 @@ public class DeleteUsuarioServlet extends HttpServlet {
 
             String id = request.getParameter("idDelete");
 
-            GenericEnum erro = UsuarioService.realizarDelete(id);
+            GenericExceptionEnum erro = UsuarioService.realizarDelete(id);
 
             if(erro != null){
                 session.setAttribute("mensagemDelete", erro.exibirMensagem());

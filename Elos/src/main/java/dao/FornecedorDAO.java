@@ -2,7 +2,8 @@ package dao;
 
 import conexao.Conexao;
 
-import enums.ErrosDoSQL;
+import exception.ErrosDoSQL;
+import model.TiposFornecedor;
 import model.Fornecedor;
 
 import java.sql.Connection;
@@ -16,10 +17,10 @@ import java.util.List;
 
 import java.util.ArrayList;
 
-import static enums.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
-import static enums.ErrosGerais.ERRO_GENERICO_NO_BD;
-import static enums.ErrosGerais.ERRO_GENERICO;
-import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+import static exception.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
+import static exception.ErrosGerais.ERRO_GENERICO_NO_BD;
+import static exception.ErrosGerais.ERRO_GENERICO;
+import static exception.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
 
 public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
@@ -33,8 +34,8 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setLong(1, fornecedor.getIdUsuario() );
-            preparedStatement.setString(2, fornecedor.getTipoUsuario());
-            preparedStatement.setString(3, fornecedor.getTipoFornecedor());
+            preparedStatement.setString(2, fornecedor.getTipoUsuario().getTipoUsuario());
+            preparedStatement.setString(3, fornecedor.getTipoFornecedor().getTipoFornecedor());
             preparedStatement.setString(4, fornecedor.getCnpj());
             preparedStatement.setString(5, fornecedor.getRazaoSocial() );
 
@@ -68,14 +69,13 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
                 return new Fornecedor(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
-                        resultSet.getString("tipo_fornecedor"),
+                        TiposFornecedor.descobrirTipoFornecedor(resultSet.getString("tipo_fornecedor")),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social")
                 );
             }
 
-            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, null);
+            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null);
 
         } catch (Exception exception){
             return null;
@@ -101,14 +101,13 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
                 return new Fornecedor(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
-                        resultSet.getString("tipo_fornecedor"),
+                        TiposFornecedor.descobrirTipoFornecedor(resultSet.getString("tipo_fornecedor")),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social")
                 );
             }
 
-            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, null);
+            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null);
 
         } catch (Exception exception){
             return null;
@@ -134,14 +133,13 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
                 return new Fornecedor(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
-                        resultSet.getString("tipo_fornecedor"),
+                        TiposFornecedor.descobrirTipoFornecedor(resultSet.getString("tipo_fornecedor")),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social")
                 );
             }
 
-            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, null);
+            return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null);
 
         } catch (Exception exception){
             return null;
@@ -167,8 +165,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
                 fornecedores.add(new Fornecedor(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
-                        resultSet.getString("tipo_fornecedor"),
+                        TiposFornecedor.descobrirTipoFornecedor(resultSet.getString("tipo_fornecedor")),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social")
                 ));
@@ -201,8 +198,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
                 fornecedores.add(new Fornecedor(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
-                        resultSet.getString("tipo_fornecedor"),
+                        TiposFornecedor.descobrirTipoFornecedor(resultSet.getString("tipo_fornecedor")),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social")
                 ));
@@ -228,7 +224,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1, fornecedor.getTipoFornecedor() );
+            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoUsuario());
             preparedStatement.setString(2, fornecedor.getRazaoSocial() );
             preparedStatement.setLong(3, fornecedor.getId());
 
@@ -254,7 +250,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where id_usuario = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1, fornecedor.getTipoFornecedor() );
+            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoUsuario());
             preparedStatement.setString(2, fornecedor.getRazaoSocial() );
             preparedStatement.setLong(3, fornecedor.getIdUsuario());
 
@@ -280,7 +276,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where cnpj = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1, fornecedor.getTipoFornecedor() );
+            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoUsuario());
             preparedStatement.setString(2, fornecedor.getRazaoSocial() );
             preparedStatement.setString(3, fornecedor.getCnpj());
 

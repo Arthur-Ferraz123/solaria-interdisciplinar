@@ -5,7 +5,7 @@ public class EmpresaDemandante {
     //Atributos
     private final long id;
     private final long idUsuario;
-    private final String tipoUsuario;
+    private final TiposUsuario tipoUsuario = TiposUsuario.EMPRESA_DEMANDANTE;
     private final String cnpj;
     private String razaoSocial;
     private boolean ehMandante;
@@ -14,7 +14,6 @@ public class EmpresaDemandante {
     public EmpresaDemandante(long id, long idUsuario, String tipoUsuario, String cnpj, String razaoSocial, boolean ehMandante) {
         this.id = id;
         this.idUsuario = idUsuario;
-        this.tipoUsuario = tipoUsuario;
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
         this.ehMandante = ehMandante;
@@ -29,7 +28,7 @@ public class EmpresaDemandante {
         return idUsuario;
     }
 
-    public String getTipoUsuario() {
+    public TiposUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 

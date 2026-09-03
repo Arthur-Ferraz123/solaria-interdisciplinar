@@ -1,4 +1,4 @@
-package enums;
+package exception;
 
 public enum ErrosDoSQL {
 
@@ -33,8 +33,6 @@ public enum ErrosDoSQL {
 
             }
         }
-
         return false;
-
     }
 }

@@ -2,7 +2,8 @@ package dao;
 
 import conexao.Conexao;
 
-import enums.ErrosDoSQL;
+import exception.ErrosDoSQL;
+import model.TiposUsuario;
 import model.Usuario;
 
 import java.sql.*;
@@ -11,10 +12,10 @@ import java.util.List;
 
 import java.util.ArrayList;
 
-import static enums.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
-import static enums.ErrosGerais.ERRO_GENERICO_NO_BD;
-import static enums.ErrosGerais.ERRO_GENERICO;
-import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+import static exception.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
+import static exception.ErrosGerais.ERRO_GENERICO_NO_BD;
+import static exception.ErrosGerais.ERRO_GENERICO;
+import static exception.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
 
 public class UsuarioDAO implements GenericDAO<Usuario> {
 
@@ -31,7 +32,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 preparedStatement.setString(1, usuario.getEmail() );
                 preparedStatement.setString(2, usuario.getSenha());
                 preparedStatement.setString(3, usuario.getNome());
-                preparedStatement.setString(4, usuario.getTipoUsuario());
+                preparedStatement.setString(4, usuario.getTipoUsuario().getTipoUsuario());
                 preparedStatement.setDouble(5, usuario.getRaioProcuraKm());
 
                 return preparedStatement.executeUpdate();
@@ -43,7 +44,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 preparedStatement.setString(1, usuario.getEmail() );
                 preparedStatement.setString(2, usuario.getSenha());
                 preparedStatement.setString(3, usuario.getNome());
-                preparedStatement.setString(4, usuario.getTipoUsuario());
+                preparedStatement.setString(4, usuario.getTipoUsuario().getTipoUsuario());
 
                 return preparedStatement.executeUpdate();
 
@@ -78,7 +79,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 );
             }
@@ -111,7 +112,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 );
             }
@@ -144,7 +145,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 );
             }
@@ -178,7 +179,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 ));
             }
@@ -211,7 +212,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 ));
             }
@@ -245,7 +246,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 ));
             }
@@ -279,7 +280,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 ));
             }
@@ -314,7 +315,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 ));
             }
@@ -351,7 +352,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                         resultSet.getString("email"),
                         resultSet.getString("senha"),
                         resultSet.getString("nome"),
-                        resultSet.getString("tipo_usuario"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
                         resultSet.getDouble("raio_procura_km")
                 ));
             }

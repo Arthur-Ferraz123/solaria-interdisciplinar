@@ -1,24 +1,24 @@
 package service;
 
 import dao.UsuarioDAO;
-import enums.ErrosGerais;
-import enums.GenericEnum;
-import enums.ValidacaoDados;
-import model.Usuario;
+import exception.ErrosGerais;
+import exception.GenericExceptionEnum;
+import model.TiposUsuario;
+import exception.ValidacaoDados;import model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import static enums.ErrosGerais.*;
-import static enums.ValidacaoDados.*;
+import static exception.ErrosGerais.*;
+import static exception.ValidacaoDados.*;
 
 public class UsuarioService {
 
     //Métodos para realizar as ações do UpdateUsuarioServlet
-    public static ArrayList<GenericEnum> realizarUpdate(String idUpdate, String tipoUsuarioUpdate, String emailUpdate, String senhaUpdate, String nomeUpdate, String raioProcuraKmUpdate){
-        ArrayList<GenericEnum> erros = validarUpdate(tipoUsuarioUpdate, emailUpdate, senhaUpdate, nomeUpdate, raioProcuraKmUpdate);
+    public static ArrayList<GenericExceptionEnum> realizarUpdate(String idUpdate, String tipoUsuarioUpdate, String emailUpdate, String senhaUpdate, String nomeUpdate, String raioProcuraKmUpdate){
+        ArrayList<GenericExceptionEnum> erros = validarUpdate(tipoUsuarioUpdate, emailUpdate, senhaUpdate, nomeUpdate, raioProcuraKmUpdate);
 
         if(!erros.isEmpty()){
             return erros;
@@ -44,8 +44,8 @@ public class UsuarioService {
 
     }
 
-    private static ArrayList<GenericEnum> validarUpdate(String tipoUsuarioUpdate,String emailUpdate, String senhaUpdate, String nomeUpdate, String raioProcuraKmUpdate){
-        ArrayList<GenericEnum> erros = new ArrayList<>();
+    private static ArrayList<GenericExceptionEnum> validarUpdate(String tipoUsuarioUpdate,String emailUpdate, String senhaUpdate, String nomeUpdate, String raioProcuraKmUpdate){
+        ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
         ValidacaoDados emailValidacao = validarEmailBasico(emailUpdate);
 
         if(emailValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
@@ -86,7 +86,7 @@ public class UsuarioService {
     }
 
     //Métodos para realizar as ações do DeleteUsuarioServlet
-    public static GenericEnum realizarDelete(String id){
+    public static GenericExceptionEnum realizarDelete(String id){
         ValidacaoDados erro = validarId(id);
 
         if(erro.getCodigo() != VALIDACAO_OK.getCodigo()) {
@@ -112,7 +112,7 @@ public class UsuarioService {
     }
 
     //Métodos para realizar as ações do ReadUsuarioService
-    public static List<Usuario> realizarSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String orderBy, String ordenacao, ArrayList<GenericEnum> errosEncontrados){
+    public static List<Usuario> realizarSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String orderBy, String ordenacao, ArrayList<GenericExceptionEnum> errosEncontrados){
         List<Usuario> usuarios = new ArrayList<>();
 
         if(clausulaWhereNome == null && clausulaWhereValor == null && clausulaWhereValor2 == null && orderBy == null && ordenacao == null){
@@ -208,8 +208,8 @@ public class UsuarioService {
 
     }
 
-    private static ArrayList<GenericEnum> validarUsuarioSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String ordenacao, String orderBy){
-        ArrayList<GenericEnum> erros = new ArrayList<>();
+    private static ArrayList<GenericExceptionEnum> validarUsuarioSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String ordenacao, String orderBy){
+        ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
         ValidacaoDados clausulaWhereNomeValidacao = validarWhere(clausulaWhereNome);
 
         if (clausulaWhereNomeValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
@@ -236,8 +236,8 @@ public class UsuarioService {
 
     }
 
-    private static ArrayList<GenericEnum> validarClausulaWhereValor(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2){
-        ArrayList<GenericEnum> dadosValidados = new ArrayList<>();
+    private static ArrayList<GenericExceptionEnum> validarClausulaWhereValor(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2){
+        ArrayList<GenericExceptionEnum> dadosValidados = new ArrayList<>();
         ValidacaoDados dadoValidado = null;
         ValidacaoDados dadoValidado2 = null;
 
@@ -284,8 +284,8 @@ public class UsuarioService {
     }
 
     //Métodos para realizar as ações do InsertUsuarioServlet
-    public static ArrayList<GenericEnum> realizarInsert(String email, String senha, String nome, String tipoUsuario, String raioProcuraKm){
-        ArrayList<GenericEnum> mensagens = validarUsuarioInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
+    public static ArrayList<GenericExceptionEnum> realizarInsert(String email, String senha, String nome, String tipoUsuario, String raioProcuraKm){
+        ArrayList<GenericExceptionEnum> mensagens = validarUsuarioInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
 
         if (mensagens.isEmpty()) {
             int resultado = persistirUsuario(email, senha, nome, tipoUsuario, raioProcuraKm);
@@ -299,8 +299,8 @@ public class UsuarioService {
 
     }
 
-    private static ArrayList<GenericEnum> validarUsuarioInsert(String email, String senha, String nome, String tipoUsuario, String raioProcuraKm){
-        ArrayList<GenericEnum> listaDeErros = new ArrayList<>();
+    private static ArrayList<GenericExceptionEnum> validarUsuarioInsert(String email, String senha, String nome, String tipoUsuario, String raioProcuraKm){
+        ArrayList<GenericExceptionEnum> listaDeErros = new ArrayList<>();
 
         ValidacaoDados validacaoEmail = validarEmailInsert(email);
         ValidacaoDados validacaoSenha = validarSenha(senha);
@@ -340,7 +340,6 @@ public class UsuarioService {
         UsuarioDAO dao = new UsuarioDAO();
 
         return dao.insert(usuario);
-
     }
 
     private static Usuario criarUsuarioValido(String id, String email, String senha, String nome, String tipoUsuario, String raioProcuraKm){
@@ -348,11 +347,10 @@ public class UsuarioService {
         String emailTratado = email.toLowerCase().trim();
         String senhaTratada = senha == null || senha.isBlank() ? null : senha.trim();
         String nomeTratado = nome.trim();
-        String tipoUsuarioTratado = tipoUsuario.toUpperCase();
+        TiposUsuario tipoUsuarioTratado = TiposUsuario.descobrirTipoUsuario(tipoUsuario.toUpperCase().trim());
         double raioProcuraKmTratado = raioProcuraKm == null || raioProcuraKm.isEmpty() ? ATRIBUTO_NULL.getCodigo() : Double.parseDouble(raioProcuraKm.trim());
 
         return new Usuario(idTratado, emailTratado, senhaTratada, nomeTratado, tipoUsuarioTratado, raioProcuraKmTratado);
-
     }
 
     //Métodos auxiliares
@@ -559,25 +557,14 @@ public class UsuarioService {
     private static ValidacaoDados validarTipoUsuario(String tipoUsuario){
         if (tipoUsuario == null || tipoUsuario.isBlank()) {
             return TIPO_USUARIO_VAZIO;
-
         }
 
-        if(tipoUsuario.length() > 18){
+        TiposUsuario tipoUsuarioToUpperCase = TiposUsuario.descobrirTipoUsuario(tipoUsuario.toUpperCase().trim());
+
+        if (tipoUsuarioToUpperCase == null){
             return TIPO_USUARIO_INVALIDO;
-
         }
-
-        String tipoUsuarioToUpperCase = tipoUsuario.toUpperCase().trim();
-
-        if (!"EMPRESA_DEMANDANTE".equalsIgnoreCase(tipoUsuarioToUpperCase) &&
-            !"FORNECEDOR".equalsIgnoreCase(tipoUsuarioToUpperCase) &&
-            !"PROFISSIONAL".equalsIgnoreCase(tipoUsuarioToUpperCase)){
-            return TIPO_USUARIO_INVALIDO;
-
-        }
-
         return VALIDACAO_OK;
-
     }
 
     private static ValidacaoDados validarRaioProcuraKm(String raioProcuraKm){

@@ -2,7 +2,8 @@ package dao;
 
 import conexao.Conexao;
 
-import enums.ErrosDoSQL;
+import exception.ErrosDoSQL;
+import model.TiposTelefone;
 import model.Telefone;
 
 import java.sql.Connection;
@@ -16,10 +17,10 @@ import java.util.List;
 
 import java.util.ArrayList;
 
-import static enums.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
-import static enums.ErrosGerais.ERRO_GENERICO_NO_BD;
-import static enums.ErrosGerais.ERRO_GENERICO;
-import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+import static exception.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
+import static exception.ErrosGerais.ERRO_GENERICO_NO_BD;
+import static exception.ErrosGerais.ERRO_GENERICO;
+import static exception.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
 
 public class TelefoneDAO implements GenericDAO<Telefone> {
 
@@ -34,7 +35,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setString(1, telefone.getTelefone() );
             preparedStatement.setLong(2, telefone.getIdUsuario());
-            preparedStatement.setString(3, telefone.getTipo());
+            preparedStatement.setString(3, telefone.getTipo().getTipoTelefone());
             preparedStatement.setBoolean(4, telefone.isPrincipal() );
 
             return preparedStatement.executeUpdate();
@@ -67,8 +68,8 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
                 return new Telefone(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo"),
                         resultSet.getString("telefone"),
+                        TiposTelefone.descobrirTipoTelefone(resultSet.getString("tipo")),
                         resultSet.getBoolean("principal")
                 );
             }
@@ -99,8 +100,8 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
                 return new Telefone(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo"),
                         resultSet.getString("telefone"),
+                        TiposTelefone.descobrirTipoTelefone(resultSet.getString("tipo")),
                         resultSet.getBoolean("principal")
                 );
             }
@@ -132,8 +133,8 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
                 telefones.add(new Telefone(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo"),
                         resultSet.getString("telefone"),
+                        TiposTelefone.descobrirTipoTelefone(resultSet.getString("tipo")),
                         resultSet.getBoolean("principal")
                 ));
             }
@@ -165,8 +166,8 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
                 telefones.add(new Telefone(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo"),
                         resultSet.getString("telefone"),
+                        TiposTelefone.descobrirTipoTelefone(resultSet.getString("tipo")),
                         resultSet.getBoolean("principal")
                 ));
             }
@@ -192,7 +193,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, telefone.getTelefone() );
-            preparedStatement.setString(2, telefone.getTipo() );
+            preparedStatement.setString(2, telefone.getTipo().getTipoTelefone() );
             preparedStatement.setBoolean(3, telefone.isPrincipal() );
             preparedStatement.setLong(4, telefone.getId());
 
@@ -218,7 +219,7 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             String update = "update telefone set tipo = ?, principal = ? where telefone = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1, telefone.getTipo() );
+            preparedStatement.setString(1, telefone.getTipo().getTipoTelefone() );
             preparedStatement.setBoolean(2, telefone.isPrincipal() );
             preparedStatement.setString(3, telefone.getTelefone() );
 

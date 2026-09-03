@@ -3,16 +3,15 @@ package model;
 public class Usuario {
 
     //Atributos
-
     private final long id;
-    private final String tipoUsuario;
+    private final TiposUsuario tipoUsuario;
     private String email;
     private String senha;
     private String nome;
     private double raioProcuraKm;
 
     //Construtor
-    public Usuario(long id, String email, String senha, String nome, String tipoUsuario, double raioProcuraKm) {
+    public Usuario(long id, String email, String senha, String nome, TiposUsuario tipoUsuario, double raioProcuraKm) {
         this.id = id;
         this.email = email;
         this.senha = senha;
@@ -22,12 +21,11 @@ public class Usuario {
     }
 
     //Getters e Setters
-
     public long getId() {
         return id;
     }
 
-    public String getTipoUsuario() {
+    public TiposUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 
@@ -64,7 +62,6 @@ public class Usuario {
     }
 
     //Método toString
-
     @Override
     public String toString(){
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +

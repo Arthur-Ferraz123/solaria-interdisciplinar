@@ -1,6 +1,6 @@
 package servlet.usuario;
 
-import enums.GenericEnum;
+import exception.GenericExceptionEnum;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Enumeration;
-import static enums.ErrosGerais.ERRO_GENERICO;
+import static exception.ErrosGerais.ERRO_GENERICO;
 
 @WebServlet("/crudUsuario-insert")
 public class InsertUsuarioServlet extends HttpServlet {
@@ -42,7 +42,7 @@ public class InsertUsuarioServlet extends HttpServlet {
             String nome = request.getParameter("nomeInsert");
             String raioProcuraKm = request.getParameter("raioProcuraKmInsert");
 
-            ArrayList<GenericEnum> mensagens = UsuarioService.realizarInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
+            ArrayList<GenericExceptionEnum> mensagens = UsuarioService.realizarInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
 
             if(!mensagens.isEmpty()){
                 session.setAttribute("mensagensInsert", mensagens);
@@ -68,7 +68,7 @@ public class InsertUsuarioServlet extends HttpServlet {
                 session.removeAttribute(attributes.nextElement());
             }
 
-            ArrayList<GenericEnum> mensagens = new ArrayList<>();
+            ArrayList<GenericExceptionEnum> mensagens = new ArrayList<>();
             mensagens.add(ERRO_GENERICO);
 
             session.setAttribute("mensagensInsert", mensagens);

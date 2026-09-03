@@ -5,7 +5,7 @@ public class Endereco {
     //Atributos
     private final long id;
     private final long idUsuario;
-    private String estado;
+    private EstadosBrasileiros estado;
     private String cidade;
     private String bairro;
     private String cep;
@@ -14,7 +14,7 @@ public class Endereco {
     private String complemento;
 
     //Construtor
-    public Endereco(long id, long idUsuario, String estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento) {
+    public Endereco(long id, long idUsuario, EstadosBrasileiros estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.estado = estado;
@@ -35,11 +35,11 @@ public class Endereco {
         return idUsuario;
     }
 
-    public String getEstado() {
+    public EstadosBrasileiros getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadosBrasileiros estado) {
         this.estado = estado;
     }
 

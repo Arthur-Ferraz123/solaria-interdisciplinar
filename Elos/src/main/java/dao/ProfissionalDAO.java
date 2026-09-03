@@ -2,7 +2,7 @@ package dao;
 
 import conexao.Conexao;
 
-import enums.ErrosDoSQL;
+import exception.ErrosDoSQL;
 import model.Profissional;
 
 import java.sql.Connection;
@@ -16,10 +16,10 @@ import java.util.List;
 
 import java.util.ArrayList;
 
-import static enums.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
-import static enums.ErrosGerais.ERRO_GENERICO_NO_BD;
-import static enums.ErrosGerais.ERRO_GENERICO;
-import static enums.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+import static exception.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
+import static exception.ErrosGerais.ERRO_GENERICO_NO_BD;
+import static exception.ErrosGerais.ERRO_GENERICO;
+import static exception.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
 
 public class ProfissionalDAO implements GenericDAO<Profissional> {
 
@@ -33,7 +33,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setLong(1, profissional.getIdUsuario() );
-            preparedStatement.setString(2, profissional.getTipoUsuario());
+            preparedStatement.setString(2, profissional.getTipoUsuario().getTipoUsuario());
             preparedStatement.setString(3, profissional.getProfissao());
             preparedStatement.setString(4, profissional.getCpf());
             preparedStatement.setLong(5, profissional.getIdFornecedor() );
@@ -68,14 +68,13 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
                 return new Profissional(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("profissao"),
                         resultSet.getString("cpf"),
                         resultSet.getLong("id_fornecedor")
                 );
             }
 
-            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
+            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
 
         } catch (Exception exception){
             return null;
@@ -101,14 +100,13 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
                 return new Profissional(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("profissao"),
                         resultSet.getString("cpf"),
                         resultSet.getLong("id_fornecedor")
                 );
             }
 
-            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
+            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
 
         } catch (Exception exception){
             return null;
@@ -134,14 +132,13 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
                 return new Profissional(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("profissao"),
                         resultSet.getString("cpf"),
                         resultSet.getLong("id_fornecedor")
                 );
             }
 
-            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
+            return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
 
         } catch (Exception exception){
             return null;
@@ -168,7 +165,6 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
                 profissionais.add(new Profissional(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("profissao"),
                         resultSet.getString("cpf"),
                         resultSet.getLong("id_fornecedor")
@@ -202,7 +198,6 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
                 profissionais.add(new Profissional(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("profissao"),
                         resultSet.getString("cpf"),
                         resultSet.getLong("id_fornecedor")
