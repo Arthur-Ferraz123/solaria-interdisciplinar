@@ -34,7 +34,7 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setLong(1, empresaDemandante.getIdUsuario());
-            preparedStatement.setString(2, empresaDemandante.getTipoUsuario());
+            preparedStatement.setString(2, empresaDemandante.getTipoUsuario().getTipoDoUsuario());
             preparedStatement.setString(3, empresaDemandante.getCnpj());
             preparedStatement.setString(4, empresaDemandante.getRazaoSocial());
             preparedStatement.setBoolean(5, empresaDemandante.isEhMandante());
@@ -69,14 +69,12 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
                 return new EmpresaDemandante(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social"),
                         resultSet.getBoolean("eh_mandante")
                 );
             }
-            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,
-                                        null, false);
+            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,false);
 
         } catch (Exception exception){
             return null;
@@ -102,15 +100,13 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
                 return new EmpresaDemandante(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social"),
                         resultSet.getBoolean("eh_mandante")
                 );
             }
 
-            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,
-                    null, false);
+            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, false);
 
         } catch (Exception exception){
             return null;
@@ -136,15 +132,13 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
                 return new EmpresaDemandante(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social"),
                         resultSet.getBoolean("eh_mandante")
                 );
             }
 
-            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,
-                    null, false);
+            return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,false);
 
         } catch (Exception exception){
             return null;
@@ -171,7 +165,6 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
                 empresaDemandantes.add(new EmpresaDemandante(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("tipo_usuario"),
                         resultSet.getString("cnpj"),
                         resultSet.getString("razao_social"),
                         resultSet.getBoolean("eh_mandante")

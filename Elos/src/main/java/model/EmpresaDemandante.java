@@ -11,7 +11,7 @@ public class EmpresaDemandante {
     private boolean ehMandante;
 
     //Construtor
-    public EmpresaDemandante(long id, long idUsuario, String tipoUsuario, String cnpj, String razaoSocial, boolean ehMandante) {
+    public EmpresaDemandante(long id, long idUsuario, String cnpj, String razaoSocial, boolean ehMandante) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.cnpj = cnpj;

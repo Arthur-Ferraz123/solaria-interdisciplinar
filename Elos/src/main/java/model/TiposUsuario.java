@@ -6,14 +6,14 @@ public enum TiposUsuario {
     EMPRESA_DEMANDANTE("EMPRESA_DEMANDANTE"),
     PROFISSIONAL("PROFISSIONAL");
 
-    private final String tipoUsuario;
+    private final String tipoDoUsuario;
 
     TiposUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+        this.tipoDoUsuario = tipoUsuario;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
+    public String getTipoDoUsuario() {
+        return tipoDoUsuario;
     }
 
     public static TiposUsuario descobrirTipoUsuario(String tipoUsuarioRecebido){
@@ -22,7 +22,7 @@ public enum TiposUsuario {
 
         for(TiposUsuario tiposUsuario : TiposUsuario.values()){
 
-            if(tiposUsuario.getTipoUsuario().equalsIgnoreCase(tipoUsuarioRecebidoTratado)){
+            if(tiposUsuario.getTipoDoUsuario().equalsIgnoreCase(tipoUsuarioRecebidoTratado)){
                 return tiposUsuario;
             }
         }

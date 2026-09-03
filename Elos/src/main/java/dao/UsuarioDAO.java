@@ -32,7 +32,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 preparedStatement.setString(1, usuario.getEmail() );
                 preparedStatement.setString(2, usuario.getSenha());
                 preparedStatement.setString(3, usuario.getNome());
-                preparedStatement.setString(4, usuario.getTipoUsuario().getTipoUsuario());
+                preparedStatement.setString(4, usuario.getTipoUsuario().getTipoDoUsuario());
                 preparedStatement.setDouble(5, usuario.getRaioProcuraKm());
 
                 return preparedStatement.executeUpdate();
@@ -44,7 +44,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 preparedStatement.setString(1, usuario.getEmail() );
                 preparedStatement.setString(2, usuario.getSenha());
                 preparedStatement.setString(3, usuario.getNome());
-                preparedStatement.setString(4, usuario.getTipoUsuario().getTipoUsuario());
+                preparedStatement.setString(4, usuario.getTipoUsuario().getTipoDoUsuario());
 
                 return preparedStatement.executeUpdate();
 

@@ -33,7 +33,7 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setLong(1, profissional.getIdUsuario() );
-            preparedStatement.setString(2, profissional.getTipoUsuario().getTipoUsuario());
+            preparedStatement.setString(2, profissional.getTipoUsuario().getTipoDoUsuario());
             preparedStatement.setString(3, profissional.getProfissao());
             preparedStatement.setString(4, profissional.getCpf());
             preparedStatement.setLong(5, profissional.getIdFornecedor() );

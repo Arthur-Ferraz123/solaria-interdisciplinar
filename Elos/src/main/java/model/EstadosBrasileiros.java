@@ -46,7 +46,7 @@ public enum EstadosBrasileiros {
         return nomeEstado;
     }
 
-    public static EstadosBrasileiros descobrirEstadoBrasileiro(String estadoBrasileiroSiglaEntrada){
+    public static EstadosBrasileiros descobrirEstadoBrasileiroPorSigla(String estadoBrasileiroSiglaEntrada){
         for(EstadosBrasileiros estadosBrasileiros : EstadosBrasileiros.values()){
             if(estadosBrasileiros.getSiglaEstado().equalsIgnoreCase(estadoBrasileiroSiglaEntrada)){
                 return estadosBrasileiros;

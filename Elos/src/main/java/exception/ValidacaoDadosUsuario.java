@@ -1,6 +1,6 @@
 package exception;
 
-public enum ValidacaoDados implements GenericExceptionEnum{
+public enum ValidacaoDadosUsuario implements GenericExceptionEnum{
 
     //Variações do enum
     ATRIBUTO_NULL(-1, "Atributo null"),
@@ -33,7 +33,7 @@ public enum ValidacaoDados implements GenericExceptionEnum{
     private final String mensagem;
 
     //Construtor
-    ValidacaoDados(int codigo, String mensagem) {
+    ValidacaoDadosUsuario(int codigo, String mensagem) {
         this.codigo = codigo;
         this.mensagem = mensagem;
     }

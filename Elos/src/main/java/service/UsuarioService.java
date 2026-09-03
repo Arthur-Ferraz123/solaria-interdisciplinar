@@ -4,7 +4,7 @@ import dao.UsuarioDAO;
 import exception.ErrosGerais;
 import exception.GenericExceptionEnum;
 import model.TiposUsuario;
-import exception.ValidacaoDados;import model.Usuario;
+import exception.ValidacaoDadosUsuario;import model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 import static exception.ErrosGerais.*;
-import static exception.ValidacaoDados.*;
+import static exception.ValidacaoDadosUsuario.*;
 
 public class UsuarioService {
 
@@ -46,27 +46,27 @@ public class UsuarioService {
 
     private static ArrayList<GenericExceptionEnum> validarUpdate(String tipoUsuarioUpdate,String emailUpdate, String senhaUpdate, String nomeUpdate, String raioProcuraKmUpdate){
         ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
-        ValidacaoDados emailValidacao = validarEmailBasico(emailUpdate);
+        ValidacaoDadosUsuario emailValidacao = validarEmailBasico(emailUpdate);
 
-        if(emailValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if(emailValidacao != VALIDACAO_OK){
             erros.add(emailValidacao);
         }
 
-        ValidacaoDados senhaValidacao = validarSenhaUpdate(senhaUpdate);
+        ValidacaoDadosUsuario senhaValidacao = validarSenhaUpdate(senhaUpdate);
 
-        if (senhaValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if (senhaValidacao != VALIDACAO_OK){
             erros.add(senhaValidacao);
         }
 
-        ValidacaoDados nomeValidacao = validarNome(nomeUpdate, tipoUsuarioUpdate);
+        ValidacaoDadosUsuario nomeValidacao = validarNome(nomeUpdate, tipoUsuarioUpdate);
 
-        if (nomeValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if (nomeValidacao != VALIDACAO_OK){
             erros.add(nomeValidacao);
         }
 
-        ValidacaoDados raioProcuraKmValidacao = validarRaioProcuraKm(raioProcuraKmUpdate);
+        ValidacaoDadosUsuario raioProcuraKmValidacao = validarRaioProcuraKm(raioProcuraKmUpdate);
 
-        if(raioProcuraKmValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if(raioProcuraKmValidacao != VALIDACAO_OK){
             erros.add(raioProcuraKmValidacao);
         }
 
@@ -75,7 +75,7 @@ public class UsuarioService {
     }
 
     public static Usuario exibirUsuarioParaUpdate(String id){
-        if(validarId(id).getCodigo() != VALIDACAO_OK.getCodigo()){
+        if(validarId(id) != VALIDACAO_OK){
             return null;
         }
 
@@ -87,9 +87,9 @@ public class UsuarioService {
 
     //Métodos para realizar as ações do DeleteUsuarioServlet
     public static GenericExceptionEnum realizarDelete(String id){
-        ValidacaoDados erro = validarId(id);
+        ValidacaoDadosUsuario erro = validarId(id);
 
-        if(erro.getCodigo() != VALIDACAO_OK.getCodigo()) {
+        if(erro != VALIDACAO_OK) {
             return erro;
         }
 
@@ -210,9 +210,9 @@ public class UsuarioService {
 
     private static ArrayList<GenericExceptionEnum> validarUsuarioSelect(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2, String ordenacao, String orderBy){
         ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
-        ValidacaoDados clausulaWhereNomeValidacao = validarWhere(clausulaWhereNome);
+        ValidacaoDadosUsuario clausulaWhereNomeValidacao = validarWhere(clausulaWhereNome);
 
-        if (clausulaWhereNomeValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if (clausulaWhereNomeValidacao != VALIDACAO_OK){
             erros.add(clausulaWhereNomeValidacao);
 
             return erros;
@@ -220,15 +220,15 @@ public class UsuarioService {
         }
 
         erros.addAll(validarClausulaWhereValor(clausulaWhereNome, clausulaWhereValor, clausulaWhereValor2));
-        ValidacaoDados orderByValidacao = validarOrderBy(orderBy);
+        ValidacaoDadosUsuario orderByValidacao = validarOrderBy(orderBy);
 
-        if (orderByValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if (orderByValidacao != VALIDACAO_OK){
             erros.add(orderByValidacao);
         }
 
-        ValidacaoDados ordenacaoValidacao = validarSentidoOrdenacao(ordenacao);
+        ValidacaoDadosUsuario ordenacaoValidacao = validarSentidoOrdenacao(ordenacao);
 
-        if (ordenacaoValidacao.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if (ordenacaoValidacao != VALIDACAO_OK){
             erros.add(ordenacaoValidacao);
         }
 
@@ -238,8 +238,8 @@ public class UsuarioService {
 
     private static ArrayList<GenericExceptionEnum> validarClausulaWhereValor(String clausulaWhereNome, String clausulaWhereValor, String clausulaWhereValor2){
         ArrayList<GenericExceptionEnum> dadosValidados = new ArrayList<>();
-        ValidacaoDados dadoValidado = null;
-        ValidacaoDados dadoValidado2 = null;
+        ValidacaoDadosUsuario dadoValidado = null;
+        ValidacaoDadosUsuario dadoValidado2 = null;
 
         String clausulaWhereNomeTratado = clausulaWhereNome.trim().toLowerCase().replaceAll("á","a")
                 .replaceAll(" em","")
@@ -251,14 +251,14 @@ public class UsuarioService {
         } else if(clausulaWhereNomeTratado.equalsIgnoreCase("email")){
             dadoValidado = validarEmailBasico(clausulaWhereValor);
         } else if(clausulaWhereNomeTratado.equalsIgnoreCase("nome")){
-            dadoValidado = validarNome(clausulaWhereValor, "PROFISSIONAL").getCodigo() == VALIDACAO_OK.getCodigo() ? validarNome(clausulaWhereValor, "PROFISSIONAL") : validarNome(clausulaWhereValor, "FORNECEDOR");
+            dadoValidado = validarNome(clausulaWhereValor, "PROFISSIONAL") == VALIDACAO_OK ? validarNome(clausulaWhereValor, "PROFISSIONAL") : validarNome(clausulaWhereValor, "FORNECEDOR");
         } else if(clausulaWhereNomeTratado.equalsIgnoreCase("tipo_usuario")){
             dadoValidado = validarTipoUsuario(clausulaWhereValor);
         } else if(clausulaWhereNomeTratado.equalsIgnoreCase("raio_procura_km")){
             dadoValidado = validarRaioProcuraKm(clausulaWhereValor);
             dadoValidado2 = validarRaioProcuraKm(clausulaWhereValor2);
 
-            if(dadoValidado.getCodigo() != VALIDACAO_OK.getCodigo()){
+            if(dadoValidado != VALIDACAO_OK){
                 dadosValidados.add(RAIOS_PROCURA_KM_NAO_NUMERICO);
 
                 return dadosValidados;
@@ -271,11 +271,11 @@ public class UsuarioService {
             dadoValidado = DADO_INVALIDO_GENERICO;
         }
 
-        if (dadoValidado.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if (dadoValidado != VALIDACAO_OK){
             dadosValidados.add(dadoValidado);
         }
 
-        if (dadoValidado2 != null && dadoValidado2.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if (dadoValidado2 != null && dadoValidado2 != VALIDACAO_OK){
             dadosValidados.add(dadoValidado2);
         }
 
@@ -302,32 +302,32 @@ public class UsuarioService {
     private static ArrayList<GenericExceptionEnum> validarUsuarioInsert(String email, String senha, String nome, String tipoUsuario, String raioProcuraKm){
         ArrayList<GenericExceptionEnum> listaDeErros = new ArrayList<>();
 
-        ValidacaoDados validacaoEmail = validarEmailInsert(email);
-        ValidacaoDados validacaoSenha = validarSenha(senha);
-        ValidacaoDados validacaoTipoUsuario = validarTipoUsuario(tipoUsuario);
-        ValidacaoDados validacaoNome = validarNome(nome, tipoUsuario);
-        ValidacaoDados validacaoRaioProcuraKm = validarRaioProcuraKm(raioProcuraKm);
+        ValidacaoDadosUsuario validacaoEmail = validarEmailInsert(email);
+        ValidacaoDadosUsuario validacaoSenha = validarSenha(senha);
+        ValidacaoDadosUsuario validacaoTipoUsuario = validarTipoUsuario(tipoUsuario);
+        ValidacaoDadosUsuario validacaoNome = validarNome(nome, tipoUsuario);
+        ValidacaoDadosUsuario validacaoRaioProcuraKm = validarRaioProcuraKm(raioProcuraKm);
 
-        if (validacaoEmail.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if (validacaoEmail != VALIDACAO_OK){
             listaDeErros.add(validacaoEmail);
         }
 
-        if(validacaoSenha.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if(validacaoSenha != VALIDACAO_OK){
             listaDeErros.add(validacaoSenha);
         }
 
-        if(validacaoTipoUsuario.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if(validacaoTipoUsuario != VALIDACAO_OK){
             listaDeErros.add(validacaoTipoUsuario);
 
             listaDeErros.add(IMPOSSIVEL_VALIDAR_NOME);
             validacaoNome = VALIDACAO_OK;
         }
 
-        if(validacaoNome.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if(validacaoNome != VALIDACAO_OK){
             listaDeErros.add(validacaoNome);
         }
 
-        if(validacaoRaioProcuraKm.getCodigo() != VALIDACAO_OK.getCodigo() && validacaoRaioProcuraKm.getCodigo() != ATRIBUTO_NULL.getCodigo()){
+        if(validacaoRaioProcuraKm != VALIDACAO_OK && validacaoRaioProcuraKm != ATRIBUTO_NULL){
             listaDeErros.add(validacaoRaioProcuraKm);
         }
 
@@ -354,7 +354,7 @@ public class UsuarioService {
     }
 
     //Métodos auxiliares
-    private static ValidacaoDados validarSentidoOrdenacao(String ordenacao){
+    private static ValidacaoDadosUsuario validarSentidoOrdenacao(String ordenacao){
         if (ordenacao == null || ordenacao.isBlank()){return ORDENACAO_INVALIDA;}
 
         String ordenacaoTratada = ordenacao.trim().toLowerCase().replaceAll("á","a")
@@ -371,7 +371,7 @@ public class UsuarioService {
         }
     }
 
-    private static ValidacaoDados validarWhere(String where){
+    private static ValidacaoDadosUsuario validarWhere(String where){
         if (where == null || where.isBlank()){return WHERE_INVALIDO;}
 
         String whereTratada = where.trim().toLowerCase().replaceAll("á","a")
@@ -388,7 +388,7 @@ public class UsuarioService {
         }
     }
 
-    private static ValidacaoDados validarOrderBy(String ordenacao){
+    private static ValidacaoDadosUsuario validarOrderBy(String ordenacao){
         if (ordenacao == null || ordenacao.isBlank()){return ORDER_BY_INVALIDO;}
 
         String ordenacaoTratada = ordenacao.trim().toLowerCase().replaceAll("á","a")
@@ -405,7 +405,7 @@ public class UsuarioService {
         }
     }
 
-    private static ValidacaoDados validarId(String id){
+    private static ValidacaoDadosUsuario validarId(String id){
         try {
             String idTratado = id.trim();
             long idConvertido = Long.parseLong(idTratado);
@@ -418,7 +418,7 @@ public class UsuarioService {
         }
     }
 
-    private static ValidacaoDados validarEmailBasico(String email) {
+    private static ValidacaoDadosUsuario validarEmailBasico(String email) {
         if (email == null || email.isBlank()) {
             return EMAIL_VAZIO;
 
@@ -431,7 +431,7 @@ public class UsuarioService {
 
         }
 
-        ValidacaoDados validacaoFormato = validarFormatoEmail(emailTratado);
+        ValidacaoDadosUsuario validacaoFormato = validarFormatoEmail(emailTratado);
 
         if (validacaoFormato != VALIDACAO_OK){
             return validacaoFormato;
@@ -442,17 +442,17 @@ public class UsuarioService {
 
     }
 
-    private static ValidacaoDados validarEmailInsert(String email) {
-        ValidacaoDados validarEmailBasico = validarFormatoEmail(email);
+    private static ValidacaoDadosUsuario validarEmailInsert(String email) {
+        ValidacaoDadosUsuario validarEmailBasico = validarFormatoEmail(email);
 
-        if(validarEmailBasico.getCodigo() != VALIDACAO_OK.getCodigo()){
+        if(validarEmailBasico != VALIDACAO_OK){
             return validarEmailBasico;
 
         }
 
         String emailTratado = email.toLowerCase().trim();
 
-        ValidacaoDados emailNaoCadastrado = validarEmailNaoCadastrado(emailTratado);
+        ValidacaoDadosUsuario emailNaoCadastrado = validarEmailNaoCadastrado(emailTratado);
 
         if(emailNaoCadastrado != VALIDACAO_OK){
             return emailNaoCadastrado;
@@ -463,7 +463,7 @@ public class UsuarioService {
 
     }
 
-    private static ValidacaoDados validarFormatoEmail(String email){
+    private static ValidacaoDadosUsuario validarFormatoEmail(String email){
         Pattern pattern = Pattern.compile("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$");
         Matcher matcher = pattern.matcher(email);
 
@@ -475,7 +475,7 @@ public class UsuarioService {
 
     }
 
-    private static ValidacaoDados validarEmailNaoCadastrado(String email){
+    private static ValidacaoDadosUsuario validarEmailNaoCadastrado(String email){
         UsuarioDAO dao = new UsuarioDAO();
         Usuario usuario = dao.readByEmail(email);
 
@@ -488,7 +488,7 @@ public class UsuarioService {
 
     }
 
-    private static ValidacaoDados validarSenhaUpdate(String senha){
+    private static ValidacaoDadosUsuario validarSenhaUpdate(String senha){
         if (senha == null || senha.isBlank()){
             return VALIDACAO_OK;
 
@@ -500,7 +500,7 @@ public class UsuarioService {
 
     }
 
-    private static ValidacaoDados validarSenha(String senha){
+    private static ValidacaoDadosUsuario validarSenha(String senha){
         if (senha == null || senha.isBlank()){
             return SENHA_VAZIA;
 
@@ -525,7 +525,7 @@ public class UsuarioService {
 
     }
 
-    private static ValidacaoDados validarNome(String nome, String tipoUsuario){
+    private static ValidacaoDadosUsuario validarNome(String nome, String tipoUsuario){
         if (nome == null || nome.isBlank()){
             return NOME_VAZIO;
 
@@ -554,7 +554,7 @@ public class UsuarioService {
 
     }
 
-    private static ValidacaoDados validarTipoUsuario(String tipoUsuario){
+    private static ValidacaoDadosUsuario validarTipoUsuario(String tipoUsuario){
         if (tipoUsuario == null || tipoUsuario.isBlank()) {
             return TIPO_USUARIO_VAZIO;
         }
@@ -567,7 +567,7 @@ public class UsuarioService {
         return VALIDACAO_OK;
     }
 
-    private static ValidacaoDados validarRaioProcuraKm(String raioProcuraKm){
+    private static ValidacaoDadosUsuario validarRaioProcuraKm(String raioProcuraKm){
         if (raioProcuraKm == null || raioProcuraKm.isBlank()){
             return ATRIBUTO_NULL;
         }

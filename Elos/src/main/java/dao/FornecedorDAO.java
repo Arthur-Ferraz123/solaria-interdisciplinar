@@ -34,7 +34,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setLong(1, fornecedor.getIdUsuario() );
-            preparedStatement.setString(2, fornecedor.getTipoUsuario().getTipoUsuario());
+            preparedStatement.setString(2, fornecedor.getTipoUsuario().getTipoDoUsuario());
             preparedStatement.setString(3, fornecedor.getTipoFornecedor().getTipoFornecedor());
             preparedStatement.setString(4, fornecedor.getCnpj());
             preparedStatement.setString(5, fornecedor.getRazaoSocial() );
@@ -224,7 +224,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoUsuario());
+            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoDoUsuario());
             preparedStatement.setString(2, fornecedor.getRazaoSocial() );
             preparedStatement.setLong(3, fornecedor.getId());
 
@@ -250,7 +250,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where id_usuario = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoUsuario());
+            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoDoUsuario());
             preparedStatement.setString(2, fornecedor.getRazaoSocial() );
             preparedStatement.setLong(3, fornecedor.getIdUsuario());
 
@@ -276,7 +276,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
             String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where cnpj = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoUsuario());
+            preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoDoUsuario());
             preparedStatement.setString(2, fornecedor.getRazaoSocial() );
             preparedStatement.setString(3, fornecedor.getCnpj());
 

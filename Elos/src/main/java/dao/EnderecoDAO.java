@@ -4,6 +4,7 @@ import conexao.Conexao;
 
 import exception.ErrosDoSQL;
 import model.Endereco;
+import model.EstadosBrasileiros;
 
 import java.sql.Connection;
 
@@ -33,7 +34,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.setLong(1, endereco.getIdUsuario() );
-            preparedStatement.setString(2, endereco.getEstado());
+            preparedStatement.setString(2, endereco.getEstado().getSiglaEstado());
             preparedStatement.setString(3, endereco.getCidade());
             preparedStatement.setString(4, endereco.getBairro() );
             preparedStatement.setString(5, endereco.getCep() );
@@ -72,7 +73,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
                 return new Endereco(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("estado"),
+                        EstadosBrasileiros.descobrirEstadoBrasileiroPorSigla(resultSet.getString("estado")),
                         resultSet.getString("cidade"),
                         resultSet.getString("bairro"),
                         resultSet.getString("cep"),
@@ -111,7 +112,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
                 enderecos.add(new Endereco(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("estado"),
+                        EstadosBrasileiros.descobrirEstadoBrasileiroPorSigla(resultSet.getString("estado")),
                         resultSet.getString("cidade"),
                         resultSet.getString("bairro"),
                         resultSet.getString("cep"),
@@ -148,7 +149,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
                 enderecos.add(new Endereco(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("estado"),
+                        EstadosBrasileiros.descobrirEstadoBrasileiroPorSigla(resultSet.getString("estado")),
                         resultSet.getString("cidade"),
                         resultSet.getString("bairro"),
                         resultSet.getString("cep"),
@@ -185,7 +186,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
                 enderecos.add(new Endereco(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("estado"),
+                        EstadosBrasileiros.descobrirEstadoBrasileiroPorSigla(resultSet.getString("estado")),
                         resultSet.getString("cidade"),
                         resultSet.getString("bairro"),
                         resultSet.getString("cep"),
@@ -223,7 +224,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
                 enderecos.add(new Endereco(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("estado"),
+                        EstadosBrasileiros.descobrirEstadoBrasileiroPorSigla(resultSet.getString("estado")),
                         resultSet.getString("cidade"),
                         resultSet.getString("bairro"),
                         resultSet.getString("cep"),
@@ -260,7 +261,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
                 enderecos.add(new Endereco(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("estado"),
+                        EstadosBrasileiros.descobrirEstadoBrasileiroPorSigla(resultSet.getString("estado")),
                         resultSet.getString("cidade"),
                         resultSet.getString("bairro"),
                         resultSet.getString("cep"),
@@ -298,7 +299,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
                 enderecos.add(new Endereco(
                         resultSet.getLong("id"),
                         resultSet.getLong("id_usuario"),
-                        resultSet.getString("estado"),
+                        EstadosBrasileiros.descobrirEstadoBrasileiroPorSigla(resultSet.getString("estado")),
                         resultSet.getString("cidade"),
                         resultSet.getString("bairro"),
                         resultSet.getString("cep"),
@@ -328,7 +329,7 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
             String update = "update endereco set estado = ?, cidade = ?, bairro = ?, cep = ?, logradouro = ?, numero = ?, complemento = ? where id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
-            preparedStatement.setString(1, endereco.getEstado() );
+            preparedStatement.setString(1, endereco.getEstado().getSiglaEstado() );
             preparedStatement.setString(2, endereco.getCidade() );
             preparedStatement.setString(3, endereco.getBairro() );
             preparedStatement.setString(4, endereco.getCep() );
