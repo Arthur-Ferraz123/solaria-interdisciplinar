@@ -162,10 +162,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     @Override
-    public List<Usuario> readAll(){
+    public ArrayList<Usuario> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario";
@@ -195,10 +195,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public List<Usuario> readAllOrderBy(String ordenacao, String ordem){
+    public ArrayList<Usuario> readAllOrderBy(String ordenacao, String ordem){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario order by "+ordenacao+" "+ordem;
@@ -228,10 +228,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public List<Usuario> readAllByTipoUsuario(String tipoUsuario){
+    public ArrayList<Usuario> readAllByTipoUsuario(String tipoUsuario){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario where tipo_usuario = ?";
@@ -262,10 +262,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public List<Usuario> readAllByTipoUsuarioOrderBy(String tipoUsuario, String ordenacao, String ordem){
+    public ArrayList<Usuario> readAllByTipoUsuarioOrderBy(String tipoUsuario, String ordenacao, String ordem){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario where tipo_usuario = ? order by "+ordenacao+" "+ordem;
@@ -296,10 +296,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public List<Usuario> readAllWhereRaioProcuraKmEntre(double raioProcuraKmBase, double raioProcuraKmTeto){
+    public ArrayList<Usuario> readAllWhereRaioProcuraKmEntre(double raioProcuraKmBase, double raioProcuraKmTeto){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario where raio_procura_km between ? and ?";
@@ -331,11 +331,11 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public List<Usuario> readAllWhereRaioProcuraKmEntreOrderBy(double raioProcuraKmBase, double raioProcuraKmTeto, String ordenacao, String ordem){
+    public ArrayList<Usuario> readAllWhereRaioProcuraKmEntreOrderBy(double raioProcuraKmBase, double raioProcuraKmTeto, String ordenacao, String ordem){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try {
 

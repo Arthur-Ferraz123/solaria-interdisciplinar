@@ -151,10 +151,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
     }
 
     @Override
-    public List<Fornecedor> readAll(){
+    public ArrayList<Fornecedor> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Fornecedor> fornecedores = new ArrayList<>();
+        ArrayList<Fornecedor> fornecedores = new ArrayList<>();
 
         try {
             String read = "select * from fornecedor";
@@ -182,10 +182,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         }
     }
 
-    public List<Fornecedor> readAllByTipoFornecedor(String tipoFornecedor){
+    public ArrayList<Fornecedor> readAllByTipoFornecedor(String tipoFornecedor){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Fornecedor> fornecedores = new ArrayList<>();
+        ArrayList<Fornecedor> fornecedores = new ArrayList<>();
 
         try {
             String read = "select * from fornecedor where tipo_fornecedor = ?";

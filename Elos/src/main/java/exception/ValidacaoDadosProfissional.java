@@ -6,6 +6,8 @@ public enum ValidacaoDadosProfissional implements GenericExceptionEnum{
     ATRIBUTO_NULL(-1, "Atributo null"),
     VALIDACAO_OK(0, "Dado válido"),
     ID_INVALIDO(1, "O ID inserido é inválido"),
+    ID_USUARIO_INVALIDO(2, "O ID do usuário inserido é inválido"),
+    ID_USUARIO_NAO_REGISTRADO(3, "O ID inserido não foi encontrado");
 
 
     //Constantes do enum

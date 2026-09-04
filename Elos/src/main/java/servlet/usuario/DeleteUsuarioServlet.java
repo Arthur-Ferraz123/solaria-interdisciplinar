@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import service.UsuarioService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import static exception.ErrosGerais.ERRO_GENERICO;
@@ -37,10 +38,10 @@ public class DeleteUsuarioServlet extends HttpServlet {
 
             String id = request.getParameter("idDelete");
 
-            GenericExceptionEnum erro = UsuarioService.realizarDelete(id);
+            ArrayList<GenericExceptionEnum> erros = UsuarioService.realizarDelete(id);
 
-            if(erro != null){
-                session.setAttribute("mensagemDelete", erro.exibirMensagem());
+            if(!erros.isEmpty()){
+                session.setAttribute("mensagemDelete", erros);
                 response.sendRedirect(request.getContextPath() + "/crudUsuario");
             } else {
                 session.setAttribute("mensagemDelete", "O usuário foi deletado com sucesso!");

@@ -97,10 +97,10 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
     }
 
     @Override
-    public List<Endereco> readAll(){
+    public ArrayList<Endereco> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Endereco> enderecos = new ArrayList<>();
+        ArrayList<Endereco> enderecos = new ArrayList<>();
 
         try {
             String read = "select * from endereco";
@@ -133,10 +133,10 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
         }
     }
 
-    public List<Endereco> readAllByIdUsuario(long idUsuario){
+    public ArrayList<Endereco> readAllByIdUsuario(long idUsuario){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Endereco> enderecos = new ArrayList<>();
+        ArrayList<Endereco> enderecos = new ArrayList<>();
 
         try {
             String read = "select * from endereco where id_usuario = ?";
@@ -170,10 +170,10 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
         }
     }
 
-    public List<Endereco> readAllByEstado(String estado){
+    public ArrayList<Endereco> readAllByEstado(String estado){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Endereco> enderecos = new ArrayList<>();
+        ArrayList<Endereco> enderecos = new ArrayList<>();
 
         try {
             String read = "select * from endereco where estado = ?";
@@ -208,10 +208,10 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
     }
 
-    public List<Endereco> readAllByCidade(String cidade){
+    public ArrayList<Endereco> readAllByCidade(String cidade){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Endereco> enderecos = new ArrayList<>();
+        ArrayList<Endereco> enderecos = new ArrayList<>();
 
         try {
             String read = "select * from endereco where cidade = ?";
@@ -245,10 +245,10 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
         }
     }
 
-    public List<Endereco> readAllByBairro(String bairro){
+    public ArrayList<Endereco> readAllByBairro(String bairro){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Endereco> enderecos = new ArrayList<>();
+        ArrayList<Endereco> enderecos = new ArrayList<>();
 
         try {
             String read = "select * from endereco where bairro = ?";
@@ -283,10 +283,10 @@ public class EnderecoDAO implements GenericDAO<Endereco> {
 
     }
 
-    public List<Endereco> readAllByCep(String cep){
+    public ArrayList<Endereco> readAllByCep(String cep){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Endereco> enderecos = new ArrayList<>();
+        ArrayList<Endereco> enderecos = new ArrayList<>();
 
         try {
             String read = "select * from endereco where cep = ?";

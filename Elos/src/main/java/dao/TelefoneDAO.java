@@ -118,10 +118,10 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
     }
 
     @Override
-    public List<Telefone> readAll(){
+    public ArrayList<Telefone> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Telefone> telefones = new ArrayList<>();
+        ArrayList<Telefone> telefones = new ArrayList<>();
 
         try {
             String read = "select * from telefone";
@@ -150,10 +150,10 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
         }
     }
 
-    public List<Telefone> readAllByIdUsuario(long idUsuario){
+    public ArrayList<Telefone> readAllByIdUsuario(long idUsuario){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Telefone> telefones = new ArrayList<>();
+        ArrayList<Telefone> telefones = new ArrayList<>();
 
         try {
             String read = "select * from telefone where id_usuario = ?";

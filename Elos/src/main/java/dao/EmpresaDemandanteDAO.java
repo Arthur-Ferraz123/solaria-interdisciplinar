@@ -150,10 +150,10 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
     }
 
     @Override
-    public List<EmpresaDemandante> readAll(){
+    public ArrayList<EmpresaDemandante> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<EmpresaDemandante> empresaDemandantes = new ArrayList<>();
+        ArrayList<EmpresaDemandante> empresaDemandantes = new ArrayList<>();
 
         try {
             String read = "select * from empresa_demandante";

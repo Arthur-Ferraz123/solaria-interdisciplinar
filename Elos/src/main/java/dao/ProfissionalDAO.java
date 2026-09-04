@@ -150,10 +150,10 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
     }
 
     @Override
-    public List<Profissional> readAll(){
+    public ArrayList<Profissional> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Profissional> profissionais = new ArrayList<>();
+        ArrayList<Profissional> profissionais = new ArrayList<>();
 
         try {
             String read = "select * from profissional";
@@ -182,10 +182,10 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
         }
     }
 
-    public List<Profissional> readAllByIdEmpresaTecnica(long idFornecedor){
+    public ArrayList<Profissional> readAllByIdEmpresaTecnica(long idFornecedor){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Profissional> profissionais = new ArrayList<>();
+        ArrayList<Profissional> profissionais = new ArrayList<>();
 
         try {
             String read = "select * from profissional where id_fornecedor = ?";
