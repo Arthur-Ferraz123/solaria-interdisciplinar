@@ -41,7 +41,7 @@ public class DeleteUsuarioServlet extends HttpServlet {
             ArrayList<GenericExceptionEnum> erros = UsuarioService.realizarDelete(id);
 
             if(!erros.isEmpty()){
-                session.setAttribute("mensagemDelete", erros);
+                session.setAttribute("mensagensErroDelete", erros);
                 response.sendRedirect(request.getContextPath() + "/crudUsuario");
             } else {
                 session.setAttribute("mensagemDelete", "O usuário foi deletado com sucesso!");
