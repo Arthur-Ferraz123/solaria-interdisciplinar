@@ -1,19 +1,21 @@
 package servlet.usuario;
 
-import exception.GenericExceptionEnum;
+import static exception.ErrosGerais.ERRO_GENERICO;
+
+import java.util.Enumeration;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import service.UsuarioService;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import java.util.Enumeration;
-import static exception.ErrosGerais.ERRO_GENERICO;
+import service.usuario.UsuarioDadosDto;
+import exception.GenericExceptionEnum;
+import service.usuario.UsuarioService;
 
 @WebServlet("/crudUsuario-insert")
 public class InsertUsuarioServlet extends HttpServlet {
@@ -36,20 +38,23 @@ public class InsertUsuarioServlet extends HttpServlet {
                 session.removeAttribute(attributes.nextElement());
             }
 
-            String tipoUsuario = request.getParameter("tipoUsuarioInsert");
-            String email = request.getParameter("emailInsert");
-            String senha = request.getParameter("senhaInsert");
-            String nome = request.getParameter("nomeInsert");
-            String raioProcuraKm = request.getParameter("raioProcuraKmInsert");
+            String tipoUsuarioInsert = request.getParameter("tipoUsuarioInsert");
+            String emailInsert = request.getParameter("emailInsert");
+            String senhaInsert = request.getParameter("senhaInsert");
+            String nomeInsert = request.getParameter("nomeInsert");
+            String raioProcuraKmInsert = request.getParameter("raioProcuraKmInsert");
 
-            ArrayList<GenericExceptionEnum> mensagens = UsuarioService.realizarInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
+            UsuarioDadosDto usuarioDadosDto = new UsuarioDadosDto(null, tipoUsuarioInsert, emailInsert,
+                                                                    senhaInsert, nomeInsert, raioProcuraKmInsert);
 
-            if(!mensagens.isEmpty()){
-                session.setAttribute("mensagensInsert", mensagens);
-                session.setAttribute("tipoUsuarioInsert", tipoUsuario);
-                session.setAttribute("emailInsert", email);
-                session.setAttribute("nomeInsert", nome);
-                session.setAttribute("raioProcuraKmInsert", raioProcuraKm);
+            ArrayList<GenericExceptionEnum> mensagensInsert = UsuarioService.realizarInsert(usuarioDadosDto);
+
+            if(!mensagensInsert.isEmpty()){
+                session.setAttribute("mensagensInsert", mensagensInsert);
+                session.setAttribute("tipoUsuarioInsert", tipoUsuarioInsert);
+                session.setAttribute("emailInsert", emailInsert);
+                session.setAttribute("nomeInsert", nomeInsert);
+                session.setAttribute("raioProcuraKmInsert", raioProcuraKmInsert);
 
                 //Atributo usado no javascript para abrir o pop-up
                 session.setAttribute("abrirInsert", true);
@@ -68,10 +73,10 @@ public class InsertUsuarioServlet extends HttpServlet {
                 session.removeAttribute(attributes.nextElement());
             }
 
-            ArrayList<GenericExceptionEnum> mensagens = new ArrayList<>();
-            mensagens.add(ERRO_GENERICO);
+            ArrayList<GenericExceptionEnum> mensagensInsert = new ArrayList<>();
+            mensagensInsert.add(ERRO_GENERICO);
 
-            session.setAttribute("mensagensInsert", mensagens);
+            session.setAttribute("mensagensInsert", mensagensInsert);
             response.sendRedirect(request.getContextPath() + "/crudUsuario");
         }
     }

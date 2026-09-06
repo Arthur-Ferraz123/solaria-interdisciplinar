@@ -57,7 +57,7 @@ public class Telefone {
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "Telefone: "+ this.telefone + "\n" +
-                "Tipo do telefone: "+ this.tipo + "\n" +
+                "Tipo do telefone: "+ this.tipo.getTipoTelefone() + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
                 "Principal: "+ this.principal + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";

@@ -2,7 +2,6 @@ package model;
 
 public class Endereco {
 
-    //Atributos
     private final long id;
     private final long idUsuario;
     private EstadosBrasileiros estado;
@@ -13,7 +12,6 @@ public class Endereco {
     private String numero;
     private String complemento;
 
-    //Construtor
     public Endereco(long id, long idUsuario, EstadosBrasileiros estado, String cidade, String bairro, String cep, String logradouro, String numero, String complemento) {
         this.id = id;
         this.idUsuario = idUsuario;
@@ -26,7 +24,6 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    //Getters e Setters
     public long getId() {
         return id;
     }
@@ -91,13 +88,12 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    //Método toString
     @Override
     public String toString(){
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "Estado: "+ this.estado + "\n" +
+                "Estado: "+ this.estado.getSiglaEstado() + "\n" +
                 "Cidade: "+ this.cidade + "\n" +
                 "Bairro: "+ this.bairro + "\n" +
                 "CEP: "+ this.cep + "\n" +

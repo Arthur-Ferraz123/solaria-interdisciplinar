@@ -1,26 +1,20 @@
 package dao;
 
-import conexao.Conexao;
-
-import exception.ErrosDoSQL;
-import model.TiposTelefone;
-import model.Telefone;
-
-import java.sql.Connection;
-
-import java.sql.PreparedStatement;
-
-import java.sql.ResultSet;
-
-import java.sql.SQLException;
-import java.util.List;
-
-import java.util.ArrayList;
-
 import static exception.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
 import static exception.ErrosGerais.ERRO_GENERICO_NO_BD;
 import static exception.ErrosGerais.ERRO_GENERICO;
 import static exception.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
+
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import conexao.Conexao;
+import exception.ErrosDoSQL;
+import model.TiposTelefone;
+import model.Telefone;
 
 public class TelefoneDAO implements GenericDAO<Telefone> {
 
@@ -118,10 +112,10 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
     }
 
     @Override
-    public List<Telefone> readAll(){
+    public ArrayList<Telefone> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Telefone> telefones = new ArrayList<>();
+        ArrayList<Telefone> telefones = new ArrayList<>();
 
         try {
             String read = "select * from telefone";
@@ -150,10 +144,11 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
         }
     }
 
-    public List<Telefone> readAllByIdUsuario(long idUsuario){
+    public ArrayList<Telefone> readAllByIdUsuario(long idUsuario){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<Telefone> telefones = new ArrayList<>();
+
+        ArrayList<Telefone> telefones = new ArrayList<>();
 
         try {
             String read = "select * from telefone where id_usuario = ?";
@@ -171,15 +166,11 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
                         resultSet.getBoolean("principal")
                 ));
             }
-
             return telefones;
-
         } catch (Exception exception){
             return telefones;
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
@@ -198,16 +189,12 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             preparedStatement.setLong(4, telefone.getId());
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
@@ -224,16 +211,12 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             preparedStatement.setString(3, telefone.getTelefone() );
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
@@ -249,16 +232,12 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             preparedStatement.setLong(1, id);
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
@@ -273,17 +252,12 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
             preparedStatement.setString(1, telefone);
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
-
     }
 }

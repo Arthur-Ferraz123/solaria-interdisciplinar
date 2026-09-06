@@ -3,9 +3,7 @@ package conexao;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.DriverManager;
-
 import java.sql.Connection;
-
 
 public class Conexao {
 
@@ -14,25 +12,16 @@ public class Conexao {
 
     public Connection conectar(){
         try{
-            //Variáveis de ambiente
             final String URL = validarEnvs(VARIAVEIS_DE_AMBIENTE.get("DB_URL"), "DB_URL");
             final String USUARIO = validarEnvs(VARIAVEIS_DE_AMBIENTE.get("DB_USUARIO"), "DB_USUARIO");
             final String SENHA = validarEnvs(VARIAVEIS_DE_AMBIENTE.get("DB_SENHA"), "DB_SENHA");
 
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(URL, USUARIO, SENHA);
-
             return connection;
-        } catch (NullPointerException | IllegalArgumentException e) {
-            e.printStackTrace();
-
-            return null;
-
         } catch (Exception e){
             e.printStackTrace();
-
             return null;
-
         }
     }
 
@@ -41,10 +30,8 @@ public class Conexao {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
             }
-
         } catch (Exception e){
             e.printStackTrace();
-
         }
     }
 
@@ -56,7 +43,6 @@ public class Conexao {
         else if(valorEnv.isEmpty()){
             throw new IllegalArgumentException(String.format("Erro: A variável de ambiente %s não possuí um valor registrado", nomeEnv));
         }
-
-        return valorEnv.trim();
+        return valorEnv.strip();
     }
 }

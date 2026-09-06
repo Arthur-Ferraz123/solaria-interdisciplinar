@@ -1,20 +1,22 @@
 package servlet.usuario;
 
-import exception.GenericExceptionEnum;
+import static exception.ErrosGerais.ERRO_GENERICO;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import exception.GenericExceptionEnum;
 import model.Usuario;
-import service.UsuarioService;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-
-import static exception.ErrosGerais.ERRO_GENERICO;
+import service.usuario.UsuarioDadosDto;
+import service.usuario.UsuarioService;
 
 @WebServlet("/crudUsuario-update")
 public class UpdateUsuarioServlet extends HttpServlet{
@@ -31,8 +33,8 @@ public class UpdateUsuarioServlet extends HttpServlet{
                 session.removeAttribute(attributes.nextElement());
             }
 
-            String id = request.getParameter("idUpdate");
-            Usuario usuario = UsuarioService.exibirUsuarioParaUpdate(id);
+            String idUpdate = request.getParameter("idUpdate");
+            Usuario usuario = UsuarioService.exibirUsuarioParaUpdate(idUpdate);
 
             if (usuario == null){
                 session.setAttribute("erroUpdate", "Um erro inesperado aconteceu, tente novamente");
@@ -68,8 +70,8 @@ public class UpdateUsuarioServlet extends HttpServlet{
             String senhaUpdate = request.getParameter("senhaUpdate");
             String nomeUpdate = request.getParameter("nomeUpdate");
             String raioProcuraKmUpdate = request.getParameter("raioProcuraKmUpdate");
-
-            ArrayList<GenericExceptionEnum> erros = UsuarioService.realizarUpdate(idUpdate, tipoUsuarioUpdate, emailUpdate, senhaUpdate, nomeUpdate, raioProcuraKmUpdate);
+            UsuarioDadosDto usuarioDadosDto = new UsuarioDadosDto(idUpdate, tipoUsuarioUpdate, emailUpdate, senhaUpdate, nomeUpdate, raioProcuraKmUpdate);
+            ArrayList<GenericExceptionEnum> erros = UsuarioService.realizarUpdate(usuarioDadosDto);
 
             if(!erros.isEmpty()){
                 session.setAttribute("errosUpdate", erros);

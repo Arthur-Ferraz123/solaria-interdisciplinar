@@ -1,28 +1,21 @@
 package dao;
 
-import conexao.Conexao;
-
-import exception.ErrosDoSQL;
-import model.EmpresaDemandante;
-
-import java.sql.Connection;
-
-import java.sql.PreparedStatement;
-
-import java.sql.ResultSet;
-
-import java.sql.SQLException;
-import java.util.List;
-
-import java.util.ArrayList;
-
 import static exception.ErrosGerais.ERRO_POR_VIOLACAO_DE_REGRA_DO_BD;
 import static exception.ErrosGerais.ERRO_GENERICO_NO_BD;
 import static exception.ErrosGerais.ERRO_GENERICO;
 import static exception.ErrosGerais.REGISTRO_NAO_ENCONTRADO;
 
-public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import exception.ErrosDoSQL;
+import model.EmpresaDemandante;
+import conexao.Conexao;
+
+public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
 
     @Override
     public int insert(EmpresaDemandante empresaDemandante) {
@@ -40,16 +33,12 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
             preparedStatement.setBoolean(5, empresaDemandante.isEhMandante());
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
@@ -75,13 +64,10 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
                 );
             }
             return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,false);
-
         } catch (Exception exception){
             return null;
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
@@ -105,15 +91,11 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
                         resultSet.getBoolean("eh_mandante")
                 );
             }
-
             return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, false);
-
         } catch (Exception exception){
             return null;
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
@@ -137,23 +119,20 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
                         resultSet.getBoolean("eh_mandante")
                 );
             }
-
             return new EmpresaDemandante(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null,false);
-
         } catch (Exception exception){
             return null;
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
     @Override
-    public List<EmpresaDemandante> readAll(){
+    public ArrayList<EmpresaDemandante> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        List<EmpresaDemandante> empresaDemandantes = new ArrayList<>();
+
+        ArrayList<EmpresaDemandante> empresaDemandantes = new ArrayList<>();
 
         try {
             String read = "select * from empresa_demandante";
@@ -171,15 +150,11 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
                 ));
             }
             return empresaDemandantes;
-
         } catch (Exception exception){
             return empresaDemandantes;
-
         } finally {
             conexao.desconectar();
-
         }
-
     }
 
     @Override
@@ -195,16 +170,12 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
             preparedStatement.setLong(2, empresaDemandante.getId());
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
     }
 
@@ -220,18 +191,13 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
             preparedStatement.setLong(2, empresaDemandante.getIdUsuario());
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
-
     }
 
     public int updateByCnpj(EmpresaDemandante empresaDemandante){
@@ -246,18 +212,13 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
             preparedStatement.setString(2, empresaDemandante.getCnpj());
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
-
     }
 
     @Override
@@ -272,18 +233,13 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
             preparedStatement.setLong(1, id);
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
-
     }
 
     public int deleteByIdUsuario(long idUsuario){
@@ -297,18 +253,13 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
             preparedStatement.setLong(1, idUsuario);
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
-
     }
 
     public int deleteByCnpj(String cnpj){
@@ -322,17 +273,12 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
             preparedStatement.setString(1, cnpj);
 
             return preparedStatement.executeUpdate();
-
         }catch (SQLException sqlException){
             return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
-
         }catch (Exception exception){
             return ERRO_GENERICO.getCodigo();
-
         } finally {
             conexao.desconectar();
-
         }
     }
-
 }

@@ -1,15 +1,14 @@
 package dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface GenericDAO<T> {
 
-    //Métodos de assinatura
     public int insert(T objeto);
 
     public T readById(long id);
 
-    public List<T> readAll();
+    public ArrayList<T> readAll();
 
     public int updateById(T objeto);
 
