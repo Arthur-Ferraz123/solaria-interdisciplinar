@@ -16,7 +16,7 @@ import static exception.ValidacaoDadosUsuario.*;
 
 public class UsuarioService {
 
-    //Métodos para realizar as ações do UpdateUsuarioServlet
+    //Métodos para realizar as ações do UpdateProfissionalServlet
     public static ArrayList<GenericExceptionEnum> realizarUpdate(String idUpdate, String tipoUsuarioUpdate, String emailUpdate, String senhaUpdate, String nomeUpdate, String raioProcuraKmUpdate){
         ArrayList<GenericExceptionEnum> erros = validarUpdate(tipoUsuarioUpdate, emailUpdate, senhaUpdate, nomeUpdate, raioProcuraKmUpdate);
 
@@ -85,7 +85,7 @@ public class UsuarioService {
 
     }
 
-    //Métodos para realizar as ações do DeleteUsuarioServlet
+    //Métodos para realizar as ações do DeleteEmpresaDemandanteServlet
     public static GenericExceptionEnum realizarDelete(String id){
         ValidacaoDadosUsuario erro = validarId(id);
 
@@ -283,7 +283,7 @@ public class UsuarioService {
 
     }
 
-    //Métodos para realizar as ações do InsertUsuarioServlet
+    //Métodos para realizar as ações do InsertEmpresaDemandanteServlet
     public static ArrayList<GenericExceptionEnum> realizarInsert(String email, String senha, String nome, String tipoUsuario, String raioProcuraKm){
         ArrayList<GenericExceptionEnum> mensagens = validarUsuarioInsert(email, senha, nome, tipoUsuario, raioProcuraKm);
 
