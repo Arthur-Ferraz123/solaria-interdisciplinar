@@ -1,19 +1,20 @@
 package servlet.usuario;
 
-import exception.GenericExceptionEnum;
+import static exception.ErrosGerais.ERRO_GENERICO;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import service.UsuarioService;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-
-import static exception.ErrosGerais.ERRO_GENERICO;
+import exception.GenericExceptionEnum;
+import service.usuario.UsuarioService;
 
 @WebServlet("/crudUsuario-delete")
 public class DeleteUsuarioServlet extends HttpServlet {
@@ -37,9 +38,7 @@ public class DeleteUsuarioServlet extends HttpServlet {
             }
 
             String id = request.getParameter("idDelete");
-
             ArrayList<GenericExceptionEnum> erros = UsuarioService.realizarDelete(id);
-
             if(!erros.isEmpty()){
                 session.setAttribute("mensagensErroDelete", erros);
                 response.sendRedirect(request.getContextPath() + "/crudUsuario");
@@ -48,7 +47,6 @@ public class DeleteUsuarioServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/crudUsuario");
             }
         } catch (Exception e){
-
             HttpSession session = request.getSession();
 
             //Limpeza dos atributos da seção, para evitar casos dos pop-ups abrirem quando não deveriam

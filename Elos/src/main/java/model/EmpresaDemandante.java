@@ -2,7 +2,6 @@ package model;
 
 public class EmpresaDemandante {
 
-    //Atributos
     private final long id;
     private final long idUsuario;
     private final TiposUsuario tipoUsuario = TiposUsuario.EMPRESA_DEMANDANTE;
@@ -10,7 +9,6 @@ public class EmpresaDemandante {
     private String razaoSocial;
     private boolean ehMandante;
 
-    //Construtor
     public EmpresaDemandante(long id, long idUsuario, String cnpj, String razaoSocial, boolean ehMandante) {
         this.id = id;
         this.idUsuario = idUsuario;
@@ -19,7 +17,6 @@ public class EmpresaDemandante {
         this.ehMandante = ehMandante;
     }
 
-    //Getters e Setters
     public long getId() {
         return id;
     }
@@ -52,13 +49,12 @@ public class EmpresaDemandante {
         this.ehMandante = ehMandante;
     }
 
-    //Método toString
     @Override
     public String toString(){
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
+                "Tipo do usuário: "+ this.tipoUsuario.getTipoDoUsuario() + "\n" +
                 "CNPJ: "+ this.cnpj + "\n" +
                 "Razão social: " + this.razaoSocial + "\n" +
                 "É mandante: " + this.ehMandante +

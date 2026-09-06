@@ -2,7 +2,6 @@ package model;
 
 public class Fornecedor {
 
-    //Atributos
     private final long id;
     private final long idUsuario;
     private final TiposUsuario tipoUsuario = TiposUsuario.FORNECEDOR;
@@ -10,7 +9,6 @@ public class Fornecedor {
     private final String cnpj;
     private String razaoSocial;
 
-    //Construtor
     public Fornecedor(long id, long idUsuario, TiposFornecedor tipoFornecedor, String cnpj, String razaoSocial) {
         this.id = id;
         this.idUsuario = idUsuario;
@@ -19,7 +17,6 @@ public class Fornecedor {
         this.razaoSocial = razaoSocial;
     }
 
-    //Getters e Setters
     public long getId() {
         return id;
     }
@@ -52,14 +49,13 @@ public class Fornecedor {
         this.razaoSocial = razaoSocial;
     }
 
-    //Método toString
     @Override
     public String toString(){
         return  "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "ID: "+ this.id + "\n" +
                 "ID do usuário: "+ this.idUsuario + "\n" +
-                "Tipo do usuário: "+ this.tipoUsuario + "\n" +
-                "Tipo do fornecedor: "+ this.tipoFornecedor + "\n" +
+                "Tipo do usuário: "+ this.tipoUsuario.getTipoDoUsuario() + "\n" +
+                "Tipo do fornecedor: "+ this.tipoFornecedor.getTipoFornecedor() + "\n" +
                 "CNPJ: "+ this.cnpj + "\n" +
                 "Razão social: " + this.razaoSocial + "\n" +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
