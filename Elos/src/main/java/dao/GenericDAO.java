@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface GenericDAO<T> {
 
@@ -8,7 +8,7 @@ public interface GenericDAO<T> {
 
     public T readById(long id);
 
-    public ArrayList<T> readAll();
+    public List<T> readAll();
 
     public int updateById(T objeto);
 

@@ -6,7 +6,7 @@ import model.TiposFornecedor;
 
 import static exception.ErrosGeraisDados.ATRIBUTO_NULL;
 
-public record FornecedorDadosDto(String id, String idUsuario, String tipoFornecedor, String cnpj, String razaoSocial) {
+public record FornecedorDadosDTO(String id, String idUsuario, String tipoFornecedor, String cnpj, String razaoSocial) {
 
     public Fornecedor construirFornecedor(){
         long idTratado = id != null && !id.isBlank() ? Long.parseLong(id) : ATRIBUTO_NULL.getCodigo();

@@ -10,15 +10,39 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import conexao.Conexao;
 import exception.ErrosDoSQL;
 import model.TiposUsuario;
 import model.Usuario;
 
-public class UsuarioDAO implements GenericDAO<Usuario> {
+public class UsuarioDAO {
 
-    @Override
+    private static String tabela = "usuario";
+
+
+    public int insertTeste(CriarInstrucaoDinamica criarInstrucaoDinamica){
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try{
+            String insert = criarInstrucaoDinamica.construirInsert(tabela);
+
+            PreparedStatement preparedStatement = connection.prepareStatement(insert);
+
+            criarInstrucaoDinamica.aplicarValoresDoPreparedStatement(preparedStatement);
+
+            return preparedStatement.executeUpdate();
+        }catch (SQLException sqlException){
+            return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
+        }catch (Exception exception){
+            return ERRO_GENERICO.getCodigo();
+        }finally {
+            conexao.desconectar();
+        }
+    }
+
     public int insert(Usuario usuario){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
@@ -28,6 +52,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 String insert = "insert into usuario(email, senha, nome, tipo_usuario, raio_procura_km) values(?, ?, ?, ?, ?)";
 
                 PreparedStatement preparedStatement = connection.prepareStatement(insert);
+
                 preparedStatement.setString(1, usuario.getEmail() );
                 preparedStatement.setString(2, usuario.getSenha());
                 preparedStatement.setString(3, usuario.getNome());
@@ -55,7 +80,6 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    @Override
     public Usuario readById(long id){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
@@ -114,12 +138,45 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    @Override
-    public ArrayList<Usuario> readAll(){
+    public List<Usuario> readAllTeste(CriarInstrucaoDinamica criarInstrucaoDinamica){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+            String read = criarInstrucaoDinamica.construirSelect(tabela);
+
+            PreparedStatement preparedStatement = connection.prepareStatement(read);
+
+            criarInstrucaoDinamica.aplicarValoresDoPreparedStatement(preparedStatement);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                usuarios.add(new Usuario(
+                        resultSet.getLong("id"),
+                        resultSet.getString("email"),
+                        resultSet.getString("senha"),
+                        resultSet.getString("nome"),
+                        TiposUsuario.descobrirTipoUsuario(resultSet.getString("tipo_usuario")),
+                        resultSet.getDouble("raio_procura_km")
+                ));
+            }
+            return usuarios;
+        } catch (Exception exception){
+            exception.printStackTrace();
+            return null;
+        }finally {
+            conexao.desconectar();
+        }
+    }
+
+    public List<Usuario> readAll(){
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario";
@@ -139,17 +196,18 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
             }
             return usuarios;
         } catch (Exception exception){
+            exception.printStackTrace();
             return null;
         }finally {
             conexao.desconectar();
         }
     }
 
-    public ArrayList<Usuario> readAllOrderBy(String campoDoOrderBy, String sentidoOrderBy){
+    public List<Usuario> readAllOrderBy(String campoDoOrderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario order by "+campoDoOrderBy+" "+sentidoOrderBy;
@@ -175,11 +233,11 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public ArrayList<Usuario> readAllByNome(String nome){
+    public List<Usuario> readAllByNome(String nome){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario where nome ilike ?";
@@ -206,11 +264,11 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public ArrayList<Usuario> readAllByNomeOrderBy(String nome, String campoDoOrderBy, String sentidoOrderBy){
+    public List<Usuario> readAllByNomeOrderBy(String nome, String campoDoOrderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario where nome ilike ? order by "+campoDoOrderBy+" "+sentidoOrderBy;
@@ -237,11 +295,11 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public ArrayList<Usuario> readAllByTipoUsuario(String tipoUsuario){
+    public List<Usuario> readAllByTipoUsuario(String tipoUsuario){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario where tipo_usuario = ?";
@@ -268,11 +326,11 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public ArrayList<Usuario> readAllByTipoUsuarioOrderBy(String tipoUsuario, String campoDoOrderBy, String sentidoOrderBy){
+    public List<Usuario> readAllByTipoUsuarioOrderBy(String tipoUsuario, String campoDoOrderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario where tipo_usuario = ? order by "+campoDoOrderBy+" "+sentidoOrderBy;
@@ -299,10 +357,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public ArrayList<Usuario> readAllWhereRaioProcuraKmEntre(double raioProcuraKmBase, double raioProcuraKmTeto){
+    public List<Usuario> readAllWhereRaioProcuraKmEntre(double raioProcuraKmBase, double raioProcuraKmTeto){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
             String read = "select * from usuario where raio_procura_km between ? and ?";
@@ -330,11 +388,11 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    public ArrayList<Usuario> readAllWhereRaioProcuraKmEntreOrderBy(double raioProcuraKmBase, double raioProcuraKmTeto, String campoDoOrderBy, String sentidoOrderBy){
+    public List<Usuario> readAllWhereRaioProcuraKmEntreOrderBy(double raioProcuraKmBase, double raioProcuraKmTeto, String campoDoOrderBy, String sentidoOrderBy){
 
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
 
@@ -363,7 +421,27 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    @Override
+    public int updateByIdTeste(CriarInstrucaoDinamica criarInstrucaoDinamica){
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try{
+            String update = criarInstrucaoDinamica.construirUpdate(tabela);
+
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+
+            criarInstrucaoDinamica.aplicarValoresDoPreparedStatement(preparedStatement);
+
+            return preparedStatement.executeUpdate();
+        }catch (SQLException sqlException){
+            return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
+        }catch (Exception exception){
+            return ERRO_GENERICO.getCodigo();
+        }finally {
+            conexao.desconectar();
+        }
+    }
+
     public int updateById(Usuario usuario){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
@@ -411,7 +489,26 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         }
     }
 
-    @Override
+    public int deleteByIdTeste(long id){
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.conectar();
+
+        try{
+            String delete = "delete from usuario where id = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(delete);
+            preparedStatement.setLong(1, id);
+
+            return preparedStatement.executeUpdate();
+        }catch (SQLException sqlException){
+            return ErrosDoSQL.foiCausadoPorConstraint(sqlException.getSQLState()) ? ERRO_POR_VIOLACAO_DE_REGRA_DO_BD.getCodigo() : ERRO_GENERICO_NO_BD.getCodigo();
+        }catch (Exception exception){
+            return ERRO_GENERICO.getCodigo();
+        }finally {
+            conexao.desconectar();
+        }
+    }
+
     public int deleteById(long id){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();

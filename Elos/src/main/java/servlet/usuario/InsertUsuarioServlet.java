@@ -5,6 +5,7 @@ import static exception.ErrosGerais.ERRO_GENERICO;
 import java.util.Enumeration;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,12 +14,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import service.usuario.UsuarioDadosDto;
+import service.usuario.UsuarioDadosDTO;
 import exception.GenericExceptionEnum;
 import service.usuario.UsuarioService;
 
 @WebServlet("/crudUsuario-insert")
-public class InsertUsuarioServlet extends HttpServlet {
+public final class InsertUsuarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,10 +45,10 @@ public class InsertUsuarioServlet extends HttpServlet {
             String nomeInsert = request.getParameter("nomeInsert");
             String raioProcuraKmInsert = request.getParameter("raioProcuraKmInsert");
 
-            UsuarioDadosDto usuarioDadosDto = new UsuarioDadosDto(null, tipoUsuarioInsert, emailInsert,
+            UsuarioDadosDTO usuarioDadosDto = new UsuarioDadosDTO(null, tipoUsuarioInsert, emailInsert,
                                                                     senhaInsert, nomeInsert, raioProcuraKmInsert);
 
-            ArrayList<GenericExceptionEnum> mensagensInsert = UsuarioService.realizarInsert(usuarioDadosDto);
+            List<GenericExceptionEnum> mensagensInsert = UsuarioService.realizarInsert(usuarioDadosDto);
 
             if(!mensagensInsert.isEmpty()){
                 session.setAttribute("mensagensInsert", mensagensInsert);
@@ -73,7 +74,7 @@ public class InsertUsuarioServlet extends HttpServlet {
                 session.removeAttribute(attributes.nextElement());
             }
 
-            ArrayList<GenericExceptionEnum> mensagensInsert = new ArrayList<>();
+            List<GenericExceptionEnum> mensagensInsert = new ArrayList<>();
             mensagensInsert.add(ERRO_GENERICO);
 
             session.setAttribute("mensagensInsert", mensagensInsert);

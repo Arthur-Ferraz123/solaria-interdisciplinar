@@ -8,6 +8,7 @@ import exception.GenericExceptionEnum;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static exception.ErrosDadosFornecedor.*;
@@ -16,7 +17,7 @@ import static exception.ErrosGeraisDados.*;
 import static service.fornecedor.CamposFornecedorAcessiveis.*;
 
 
-public class FornecedorService {
+public final class FornecedorService {
 
     private static final int TAMANHO_CNPJ = 14;
 
@@ -183,21 +184,16 @@ public class FornecedorService {
     }
 
     //Métodos relacionados ao delete
-    public static ArrayList<GenericExceptionEnum> realizarDelete(String id){
-        ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
-
+    public static GenericExceptionEnum realizarDelete(String id){
         if(validarId(id) != VALIDACAO_OK) {
-            erros.add(ERRO_GENERICO);
-            return erros;
+            return ERRO_GENERICO;
         }
 
         int qtdLinhasDeletadas = deletarFornecedor(id);
         if(qtdLinhasDeletadas > 0){
-            return erros;
+            return SUCESSO;
         }
-
-        erros.add(descobrirErroGeral(qtdLinhasDeletadas));
-        return erros;
+        return descobrirErroGeral(qtdLinhasDeletadas);
     }
 
     private static int deletarFornecedor(String id){
@@ -206,8 +202,8 @@ public class FornecedorService {
     }
 
     //Métodos relacionados ao select
-    public static ArrayList<Fornecedor> realizarSelect(FornecedorDadosDePesquisaDto fornecedorDadosDePesquisaDto, ArrayList<GenericExceptionEnum> errosEncontrados){
-        ArrayList<Fornecedor> Fornecedores;
+    public static List<Fornecedor> realizarSelect(FornecedorDadosDePesquisaDTO fornecedorDadosDePesquisaDto, List<GenericExceptionEnum> errosEncontrados){
+        List<Fornecedor> Fornecedores;
 
         if(fornecedorDadosDePesquisaDto == null){
             return lerFornecedores(null, true);
@@ -225,7 +221,7 @@ public class FornecedorService {
         return Fornecedores;
     }
 
-    private static ArrayList<Fornecedor> lerFornecedores(FornecedorDadosDePesquisaDto fornecedorDadosDePesquisaDto, boolean erroEncontrado){
+    private static List<Fornecedor> lerFornecedores(FornecedorDadosDePesquisaDTO fornecedorDadosDePesquisaDto, boolean erroEncontrado){
         if (erroEncontrado){
             FornecedorDAO dao = new FornecedorDAO();
             return dao.readAll();
@@ -236,7 +232,7 @@ public class FornecedorService {
         if(!clausulaWhere.isMultiplosRetornos()){
             Fornecedor fornecedor = lerFornecedorUnicoRetorno(clausulaWhere, fornecedorDadosDePesquisaDto.clausulaWhereValor());
 
-            ArrayList<Fornecedor> fornecedores = new ArrayList<>();
+            List<Fornecedor> fornecedores = new ArrayList<>();
 
             if (fornecedor.getId() != REGISTRO_NAO_ENCONTRADO.getCodigo()){
                 fornecedores.add(fornecedor);
@@ -266,7 +262,7 @@ public class FornecedorService {
         return new Fornecedor(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, null);
     }
 
-    private static ArrayList<Fornecedor> lerFornecedorMultiplosRetornos(CamposFornecedorAcessiveis clausulaWhere, FornecedorDadosDePesquisaDto fornecedorDadosDePesquisaDto){
+    private static List<Fornecedor> lerFornecedorMultiplosRetornos(CamposFornecedorAcessiveis clausulaWhere, FornecedorDadosDePesquisaDTO fornecedorDadosDePesquisaDto){
         CamposFornecedorAcessiveis orderBy = CamposFornecedorAcessiveis.descobrirCampoFornecedor(fornecedorDadosDePesquisaDto.orderBy().strip().toLowerCase());
 
         FornecedorDAO dao = new FornecedorDAO();
@@ -289,8 +285,8 @@ public class FornecedorService {
         return new ArrayList<>();
     }
 
-    private static ArrayList<GenericExceptionEnum> validarFornecedorSelect(FornecedorDadosDePesquisaDto FornecedorDadosDePesquisaDto){
-        ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
+    private static List<GenericExceptionEnum> validarFornecedorSelect(FornecedorDadosDePesquisaDTO FornecedorDadosDePesquisaDto){
+        List<GenericExceptionEnum> erros = new ArrayList<>();
 
         GenericExceptionEnum clausulaWhereNomeValidacao = validarWhere(FornecedorDadosDePesquisaDto.clausulaWhereNome());
         if (clausulaWhereNomeValidacao != VALIDACAO_OK){
@@ -312,8 +308,8 @@ public class FornecedorService {
         return erros;
     }
 
-    private static ArrayList<GenericExceptionEnum> validarClausulaWhereValor(String clausulaWhereNome, String clausulaWhereValor){
-        ArrayList<GenericExceptionEnum> errosNasClausulasWhere = new ArrayList<>();
+    private static List<GenericExceptionEnum> validarClausulaWhereValor(String clausulaWhereNome, String clausulaWhereValor){
+        List<GenericExceptionEnum> errosNasClausulasWhere = new ArrayList<>();
 
         GenericExceptionEnum clausulaWhereValorValidacao = null;
 
@@ -349,8 +345,8 @@ public class FornecedorService {
     }
 
     //Métodos relacionados ao update
-    public static ArrayList<GenericExceptionEnum> realizarUpdate(FornecedorDadosDto FornecedorDadosDto){
-        ArrayList<GenericExceptionEnum> erros = validarUpdate(FornecedorDadosDto);
+    public static List<GenericExceptionEnum> realizarUpdate(FornecedorDadosDTO FornecedorDadosDto){
+        List<GenericExceptionEnum> erros = validarUpdate(FornecedorDadosDto);
         if(!erros.isEmpty()){
             return erros;
         }
@@ -362,13 +358,13 @@ public class FornecedorService {
         return erros;
     }
 
-    private static int atualizarFornecedor(FornecedorDadosDto FornecedorDadosDto){
+    private static int atualizarFornecedor(FornecedorDadosDTO FornecedorDadosDto){
         FornecedorDAO dao = new FornecedorDAO();
         return dao.updateById(FornecedorDadosDto.construirFornecedor());
     }
 
-    private static ArrayList<GenericExceptionEnum> validarUpdate(FornecedorDadosDto FornecedorDadosDto){
-        ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
+    private static List<GenericExceptionEnum> validarUpdate(FornecedorDadosDTO FornecedorDadosDto){
+        List<GenericExceptionEnum> erros = new ArrayList<>();
 
         GenericExceptionEnum tipoFornecedorValidacao = validarTipoFornecedor(FornecedorDadosDto.tipoFornecedor());
         if(tipoFornecedorValidacao != VALIDACAO_OK){
@@ -392,8 +388,8 @@ public class FornecedorService {
     }
 
     //Métodos relacionados ao insert
-    public static ArrayList<GenericExceptionEnum> realizarInsert(FornecedorDadosDto FornecedorDadosDto){
-        ArrayList<GenericExceptionEnum> mensagens = validarFornecedorInsert(FornecedorDadosDto);
+    public static List<GenericExceptionEnum> realizarInsert(FornecedorDadosDTO FornecedorDadosDto){
+        List<GenericExceptionEnum> mensagens = validarFornecedorInsert(FornecedorDadosDto);
         if (mensagens.isEmpty()) {
             int resultado = persistirFornecedor(FornecedorDadosDto);
             if (resultado < 1) {
@@ -403,8 +399,8 @@ public class FornecedorService {
         return mensagens;
     }
 
-    private static ArrayList<GenericExceptionEnum> validarFornecedorInsert(FornecedorDadosDto FornecedorDadosDto){
-        ArrayList<GenericExceptionEnum> listaDeErros = new ArrayList<>();
+    private static List<GenericExceptionEnum> validarFornecedorInsert(FornecedorDadosDTO FornecedorDadosDto){
+        List<GenericExceptionEnum> listaDeErros = new ArrayList<>();
 
         GenericExceptionEnum validacaoIdUsuario = validarIdUsuario(FornecedorDadosDto.idUsuario());
         if (validacaoIdUsuario != VALIDACAO_OK){
@@ -428,7 +424,7 @@ public class FornecedorService {
         return listaDeErros;
     }
 
-    private static int persistirFornecedor(FornecedorDadosDto FornecedorDadosDto){
+    private static int persistirFornecedor(FornecedorDadosDTO FornecedorDadosDto){
         FornecedorDAO dao = new FornecedorDAO();
         return dao.insert(FornecedorDadosDto.construirFornecedor());
     }

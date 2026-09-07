@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import conexao.Conexao;
 import exception.ErrosDoSQL;
@@ -131,10 +132,10 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
     }
 
     @Override
-    public ArrayList<Profissional> readAll(){
+    public List<Profissional> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Profissional> profissionais = new ArrayList<>();
+        List<Profissional> profissionais = new ArrayList<>();
 
         try {
             String read = "select * from profissional";
@@ -163,11 +164,10 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
         }
     }
 
-    public ArrayList<Profissional> readAllOrderBy(String campoDoOderBy, String sentidoOrderBy
-    ){
+    public List<Profissional> readAllOrderBy(String campoDoOderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Profissional> profissionais = new ArrayList<>();
+        List<Profissional> profissionais = new ArrayList<>();
 
         try {
             String read = "select * from profissional order by "+campoDoOderBy+" "+sentidoOrderBy
@@ -197,10 +197,10 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
         }
     }
 
-    public ArrayList<Profissional> readAllByIdFornecedor(long idFornecedor){
+    public List<Profissional> readAllByIdFornecedor(long idFornecedor){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Profissional> profissionais = new ArrayList<>();
+        List<Profissional> profissionais = new ArrayList<>();
 
         try {
             String read = "select * from profissional where id_fornecedor = ?";
@@ -230,11 +230,10 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
         }
     }
 
-    public ArrayList<Profissional> readAllByIdFornecedorOrderBy(long idFornecedor, String campoDoOderBy, String sentidoOrderBy
-    ){
+    public List<Profissional> readAllByIdFornecedorOrderBy(long idFornecedor, String campoDoOderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Profissional> profissionais = new ArrayList<>();
+        List<Profissional> profissionais = new ArrayList<>();
 
         try {
             String read = "select * from profissional where id_fornecedor = ? order by "+campoDoOderBy+" "+sentidoOrderBy
@@ -265,10 +264,10 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
         }
     }
 
-    public ArrayList<Profissional> readAllByIdProfissao(String profissao){
+    public List<Profissional> readAllByIdProfissao(String profissao){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Profissional> profissionais = new ArrayList<>();
+        List<Profissional> profissionais = new ArrayList<>();
 
         try {
             String read = "select * from profissional where profissao ilike ?";
@@ -294,11 +293,10 @@ public class ProfissionalDAO implements GenericDAO<Profissional> {
         }
     }
 
-    public ArrayList<Profissional> readAllByIdProfissaoOrderBy(String profissao, String campoDoOderBy, String sentidoOrderBy
-    ){
+    public List<Profissional> readAllByIdProfissaoOrderBy(String profissao, String campoDoOderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Profissional> profissionais = new ArrayList<>();
+        List<Profissional> profissionais = new ArrayList<>();
 
         try {
             String read = "select * from profissional where profissao ilike ? order by "+campoDoOderBy+" "+sentidoOrderBy

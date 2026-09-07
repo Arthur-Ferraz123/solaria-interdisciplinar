@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import conexao.Conexao;
 import exception.ErrosDoSQL;
@@ -112,10 +113,10 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
     }
 
     @Override
-    public ArrayList<Telefone> readAll(){
+    public List<Telefone> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Telefone> telefones = new ArrayList<>();
+        List<Telefone> telefones = new ArrayList<>();
 
         try {
             String read = "select * from telefone";
@@ -144,11 +145,11 @@ public class TelefoneDAO implements GenericDAO<Telefone> {
         }
     }
 
-    public ArrayList<Telefone> readAllByIdUsuario(long idUsuario){
+    public List<Telefone> readAllByIdUsuario(long idUsuario){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
-        ArrayList<Telefone> telefones = new ArrayList<>();
+        List<Telefone> telefones = new ArrayList<>();
 
         try {
             String read = "select * from telefone where id_usuario = ?";

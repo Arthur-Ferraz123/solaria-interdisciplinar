@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import exception.ErrosDoSQL;
 import model.EmpresaDemandante;
@@ -128,11 +129,11 @@ public class EmpresaDemandanteDAO implements GenericDAO<EmpresaDemandante> {
     }
 
     @Override
-    public ArrayList<EmpresaDemandante> readAll(){
+    public List<EmpresaDemandante> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
 
-        ArrayList<EmpresaDemandante> empresaDemandantes = new ArrayList<>();
+        List<EmpresaDemandante> empresaDemandantes = new ArrayList<>();
 
         try {
             String read = "select * from empresa_demandante";

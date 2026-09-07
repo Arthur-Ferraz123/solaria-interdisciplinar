@@ -1,10 +1,10 @@
 package service.profissional;
 
-import static exception.ErrosGerais.ATRIBUTO_NULL;
+import static exception.ErrosGeraisDados.ATRIBUTO_NULL;
 
 import model.Profissional;
 
-public record ProfissionalDadosDto(String id, String idUsuario, String profissao, String cpf, String idFornecedor) {
+public record ProfissionalDadosDTO(String id, String idUsuario, String profissao, String cpf, String idFornecedor) {
 
     public Profissional construirProfissional(){
         long idTratado = id != null && !id.isBlank() ? Long.parseLong(id.strip()) : ATRIBUTO_NULL.getCodigo();

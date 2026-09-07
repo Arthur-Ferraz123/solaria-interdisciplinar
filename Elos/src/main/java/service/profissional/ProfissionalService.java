@@ -6,6 +6,7 @@ import static exception.ErrosGeraisDados.*;
 import static service.profissional.CamposProfissionalAcessiveis.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import model.Fornecedor;
@@ -18,7 +19,7 @@ import dao.UsuarioDAO;
 import exception.ErrosGerais;
 import exception.GenericExceptionEnum;
 
-public class ProfissionalService {
+public final class ProfissionalService {
 
     private static final Pattern PATTERN_PROFISSAO = Pattern.compile("^[\\p{Script=Latin}0-9,.\\s\\-/]+$");
     private static final int TAMANHO_MAXIMO_PROFISSAO = 100;
@@ -178,21 +179,16 @@ public class ProfissionalService {
     }
 
     //Métodos relacionados ao delete
-    public static ArrayList<GenericExceptionEnum> realizarDelete(String id){
-        ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
-
+    public static GenericExceptionEnum realizarDelete(String id){
         if(validarId(id) != VALIDACAO_OK) {
-            erros.add(ERRO_GENERICO);
-            return erros;
+            return ERRO_GENERICO;
         }
 
         int qtdLinhasDeletadas = deletarProfissional(id);
         if(qtdLinhasDeletadas > 0){
-            return erros;
+            return SUCESSO;
         }
-
-        erros.add(descobrirErroGeral(qtdLinhasDeletadas));
-        return erros;
+        return descobrirErroGeral(qtdLinhasDeletadas);
     }
 
     private static int deletarProfissional(String id){
@@ -201,8 +197,8 @@ public class ProfissionalService {
     }
 
     //Métodos relacionados ao select
-    public static ArrayList<Profissional> realizarSelect(ProfissionalDadosDePesquisaDto profissionalDadosDePesquisaDto, ArrayList<GenericExceptionEnum> errosEncontrados){
-        ArrayList<Profissional> usuarios;
+    public static List<Profissional> realizarSelect(ProfissionalDadosDePesquisaDTO profissionalDadosDePesquisaDto, List<GenericExceptionEnum> errosEncontrados){
+        List<Profissional> usuarios;
 
         if(profissionalDadosDePesquisaDto == null){
             return lerProfissional(null, true);
@@ -220,7 +216,7 @@ public class ProfissionalService {
         return usuarios;
     }
 
-    private static ArrayList<Profissional> lerProfissional(ProfissionalDadosDePesquisaDto profissionalDadosDePesquisaDto, boolean erroEncontrado){
+    private static List<Profissional> lerProfissional(ProfissionalDadosDePesquisaDTO profissionalDadosDePesquisaDto, boolean erroEncontrado){
         ProfissionalDAO dao = new ProfissionalDAO();
         if (erroEncontrado){
             return dao.readAll();
@@ -231,7 +227,7 @@ public class ProfissionalService {
         if(!clausulaWhere.isMultiplosRetornos()){
             Profissional profissional= lerProfissionalUnicoRetorno(clausulaWhere, profissionalDadosDePesquisaDto.clausulaWhereValor());
 
-            ArrayList<Profissional> profissionais = new ArrayList<>();
+            List<Profissional> profissionais = new ArrayList<>();
 
             if (profissional.getId() != REGISTRO_NAO_ENCONTRADO.getCodigo()){
                 profissionais.add(profissional);
@@ -262,7 +258,7 @@ public class ProfissionalService {
         return new Profissional(REGISTRO_NAO_ENCONTRADO.getCodigo(), REGISTRO_NAO_ENCONTRADO.getCodigo(), null, null, REGISTRO_NAO_ENCONTRADO.getCodigo());
     }
 
-    private static ArrayList<Profissional> lerProfissionalMultiplosRetorno(CamposProfissionalAcessiveis clausulaWhere, ProfissionalDadosDePesquisaDto profissionalDadosDePesquisaDto){
+    private static List<Profissional> lerProfissionalMultiplosRetorno(CamposProfissionalAcessiveis clausulaWhere, ProfissionalDadosDePesquisaDTO profissionalDadosDePesquisaDto){
         CamposProfissionalAcessiveis orderBy = CamposProfissionalAcessiveis.descobrirCampoProfissional(profissionalDadosDePesquisaDto.orderBy().strip().toLowerCase());
 
         ProfissionalDAO dao = new ProfissionalDAO();
@@ -286,8 +282,8 @@ public class ProfissionalService {
         return new ArrayList<>();
     }
 
-    private static ArrayList<GenericExceptionEnum> validarProfissionalSelect(ProfissionalDadosDePesquisaDto profissionalDadosDePesquisaDto){
-        ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
+    private static List<GenericExceptionEnum> validarProfissionalSelect(ProfissionalDadosDePesquisaDTO profissionalDadosDePesquisaDto){
+        List<GenericExceptionEnum> erros = new ArrayList<>();
 
         GenericExceptionEnum clausulaWhereNomeValidacao = validarWhere(profissionalDadosDePesquisaDto.clausulaWhereNome());
         if (clausulaWhereNomeValidacao != VALIDACAO_OK){
@@ -309,8 +305,8 @@ public class ProfissionalService {
         return erros;
     }
 
-    private static ArrayList<GenericExceptionEnum> validarClausulaWhereValor(String clausulaWhereNome, String clausulaWhereValor){
-        ArrayList<GenericExceptionEnum> errosNasClausulasWhere = new ArrayList<>();
+    private static List<GenericExceptionEnum> validarClausulaWhereValor(String clausulaWhereNome, String clausulaWhereValor){
+        List<GenericExceptionEnum> errosNasClausulasWhere = new ArrayList<>();
 
         GenericExceptionEnum clausulaWhereValorValidacao = null;
 
@@ -342,8 +338,8 @@ public class ProfissionalService {
     }
 
     //Métodos relacionados ao update
-    public static ArrayList<GenericExceptionEnum> realizarUpdate(ProfissionalDadosDto profissionalDadosDto){
-        ArrayList<GenericExceptionEnum> erros = validarUpdate(profissionalDadosDto);
+    public static List<GenericExceptionEnum> realizarUpdate(ProfissionalDadosDTO profissionalDadosDto){
+        List<GenericExceptionEnum> erros = validarUpdate(profissionalDadosDto);
         if(!erros.isEmpty()){
             return erros;
         }
@@ -355,13 +351,13 @@ public class ProfissionalService {
         return erros;
     }
 
-    private static int atualizarProfissional(ProfissionalDadosDto profissionalDadosDto){
+    private static int atualizarProfissional(ProfissionalDadosDTO profissionalDadosDto){
         ProfissionalDAO dao = new ProfissionalDAO();
         return dao.updateById(profissionalDadosDto.construirProfissional());
     }
 
-    private static ArrayList<GenericExceptionEnum> validarUpdate(ProfissionalDadosDto profissionalDadosDto){
-        ArrayList<GenericExceptionEnum> erros = new ArrayList<>();
+    private static List<GenericExceptionEnum> validarUpdate(ProfissionalDadosDTO profissionalDadosDto){
+        List<GenericExceptionEnum> erros = new ArrayList<>();
 
         GenericExceptionEnum profissaoValidacao = validarProfissao(profissionalDadosDto.profissao());
         if(profissaoValidacao != VALIDACAO_OK){
@@ -385,8 +381,8 @@ public class ProfissionalService {
     }
 
     //Métodos relacionados ao insert
-    public static ArrayList<GenericExceptionEnum> realizarInsert(ProfissionalDadosDto usuarioDadosDto){
-        ArrayList<GenericExceptionEnum> mensagens = validarProfissionalInsert(usuarioDadosDto);
+    public static List<GenericExceptionEnum> realizarInsert(ProfissionalDadosDTO usuarioDadosDto){
+        List<GenericExceptionEnum> mensagens = validarProfissionalInsert(usuarioDadosDto);
         if (mensagens.isEmpty()) {
             int resultado = persistirProfissional(usuarioDadosDto);
             if (resultado < 1) {
@@ -396,8 +392,8 @@ public class ProfissionalService {
         return mensagens;
     }
 
-    private static ArrayList<GenericExceptionEnum> validarProfissionalInsert(ProfissionalDadosDto profissionalDadosDto){
-        ArrayList<GenericExceptionEnum> listaDeErros = new ArrayList<>();
+    private static List<GenericExceptionEnum> validarProfissionalInsert(ProfissionalDadosDTO profissionalDadosDto){
+        List<GenericExceptionEnum> listaDeErros = new ArrayList<>();
 
         GenericExceptionEnum validacaoIdUsuario = validarIdUsuario(profissionalDadosDto.idUsuario());
         if (validacaoIdUsuario != VALIDACAO_OK){
@@ -421,7 +417,7 @@ public class ProfissionalService {
         return listaDeErros;
     }
 
-    private static int persistirProfissional(ProfissionalDadosDto profissionalDadosDto){
+    private static int persistirProfissional(ProfissionalDadosDTO profissionalDadosDto){
         ProfissionalDAO dao = new ProfissionalDAO();
         return dao.insert(profissionalDadosDto.construirProfissional());
     }

@@ -16,12 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.Usuario;
-import service.usuario.UsuarioDadosDePesquisaDto;
+import service.usuario.UsuarioDadosDePesquisaDTO;
 import service.usuario.UsuarioService;
 import exception.GenericExceptionEnum;
 
 @WebServlet("/crudUsuario")
-public class ReadUsuarioServlet extends HttpServlet {
+public final class ReadUsuarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,7 +46,8 @@ public class ReadUsuarioServlet extends HttpServlet {
 
             ArrayList<GenericExceptionEnum> errosRead = new ArrayList<>();
             List<Usuario> usuariosRead = new ArrayList<>();
-            UsuarioDadosDePesquisaDto usuarioDadosDePesquisaDto = new UsuarioDadosDePesquisaDto(clausulaWhereNome, clausulaWhereValor, clausulaWhereValor2, orderBy, ordenacao);
+            UsuarioDadosDePesquisaDTO usuarioDadosDePesquisaDto = new UsuarioDadosDePesquisaDTO(clausulaWhereNome, clausulaWhereValor, clausulaWhereValor2, orderBy, ordenacao);
+
             usuariosRead.addAll(UsuarioService.realizarSelect(usuarioDadosDePesquisaDto, errosRead));
 
             request.setAttribute("errosRead", errosRead);

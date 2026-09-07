@@ -1,11 +1,11 @@
 package service.usuario;
 
-import static exception.ErrosGerais.ATRIBUTO_NULL;
+import static exception.ErrosGeraisDados.ATRIBUTO_NULL;
 
 import model.TiposUsuario;
 import model.Usuario;
 
-public record UsuarioDadosDto(String id, String tipoUsuario, String email, String senha, String nome, String raioProcuraKm){
+public record UsuarioDadosDTO(String id, String tipoUsuario, String email, String senha, String nome, String raioProcuraKm){
 
     public Usuario construirUsuario(){
         long idTratado = id != null && !id.isBlank() ? Long.parseLong(id.strip()) : ATRIBUTO_NULL.getCodigo();

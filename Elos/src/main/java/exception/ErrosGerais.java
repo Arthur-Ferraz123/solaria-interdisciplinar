@@ -2,7 +2,7 @@ package exception;
 
 public enum ErrosGerais implements GenericExceptionEnum {
 
-
+    SUCESSO(0, "Sucesso na operação!"),
     ERRO_POR_VIOLACAO_DE_REGRA_DO_BD(-1, "Um ou mais dados inseridos estão inválidos"),
     ERRO_GENERICO_NO_BD(-2, "Um possível erro de conexão ocorreu, cheque sua conexão de internet e tente novamente!"),
     ERRO_GENERICO(-3, "Algo inesperado aconteceu, tente novamente!"),

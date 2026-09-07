@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import conexao.Conexao;
 import exception.ErrosDoSQL;
@@ -137,10 +138,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
     }
 
     @Override
-    public ArrayList<Fornecedor> readAll(){
+    public List<Fornecedor> readAll(){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Fornecedor> fornecedores = new ArrayList<>();
+        List<Fornecedor> fornecedores = new ArrayList<>();
 
         try {
             String read = "select * from fornecedor";
@@ -164,10 +165,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         }
     }
 
-    public ArrayList<Fornecedor> readAllOrderBy(String campoDoOrderBy, String sentidoOrderBy){
+    public List<Fornecedor> readAllOrderBy(String campoDoOrderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Fornecedor> fornecedores = new ArrayList<>();
+        List<Fornecedor> fornecedores = new ArrayList<>();
 
         try {
             String read = "select * from fornecedor order by "+campoDoOrderBy+" "+sentidoOrderBy;
@@ -191,10 +192,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         }
     }
 
-    public ArrayList<Fornecedor> readAllByTipoFornecedor(String tipoFornecedor){
+    public List<Fornecedor> readAllByTipoFornecedor(String tipoFornecedor){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Fornecedor> fornecedores = new ArrayList<>();
+        List<Fornecedor> fornecedores = new ArrayList<>();
 
         try {
             String read = "select * from fornecedor where tipo_fornecedor = ?";
@@ -220,10 +221,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         }
     }
 
-    public ArrayList<Fornecedor> readAllByTipoFornecedorOrderBy(String tipoFornecedor, String campoDoOrderBy, String sentidoOrderBy){
+    public List<Fornecedor> readAllByTipoFornecedorOrderBy(String tipoFornecedor, String campoDoOrderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Fornecedor> fornecedores = new ArrayList<>();
+        List<Fornecedor> fornecedores = new ArrayList<>();
 
         try {
             String read = "select * from fornecedor where tipo_fornecedor = ? order by "+campoDoOrderBy+" "+sentidoOrderBy;
@@ -249,10 +250,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         }
     }
 
-    public ArrayList<Fornecedor> readAllByRazaoSocial(String razaoSocial){
+    public List<Fornecedor> readAllByRazaoSocial(String razaoSocial){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Fornecedor> fornecedores = new ArrayList<>();
+        List<Fornecedor> fornecedores = new ArrayList<>();
 
         try {
             String read = "select * from fornecedor where razao_social ilike ?";
@@ -278,10 +279,10 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         }
     }
 
-    public ArrayList<Fornecedor> readAllByRazaoSocialOrderBy(String razaoSocial, String campoDoOrderBy, String sentidoOrderBy){
+    public List<Fornecedor> readAllByRazaoSocialOrderBy(String razaoSocial, String campoDoOrderBy, String sentidoOrderBy){
         Conexao conexao = new Conexao();
         Connection connection = conexao.conectar();
-        ArrayList<Fornecedor> fornecedores = new ArrayList<>();
+        List<Fornecedor> fornecedores = new ArrayList<>();
 
         try {
             String read = "select * from fornecedor where razao_social ilike ? order by "+campoDoOrderBy+" "+sentidoOrderBy;
@@ -313,7 +314,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         Connection connection = conexao.conectar();
 
         try{
-            String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where id = ?";
+            String update = "update fornecedor set tipo_fornecedor = ?, razao_social = ? where id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoDoUsuario());
@@ -335,7 +336,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         Connection connection = conexao.conectar();
 
         try{
-            String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where id_usuario = ?";
+            String update = "update fornecedor set tipo_fornecedor = ?, razao_social = ? where id_usuario = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoDoUsuario());
@@ -357,7 +358,7 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
         Connection connection = conexao.conectar();
 
         try{
-            String update = "update fornecedor set tipo_fornecedor = ?, razao_social =  where cnpj = ?";
+            String update = "update fornecedor set tipo_fornecedor = ?, razao_social = ? where cnpj = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, fornecedor.getTipoUsuario().getTipoDoUsuario());
